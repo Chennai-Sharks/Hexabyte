@@ -50,3 +50,6 @@ windows/
 
 # Web
 web/
+
+# firebase
+google-services.json
