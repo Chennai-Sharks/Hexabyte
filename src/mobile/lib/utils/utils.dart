@@ -8,6 +8,7 @@ class Utils {
   static const primaryBackground = Color(0xFFF8F8F8);
 
   static const secondaryButtonColor = Color(0xFF3B3B3B);
+  static const white = Color(0xFFFFFFFF);
   // for smaller fonts
   static const secondaryFontColor = Color(0xFFC3C3C3);
   static const secondaryGreen = Color(0xFF25D366);

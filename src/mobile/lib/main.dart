@@ -1,6 +1,12 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:hexabyte/screens/auth_screen/auth_screen.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  await dotenv.load(fileName: ".env");
   runApp(const MyApp());
 }
 
@@ -9,59 +15,25 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Map<int, Color> color = {
+      50: const Color.fromRGBO(136, 14, 79, .1),
+      100: const Color.fromRGBO(136, 14, 79, .2),
+      200: const Color.fromRGBO(136, 14, 79, .3),
+      300: const Color.fromRGBO(136, 14, 79, .4),
+      400: const Color.fromRGBO(136, 14, 79, .5),
+      500: const Color.fromRGBO(136, 14, 79, .6),
+      600: const Color.fromRGBO(136, 14, 79, .7),
+      700: const Color.fromRGBO(136, 14, 79, .8),
+      800: const Color.fromRGBO(136, 14, 79, .9),
+      900: const Color.fromRGBO(136, 14, 79, 1),
+    };
     return MaterialApp(
       title: 'Hexabyte',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: MaterialColor(0xFFBB0C24, color),
       ),
-      home: const MyHomePage(title: 'Hexabyte'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
+      home: AuthScreen(),
     );
   }
 }
