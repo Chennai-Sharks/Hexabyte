@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -20,12 +22,21 @@ class AuthProvider {
     await storage.write(key: 'token', value: checkResponse.headers['auth-token']);
   }
 
-  Future<void> register({required String userId}) async {
+  Future<void> register({required String userId, required dynamic data}) async {
     //  final token = await storage.read(key: 'token');
-    final checkResponse = await http.get(Uri.parse(Utils.backendUrl! + '/api/register'), headers: {
-      ...Utils.headerValue,
-      // 'auth-token': token!
-    });
+    final checkResponse = await http.post(
+      Uri.parse(Utils.backendUrl! + '/api/register'),
+      body: json.encode({
+        'uuid': userId,
+        'name': data['name'],
+        'location': data['state'],
+        'preferences': data['preferences'],
+      }),
+      headers: {
+        ...Utils.headerValue,
+        // 'auth-token': token!
+      },
+    );
     print(checkResponse);
     await storage.write(key: 'token', value: checkResponse.headers['auth-token']);
 
