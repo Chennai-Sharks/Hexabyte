@@ -1,8 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexabyte/screens/home_screen/widgets/product_card.dart';
+import 'package:hexabyte/screens/profile_screen/profile_screen.dart';
 import 'package:hexabyte/utils/utils.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -10,6 +12,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(FirebaseAuth.instance);
     return Scaffold(
       backgroundColor: Utils.primaryBackground,
       body: SingleChildScrollView(
@@ -17,16 +20,25 @@ class HomeScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.05,
+              height: MediaQuery.of(context).size.height * 0.01,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Container(
                   margin: const EdgeInsets.only(right: 10),
-                  child: CircleAvatar(
-                    child: Image.asset('assets/logo.png'),
-                    maxRadius: 22,
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const ProfileScreen(),
+                        ),
+                      );
+                    },
+                    child: CircleAvatar(
+                      child: Image.asset('assets/logo.png'),
+                      maxRadius: 22,
+                    ),
                   ),
                 )
               ],

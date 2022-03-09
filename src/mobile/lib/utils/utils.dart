@@ -15,7 +15,6 @@ class Utils {
   static const secondaryPeach = Color(0xFFFA6E6E);
 
   static String? backendUrl = dotenv.env['BACKEND_URL'];
-
   static const headerValue = {
     'Content-type': 'application/json',
     'Accept': 'application/json',

@@ -1,13 +1,12 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:hexabyte/screens/auth_screen/auth_screen.dart';
-import 'package:hexabyte/screens/home_screen/home_screen.dart';
+
+import 'package:hexabyte/screens/intermediate_screen/intermediate_screen.dart';
+
+import 'package:hexabyte/utils/utils.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
   await dotenv.load(fileName: ".env");
   runApp(const MyApp());
 }
@@ -17,6 +16,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(Utils.backendUrl);
+
     final Map<int, Color> color = {
       50: const Color.fromRGBO(136, 14, 79, .1),
       100: const Color.fromRGBO(136, 14, 79, .2),
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: MaterialColor(0xFFBB0C24, color),
       ),
-      home: HomeScreen(),
+      home: IntermediateScreen(),
     );
   }
 }
