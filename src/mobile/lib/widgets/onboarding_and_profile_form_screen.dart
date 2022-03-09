@@ -6,7 +6,6 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexabyte/layout/nav_layout.dart';
 import 'package:hexabyte/providers/auth/auth_provider.dart';
-import 'package:hexabyte/screens/home_screen/home_screen.dart';
 import 'package:hexabyte/utils/utils.dart';
 
 class OnboardingAndProfileFormScreen extends StatefulWidget {
@@ -55,12 +54,17 @@ class _OnboardingAndProfileFormScreenState extends State<OnboardingAndProfileFor
                 child: Column(children: <Widget>[
                   FormBuilder(
                     key: _formKey,
-                    initialValue: const {
-                      "name": "",
-                      "purpose": "",
-                      "state": "Tamil Nadu",
-                      "preferences": "",
-                    },
+                    initialValue: widget.name != null
+                        ? {
+                            "name": widget.name,
+                            "location": widget.location,
+                            "preferences": widget.preferences,
+                          }
+                        : {
+                            "name": "",
+                            "location": "",
+                            "preferences": "",
+                          },
                     child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -75,7 +79,6 @@ class _OnboardingAndProfileFormScreenState extends State<OnboardingAndProfileFor
                                 child: Center(
                                   child: FormBuilderTextField(
                                     name: 'name',
-
                                     decoration: const InputDecoration(
                                       labelText: 'Your Name',
                                       labelStyle: TextStyle(fontSize: 16, color: Colors.black),
@@ -126,7 +129,7 @@ class _OnboardingAndProfileFormScreenState extends State<OnboardingAndProfileFor
                                 padding: const EdgeInsets.symmetric(horizontal: 11.0),
                                 child: Center(
                                   child: FormBuilderDropdown(
-                                    name: 'state',
+                                    name: 'location',
                                     decoration: const InputDecoration(
                                       labelText: 'Choose State',
                                       labelStyle: TextStyle(color: Colors.black),
@@ -239,7 +242,7 @@ class _OnboardingAndProfileFormScreenState extends State<OnboardingAndProfileFor
   }
 }
 
-var stateOptions = [
+final stateOptions = [
   "Andhra Pradesh",
   "Arunachal Pradesh",
   "Assam",

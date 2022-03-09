@@ -5,10 +5,10 @@ import 'package:hexabyte/utils/utils.dart';
 
 import 'package:http/http.dart' as http;
 
-class ProfileProvider {
+class SearchProvider {
   final storage = const FlutterSecureStorage();
 
-  Future<Map<String, dynamic>> getProfileData() async {
+  Future<Map<String, dynamic>> searchResults() async {
     print('doing');
     final token = await storage.read(key: 'token');
     print(token);

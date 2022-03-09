@@ -14,6 +14,7 @@ class AuthProvider {
   final storage = const FlutterSecureStorage();
 
   Future<void> login({String? userId}) async {
+    print(userId);
     final checkResponse = await http.get(
       Uri.parse(Utils.backendUrl! + '/api/login/$userId'),
     );
@@ -23,7 +24,7 @@ class AuthProvider {
   }
 
   Future<void> register({required String userId, required dynamic data}) async {
-    //  final token = await storage.read(key: 'token');
+    // final token = await storage.read(key: 'token');
     final checkResponse = await http.post(
       Uri.parse(Utils.backendUrl! + '/api/register'),
       body: json.encode({
