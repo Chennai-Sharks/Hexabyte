@@ -1,7 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hexabyte/layout/nav_layout.dart';
+import 'package:hexabyte/providers/auth/auth_provider.dart';
+import 'package:hexabyte/screens/home_screen/home_screen.dart';
+import 'package:hexabyte/utils/utils.dart';
 
 class OnboardingAndProfileFormScreen extends StatefulWidget {
   final String? appTitle;
@@ -19,6 +25,7 @@ class OnboardingAndProfileFormScreen extends StatefulWidget {
 }
 
 class _OnboardingAndProfileFormScreenState extends State<OnboardingAndProfileFormScreen> {
+  final AuthProvider _authProvider = AuthProvider();
   final _formKey = GlobalKey<FormBuilderState>();
   @override
   Widget build(BuildContext context) {
@@ -85,31 +92,31 @@ class _OnboardingAndProfileFormScreenState extends State<OnboardingAndProfileFor
                               ),
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(9),
-                            child: Container(
-                              decoration:
-                                  BoxDecoration(color: Colors.grey.shade200, borderRadius: BorderRadius.circular(20)),
-                              child: Padding(
-                                padding: const EdgeInsets.fromLTRB(11, 0, 11, 0),
-                                child: Center(
-                                  child: FormBuilderTextField(
-                                    name: 'purpose',
-                                    decoration: const InputDecoration(
-                                      labelText: 'Your Purpose',
-                                      labelStyle: TextStyle(fontSize: 16, color: Colors.black),
-                                      border: InputBorder.none,
-                                    ),
-                                    valueTransformer: (text) => num.tryParse(text!),
-                                    validator: FormBuilderValidators.compose([
-                                      FormBuilderValidators.required(context),
-                                    ]),
-                                    keyboardType: TextInputType.text,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
+                          // Padding(
+                          //   padding: const EdgeInsets.all(9),
+                          //   child: Container(
+                          //     decoration:
+                          //         BoxDecoration(color: Colors.grey.shade200, borderRadius: BorderRadius.circular(20)),
+                          //     child: Padding(
+                          //       padding: const EdgeInsets.fromLTRB(11, 0, 11, 0),
+                          //       child: Center(
+                          //         child: FormBuilderTextField(
+                          //           name: 'purpose',
+                          //           decoration: const InputDecoration(
+                          //             labelText: 'Your Purpose',
+                          //             labelStyle: TextStyle(fontSize: 16, color: Colors.black),
+                          //             border: InputBorder.none,
+                          //           ),
+                          //           valueTransformer: (text) => num.tryParse(text!),
+                          //           validator: FormBuilderValidators.compose([
+                          //             FormBuilderValidators.required(context),
+                          //           ]),
+                          //           keyboardType: TextInputType.text,
+                          //         ),
+                          //       ),
+                          //     ),
+                          //   ),
+                          // ),
                           Padding(
                             padding: const EdgeInsets.all(9),
                             child: Container(
@@ -158,38 +165,20 @@ class _OnboardingAndProfileFormScreenState extends State<OnboardingAndProfileFor
                                         border: InputBorder.none,
                                         labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
                                     options: [
-                                      FormBuilderFieldOption(
-                                        value: 'Test',
-                                        child: Text(
-                                          'Test',
-                                          style: GoogleFonts.exo(color: Colors.black),
-                                        ),
-                                      ),
-                                      FormBuilderFieldOption(
-                                          value: 'Test 1',
-                                          child: Text(
-                                            'Test 1',
-                                            style: GoogleFonts.exo(color: Colors.black),
-                                          )),
-                                      FormBuilderFieldOption(
-                                          value: 'Test 2',
-                                          child: Text('Test 2', style: GoogleFonts.exo(color: Colors.black))),
-                                      FormBuilderFieldOption(
-                                          value: 'Test 3',
-                                          child: Text('Test 3', style: GoogleFonts.exo(color: Colors.black))),
-                                      FormBuilderFieldOption(
-                                          value: 'Test 4',
-                                          child: Text('Test 4', style: GoogleFonts.exo(color: Colors.black))),
-                                      FormBuilderFieldOption(
-                                          value: 'Test 2',
-                                          child: Text('Test 2', style: GoogleFonts.exo(color: Colors.black))),
-                                      FormBuilderFieldOption(
-                                          value: 'Test 3',
-                                          child: Text('Test 3', style: GoogleFonts.exo(color: Colors.black))),
-                                      FormBuilderFieldOption(
-                                          value: 'Test 4',
-                                          child: Text('Test 4', style: GoogleFonts.exo(color: Colors.black))),
-                                    ],
+                                      'Consumable food scraps',
+                                      'Rotten peels',
+                                      'Spoilt vegetables/fruits',
+                                      'Waste oils',
+                                      'Eggshells'
+                                    ]
+                                        .map((eachItem) => FormBuilderFieldOption(
+                                            key: Key(eachItem),
+                                            value: eachItem,
+                                            child: Text(
+                                              eachItem,
+                                              style: GoogleFonts.exo(color: Colors.black),
+                                            )))
+                                        .toList(),
                                   ),
                                 ),
                               ),
@@ -197,24 +186,44 @@ class _OnboardingAndProfileFormScreenState extends State<OnboardingAndProfileFor
                           ),
                         ]),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: MaterialButton(
-                      height: size.height * 0.05,
-                      minWidth: size.width * 0.4,
-                      color: color,
-                      child: const Text(
-                        "Submit",
-                        style: TextStyle(color: Colors.white),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.05,
+                  ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.5,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Utils.primaryColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
+                        elevation: 3,
                       ),
-                      onPressed: () {
+                      onPressed: () async {
                         _formKey.currentState!.save();
                         if (_formKey.currentState!.validate()) {
                           print(_formKey.currentState!.value);
+                          await _authProvider.register(
+                            userId: FirebaseAuth.instance.currentUser!.uid,
+                            data: _formKey.currentState!.value,
+                          );
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                              builder: (context) => const NavigationLayout(),
+                            ),
+                          );
                         } else {
-                          print("validation failed");
+                          Fluttertoast.showToast(msg: 'validation failed');
+                          // print("validation failed");
                         }
                       },
+                      child: const Text(
+                        'Submit',
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: Utils.white,
+                        ),
+                      ),
                     ),
                   ),
                   SizedBox(

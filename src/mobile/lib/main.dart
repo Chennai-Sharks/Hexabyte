@@ -4,6 +4,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hexabyte/screens/intermediate_screen/intermediate_screen.dart';
 
 import 'package:hexabyte/utils/utils.dart';
+import 'package:form_builder_validators/localization/l10n.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,6 +33,19 @@ class MyApp extends StatelessWidget {
     };
     return MaterialApp(
       title: 'Hexabyte',
+      supportedLocales: const [
+        Locale('en', ''),
+        Locale('es', ''),
+        Locale('fa', ''),
+        Locale('fr', ''),
+        Locale('ja', ''),
+        Locale('pt', ''),
+        Locale('sk', ''),
+        Locale('pl', ''),
+      ],
+      localizationsDelegates: const [
+        FormBuilderLocalizations.delegate,
+      ],
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: MaterialColor(0xFFBB0C24, color),
