@@ -22,7 +22,11 @@ dependencies:
   form_builder_validators: ^7.6.1
   flutter_dotenv: ^5.0.2
   pinput: ^2.1.4
+  flutter_typeahead: ^3.2.4
+  flutter_svg: ^1.0.3
+  font_awesome_flutter: ^9.2.0
   fluttertoast: ^8.0.9
+  bottom_navy_bar: ^6.0.0
   flutter_secure_storage: ^5.0.2
 
   cupertino_icons: ^1.0.2
