@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexabyte/providers/auth/auth_provider.dart';
+import 'package:hexabyte/screens/auth_screen/auth_screen.dart';
 import 'package:hexabyte/screens/profile_screen/widgets/option_container.dart';
 import 'package:hexabyte/screens/profile_screen/widgets/your_orders.dart';
 import 'package:hexabyte/utils/utils.dart';
@@ -134,20 +136,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            GestureDetector(
-                              onTap: () async {
-                                await _authProvider.logout();
-                              },
-                              child: optionContainer(
+                            optionContainer(
                                 color,
                                 const Icon(
                                   Icons.logout,
                                   color: Colors.white,
                                 ),
                                 "Logout",
-                                context,
-                              ),
-                            ),
+                                context, () async {
+                              print('tap');
+                              Fluttertoast.showToast(msg: 'Logging out');
+                              await _authProvider.logout();
+                              Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                  builder: (context) => AuthScreen(),
+                                ),
+                              );
+                            }),
                           ],
                         )
                       ],

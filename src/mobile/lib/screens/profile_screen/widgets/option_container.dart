@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-Widget optionContainer(Color? color, Icon? icon, String? text, BuildContext context) {
+Widget optionContainer(Color? color, Icon? icon, String? text, BuildContext context, dynamic onTap) {
   Size? size = MediaQuery.of(context).size;
   return Column(
     mainAxisAlignment: MainAxisAlignment.center,
     crossAxisAlignment: CrossAxisAlignment.center,
     children: [
       GestureDetector(
-        onTap: () {},
+        onTap: onTap,
         child: Container(
           width: size.width * 0.16,
           height: size.width * 0.16,
