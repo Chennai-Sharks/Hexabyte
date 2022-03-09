@@ -36,7 +36,7 @@ class ProductCard extends StatelessWidget {
                 topRight: Radius.circular(20),
               ),
               child: Container(
-                color: Colors.red,
+                // color: Colors.red,
                 child: Image.asset(
                   'assets/logo.png',
                   height: 160,
@@ -111,6 +111,9 @@ class ProductCard extends StatelessWidget {
                         label: Text(toWhom),
                       ),
                     ],
+                  ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.05,
                   ),
                 ],
               ),
