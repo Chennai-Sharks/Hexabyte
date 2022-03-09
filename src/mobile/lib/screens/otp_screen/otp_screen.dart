@@ -28,6 +28,7 @@ class _OtpScreenState extends State<OtpScreen> {
         verificationCompleted: (PhoneAuthCredential credentials) async {
           final userData = await FirebaseAuth.instance.signInWithCredential(credentials);
           final isNewUser = userData.additionalUserInfo?.isNewUser;
+          // add the login route code (connection with backend)
           if (isNewUser!) {
             Navigator.of(context).pushAndRemoveUntil(
                 MaterialPageRoute(
@@ -88,9 +89,10 @@ class _OtpScreenState extends State<OtpScreen> {
             ),
             Padding(
               padding: const EdgeInsets.all(30.0),
-              child: OTPTextField(
-                length: 4,
+              child: PinPut(
+                fieldsCount:4,
                 // fieldWidth: 40,
+                errorText:'Invalid OTP'
                 controller: _controller,
                 keyboardType: TextInputType.number,
                 onCompleted: (string) {

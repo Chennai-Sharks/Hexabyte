@@ -21,7 +21,6 @@ dependencies:
   auto_size_text: ^3.0.0
   form_builder_validators: ^7.6.1
   flutter_dotenv: ^5.0.2
-  otp_text_field: ^1.1.2
   pinput: ^2.1.4
   fluttertoast: ^8.0.9
   flutter_secure_storage: ^5.0.2
