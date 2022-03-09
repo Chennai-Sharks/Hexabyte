@@ -28,14 +28,22 @@ dependencies:
   fluttertoast: ^8.0.9
   bottom_navy_bar: ^6.0.0
   flutter_secure_storage: ^5.0.2
+  razorpay_flutter: ^1.2.9
+  velocity_x: ^3.4.0
 
   cupertino_icons: ^1.0.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.9.0
 
   flutter_lints: ^1.0.0
+
+flutter_icons:
+  android: 'ic_launcher'
+  ios: true
+  image_path: 'assets/logo.png'
 
 # auth, onboarding(if user not there), listing page(home), profile page, sellers page
 # product details page, user orders page.
@@ -45,7 +53,7 @@ flutter:
 
   assets:
     - .env
-    - assets/logo.png
+    - assets/
 
   # fonts:
   #   - family: Schyler

@@ -55,7 +55,7 @@ class SearchPage extends StatelessWidget {
                   );
                 },
                 onSuggestionSelected: (suggestion) {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProductDetailsScreen()));
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProductDetailsPage()));
                 },
               ),
             ),
