@@ -16,33 +16,34 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Utils.primaryBackground,
       body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.01,
+              height: MediaQuery.of(context).size.height * 0.03,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Container(
-                  margin: const EdgeInsets.only(right: 10),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const ProfileScreen(),
-                        ),
-                      );
-                    },
-                    child: CircleAvatar(
-                      child: Image.asset('assets/logo.png'),
-                      maxRadius: 22,
-                    ),
-                  ),
-                )
-              ],
-            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.end,
+            //   children: [
+            //     Container(
+            //       margin: const EdgeInsets.only(right: 10),
+            //       child: GestureDetector(
+            //         onTap: () {
+            //           Navigator.of(context).push(
+            //             MaterialPageRoute(
+            //               builder: (context) => const ProfileScreen(),
+            //             ),
+            //           );
+            //         },
+            //         child: CircleAvatar(
+            //           child: Image.asset('assets/logo.png'),
+            //           maxRadius: 22,
+            //         ),
+            //       ),
+            //     )
+            //   ],
+            // ),
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.01,
             ),
@@ -72,7 +73,7 @@ class HomeScreen extends StatelessWidget {
             ),
             Container(
               padding: const EdgeInsets.only(left: 20),
-              height: MediaQuery.of(context).size.height * 0.36,
+              height: MediaQuery.of(context).size.height * 0.3,
               child: ListView.builder(
                 physics: const BouncingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
@@ -105,7 +106,7 @@ class HomeScreen extends StatelessWidget {
             ),
             Container(
               padding: const EdgeInsets.only(left: 20),
-              height: MediaQuery.of(context).size.height * 0.36,
+              height: MediaQuery.of(context).size.height * 0.3,
               child: ListView.builder(
                 physics: const BouncingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
@@ -122,7 +123,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.01,
+              height: MediaQuery.of(context).size.height * 0.02,
             ),
             Padding(
               padding: const EdgeInsets.only(left: 20.0),
@@ -138,7 +139,7 @@ class HomeScreen extends StatelessWidget {
             ),
             Container(
               padding: const EdgeInsets.only(left: 20),
-              height: MediaQuery.of(context).size.height * 0.36,
+              height: MediaQuery.of(context).size.height * 0.3,
               child: ListView.builder(
                 physics: const BouncingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
@@ -153,6 +154,9 @@ class HomeScreen extends StatelessWidget {
                   );
                 },
               ),
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.03,
             ),
           ],
         ),

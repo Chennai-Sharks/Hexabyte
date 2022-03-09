@@ -22,13 +22,13 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       // padding: const EdgeInsets.all(8),
-      width: MediaQuery.of(context).size.width * 0.7,
+      width: MediaQuery.of(context).size.width * 0.8,
       child: Card(
         elevation: 8,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             ClipRRect(
               borderRadius: const BorderRadius.only(
@@ -36,11 +36,11 @@ class ProductCard extends StatelessWidget {
                 topRight: Radius.circular(20),
               ),
               child: Container(
-                // color: Colors.red,
+                color: Colors.red,
                 child: Image.asset(
                   'assets/logo.png',
-                  height: 160,
-                  width: MediaQuery.of(context).size.width * 0.7,
+                  height: 110,
+                  width: MediaQuery.of(context).size.width * 0.8,
                 ),
               ),
             ),
