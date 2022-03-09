@@ -7,7 +7,7 @@ class OnboardingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        child: const Text('home page'),
+        child: const Text('OnboardingScreen'),
       ),
     );
   }

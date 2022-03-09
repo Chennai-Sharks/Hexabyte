@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hexabyte/screens/home_screen/home_screen.dart';
 import 'package:hexabyte/screens/onboarding_screen/onboarding_screen.dart';
 import 'package:hexabyte/utils/utils.dart';
-import 'package:otp_text_field/otp_field.dart';
+import 'package:pinput/pinput.dart';
 
 class OtpScreen extends StatefulWidget {
   final String phone;
@@ -17,7 +17,6 @@ class OtpScreen extends StatefulWidget {
 }
 
 class _OtpScreenState extends State<OtpScreen> {
-  final OtpFieldController? _controller = OtpFieldController();
   String? verificationCode;
 
   Future<void> verifyPhone({
@@ -64,9 +63,11 @@ class _OtpScreenState extends State<OtpScreen> {
   @override
   void initState() {
     super.initState();
-    verifyPhone(
-      phone: widget.phone,
-    );
+    if (widget.phone != '9176730100') {
+      verifyPhone(
+        phone: widget.phone,
+      );
+    }
   }
 
   @override
@@ -76,7 +77,7 @@ class _OtpScreenState extends State<OtpScreen> {
         body: Column(
           children: [
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.1,
+              height: MediaQuery.of(context).size.height * 0.3,
             ),
             Container(
               margin: const EdgeInsets.only(top: 20),
@@ -89,16 +90,44 @@ class _OtpScreenState extends State<OtpScreen> {
             ),
             Padding(
               padding: const EdgeInsets.all(30.0),
-              child: PinPut(
-                fieldsCount:4,
-                // fieldWidth: 40,
-                errorText:'Invalid OTP'
-                controller: _controller,
-                keyboardType: TextInputType.number,
-                onCompleted: (string) {
-                  print(string);
-                },
+              child: Pinput(
+                length: 6,
+                onCompleted: ((value) async {
+                  print(value);
+                  // verifyPhone(phone: widget.phone);
+                  final userData = await FirebaseAuth.instance.signInWithCredential(
+                    PhoneAuthProvider.credential(
+                      verificationId: verificationCode!,
+                      smsCode: value,
+                    ),
+                  );
+                  final isNewUser = userData.additionalUserInfo?.isNewUser;
+                  // add the login route code (connection with backend)
+                  if (isNewUser!) {
+                    Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(
+                          builder: (context) => const OnboardingScreen(),
+                        ),
+                        (route) => false);
+                  } else {
+                    Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(
+                          builder: (context) => const HomeScreen(),
+                        ),
+                        (route) => false);
+                  }
+                }),
               ),
+              // child: PinPut(
+              //   fieldsCount:4,
+              //   // fieldWidth: 40,
+              //   errorText:'Invalid OTP'
+              //   controller: _controller,
+              //   keyboardType: TextInputType.number,
+              //   onCompleted: (string) {
+              //     print(string);
+              //   },
+              // ),
             ),
             Container(
               height: MediaQuery.of(context).size.width * 0.1,
