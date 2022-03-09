@@ -6,6 +6,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 // import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hexabyte/screens/otp_screen/otp_screen.dart';
 import 'package:hexabyte/utils/utils.dart';
 
 // import 'package:provider/provider.dart';
@@ -112,6 +113,11 @@ class AuthScreen extends StatelessWidget {
                   Fluttertoast.showToast(msg: 'Phone number is empty');
                 } else if (mobileno.length == 10) {
                   print(_formKey.currentState?.value);
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => OtpScreen(phone: mobileno),
+                    ),
+                  );
                 } else {
                   Fluttertoast.showToast(msg: 'Invalid Phone number');
                 }
