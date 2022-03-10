@@ -67,15 +67,18 @@ class SearchPage extends StatelessWidget {
                 },
                 onSuggestionSelected: (suggestion) {
                   final data = suggestion as Map;
+                  print(data);
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => ProductDetailsPage(
                         productName: data['product_name'],
+                        sellerId: data['uuid'].toString(),
                         category: data['category'],
-                        description: data['description'],
+                        description: data['description'] ?? 'No description',
                         location: data['location'],
                         weight: data['weight'].toString(),
                         price: data['price'].toString(),
+                        orderType: 'Onetime only',
                       ),
                     ),
                   );

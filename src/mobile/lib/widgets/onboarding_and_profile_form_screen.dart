@@ -56,17 +56,11 @@ class _OnboardingAndProfileFormScreenState extends State<OnboardingAndProfileFor
                 child: Column(children: <Widget>[
                   FormBuilder(
                     key: _formKey,
-                    initialValue: widget.name != null
-                        ? {
-                            "name": widget.name,
-                            "location": widget.location,
-                            "preferences": widget.preferences,
-                          }
-                        : {
-                            "name": "",
-                            "location": "",
-                            "preferences": "",
-                          },
+                    initialValue: const {
+                      "name": "",
+                      "location": 'Tamil Nadu',
+                      "preferences": "",
+                    },
                     child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -162,7 +156,6 @@ class _OnboardingAndProfileFormScreenState extends State<OnboardingAndProfileFor
                                 child: Center(
                                   child: FormBuilderFilterChip(
                                     name: 'preferences',
-                                    initialValue: widget.preferences as List,
                                     checkmarkColor: Colors.black,
                                     disabledColor: Colors.grey.shade100,
                                     crossAxisAlignment: WrapCrossAlignment.start,
@@ -267,33 +260,18 @@ class _OnboardingAndProfileFormScreenState extends State<OnboardingAndProfileFor
 }
 
 final stateOptions = [
-  "Andhra Pradesh",
-  "Arunachal Pradesh",
-  "Assam",
-  "Bihar",
-  "Chhattisgarh",
-  "Goa",
-  "Gujarat",
-  "Haryana",
-  "Himachal Pradesh",
-  "Jharkhand",
-  "Karnataka",
-  "Kerala",
-  "Madhya Pradesh",
-  "Maharashtra",
-  "Manipur",
-  "Meghalaya",
-  "Mizoram",
-  "Nagaland",
-  "Odisha",
-  "Punjab",
-  "Rajasthan",
-  "Sikkim",
-  "Tamil Nadu",
-  "Telangana",
-  "Tripura",
-  "Uttar Pradesh",
-  "Uttarakhand",
-  "Gairsain",
-  "West Bengal"
+  'Andhra Pradesh',
+  'Assam',
+  'Delhi',
+  'Gujarat',
+  'Haryana',
+  'Karnataka',
+  'Kerala',
+  'Madhya Pradesh',
+  'Maharashtra',
+  'Punjab',
+  'Tamil Nadu',
+  'Telangana',
+  'Uttar Pradesh',
+  'West Bengal'
 ];

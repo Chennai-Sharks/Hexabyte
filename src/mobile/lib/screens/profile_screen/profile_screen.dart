@@ -187,10 +187,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                         ),
                       ),
-                      Container(
-                        color: Colors.grey.shade200,
-                        child: const YourOrders(),
-                      ),
+                      // Container(
+                      //   color: Colors.grey.shade200,
+                      //   child: const YourOrders(),
+                      // ),
                     ],
                   ),
                 ),
