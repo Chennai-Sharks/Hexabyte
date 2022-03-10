@@ -56,7 +56,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         body: FutureBuilder(
           future: _profileProvider.getProfileData(),
           builder: (context, AsyncSnapshot<Map<String, dynamic>?> snapshot) {
-            if (snapshot.connectionState == ConnectionState.active) {
+            if (snapshot.connectionState == ConnectionState.done) {
               print(snapshot.data);
               return Container(
                 color: Colors.grey.shade200,
@@ -98,7 +98,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   Padding(
                                     padding: const EdgeInsets.symmetric(horizontal: 10.0),
                                     child: Text(
-                                      'Nikhilesh Jr',
+                                      snapshot.data?['name'] ?? 'Hello',
                                       style: GoogleFonts.notoSansAnatolianHieroglyphs(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 18,
@@ -137,7 +137,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               Padding(
                                 padding: const EdgeInsets.all(2.0),
                                 child: Text(
-                                  'nikhi1234@gmail.com',
+                                  snapshot.data?['location'],
                                   style: GoogleFonts.notoSansAnatolianHieroglyphs(
                                     fontSize: 16,
                                     color: Colors.grey.shade700,
@@ -150,22 +150,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   optionContainer(
-                                      color,
-                                      const Icon(
-                                        Icons.logout,
-                                        color: Colors.white,
-                                      ),
-                                      "Logout",
-                                      context, () async {
-                                    print('tap');
-                                    Fluttertoast.showToast(msg: 'Logging out');
-                                    await _authProvider.logout();
-                                    Navigator.of(context).pushReplacement(
-                                      MaterialPageRoute(
-                                        builder: (context) => AuthScreen(),
-                                      ),
-                                    );
-                                  }),
+                                    color,
+                                    const Icon(
+                                      Icons.logout,
+                                      color: Colors.white,
+                                    ),
+                                    "Logout",
+                                    context,
+                                    () async {
+                                      print('tap');
+                                      Fluttertoast.showToast(msg: 'Logging out');
+                                      await _authProvider.logout();
+                                      Navigator.of(context).pushReplacement(
+                                        MaterialPageRoute(
+                                          builder: (context) => AuthScreen(),
+                                        ),
+                                      );
+                                    },
+                                  ),
                                 ],
                               )
                             ],
@@ -194,141 +196,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               );
             }
-            return Container(
-              color: Colors.grey.shade200,
-              height: size.height,
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    ClipRRect(
-                      borderRadius: const BorderRadius.only(
-                        bottomRight: Radius.circular(50),
-                        bottomLeft: Radius.circular(50),
-                      ),
-                      child: Container(
-                        height: size.height * 0.48,
-                        color: Colors.white,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            SizedBox(height: size.height * 0.03),
-                            Center(
-                              child: Container(
-                                height: size.width * 0.3,
-                                width: size.width * 0.3,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  image: const DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: AssetImage('assets/logo.png'),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: size.height * 0.015),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                                  child: Text(
-                                    'Nikhilesh Jr',
-                                    style: GoogleFonts.notoSansAnatolianHieroglyphs(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18,
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  height: 30,
-                                  width: 30,
-                                  decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(15)),
-                                  child: Center(
-                                    child: IconButton(
-                                      onPressed: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => OnboardingAndProfileFormScreen(
-                                              appTitle: "Update Your Profile",
-                                              location: snapshot.data?['location'],
-                                              name: snapshot.data?['name'],
-                                              preferences: snapshot.data?['preferences'],
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                      icon: const FaIcon(
-                                        FontAwesomeIcons.pencilAlt,
-                                        size: 15,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(2.0),
-                              child: Text(
-                                'nikhi1234@gmail.com',
-                                style: GoogleFonts.notoSansAnatolianHieroglyphs(
-                                  fontSize: 16,
-                                  color: Colors.grey.shade700,
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: size.height * 0.05),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                optionContainer(
-                                    color,
-                                    const Icon(
-                                      Icons.logout,
-                                      color: Colors.white,
-                                    ),
-                                    "Logout",
-                                    context, () async {
-                                  print('tap');
-                                  Fluttertoast.showToast(msg: 'Logging out');
-                                  await _authProvider.logout();
-                                  Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(
-                                      builder: (context) => AuthScreen(),
-                                    ),
-                                  );
-                                }),
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: size.height * 0.025),
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Center(
-                        child: Text(
-                          'Your Orders',
-                          style: GoogleFonts.exo(
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      color: Colors.grey.shade200,
-                      child: const YourOrders(),
-                    ),
-                  ],
-                ),
-              ),
-            );
+            return const LoadingScreen();
           },
         ),
       ),

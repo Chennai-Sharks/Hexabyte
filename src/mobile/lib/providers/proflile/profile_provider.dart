@@ -25,4 +25,24 @@ class ProfileProvider {
 
     return json.decode(response.body);
   }
+
+  Future<void> updateUserData(Map<String, dynamic> data, dynamic userId) async {
+    final token = await storage.read(key: 'token');
+    print(token);
+
+    final response = await http.put(
+      Uri.parse(Utils.backendUrl! + '/api/user'),
+      body: json.encode({
+        "uuid": userId,
+        "name": data['name'],
+        "preferences": data['preferences'],
+        "location": data['location'],
+      }),
+      headers: {
+        ...Utils.headerValue,
+        'auth-token': token!,
+      },
+    );
+    print('here');
+  }
 }

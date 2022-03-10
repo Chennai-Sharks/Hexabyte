@@ -109,7 +109,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                     decoration: BoxDecoration(
                         image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: AssetImage(widget.imageUrl!),
+                      image: AssetImage('assets/logo.png'),
                     )),
                   ),
                 ),
@@ -147,8 +147,6 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   qAndAns(color, "Category ", widget.category!, context),
-                  qAndAns(color, "Order Type ", widget.orderType!, context),
-                  qAndAns(color, "Status of Order ", widget.orderStatus.toString(), context),
                   qAndAns(color, "Location ", widget.location!, context),
                   SizedBox(height: size.height * 0.05),
                   Center(

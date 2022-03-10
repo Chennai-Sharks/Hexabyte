@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:hexabyte/layout/nav_layout.dart';
 import 'package:hexabyte/providers/auth/auth_provider.dart';
 import 'package:hexabyte/screens/home_screen/home_screen.dart';
 import 'package:hexabyte/screens/onboarding_screen/onboarding_screen.dart';
@@ -39,7 +40,7 @@ class _OtpScreenState extends State<OtpScreen> {
           } else {
             Navigator.of(context).pushAndRemoveUntil(
                 MaterialPageRoute(
-                  builder: (context) => const HomeScreen(),
+                  builder: (context) => HomeScreen(),
                 ),
                 (route) => false);
           }
@@ -116,7 +117,7 @@ class _OtpScreenState extends State<OtpScreen> {
                   await authProvider.login(userId: FirebaseAuth.instance.currentUser!.uid);
                   Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(
-                        builder: (context) => const HomeScreen(),
+                        builder: (context) => const NavigationLayout(),
                       ),
                       (route) => false);
                 }

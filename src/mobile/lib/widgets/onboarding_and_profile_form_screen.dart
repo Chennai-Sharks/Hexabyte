@@ -6,6 +6,7 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexabyte/layout/nav_layout.dart';
 import 'package:hexabyte/providers/auth/auth_provider.dart';
+import 'package:hexabyte/providers/proflile/profile_provider.dart';
 import 'package:hexabyte/utils/utils.dart';
 
 class OnboardingAndProfileFormScreen extends StatefulWidget {
@@ -13,7 +14,7 @@ class OnboardingAndProfileFormScreen extends StatefulWidget {
   final String? name;
   final String? purpose;
   final String? location;
-  final List<String?>? preferences;
+  final List<dynamic>? preferences;
 
   const OnboardingAndProfileFormScreen(
       {Key? key, this.appTitle, this.name, this.purpose, this.location, this.preferences})
@@ -25,6 +26,7 @@ class OnboardingAndProfileFormScreen extends StatefulWidget {
 
 class _OnboardingAndProfileFormScreenState extends State<OnboardingAndProfileFormScreen> {
   final AuthProvider _authProvider = AuthProvider();
+  final ProfileProvider _profileProvider = ProfileProvider();
   final _formKey = GlobalKey<FormBuilderState>();
   @override
   Widget build(BuildContext context) {
@@ -160,6 +162,7 @@ class _OnboardingAndProfileFormScreenState extends State<OnboardingAndProfileFor
                                 child: Center(
                                   child: FormBuilderFilterChip(
                                     name: 'preferences',
+                                    initialValue: widget.preferences as List,
                                     checkmarkColor: Colors.black,
                                     disabledColor: Colors.grey.shade100,
                                     crossAxisAlignment: WrapCrossAlignment.start,
@@ -172,6 +175,7 @@ class _OnboardingAndProfileFormScreenState extends State<OnboardingAndProfileFor
                                       'Rotten peels',
                                       'Spoilt vegetables/fruits',
                                       'Waste oils',
+                                      'Excess food',
                                       'Eggshells'
                                     ]
                                         .map((eachItem) => FormBuilderFieldOption(
@@ -204,20 +208,40 @@ class _OnboardingAndProfileFormScreenState extends State<OnboardingAndProfileFor
                       ),
                       onPressed: () async {
                         _formKey.currentState!.save();
-                        if (_formKey.currentState!.validate()) {
-                          print(_formKey.currentState!.value);
-                          await _authProvider.register(
-                            userId: FirebaseAuth.instance.currentUser!.uid,
-                            data: _formKey.currentState!.value,
-                          );
-                          Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(
-                              builder: (context) => const NavigationLayout(),
-                            ),
-                          );
+                        if (widget.name != null) {
+                          if (_formKey.currentState!.validate()) {
+                            print(_formKey.currentState!.value);
+                            await _profileProvider.updateUserData(
+                              _formKey.currentState!.value,
+                              FirebaseAuth.instance.currentUser!.uid,
+                            );
+                            Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                builder: (context) => const NavigationLayout(),
+                              ),
+                            );
+                            Fluttertoast.showToast(msg: 'Update done');
+                          } else {
+                            Fluttertoast.showToast(msg: 'validation failed');
+                            // print("validation failed");
+                          }
                         } else {
-                          Fluttertoast.showToast(msg: 'validation failed');
-                          // print("validation failed");
+                          _formKey.currentState!.save();
+                          if (_formKey.currentState!.validate()) {
+                            print(_formKey.currentState!.value);
+                            await _authProvider.register(
+                              userId: FirebaseAuth.instance.currentUser!.uid,
+                              data: _formKey.currentState!.value,
+                            );
+                            Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                builder: (context) => const NavigationLayout(),
+                              ),
+                            );
+                          } else {
+                            Fluttertoast.showToast(msg: 'validation failed');
+                            // print("validation failed");
+                          }
                         }
                       },
                       child: const Text(

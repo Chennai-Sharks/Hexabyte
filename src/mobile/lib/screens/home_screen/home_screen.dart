@@ -2,13 +2,18 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hexabyte/providers/auth/auth_provider.dart';
+import 'package:hexabyte/screens/auth_screen/auth_screen.dart';
 import 'package:hexabyte/screens/home_screen/widgets/product_card.dart';
 import 'package:hexabyte/screens/profile_screen/profile_screen.dart';
+import 'package:hexabyte/screens/profile_screen/widgets/option_container.dart';
 import 'package:hexabyte/utils/utils.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  HomeScreen({Key? key}) : super(key: key);
+  final AuthProvider _authProvider = AuthProvider();
 
   @override
   Widget build(BuildContext context) {
@@ -88,6 +93,25 @@ class HomeScreen extends StatelessWidget {
                   );
                 },
               ),
+            ),
+            optionContainer(
+              Colors.red,
+              const Icon(
+                Icons.logout,
+                color: Colors.white,
+              ),
+              "Logout",
+              context,
+              () async {
+                print('tap');
+                Fluttertoast.showToast(msg: 'Logging out');
+                await _authProvider.logout();
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (context) => AuthScreen(),
+                  ),
+                );
+              },
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.01,
