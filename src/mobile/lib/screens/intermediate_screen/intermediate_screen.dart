@@ -21,6 +21,7 @@ class IntermediateScreen extends StatelessWidget {
             // Assign listener after the SDK is initialized successfully
             FirebaseAuth.instance.authStateChanges().listen((User? user) {
               if (user == null) {
+                print('here');
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
                     builder: (context) => AuthScreen(),
