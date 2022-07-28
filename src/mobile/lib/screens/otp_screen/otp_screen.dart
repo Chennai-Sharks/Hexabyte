@@ -1,12 +1,14 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import 'package:pinput/pinput.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import 'package:hexabyte/layout/nav_layout.dart';
 import 'package:hexabyte/providers/auth/auth_provider.dart';
 import 'package:hexabyte/screens/onboarding_screen/onboarding_screen.dart';
 import 'package:hexabyte/utils/utils.dart';
-import 'package:pinput/pinput.dart';
 
 class OtpScreen extends StatefulWidget {
   final String phone;
