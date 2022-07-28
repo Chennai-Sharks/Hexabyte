@@ -212,6 +212,12 @@ class HomeScreen extends StatelessWidget {
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.02,
             ),
+            ElevatedButton(
+                onPressed: () async {
+                  await _authProvider.logout();
+                },
+                child: Text('hks')),
+
             Padding(
               padding: const EdgeInsets.only(left: 20.0),
               child: AutoSizeText(

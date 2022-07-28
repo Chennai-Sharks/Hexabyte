@@ -1,8 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hexabyte/layout/nav_layout.dart';
 import 'package:hexabyte/providers/auth/auth_provider.dart';
-import 'package:hexabyte/screens/home_screen/home_screen.dart';
 import 'package:hexabyte/screens/onboarding_screen/onboarding_screen.dart';
 import 'package:hexabyte/utils/utils.dart';
 import 'package:pinput/pinput.dart';
@@ -22,31 +23,17 @@ class _OtpScreenState extends State<OtpScreen> {
   AuthProvider authProvider = AuthProvider();
   String? verificationCode;
 
-  Future<void> verifyPhone({
+  Future<void> verifyPhoneSendOtp({
     required String phone,
   }) async {
     await FirebaseAuth.instance.verifyPhoneNumber(
         phoneNumber: '+91$phone',
         verificationCompleted: (PhoneAuthCredential credentials) async {
-          final userData = await FirebaseAuth.instance.signInWithCredential(credentials);
-          final isNewUser = userData.additionalUserInfo?.isNewUser;
-          // add the login route code (connection with backend)
-          if (isNewUser!) {
-            Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(
-                  builder: (context) => const OnboardingScreen(),
-                ),
-                (route) => false);
-          } else {
-            Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(
-                  builder: (context) => HomeScreen(),
-                ),
-                (route) => false);
-          }
+          Fluttertoast.showToast(msg: 'OTP sent to your phone number', toastLength: Toast.LENGTH_LONG);
         },
         verificationFailed: (e) {
-          print(e);
+          Fluttertoast.showToast(
+              msg: 'App verification failed. Maybe due to internet issues.', toastLength: Toast.LENGTH_LONG);
         },
         codeSent: (verificationId, resendToken) {
           setState(() {
@@ -67,7 +54,7 @@ class _OtpScreenState extends State<OtpScreen> {
   void initState() {
     super.initState();
     if (widget.phone != '9176730100') {
-      verifyPhone(
+      verifyPhoneSendOtp(
         phone: widget.phone,
       );
     }
@@ -78,16 +65,38 @@ class _OtpScreenState extends State<OtpScreen> {
     return Scaffold(
       backgroundColor: Utils.primaryBackground,
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.3,
+          Center(
+            child: Text(
+              'Verification',
+              style: GoogleFonts.rubik(
+                fontWeight: FontWeight.bold,
+                fontSize: 30,
+              ),
+            ),
           ),
-          Container(
-            margin: const EdgeInsets.only(top: 20),
-            child: Center(
-              child: Text(
-                'Verify +91-${widget.phone}',
-                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 26),
+          const SizedBox(
+            height: 40,
+          ),
+          Center(
+            child: Text(
+              'Enter the code sent to the number',
+              style: GoogleFonts.rubik(
+                fontSize: 22,
+                color: Colors.black54,
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Center(
+            child: Text(
+              '+91 ${widget.phone}',
+              style: GoogleFonts.rubik(
+                // fontWeight: FontWeight.bold,
+                fontSize: 25,
               ),
             ),
           ),
@@ -95,72 +104,52 @@ class _OtpScreenState extends State<OtpScreen> {
             padding: const EdgeInsets.all(30.0),
             child: Pinput(
               length: 6,
+              hapticFeedbackType: HapticFeedbackType.heavyImpact,
               onCompleted: ((value) async {
-                print(value);
-                // verifyPhone(phone: widget.phone);
-                final userData = await FirebaseAuth.instance.signInWithCredential(
-                  PhoneAuthProvider.credential(
-                    verificationId: verificationCode!,
-                    smsCode: value,
-                  ),
-                );
-                final isNewUser = userData.additionalUserInfo?.isNewUser;
-                // add the login route code (connection with backend)
-                if (isNewUser!) {
-                  // await authProvider.register(userId: FirebaseAuth.instance.currentUser!.uid);
-                  Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(
-                        builder: (context) => const OnboardingScreen(),
-                      ),
-                      (route) => false);
-                } else {
-                  await authProvider.login(userId: FirebaseAuth.instance.currentUser!.uid);
-                  Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(
-                        builder: (context) => const NavigationLayout(),
-                      ),
-                      (route) => false);
+                try {
+                  final userData = await FirebaseAuth.instance.signInWithCredential(
+                    PhoneAuthProvider.credential(
+                      verificationId: verificationCode!,
+                      smsCode: value,
+                    ),
+                  );
+                  if (!mounted) return;
+                  final bool isNewUser = userData.additionalUserInfo?.isNewUser as bool;
+                  // add the login route code (connection with backend)
+                  if (isNewUser) {
+                    // await authProvider.register(userId: FirebaseAuth.instance.currentUser!.uid);
+                    Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(
+                          builder: (context) => const OnboardingScreen(),
+                        ),
+                        (route) => false);
+                  } else {
+                    //uncomment this afterwards.
+                    // await authProvider.login(userId: FirebaseAuth.instance.currentUser!.uid);
+                    if (!mounted) return;
+                    Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(
+                          builder: (context) => const NavigationLayout(),
+                        ),
+                        (route) => false);
+                  }
+                } catch (error) {
+                  Fluttertoast.showToast(
+                    msg: 'Problem: ${error.toString()}',
+                    toastLength: Toast.LENGTH_LONG,
+                  );
                 }
               }),
+              defaultPinTheme: PinTheme(
+                width: 76,
+                height: 56,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(19),
+                  border: Border.all(color: Colors.black26),
+                ),
+              ),
             ),
-            // child: PinPut(
-            //   fieldsCount:4,
-            //   // fieldWidth: 40,
-            //   errorText:'Invalid OTP'
-            //   controller: _controller,
-            //   keyboardType: TextInputType.number,
-            //   onCompleted: (string) {
-            //     print(string);
-            //   },
-            // ),
           ),
-          Container(
-            height: MediaQuery.of(context).size.width * 0.1,
-          ),
-          //  SizedBox(
-          //   //alignment: Alignment.center,
-          //   width: MediaQuery.of(context).size.width * 0.75,
-          //   height: 50,
-          //   child: ElevatedButton(
-          //     style: ElevatedButton.styleFrom(
-          //       primary: Utils.primaryColor,
-          //       shape: RoundedRectangleBorder(
-          //         borderRadius: BorderRadius.circular(30.0),
-          //       ),
-          //       elevation: 3,
-          //     ),
-          //     onPressed: () async {
-
-          //     },
-          //     child: const Text(
-          //       'CONTINUE',
-          //       style: TextStyle(
-          //         fontSize: 15,
-          //         color: Utils.white,
-          //       ),
-          //     ),
-          //   ),
-          // ),
         ],
       ),
     );
