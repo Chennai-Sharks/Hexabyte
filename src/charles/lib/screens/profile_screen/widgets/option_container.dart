@@ -10,6 +10,7 @@ Widget optionContainer(Color? color, Icon? icon, String? text, BuildContext cont
       GestureDetector(
         onTap: onTap,
         child: Container(
+
           width: size.width * 0.16,
           height: size.width * 0.16,
           child: Center(
@@ -19,7 +20,7 @@ Widget optionContainer(Color? color, Icon? icon, String? text, BuildContext cont
             color: color!,
             borderRadius: BorderRadius.circular(5),
             boxShadow: [
-              BoxShadow(spreadRadius: 2, blurRadius: 5, color: Colors.black.withAlpha(100)),
+              BoxShadow(spreadRadius: 1, blurRadius: 5, color: Colors.black.withAlpha(100)),
             ],
           ),
         ),

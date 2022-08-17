@@ -1,7 +1,6 @@
 // import 'package:app/providers/auth_provider.dart';
-import 'package:flutter/material.dart';
-
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 // import 'package:form_builder_validators/form_builder_validators.dart';
@@ -18,7 +17,7 @@ class AuthScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Utils.primaryBackground,
+      backgroundColor: Theme.of(context).primaryColor,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -34,7 +33,7 @@ class AuthScreen extends StatelessWidget {
               'Hexabyte',
               style: GoogleFonts.exo(
                 fontSize: 50,
-                color: Utils.primaryFontColor,
+                color: Theme.of(context).secondaryHeaderColor.withAlpha(900),
                 fontWeight: FontWeight.bold,
                 wordSpacing: 3,
               ),
@@ -52,7 +51,7 @@ class AuthScreen extends StatelessWidget {
                 'Application for using food waste as consumable organic resource',
                 style: GoogleFonts.rubik(
                   fontSize: 20,
-                  color: Utils.primaryFontColor,
+                  color: Theme.of(context).secondaryHeaderColor.withAlpha(900),
                 ),
                 textAlign: TextAlign.center,
                 maxLines: 2,
@@ -74,9 +73,14 @@ class AuthScreen extends StatelessWidget {
                   fillColor: const Color(0xFFF2F2F2),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30.0),
+                    borderSide: BorderSide(
+                      color: Theme.of(context).secondaryHeaderColor,
+                    ),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: Utils.primaryFontColor),
+                    borderSide: BorderSide(
+                      color: Theme.of(context).secondaryHeaderColor,
+                    ),
                     borderRadius: BorderRadius.circular(30),
                   ),
                 ),

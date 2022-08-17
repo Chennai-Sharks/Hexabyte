@@ -21,7 +21,8 @@ class _YourOrdersState extends State<YourOrders> {
         if (snapshot.connectionState == ConnectionState.done) {
           final orderData = snapshot.data as List;
           return orderData.isNotEmpty
-              ? SizedBox(
+              ? Container(
+                  color: Theme.of(context).secondaryHeaderColor,
                   height: MediaQuery.of(context).size.height * 1.2,
                   child: ListView.builder(
                     physics: const NeverScrollableScrollPhysics(),
