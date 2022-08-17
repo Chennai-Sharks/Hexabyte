@@ -24,6 +24,17 @@ class _AddProductsScreenState extends State<AddProductsScreen> {
     Color? color = Colors.redAccent.shade700;
     return SafeArea(
         child: Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Add Your Product",
+          style: GoogleFonts.exo(
+              fontSize: 24,
+              color: Theme.of(context).secondaryHeaderColor,
+              fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.redAccent.shade700,
+      ),
       body: Container(
         color: Theme.of(context).primaryColor,
         child: SingleChildScrollView(
@@ -33,15 +44,6 @@ class _AddProductsScreenState extends State<AddProductsScreen> {
             children: [
               SizedBox(
                 height: size.height * 0.025,
-              ),
-              Center(
-                child: Text(
-                  "Add Your Product",
-                  style: GoogleFonts.exo(
-                      fontSize: 24,
-                      color: Theme.of(context).secondaryHeaderColor,
-                      fontWeight: FontWeight.bold),
-                ),
               ),
               SizedBox(
                 height: size.height * 0.05,

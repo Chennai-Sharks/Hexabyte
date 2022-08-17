@@ -27,7 +27,8 @@ class IntermediateScreen extends StatelessWidget {
                   ),
                 );
               } else {
-                Navigator.of(context).pushReplacement(
+                Navigator.push(
+                  context,
                   MaterialPageRoute(
                     builder: (context) => const NavigationLayout(),
                   ),

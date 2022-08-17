@@ -44,9 +44,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ),
           leading: IconButton(
-            icon: const Icon(
+            icon:  Icon(
               Icons.arrow_back,
-              color: Colors.black,
+             color: Theme.of(context).secondaryHeaderColor,
             ),
             splashRadius: 25,
             onPressed: () {
@@ -60,7 +60,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             if (snapshot.connectionState == ConnectionState.done) {
               print(snapshot.data);
               return Container(
-                color: Colors.grey.shade200,
+                color:Theme.of(context).primaryColor,
                 height: size.height,
                 child: SingleChildScrollView(
                   child: Column(
@@ -72,7 +72,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                         child: Container(
                           height: size.height * 0.48,
-                          color: Colors.white,
+                          color:Theme.of(context).secondaryHeaderColor.withAlpha(50),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -99,9 +99,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   Padding(
                                     padding: const EdgeInsets.symmetric(horizontal: 10.0),
                                     child: Text(
-                                      snapshot.data?['name'] ?? 'Hello',
+                                       'Hello',
                                       style: GoogleFonts.notoSansAnatolianHieroglyphs(
                                         fontWeight: FontWeight.bold,
+                                        color:Theme.of(context).secondaryHeaderColor,
                                         fontSize: 18,
                                       ),
                                     ),
@@ -118,9 +119,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             MaterialPageRoute(
                                               builder: (context) => OnboardingAndProfileFormScreen(
                                                 appTitle: "Update Your Profile",
-                                                location: snapshot.data?['location'],
-                                                name: snapshot.data?['name'],
-                                                preferences: snapshot.data?['preferences'],
+                                                location: "Location",
+
+                                                name: "Name",
+                                                preferences: ["preferences"],
                                               ),
                                             ),
                                           );
@@ -137,8 +139,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(2.0),
-                                child: Text(
-                                  snapshot.data?['location'],
+                                child: Text( "Location",
                                   style: GoogleFonts.notoSansAnatolianHieroglyphs(
                                     fontSize: 16,
                                     color: Colors.grey.shade700,
@@ -184,6 +185,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             style: GoogleFonts.exo(
                               fontSize: 25,
                               fontWeight: FontWeight.bold,
+                              color:Theme.of(context).secondaryHeaderColor,
                             ),
                           ),
                         ),

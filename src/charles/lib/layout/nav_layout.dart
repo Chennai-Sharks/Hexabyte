@@ -18,7 +18,7 @@ class _NavigationLayoutState extends State<NavigationLayout> {
   int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
-    Color? color = Colors.redAccent.shade400;
+    Color? color = Colors.redAccent.shade700;
 
     final tabNavigations = [
       HomeScreen(),

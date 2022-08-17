@@ -1,14 +1,13 @@
-import 'package:flutter/material.dart';
-
-import 'package:pinput/pinput.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:hexabyte/layout/nav_layout.dart';
 import 'package:hexabyte/providers/auth/auth_provider.dart';
 import 'package:hexabyte/screens/onboarding_screen/onboarding_screen.dart';
-import 'package:hexabyte/utils/utils.dart';
+import 'package:pinput/pinput.dart';
+
+import '../../utils/utils.dart';
 
 class OtpScreen extends StatefulWidget {
   final String phone;
@@ -31,13 +30,15 @@ class _OtpScreenState extends State<OtpScreen> {
     await FirebaseAuth.instance.verifyPhoneNumber(
         phoneNumber: '+91$phone',
         verificationCompleted: (PhoneAuthCredential credentials) async {
-          Fluttertoast.showToast(msg: 'OTP sent to your phone number', toastLength: Toast.LENGTH_LONG);
+          Fluttertoast.showToast(msg: 'Verification done!', toastLength: Toast.LENGTH_LONG);
         },
         verificationFailed: (e) {
           Fluttertoast.showToast(
               msg: 'App verification failed. Maybe due to internet issues.', toastLength: Toast.LENGTH_LONG);
         },
         codeSent: (verificationId, resendToken) {
+          Fluttertoast.showToast(msg: 'OTP sent to your phone number', toastLength: Toast.LENGTH_LONG);
+
           setState(() {
             verificationCode = verificationId;
           });
@@ -64,8 +65,20 @@ class _OtpScreenState extends State<OtpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final defaultPinTheme = PinTheme(
+      width: 76,
+      height: 56,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(19),
+        border: Border.all(color: Theme.of(context).secondaryHeaderColor),
+      ),
+    );
+    final focusedPinTheme = defaultPinTheme.copyDecorationWith(
+      border: Border.all(color: Utils.primaryColor),
+      borderRadius: BorderRadius.circular(8),
+    );
     return Scaffold(
-      backgroundColor: Utils.primaryBackground,
+      backgroundColor: Theme.of(context).primaryColor,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -74,6 +87,7 @@ class _OtpScreenState extends State<OtpScreen> {
               'Verification',
               style: GoogleFonts.rubik(
                 fontWeight: FontWeight.bold,
+                color: Theme.of(context).secondaryHeaderColor,
                 fontSize: 30,
               ),
             ),
@@ -86,7 +100,7 @@ class _OtpScreenState extends State<OtpScreen> {
               'Enter the code sent to the number',
               style: GoogleFonts.rubik(
                 fontSize: 22,
-                color: Colors.black54,
+                color: Theme.of(context).secondaryHeaderColor.withAlpha(700),
               ),
             ),
           ),
@@ -99,6 +113,7 @@ class _OtpScreenState extends State<OtpScreen> {
               style: GoogleFonts.rubik(
                 // fontWeight: FontWeight.bold,
                 fontSize: 25,
+                color: Theme.of(context).secondaryHeaderColor,
               ),
             ),
           ),
@@ -106,6 +121,8 @@ class _OtpScreenState extends State<OtpScreen> {
             padding: const EdgeInsets.all(30.0),
             child: Pinput(
               length: 6,
+              focusedPinTheme: focusedPinTheme,
+              submittedPinTheme: defaultPinTheme,
               hapticFeedbackType: HapticFeedbackType.heavyImpact,
               onCompleted: ((value) async {
                 try {
@@ -147,7 +164,7 @@ class _OtpScreenState extends State<OtpScreen> {
                 height: 56,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(19),
-                  border: Border.all(color: Colors.black26),
+                  border: Border.all(color: Theme.of(context).secondaryHeaderColor),
                 ),
               ),
             ),
