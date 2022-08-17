@@ -30,16 +30,15 @@ class _OtpScreenState extends State<OtpScreen> {
     await FirebaseAuth.instance.verifyPhoneNumber(
         phoneNumber: '+91$phone',
         verificationCompleted: (PhoneAuthCredential credentials) async {
-          Fluttertoast.showToast(
-              msg: 'OTP sent to your phone number',
-              toastLength: Toast.LENGTH_LONG);
+          Fluttertoast.showToast(msg: 'Verification done!', toastLength: Toast.LENGTH_LONG);
         },
         verificationFailed: (e) {
           Fluttertoast.showToast(
-              msg: 'App verification failed. Maybe due to internet issues.',
-              toastLength: Toast.LENGTH_LONG);
+              msg: 'App verification failed. Maybe due to internet issues.', toastLength: Toast.LENGTH_LONG);
         },
         codeSent: (verificationId, resendToken) {
+          Fluttertoast.showToast(msg: 'OTP sent to your phone number', toastLength: Toast.LENGTH_LONG);
+
           setState(() {
             verificationCode = verificationId;
           });
@@ -127,16 +126,14 @@ class _OtpScreenState extends State<OtpScreen> {
               hapticFeedbackType: HapticFeedbackType.heavyImpact,
               onCompleted: ((value) async {
                 try {
-                  final userData =
-                      await FirebaseAuth.instance.signInWithCredential(
+                  final userData = await FirebaseAuth.instance.signInWithCredential(
                     PhoneAuthProvider.credential(
                       verificationId: verificationCode!,
                       smsCode: value,
                     ),
                   );
                   if (!mounted) return;
-                  final bool isNewUser =
-                      userData.additionalUserInfo?.isNewUser as bool;
+                  final bool isNewUser = userData.additionalUserInfo?.isNewUser as bool;
                   // add the login route code (connection with backend)
                   if (isNewUser) {
                     // await authProvider.register(userId: FirebaseAuth.instance.currentUser!.uid);
@@ -167,8 +164,7 @@ class _OtpScreenState extends State<OtpScreen> {
                 height: 56,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(19),
-                  border:
-                      Border.all(color: Theme.of(context).secondaryHeaderColor),
+                  border: Border.all(color: Theme.of(context).secondaryHeaderColor),
                 ),
               ),
             ),
