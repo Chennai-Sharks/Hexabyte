@@ -19,6 +19,7 @@ class ItemDataSerializer(serializers.Serializer):
     duration = serializers.IntegerField()
     description = serializers.CharField()
     total_qty = serializers.IntegerField()
+    cost_per_kg = serializers.IntegerField()
     subscribed_qty = serializers.IntegerField(required=False)
     available_qty =  serializers.IntegerField(required=False)
 
@@ -27,3 +28,5 @@ class OrderDataSerializer(serializers.Serializer):
     item_id = serializers.CharField()
     duration = serializers.IntegerField()
     subscribed_qty = serializers.IntegerField()
+    cost_per_kg = serializers.IntegerField()
+    date = serializers.DateField(required=False)
