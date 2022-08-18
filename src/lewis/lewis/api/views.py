@@ -1,9 +1,10 @@
 from logging import log
 from django.http import HttpResponse, JsonResponse
-from lewis.api.utils import get_db_handle, bytes_to_json
-from lewis.api.schemas import MetadataSerializer
+from lewis.api.utils import  bytes_to_json # ,get_db_handle,
+from lewis.api.schemas import MetadataSerializer , ItemDataSerializer
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view
+from lewis.settings import db
 
 @api_view(['POST'])
 @csrf_exempt
@@ -15,8 +16,8 @@ def data_collection(request):
     '''
 
     try:
-        client = get_db_handle()    
-        db = client.Lewis
+        # client = get_db_handle()    
+        # db = client.Lewis
         data_ = request.body
         data = bytes_to_json(data_)
         phone = data['phone'] 

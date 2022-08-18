@@ -16,6 +16,11 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+# MongoDB connection
+from pymongo import MongoClient
+client = MongoClient("mongodb+srv://Nikhilesh:Dalesteyn08#@lewis.csy1lc4.mongodb.net/?retryWrites=true&w=majority")    
+db = client.Lewis
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
@@ -37,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',    
-    'phonenumber_field'
+    # 'phonenumber_field'
 ]
 
 MIDDLEWARE = [
