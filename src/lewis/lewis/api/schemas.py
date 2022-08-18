@@ -12,8 +12,8 @@ class MetadataSerializer(serializers.Serializer):
 
 class ItemDataSerializer(serializers.Serializer):
     producer_id = serializers.CharField()
-    location = serializers.ListField(child = serializers.FloatField(), allow_empty = False,  min_length=2, max_length=2)
-    business = serializers.CharField()
+    location = serializers.ListField(child = serializers.FloatField(), allow_empty = False,  min_length=2, max_length=2,required=False)
+    business = serializers.CharField(required=False)
     title = serializers.CharField()
     tags = serializers.ListField(child = serializers.CharField())
     duration = serializers.IntegerField()

@@ -19,6 +19,9 @@ def item_addition(request):
         data = bytes_to_json(data_)
         serializer = ItemDataSerializer(data = data)
         if serializer.is_valid():
+            user_data = db.metadata.find_one({"phone": data['producer_id']})        
+            data['business']=user_data['business']
+            data['location']=user_data['location']
             data["subscribed_qty"]=0
             data["balance_qty"]=data["total_qty"]
             result = db.Items.insert_one(data)
