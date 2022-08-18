@@ -7,6 +7,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexabyte/screens/otp_screen/otp_screen.dart';
 import 'package:hexabyte/utils/utils.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // import 'package:provider/provider.dart';
 
@@ -111,13 +112,15 @@ class AuthScreen extends StatelessWidget {
                 elevation: 3,
               ),
               onPressed: () async {
+                final navContext = Navigator.of(context);
                 _formKey.currentState?.save();
                 final mobileno = _formKey.currentState?.value['phoneno'];
                 if (mobileno == null) {
                   Fluttertoast.showToast(msg: 'Phone number is empty');
                 } else if (mobileno.length == 10) {
-                  print(_formKey.currentState?.value);
-                  Navigator.of(context).push(
+                  SharedPreferences pref = await SharedPreferences.getInstance();
+                  await pref.setString('phone', mobileno);
+                  navContext.push(
                     MaterialPageRoute(
                       builder: (context) => OtpScreen(phone: mobileno),
                     ),
