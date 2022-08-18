@@ -15,20 +15,20 @@ class IntermediateScreen extends StatelessWidget {
     return FutureBuilder(
         future: _initFirebaseSdk,
         builder: (_, snapshot) {
+          final navContext = Navigator.of(context);
           if (snapshot.hasError) return const Scaffold();
 
           if (snapshot.connectionState == ConnectionState.done) {
             // Assign listener after the SDK is initialized successfully
             FirebaseAuth.instance.authStateChanges().listen((User? user) {
               if (user == null) {
-                Navigator.of(context).pushReplacement(
+                navContext.pushReplacement(
                   MaterialPageRoute(
                     builder: (context) => AuthScreen(),
                   ),
                 );
               } else {
-                Navigator.push(
-                  context,
+                navContext.push(
                   MaterialPageRoute(
                     builder: (context) => const NavigationLayout(),
                   ),
