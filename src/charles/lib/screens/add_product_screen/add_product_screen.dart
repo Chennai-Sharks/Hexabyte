@@ -5,7 +5,8 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexabyte/layout/nav_layout.dart';
 import 'package:hexabyte/providers/add_product/add_product_provider.dart';
-import 'package:hexabyte/widgets/onboarding_and_profile_form_screen.dart';
+// import 'package:hexabyte/widgets/onboarding_and_profile_form_screen.dart';
+import 'package:hexabyte/screens/onboarding_screen/onboarding_screen.dart';
 
 class AddProductsScreen extends StatefulWidget {
   const AddProductsScreen({Key? key}) : super(key: key);
@@ -27,10 +28,8 @@ class _AddProductsScreenState extends State<AddProductsScreen> {
       appBar: AppBar(
         title: Text(
           "Add Your Product",
-          style: GoogleFonts.exo(
-              fontSize: 24,
-              color: Theme.of(context).secondaryHeaderColor,
-              fontWeight: FontWeight.bold),
+          style:
+              GoogleFonts.exo(fontSize: 24, color: Theme.of(context).secondaryHeaderColor, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
         backgroundColor: Colors.redAccent.shade700,
@@ -69,12 +68,7 @@ class _AddProductsScreenState extends State<AddProductsScreen> {
                                   decoration: BoxDecoration(
                                     color: Theme.of(context).primaryColor,
                                     borderRadius: BorderRadius.circular(20),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: Colors.grey.shade100,
-                                          spreadRadius: 1,
-                                          blurRadius: 5)
-                                    ],
+                                    boxShadow: [BoxShadow(color: Colors.grey.shade100, spreadRadius: 1, blurRadius: 5)],
                                   ),
                                   child: Center(
                                     child: Padding(
@@ -87,17 +81,14 @@ class _AddProductsScreenState extends State<AddProductsScreen> {
                                           labelText: 'Name Of Product',
                                           labelStyle: TextStyle(
                                             fontSize: 16,
-                                            color: Theme.of(context)
-                                                .secondaryHeaderColor,
+                                            color: Theme.of(context).secondaryHeaderColor,
                                           ),
                                           border: InputBorder.none,
                                         ),
 
                                         // valueTransformer: (text) => num.tryParse(text),
-                                        validator:
-                                            FormBuilderValidators.compose([
-                                          FormBuilderValidators.required(
-                                              context),
+                                        validator: FormBuilderValidators.compose([
+                                          FormBuilderValidators.required(context),
                                         ]),
                                         keyboardType: TextInputType.name,
                                       ),
@@ -106,18 +97,12 @@ class _AddProductsScreenState extends State<AddProductsScreen> {
                                 ),
                               ),
                               Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 9.0),
+                                padding: const EdgeInsets.symmetric(horizontal: 9.0),
                                 child: Container(
                                   decoration: BoxDecoration(
                                     color: Theme.of(context).primaryColor,
                                     borderRadius: BorderRadius.circular(20),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: Colors.grey.shade100,
-                                          spreadRadius: 1,
-                                          blurRadius: 5)
-                                    ],
+                                    boxShadow: [BoxShadow(color: Colors.grey.shade100, spreadRadius: 1, blurRadius: 5)],
                                   ),
                                   child: Center(
                                     child: Padding(
@@ -129,16 +114,12 @@ class _AddProductsScreenState extends State<AddProductsScreen> {
                                           border: InputBorder.none,
                                           labelStyle: TextStyle(
                                             fontSize: 16,
-                                            color: Theme.of(context)
-                                                .secondaryHeaderColor,
+                                            color: Theme.of(context).secondaryHeaderColor,
                                           ),
                                         ),
                                         allowClear: true,
                                         validator:
-                                            FormBuilderValidators.compose([
-                                          FormBuilderValidators.required(
-                                              context)
-                                        ]),
+                                            FormBuilderValidators.compose([FormBuilderValidators.required(context)]),
                                         items: stateOptions
                                             .map((gender) => DropdownMenuItem(
                                                   value: gender,
@@ -151,18 +132,12 @@ class _AddProductsScreenState extends State<AddProductsScreen> {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 9.0, right: 9, top: 9),
+                                padding: const EdgeInsets.only(left: 9.0, right: 9, top: 9),
                                 child: Container(
                                   decoration: BoxDecoration(
                                     color: Theme.of(context).primaryColor,
                                     borderRadius: BorderRadius.circular(20),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: Colors.grey.shade100,
-                                          spreadRadius: 1,
-                                          blurRadius: 5)
-                                    ],
+                                    boxShadow: [BoxShadow(color: Colors.grey.shade100, spreadRadius: 1, blurRadius: 5)],
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsets.all(11.0),
@@ -174,16 +149,12 @@ class _AddProductsScreenState extends State<AddProductsScreen> {
                                           border: InputBorder.none,
                                           labelStyle: TextStyle(
                                             fontSize: 16,
-                                            color: Theme.of(context)
-                                                .secondaryHeaderColor,
+                                            color: Theme.of(context).secondaryHeaderColor,
                                           ),
                                         ),
                                         allowClear: true,
                                         validator:
-                                            FormBuilderValidators.compose([
-                                          FormBuilderValidators.required(
-                                              context)
-                                        ]),
+                                            FormBuilderValidators.compose([FormBuilderValidators.required(context)]),
                                         items: [
                                           'Consumable food scraps',
                                           'Eggshells',
@@ -208,12 +179,7 @@ class _AddProductsScreenState extends State<AddProductsScreen> {
                                   decoration: BoxDecoration(
                                     color: Theme.of(context).primaryColor,
                                     borderRadius: BorderRadius.circular(20),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: Colors.grey.shade100,
-                                          spreadRadius: 1,
-                                          blurRadius: 5)
-                                    ],
+                                    boxShadow: [BoxShadow(color: Colors.grey.shade100, spreadRadius: 1, blurRadius: 5)],
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsets.all(11.0),
@@ -225,19 +191,15 @@ class _AddProductsScreenState extends State<AddProductsScreen> {
                                           labelText: 'Weight (in KG)',
                                           labelStyle: TextStyle(
                                             fontSize: 16,
-                                            color: Theme.of(context)
-                                                .secondaryHeaderColor,
+                                            color: Theme.of(context).secondaryHeaderColor,
                                           ),
                                           border: InputBorder.none,
                                         ),
 
                                         // valueTransformer: (text) => num.tryParse(text),
-                                        validator:
-                                            FormBuilderValidators.compose([
-                                          FormBuilderValidators.required(
-                                              context),
-                                          FormBuilderValidators.numeric(
-                                              context),
+                                        validator: FormBuilderValidators.compose([
+                                          FormBuilderValidators.required(context),
+                                          FormBuilderValidators.numeric(context),
                                         ]),
                                         keyboardType: TextInputType.number,
                                       ),
@@ -246,18 +208,12 @@ class _AddProductsScreenState extends State<AddProductsScreen> {
                                 ),
                               ),
                               Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 9, right: 9),
+                                padding: const EdgeInsets.only(left: 9, right: 9),
                                 child: Container(
                                   decoration: BoxDecoration(
                                     color: Theme.of(context).primaryColor,
                                     borderRadius: BorderRadius.circular(20),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: Colors.grey.shade100,
-                                          spreadRadius: 1,
-                                          blurRadius: 5)
-                                    ],
+                                    boxShadow: [BoxShadow(color: Colors.grey.shade100, spreadRadius: 1, blurRadius: 5)],
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsets.all(11.0),
@@ -269,19 +225,15 @@ class _AddProductsScreenState extends State<AddProductsScreen> {
                                           labelText: 'Cost (In Rupees)',
                                           labelStyle: TextStyle(
                                             fontSize: 16,
-                                            color: Theme.of(context)
-                                                .secondaryHeaderColor,
+                                            color: Theme.of(context).secondaryHeaderColor,
                                           ),
                                           border: InputBorder.none,
                                         ),
 
                                         // valueTransformer: (text) => num.tryParse(text),
-                                        validator:
-                                            FormBuilderValidators.compose([
-                                          FormBuilderValidators.required(
-                                              context),
-                                          FormBuilderValidators.numeric(
-                                              context),
+                                        validator: FormBuilderValidators.compose([
+                                          FormBuilderValidators.required(context),
+                                          FormBuilderValidators.numeric(context),
                                         ]),
                                         keyboardType: TextInputType.number,
                                       ),
@@ -290,18 +242,12 @@ class _AddProductsScreenState extends State<AddProductsScreen> {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 9, right: 9, top: 9, bottom: 20),
+                                padding: const EdgeInsets.only(left: 9, right: 9, top: 9, bottom: 20),
                                 child: Container(
                                   decoration: BoxDecoration(
                                     color: Theme.of(context).primaryColor,
                                     borderRadius: BorderRadius.circular(20),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: Colors.grey.shade100,
-                                          spreadRadius: 1,
-                                          blurRadius: 5)
-                                    ],
+                                    boxShadow: [BoxShadow(color: Colors.grey.shade100, spreadRadius: 1, blurRadius: 5)],
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsets.all(11.0),
@@ -313,17 +259,14 @@ class _AddProductsScreenState extends State<AddProductsScreen> {
                                           labelText: 'Description',
                                           labelStyle: TextStyle(
                                             fontSize: 16,
-                                            color: Theme.of(context)
-                                                .secondaryHeaderColor,
+                                            color: Theme.of(context).secondaryHeaderColor,
                                           ),
                                           border: InputBorder.none,
                                         ),
 
                                         // valueTransformer: (text) => num.tryParse(text),
-                                        validator:
-                                            FormBuilderValidators.compose([
-                                          FormBuilderValidators.required(
-                                              context),
+                                        validator: FormBuilderValidators.compose([
+                                          FormBuilderValidators.required(context),
                                         ]),
                                         keyboardType: TextInputType.name,
                                       ),
@@ -343,19 +286,15 @@ class _AddProductsScreenState extends State<AddProductsScreen> {
                     child: Text(
                       "Submit",
                       style: GoogleFonts.exo(
-                          color: Theme.of(context).primaryColor,
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold),
+                          color: Theme.of(context).primaryColor, fontSize: 22, fontWeight: FontWeight.bold),
                     ),
                     onPressed: () async {
                       _formKey.currentState!.save();
                       if (_formKey.currentState!.validate()) {
                         print(_formKey.currentState!.value);
-                        await _addProductProvider
-                            .addProduct(_formKey.currentState!.value);
+                        await _addProductProvider.addProduct(_formKey.currentState!.value);
                         Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(
-                              builder: (context) => const NavigationLayout()),
+                          MaterialPageRoute(builder: (context) => const NavigationLayout()),
                         );
                         Fluttertoast.showToast(msg: 'Product added');
                       } else {

@@ -1,14 +1,16 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:form_builder_validators/localization/l10n.dart';
 import 'package:hexabyte/screens/intermediate_screen/intermediate_screen.dart';
+// import 'package:hexabyte/screens/onboarding_screen/onboarding_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'theme_provider/theme_provider_app.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  //await dotenv.load(fileName: ".env");
+  await dotenv.load(fileName: ".env");
   await Firebase.initializeApp();
   runApp(const MyApp());
 }
@@ -48,6 +50,7 @@ class MyApp extends StatelessWidget {
           // If you wanna go to Home page straight away, comment the above line and uncomment
           // the below line.
           // home: NavigationLayout(),
+          // home: const OnboardingScreen(),
         );
       },
     );

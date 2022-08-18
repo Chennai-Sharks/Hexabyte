@@ -9,7 +9,6 @@ import 'package:hexabyte/screens/loading_screen/loading_screen.dart';
 import 'package:hexabyte/screens/profile_screen/widgets/option_container.dart';
 import 'package:hexabyte/screens/profile_screen/widgets/your_orders.dart';
 import 'package:hexabyte/utils/utils.dart';
-import 'package:hexabyte/widgets/onboarding_and_profile_form_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   final String? name;
@@ -34,19 +33,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
         appBar: AppBar(
           centerTitle: true,
           backgroundColor: Theme.of(context).primaryColor,
-          iconTheme: IconThemeData(color:Theme.of(context).secondaryHeaderColor),
+          iconTheme: IconThemeData(color: Theme.of(context).secondaryHeaderColor),
           elevation: 0,
           title: Text(
             'My Profile',
             style: GoogleFonts.exo(
               fontWeight: FontWeight.bold,
-              color:Theme.of(context).secondaryHeaderColor,
+              color: Theme.of(context).secondaryHeaderColor,
             ),
           ),
           leading: IconButton(
-            icon:  Icon(
+            icon: Icon(
               Icons.arrow_back,
-             color: Theme.of(context).secondaryHeaderColor,
+              color: Theme.of(context).secondaryHeaderColor,
             ),
             splashRadius: 25,
             onPressed: () {
@@ -60,7 +59,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             if (snapshot.connectionState == ConnectionState.done) {
               print(snapshot.data);
               return Container(
-                color:Theme.of(context).primaryColor,
+                color: Theme.of(context).primaryColor,
                 height: size.height,
                 child: SingleChildScrollView(
                   child: Column(
@@ -72,7 +71,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                         child: Container(
                           height: size.height * 0.48,
-                          color:Theme.of(context).secondaryHeaderColor.withAlpha(50),
+                          color: Theme.of(context).secondaryHeaderColor.withAlpha(50),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -99,10 +98,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   Padding(
                                     padding: const EdgeInsets.symmetric(horizontal: 10.0),
                                     child: Text(
-                                       'Hello',
+                                      'Hello',
                                       style: GoogleFonts.notoSansAnatolianHieroglyphs(
                                         fontWeight: FontWeight.bold,
-                                        color:Theme.of(context).secondaryHeaderColor,
+                                        color: Theme.of(context).secondaryHeaderColor,
                                         fontSize: 18,
                                       ),
                                     ),
@@ -114,18 +113,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     child: Center(
                                       child: IconButton(
                                         onPressed: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) => OnboardingAndProfileFormScreen(
-                                                appTitle: "Update Your Profile",
-                                                location: "Location",
+                                          // Navigator.push(
+                                          //   context,
+                                          //   MaterialPageRoute(
+                                          //     builder: (context) => OnboardingAndProfileFormScreen(
+                                          //       appTitle: "Update Your Profile",
+                                          //       location: "Location",
 
-                                                name: "Name",
-                                                preferences: ["preferences"],
-                                              ),
-                                            ),
-                                          );
+                                          //       name: "Name",
+                                          //       preferences: ["preferences"],
+                                          //     ),
+                                          //   ),
+                                          // );
                                         },
                                         icon: const FaIcon(
                                           FontAwesomeIcons.pencilAlt,
@@ -139,7 +138,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(2.0),
-                                child: Text( "Location",
+                                child: Text(
+                                  "Location",
                                   style: GoogleFonts.notoSansAnatolianHieroglyphs(
                                     fontSize: 16,
                                     color: Colors.grey.shade700,
@@ -185,7 +185,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             style: GoogleFonts.exo(
                               fontSize: 25,
                               fontWeight: FontWeight.bold,
-                              color:Theme.of(context).secondaryHeaderColor,
+                              color: Theme.of(context).secondaryHeaderColor,
                             ),
                           ),
                         ),
