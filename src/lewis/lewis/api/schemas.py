@@ -18,8 +18,8 @@ class ItemDataSerializer(serializers.Serializer):
     duration = serializers.IntegerField()
     description = serializers.CharField()
     total_qty = serializers.IntegerField()
-    # subscribed_qty = serializers.IntegerField()
-    # available_qty =  serializers.IntegerField()
+    subscribed_qty = serializers.IntegerField(required=False)
+    available_qty =  serializers.IntegerField(required=False)
 
 class OrderDataSerializer(serializers.Serializer):
     customer_id  = serializers.CharField()
