@@ -8,6 +8,7 @@ class MetadataSerializer(serializers.Serializer):
     business = serializers.CharField()
     location = serializers.ListField(child = serializers.FloatField(), allow_empty = False,  min_length=2, max_length=2)
     email = serializers.CharField()
+    subscription_threshold_count = serializers.IntegerField(required=False)
 
 class ItemDataSerializer(serializers.Serializer):
     producer_id = serializers.CharField()
