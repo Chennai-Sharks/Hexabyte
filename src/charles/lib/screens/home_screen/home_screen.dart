@@ -21,35 +21,31 @@ class HomeScreen extends StatelessWidget {
     final controller = ScrollController();
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(150.0),
-        child: Container(
-          color: color,
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(20.0, 8, 40, 8),
-                    child: Image.asset(
-                      "assets/logo.png",
-                      height: 40,
-                    ),
+      appBar: AppBar(
+        backgroundColor: color,
+        title: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                  child: Image.asset(
+                    "assets/logo.png",
+                    height: 40,
                   ),
-                  Text(
-                    'HexaByte',
-                    style: GoogleFonts.rubik(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                      color: Theme.of(context).primaryColor,
-                    ),
+                ),
+                Text(
+                  'HexaByte',
+                  style: GoogleFonts.rubik(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).primaryColor,
                   ),
-                ],
-              ),
-              HomePageAppBar(),
-            ],
-          ),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
       drawer: Drawer(),

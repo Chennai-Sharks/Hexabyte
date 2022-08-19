@@ -27,29 +27,19 @@ class _CommonAppBarState extends State<CommonAppBar> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 5,
-                      horizontal: 15,
-                    ),
-                    child: GestureDetector(
-                      onTap: () {},
-                      child: Image.asset(
-                        'images/logo.png',
-                        width: 100,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 12.0),
-                    child: GestureDetector(
-                      onTap: () {},
-                      child: Icon(
-                        Icons.search_sharp,
-                        color: Theme.of(context).primaryColor,
-                      ),
-                    ),
-                  ),
+                  // Padding(
+                  //   padding: const EdgeInsets.symmetric(
+                  //     vertical: 5,
+                  //     horizontal: 15,
+                  //   ),
+                  //   child: GestureDetector(
+                  //     onTap: () {},
+                  //     child: Image.asset(
+                  //       'images/logo.png',
+                  //       width: 100,
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
             ),
@@ -150,111 +140,111 @@ class _HomePageAppBarState extends State<HomePageAppBar> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 5,
-                  ),
-                  child: TextFieldControllers(
-                    child: TextField(
-                      onChanged: (value) {
-                        setState(() {});
-                      },
-                      textCapitalization: TextCapitalization.words,
-                      style: GoogleFonts.montserrat(),
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.only(
-                          bottom: 14,
-                        ),
-                        hintStyle: GoogleFonts.montserrat(color: Colors.grey.shade600),
-                        icon: Icon(
-                          Icons.search,
-                          size: 20,
-                          color: Theme.of(context).secondaryHeaderColor,
-                        ),
-                        hintText: "Search",
-                        border: InputBorder.none,
-                      ),
-                    ),
-                  ),
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.mic,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                ),
-              ],
-            ),
-            GestureDetector(
-              onTap: () {},
-              child: Container(
-                height: 20,
-                child: GestureDetector(
-                  onTap: () {},
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            left: 10,
-                          ),
-                          child: Center(
-                            child: Icon(
-                              Icons.location_pin,
-                              // size: 10,
-                              color: Theme.of(context).primaryColor,
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 10, top: 2),
-                          child: Center(
-                            child: RichText(
-                              text: TextSpan(
-                                style: GoogleFonts.montserrat(
-                                  color: Theme.of(context).primaryColor,
-                                  fontSize: 14,
-                                ),
-                                children: <TextSpan>[
-                                  TextSpan(
-                                    text: 'Deliver to ',
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          // Text(
-                          //   '${}',
-                          //   softWrap: true,
-                          //
-                          //
-                          // ),
-                        ),
-                      ]),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 15.0),
-                        child: Center(
-                          child: GestureDetector(
-                            onTap: () {},
-                            child: Icon(
-                              Icons.keyboard_arrow_down,
-                              color: Theme.of(context).primaryColor,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+            //   crossAxisAlignment: CrossAxisAlignment.center,
+            //   children: [
+            //     // Padding(
+            //     //   padding: const EdgeInsets.symmetric(
+            //     //     vertical: 5,
+            //     //   ),
+            //     //   child: TextFieldControllers(
+            //     //     child: TextField(
+            //     //       onChanged: (value) {
+            //     //         setState(() {});
+            //     //       },
+            //     //       textCapitalization: TextCapitalization.words,
+            //     //       style: GoogleFonts.montserrat(),
+            //     //       decoration: InputDecoration(
+            //     //         contentPadding: EdgeInsets.only(
+            //     //           bottom: 14,
+            //     //         ),
+            //     //         hintStyle: GoogleFonts.montserrat(color: Colors.grey.shade600),
+            //     //         icon: Icon(
+            //     //           Icons.search,
+            //     //           size: 20,
+            //     //           color: Theme.of(context).secondaryHeaderColor,
+            //     //         ),
+            //     //         hintText: "Search",
+            //     //         border: InputBorder.none,
+            //     //       ),
+            //     //     ),
+            //     //   ),
+            //     // ),
+            //     //   IconButton(
+            //     //     onPressed: () {},
+            //     //     icon: Icon(
+            //     //       Icons.mic,
+            //     //       color: Theme.of(context).primaryColor,
+            //     //     ),
+            //     //   ),
+            //   ],
+            // ),
+            // GestureDetector(
+            //   onTap: () {},
+            //   child: Container(
+            //     height: 20,
+            //     child: GestureDetector(
+            //       onTap: () {},
+            //       child: Row(
+            //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //         crossAxisAlignment: CrossAxisAlignment.center,
+            //         children: [
+            //           Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
+            //             Padding(
+            //               padding: const EdgeInsets.only(
+            //                 left: 10,
+            //               ),
+            //               child: Center(
+            //                 child: Icon(
+            //                   Icons.location_pin,
+            //                   // size: 10,
+            //                   color: Theme.of(context).primaryColor,
+            //                 ),
+            //               ),
+            //             ),
+            //             Padding(
+            //               padding: const EdgeInsets.only(left: 10, top: 2),
+            //               child: Center(
+            //                 child: RichText(
+            //                   text: TextSpan(
+            //                     style: GoogleFonts.montserrat(
+            //                       color: Theme.of(context).primaryColor,
+            //                       fontSize: 14,
+            //                     ),
+            //                     children: <TextSpan>[
+            //                       TextSpan(
+            //                         text: 'Deliver to ',
+            //                       ),
+            //                     ],
+            //                   ),
+            //                 ),
+            //               ),
+            //               // Text(
+            //               //   '${}',
+            //               //   softWrap: true,
+            //               //
+            //               //
+            //               // ),
+            //             ),
+            //           ]),
+            //           Padding(
+            //             padding: const EdgeInsets.only(right: 15.0),
+            //             child: Center(
+            //               child: GestureDetector(
+            //                 onTap: () {},
+            //                 child: Icon(
+            //                   Icons.keyboard_arrow_down,
+            //                   color: Theme.of(context).primaryColor,
+            //                 ),
+            //               ),
+            //             ),
+            //           ),
+            //         ],
+            //       ),
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),

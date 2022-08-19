@@ -4,7 +4,6 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexabyte/screens/product_details_screen/widgets/payment_success_screen.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
-import 'package:velocity_x/velocity_x.dart';
 
 class ProductDetailsPage extends StatefulWidget {
   final String? productName;
@@ -155,21 +154,21 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                         ),
                         Row(
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: VxStepper(
-                                defaultValue: 1,
-                                max: int.parse(widget.weight!),
-                                min: 1,
-                                onChange: (value) {
-                                  setState(() {
-                                    _stepperValue = value;
-                                    _oneTimeBuyCost = _stepperValue! * int.parse(widget.price!);
-                                    _contractBuyCost = _oneTimeBuyCost! * _month!;
-                                  });
-                                },
-                              ),
-                            ),
+                            // Padding(
+                            //   padding: const EdgeInsets.all(8.0),
+                            //   child: VxStepper(
+                            //     defaultValue: 1,
+                            //     max: int.parse(widget.weight!),
+                            //     min: 1,
+                            //     onChange: (value) {
+                            //       setState(() {
+                            //         _stepperValue = value;
+                            //         _oneTimeBuyCost = _stepperValue! * int.parse(widget.price!);
+                            //         _contractBuyCost = _oneTimeBuyCost! * _month!;
+                            //       });
+                            //     },
+                            //   ),
+                            // ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(

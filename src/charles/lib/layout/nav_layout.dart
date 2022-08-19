@@ -31,7 +31,7 @@ class NavigationLayoutState extends State<NavigationLayout> {
       appBar: AppBar(
         elevation: 0,
         leading: const Text(''),
-        backgroundColor: Colors.red,
+        backgroundColor: color,
         toolbarHeight: 0,
       ),
       body: tabNavigations[_currentIndex],
