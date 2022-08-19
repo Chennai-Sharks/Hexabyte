@@ -1,23 +1,15 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hexabyte/layout/appbar_layout.dart';
-import 'package:hexabyte/providers/auth/auth_provider.dart';
 import 'package:hexabyte/screens/home_screen/widgets/product_card.dart';
 import 'package:hexabyte/screens/home_screen/widgets/search_bar.dart';
 import 'package:hexabyte/screens/search_screen/search_screen.dart';
 
 class HomeScreen extends StatelessWidget {
-  HomeScreen({Key? key}) : super(key: key);
-  final AuthProvider _authProvider = AuthProvider();
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    print(FirebaseAuth.instance);
-    Size? size = MediaQuery.of(context).size;
-    Color? color = Colors.redAccent.shade700;
-
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
