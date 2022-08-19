@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
           theme: MyThemes.lightTheme,
           darkTheme: MyThemes.darkTheme,
           debugShowCheckedModeBanner: false,
-          themeMode: themeProvider.themeMode,
+          // themeMode: themeProvider.themeMode,
           supportedLocales: const [
             Locale('en', ''),
             Locale('es', ''),

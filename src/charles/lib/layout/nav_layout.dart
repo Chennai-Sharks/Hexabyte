@@ -31,10 +31,11 @@ class NavigationLayoutState extends State<NavigationLayout> {
       appBar: AppBar(
         elevation: 0,
         leading: const Text(''),
-        backgroundColor: color,
+        backgroundColor: Colors.white,
         toolbarHeight: 0,
       ),
       body: tabNavigations[_currentIndex],
+      backgroundColor: Colors.grey[50],
       bottomNavigationBar: BottomNavyBar(
         backgroundColor: Theme.of(context).primaryColor,
         items: <BottomNavyBarItem>[

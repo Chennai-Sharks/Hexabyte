@@ -70,7 +70,7 @@ class _OrderCardState extends State<OrderCard> {
                       padding: const EdgeInsets.all(5.0),
                       child: Text(
                         widget.productName!,
-                        style: GoogleFonts.exo(
+                        style: GoogleFonts.roboto(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),

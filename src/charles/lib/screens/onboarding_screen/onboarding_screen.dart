@@ -34,7 +34,7 @@ class OnboardingScreenState extends State<OnboardingScreen> {
       appBar: AppBar(
         title: Text(
           'Onboarding',
-          style: GoogleFonts.rubik(
+          style: GoogleFonts.roboto(
             color: Colors.black,
           ),
         ),
@@ -51,7 +51,7 @@ class OnboardingScreenState extends State<OnboardingScreen> {
             Center(
               child: Text(
                 'Welcome! Enter your details',
-                style: GoogleFonts.rubik(fontSize: 24, color: Colors.grey.shade900, fontWeight: FontWeight.bold),
+                style: GoogleFonts.roboto(fontSize: 24, color: Colors.grey.shade900, fontWeight: FontWeight.bold),
               ),
             ),
             SizedBox(

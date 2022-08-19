@@ -26,7 +26,7 @@ class SearchPage extends StatelessWidget {
             ),
             AutoSizeText(
               'Search Page',
-              style: GoogleFonts.exo(
+              style: GoogleFonts.roboto(
                 color: Theme.of(context).secondaryHeaderColor,
                 fontWeight: FontWeight.bold,
                 fontSize: 25,
@@ -92,12 +92,7 @@ class SearchPage extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: Theme.of(context).primaryColor,
                     borderRadius: BorderRadius.circular(20),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey.shade100,
-                          spreadRadius: 1,
-                          blurRadius: 5)
-                    ],
+                    boxShadow: [BoxShadow(color: Colors.grey.shade100, spreadRadius: 1, blurRadius: 5)],
                   ),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 11.0),
@@ -114,8 +109,7 @@ class SearchPage extends StatelessWidget {
                         // initialValue: 'Male',
                         allowClear: true,
 
-                        validator: FormBuilderValidators.compose(
-                            [FormBuilderValidators.required(context)]),
+                        validator: FormBuilderValidators.compose([FormBuilderValidators.required(context)]),
                         items: [
                           'Consumable food scraps',
                           'Eggshells',

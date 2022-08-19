@@ -28,7 +28,7 @@ class AddProductsScreenState extends State<AddProductsScreen> {
       appBar: AppBar(
         title: Text(
           "Add Your Product",
-          style: GoogleFonts.rubik(
+          style: GoogleFonts.roboto(
               fontSize: 24, color: Theme.of(context).secondaryHeaderColor, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
@@ -45,7 +45,7 @@ class AddProductsScreenState extends State<AddProductsScreen> {
             Center(
               child: Text(
                 'Enter the details',
-                style: GoogleFonts.rubik(fontSize: 24, color: Colors.grey.shade900, fontWeight: FontWeight.bold),
+                style: GoogleFonts.roboto(fontSize: 24, color: Colors.grey.shade900, fontWeight: FontWeight.bold),
               ),
             ),
             SizedBox(
@@ -111,7 +111,7 @@ class AddProductsScreenState extends State<AddProductsScreen> {
                                   decoration: InputDecoration(
                                     labelText: item['label'],
                                     border: InputBorder.none,
-                                    labelStyle: GoogleFonts.rubik(
+                                    labelStyle: GoogleFonts.roboto(
                                       fontSize: 18,
                                       color: Colors.black,
                                     ),
@@ -123,7 +123,7 @@ class AddProductsScreenState extends State<AddProductsScreen> {
                                           value: eachItem,
                                           child: Text(
                                             eachItem.sentenceCase,
-                                            style: GoogleFonts.rubik(color: Colors.black),
+                                            style: GoogleFonts.roboto(color: Colors.black),
                                           ),
                                         ),
                                       )
