@@ -11,10 +11,10 @@ class NavigationLayout extends StatefulWidget {
   const NavigationLayout({Key? key}) : super(key: key);
 
   @override
-  _NavigationLayoutState createState() => _NavigationLayoutState();
+  NavigationLayoutState createState() => NavigationLayoutState();
 }
 
-class _NavigationLayoutState extends State<NavigationLayout> {
+class NavigationLayoutState extends State<NavigationLayout> {
   int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
@@ -27,86 +27,90 @@ class _NavigationLayoutState extends State<NavigationLayout> {
       Container(),
       ProfileScreen(),
     ];
-    return SafeArea(
-      child: Scaffold(
-        body: tabNavigations[_currentIndex],
-        bottomNavigationBar: BottomNavyBar(
-          backgroundColor: Theme.of(context).primaryColor,
-          items: <BottomNavyBarItem>[
-            BottomNavyBarItem(
-              icon: const FaIcon(FontAwesomeIcons.home, size: 20),
-              title: Center(
-                child: Text(
-                  'Home',
-                  style: GoogleFonts.montserrat(
-                    fontSize: 12,
-                  ),
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        leading: const Text(''),
+        backgroundColor: Colors.red,
+        toolbarHeight: 0,
+      ),
+      body: tabNavigations[_currentIndex],
+      bottomNavigationBar: BottomNavyBar(
+        backgroundColor: Theme.of(context).primaryColor,
+        items: <BottomNavyBarItem>[
+          BottomNavyBarItem(
+            icon: const FaIcon(FontAwesomeIcons.home, size: 20),
+            title: Center(
+              child: Text(
+                'Home',
+                style: GoogleFonts.montserrat(
+                  fontSize: 12,
                 ),
               ),
-              activeColor: color,
-              inactiveColor: color,
             ),
-            BottomNavyBarItem(
-              icon: const FaIcon(FontAwesomeIcons.search, size: 20),
-              title: Center(
-                child: Text(
-                  'Search',
-                  style: GoogleFonts.montserrat(
-                    fontSize: 12,
-                  ),
+            activeColor: color,
+            inactiveColor: color,
+          ),
+          BottomNavyBarItem(
+            icon: const FaIcon(FontAwesomeIcons.search, size: 20),
+            title: Center(
+              child: Text(
+                'Search',
+                style: GoogleFonts.montserrat(
+                  fontSize: 12,
                 ),
               ),
-              activeColor: color,
-              inactiveColor: color,
             ),
-            BottomNavyBarItem(
-              icon: const Icon(Icons.add, size: 20),
-              title: Center(
-                child: Text(
-                  'Add Items',
-                  style: GoogleFonts.montserrat(
-                    fontSize: 12,
-                  ),
+            activeColor: color,
+            inactiveColor: color,
+          ),
+          BottomNavyBarItem(
+            icon: const Icon(Icons.add, size: 20),
+            title: Center(
+              child: Text(
+                'Add Items',
+                style: GoogleFonts.montserrat(
+                  fontSize: 12,
                 ),
               ),
-              activeColor: color,
-              inactiveColor: color,
             ),
-            BottomNavyBarItem(
-              icon: const FaIcon(FontAwesomeIcons.chartPie, size: 20),
-              title: Center(
-                child: Text(
-                  'Metrics',
-                  style: GoogleFonts.montserrat(
-                    fontSize: 12,
-                  ),
+            activeColor: color,
+            inactiveColor: color,
+          ),
+          BottomNavyBarItem(
+            icon: const FaIcon(FontAwesomeIcons.chartPie, size: 20),
+            title: Center(
+              child: Text(
+                'Metrics',
+                style: GoogleFonts.montserrat(
+                  fontSize: 12,
                 ),
               ),
-              activeColor: color,
-              inactiveColor: color,
             ),
-            BottomNavyBarItem(
-              icon: const FaIcon(FontAwesomeIcons.userCircle, size: 20),
-              title: Center(
-                child: Text(
-                  'Profile',
-                  style: GoogleFonts.montserrat(
-                    fontSize: 12,
-                  ),
+            activeColor: color,
+            inactiveColor: color,
+          ),
+          BottomNavyBarItem(
+            icon: const FaIcon(FontAwesomeIcons.userCircle, size: 20),
+            title: Center(
+              child: Text(
+                'Profile',
+                style: GoogleFonts.montserrat(
+                  fontSize: 12,
                 ),
               ),
-              activeColor: color,
-              inactiveColor: color,
             ),
-          ],
-          animationDuration: const Duration(milliseconds: 400),
-          selectedIndex: _currentIndex,
-          onItemSelected: (index) {
-            setState(() {
-              _currentIndex = index;
-            });
-          },
-        ),
+            activeColor: color,
+            inactiveColor: color,
+          ),
+        ],
+        animationDuration: const Duration(milliseconds: 400),
+        selectedIndex: _currentIndex,
+        onItemSelected: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
       ),
     );
   }

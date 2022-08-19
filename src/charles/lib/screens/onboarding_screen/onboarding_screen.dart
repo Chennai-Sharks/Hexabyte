@@ -130,10 +130,12 @@ class OnboardingScreenState extends State<OnboardingScreen> {
                         print(position.latitude);
                         print(_formKey.currentState!.value);
                         print(FirebaseAuth.instance.currentUser!.phoneNumber!);
+                        final formValue = {..._formKey.currentState!.value};
+                        formValue.update('age', (value) => int.parse(value));
                         final response = await OnboardingApi.dataCollection(data: {
-                          ..._formKey.currentState!.value,
+                          ...formValue,
                           'location': [position.latitude, position.longitude],
-                          'phone': FirebaseAuth.instance.currentUser!.phoneNumber!
+                          'phone': FirebaseAuth.instance.currentUser!.phoneNumber!.substring(3)
                         });
                         if (response == 1) {
                           navContext.pushReplacement(
@@ -168,20 +170,3 @@ class OnboardingScreenState extends State<OnboardingScreen> {
     );
   }
 }
-
-final stateOptions = [
-  'Andhra Pradesh',
-  'Assam',
-  'Delhi',
-  'Gujarat',
-  'Haryana',
-  'Karnataka',
-  'Kerala',
-  'Madhya Pradesh',
-  'Maharashtra',
-  'Punjab',
-  'Tamil Nadu',
-  'Telangana',
-  'Uttar Pradesh',
-  'West Bengal'
-];
