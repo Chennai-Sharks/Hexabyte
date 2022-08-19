@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -33,7 +34,7 @@ class OnboardingScreenState extends State<OnboardingScreen> {
       appBar: AppBar(
         title: Text(
           'Onboarding',
-          style: GoogleFonts.rubik(
+          style: GoogleFonts.roboto(
             color: Colors.black,
           ),
         ),
@@ -50,7 +51,7 @@ class OnboardingScreenState extends State<OnboardingScreen> {
             Center(
               child: Text(
                 'Welcome! Enter your details',
-                style: GoogleFonts.rubik(fontSize: 24, color: Colors.grey.shade900, fontWeight: FontWeight.bold),
+                style: GoogleFonts.roboto(fontSize: 24, color: Colors.grey.shade900, fontWeight: FontWeight.bold),
               ),
             ),
             SizedBox(
@@ -124,6 +125,8 @@ class OnboardingScreenState extends State<OnboardingScreen> {
                           return;
                         }
 
+                        EasyLoading.show(status: 'loading...');
+
                         Position position =
                             await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.bestForNavigation);
                         print(position.longitude);
@@ -138,12 +141,14 @@ class OnboardingScreenState extends State<OnboardingScreen> {
                           'phone': FirebaseAuth.instance.currentUser!.phoneNumber!.substring(3)
                         });
                         if (response == 1) {
+                          EasyLoading.dismiss();
                           navContext.pushReplacement(
                             MaterialPageRoute(
                               builder: (context) => const NavigationLayout(),
                             ),
                           );
                         } else {
+                          EasyLoading.dismiss();
                           Fluttertoast.showToast(msg: 'Server error');
                         }
                       } else {

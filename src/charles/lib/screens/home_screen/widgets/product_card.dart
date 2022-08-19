@@ -57,7 +57,7 @@ class ProductCard extends StatelessWidget {
                   Text(
                     name,
                     textAlign: TextAlign.left,
-                    style: GoogleFonts.exo(
+                    style: GoogleFonts.roboto(
                       color: Theme.of(context).secondaryHeaderColor,
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -72,14 +72,14 @@ class ProductCard extends StatelessWidget {
                       children: [
                         Text(
                           'Rs. ',
-                          style: GoogleFonts.exo(
+                          style: GoogleFonts.roboto(
                             color: Theme.of(context).secondaryHeaderColor,
                             fontSize: 20,
                           ),
                         ),
                         Text(
                           price.toString(),
-                          style: GoogleFonts.exo(
+                          style: GoogleFonts.roboto(
                             color: Theme.of(context).secondaryHeaderColor,
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -90,7 +90,7 @@ class ProductCard extends StatelessWidget {
                         ),
                         Text(
                           weight.toString(),
-                          style: GoogleFonts.exo(
+                          style: GoogleFonts.roboto(
                             color: Theme.of(context).secondaryHeaderColor,
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -98,7 +98,7 @@ class ProductCard extends StatelessWidget {
                         ),
                         Text(
                           ' KG',
-                          style: GoogleFonts.exo(
+                          style: GoogleFonts.roboto(
                             color: Theme.of(context).secondaryHeaderColor,
                             fontSize: 20,
                           ),

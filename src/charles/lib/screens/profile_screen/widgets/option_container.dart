@@ -10,7 +10,6 @@ Widget optionContainer(Color? color, Icon? icon, String? text, BuildContext cont
       GestureDetector(
         onTap: onTap,
         child: Container(
-
           width: size.width * 0.16,
           height: size.width * 0.16,
           child: Center(
@@ -29,7 +28,7 @@ Widget optionContainer(Color? color, Icon? icon, String? text, BuildContext cont
         padding: const EdgeInsets.all(8.0),
         child: Text(
           text!,
-          style: GoogleFonts.exo(fontSize: 14, fontWeight: FontWeight.bold),
+          style: GoogleFonts.roboto(fontSize: 14, fontWeight: FontWeight.bold),
         ),
       ),
     ],

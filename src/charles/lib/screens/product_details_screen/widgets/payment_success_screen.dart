@@ -20,7 +20,7 @@ class _PaymentSuccessPageState extends State<PaymentSuccessPage> {
         children: [
           Text(
             'Your Payment is Successful !!!',
-            style: GoogleFonts.exo(fontSize: 25, color: Colors.black),
+            style: GoogleFonts.roboto(fontSize: 25, color: Colors.black),
           ),
           SizedBox(height: MediaQuery.of(context).size.height * 0.6),
           Center(
@@ -35,7 +35,7 @@ class _PaymentSuccessPageState extends State<PaymentSuccessPage> {
                 child: Center(
                   child: Text(
                     'Go To Home Page',
-                    style: GoogleFonts.exo(color: Colors.white),
+                    style: GoogleFonts.roboto(color: Colors.white),
                   ),
                 ),
               ),

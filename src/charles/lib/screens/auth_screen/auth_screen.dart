@@ -32,7 +32,7 @@ class AuthScreen extends StatelessWidget {
           Center(
             child: AutoSizeText(
               'Hexabyte',
-              style: GoogleFonts.exo(
+              style: GoogleFonts.roboto(
                 fontSize: 50,
                 color: Theme.of(context).secondaryHeaderColor.withAlpha(900),
                 fontWeight: FontWeight.bold,
@@ -50,7 +50,7 @@ class AuthScreen extends StatelessWidget {
             child: Center(
               child: AutoSizeText(
                 'Application for using food waste as consumable organic resource',
-                style: GoogleFonts.rubik(
+                style: GoogleFonts.roboto(
                   fontSize: 20,
                   color: Theme.of(context).secondaryHeaderColor.withAlpha(900),
                 ),

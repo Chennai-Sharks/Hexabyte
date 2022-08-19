@@ -37,7 +37,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           elevation: 0,
           title: Text(
             'My Profile',
-            style: GoogleFonts.exo(
+            style: GoogleFonts.roboto(
               fontWeight: FontWeight.bold,
               color: Theme.of(context).secondaryHeaderColor,
             ),
@@ -182,7 +182,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         child: Center(
                           child: Text(
                             'Your Orders',
-                            style: GoogleFonts.exo(
+                            style: GoogleFonts.roboto(
                               fontSize: 25,
                               fontWeight: FontWeight.bold,
                               color: Theme.of(context).secondaryHeaderColor,

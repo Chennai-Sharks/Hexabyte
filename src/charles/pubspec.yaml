@@ -29,11 +29,12 @@ dependencies:
   bottom_navy_bar: ^6.0.0
   flutter_secure_storage: ^5.0.2
   razorpay_flutter: ^1.2.9
-  velocity_x: ^3.5.1
   geolocator: ^9.0.1
   cupertino_icons: ^1.0.2
   scroll_app_bar: ^2.0.0
   recase: ^4.0.0
+  count_stepper: ^0.0.4
+  flutter_easyloading: ^3.0.5
 
 dev_dependencies:
   flutter_test:

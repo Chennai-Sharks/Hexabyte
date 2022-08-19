@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -27,7 +28,7 @@ class AddProductsScreenState extends State<AddProductsScreen> {
       appBar: AppBar(
         title: Text(
           "Add Your Product",
-          style: GoogleFonts.rubik(
+          style: GoogleFonts.roboto(
               fontSize: 24, color: Theme.of(context).secondaryHeaderColor, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
@@ -44,7 +45,7 @@ class AddProductsScreenState extends State<AddProductsScreen> {
             Center(
               child: Text(
                 'Enter the details',
-                style: GoogleFonts.rubik(fontSize: 24, color: Colors.grey.shade900, fontWeight: FontWeight.bold),
+                style: GoogleFonts.roboto(fontSize: 24, color: Colors.grey.shade900, fontWeight: FontWeight.bold),
               ),
             ),
             SizedBox(
@@ -110,7 +111,7 @@ class AddProductsScreenState extends State<AddProductsScreen> {
                                   decoration: InputDecoration(
                                     labelText: item['label'],
                                     border: InputBorder.none,
-                                    labelStyle: GoogleFonts.rubik(
+                                    labelStyle: GoogleFonts.roboto(
                                       fontSize: 18,
                                       color: Colors.black,
                                     ),
@@ -122,7 +123,7 @@ class AddProductsScreenState extends State<AddProductsScreen> {
                                           value: eachItem,
                                           child: Text(
                                             eachItem.sentenceCase,
-                                            style: GoogleFonts.rubik(color: Colors.black),
+                                            style: GoogleFonts.roboto(color: Colors.black),
                                           ),
                                         ),
                                       )
@@ -155,6 +156,7 @@ class AddProductsScreenState extends State<AddProductsScreen> {
                       final navContext = Navigator.of(context);
                       _formKey.currentState!.save();
                       if (_formKey.currentState!.validate()) {
+                        EasyLoading.show(status: 'Loading...');
                         final formValue = {..._formKey.currentState!.value};
                         // formValue['age'] = int.parse(formValue['age']);
                         formValue.update('duration', (value) => int.parse(value));
@@ -163,6 +165,7 @@ class AddProductsScreenState extends State<AddProductsScreen> {
                         final response = await AddProductApi.itemAddition(data: formValue);
 
                         if (response == 1) {
+                          EasyLoading.dismiss();
                           Fluttertoast.showToast(msg: 'Product added successfully!');
 
                           navContext.pushReplacement(
@@ -171,6 +174,7 @@ class AddProductsScreenState extends State<AddProductsScreen> {
                             ),
                           );
                         } else {
+                          EasyLoading.dismiss();
                           Fluttertoast.showToast(msg: 'Server error');
                         }
                       } else {

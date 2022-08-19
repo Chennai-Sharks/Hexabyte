@@ -46,7 +46,7 @@ class _YourOrdersState extends State<YourOrders> {
               : Center(
                   child: Text(
                     'No orders till now !!!',
-                    style: GoogleFonts.exo(),
+                    style: GoogleFonts.roboto(),
                   ),
                 );
         }

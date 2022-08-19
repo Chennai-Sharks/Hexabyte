@@ -85,7 +85,7 @@ class _OtpScreenState extends State<OtpScreen> {
           Center(
             child: Text(
               'Verification',
-              style: GoogleFonts.rubik(
+              style: GoogleFonts.roboto(
                 fontWeight: FontWeight.bold,
                 color: Theme.of(context).secondaryHeaderColor,
                 fontSize: 30,
@@ -98,7 +98,7 @@ class _OtpScreenState extends State<OtpScreen> {
           Center(
             child: Text(
               'Enter the code sent to the number',
-              style: GoogleFonts.rubik(
+              style: GoogleFonts.roboto(
                 fontSize: 22,
                 color: Theme.of(context).secondaryHeaderColor.withAlpha(700),
               ),
@@ -110,7 +110,7 @@ class _OtpScreenState extends State<OtpScreen> {
           Center(
             child: Text(
               '+91 ${widget.phone}',
-              style: GoogleFonts.rubik(
+              style: GoogleFonts.roboto(
                 // fontWeight: FontWeight.bold,
                 fontSize: 25,
                 color: Theme.of(context).secondaryHeaderColor,

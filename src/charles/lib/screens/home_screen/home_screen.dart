@@ -1,63 +1,64 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hexabyte/layout/appbar_layout.dart';
-import 'package:hexabyte/providers/auth/auth_provider.dart';
-import 'package:hexabyte/providers/home/home_provider.dart';
 import 'package:hexabyte/screens/home_screen/widgets/product_card.dart';
+import 'package:hexabyte/screens/home_screen/widgets/search_bar.dart';
+import 'package:hexabyte/screens/search_screen/search_screen.dart';
 
 class HomeScreen extends StatelessWidget {
-  HomeScreen({Key? key}) : super(key: key);
-  final AuthProvider _authProvider = AuthProvider();
-  final HomeProvider _homeProvider = HomeProvider();
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    print(FirebaseAuth.instance);
-    Size? size = MediaQuery.of(context).size;
-    Color? color = Colors.redAccent.shade700;
-
-    final controller = ScrollController();
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(150.0),
-        child: Container(
-          color: color,
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(20.0, 8, 40, 8),
-                    child: Image.asset(
-                      "assets/logo.png",
-                      height: 40,
-                    ),
-                  ),
-                  Text(
-                    'HexaByte',
-                    style: GoogleFonts.rubik(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                      color: Theme.of(context).primaryColor,
-                    ),
-                  ),
-                ],
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'HexaByte',
+              style: GoogleFonts.roboto(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
               ),
-              HomePageAppBar(),
-            ],
+            ),
+            CircleAvatar(
+              backgroundColor: Colors.white,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(40),
+                child: const Icon(
+                  Icons.account_circle,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+          ],
+        ),
+        leading: Padding(
+          padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+          child: Image.asset(
+            "assets/logo.png",
+            height: 40,
           ),
         ),
       ),
-      drawer: Drawer(),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            GestureDetector(
+              child: const SearchBar(),
+              onTap: () => Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => SearchPage(),
+                ),
+              ),
+            ),
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.03,
             ),
@@ -86,9 +87,9 @@ class HomeScreen extends StatelessWidget {
               height: MediaQuery.of(context).size.height * 0.01,
             ),
             AutoSizeText(
-              'What would you like to order today',
+              'What would you like to order today?',
               textAlign: TextAlign.center,
-              style: GoogleFonts.exo(
+              style: GoogleFonts.roboto(
                 color: Theme.of(context).secondaryHeaderColor,
                 fontWeight: FontWeight.bold,
                 fontSize: 25,
@@ -106,7 +107,7 @@ class HomeScreen extends StatelessWidget {
               padding: const EdgeInsets.only(left: 20.0),
               child: AutoSizeText(
                 'Popular Seller',
-                style: GoogleFonts.exo(
+                style: GoogleFonts.roboto(
                   color: Theme.of(context).secondaryHeaderColor,
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
@@ -140,7 +141,7 @@ class HomeScreen extends StatelessWidget {
               padding: const EdgeInsets.only(left: 20.0),
               child: AutoSizeText(
                 'Popular Items',
-                style: GoogleFonts.exo(
+                style: GoogleFonts.roboto(
                   color: Theme.of(context).secondaryHeaderColor,
                   fontWeight: FontWeight.bold,
                   fontSize: 20,

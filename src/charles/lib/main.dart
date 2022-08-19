@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:form_builder_validators/localization/l10n.dart';
 import 'package:hexabyte/screens/intermediate_screen/intermediate_screen.dart';
 // import 'package:hexabyte/screens/onboarding_screen/onboarding_screen.dart';
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
           theme: MyThemes.lightTheme,
           darkTheme: MyThemes.darkTheme,
           debugShowCheckedModeBanner: false,
-          themeMode: themeProvider.themeMode,
+          // themeMode: themeProvider.themeMode,
           supportedLocales: const [
             Locale('en', ''),
             Locale('es', ''),
@@ -51,6 +52,7 @@ class MyApp extends StatelessWidget {
           // the below line.
           // home: NavigationLayout(),
           // home: const OnboardingScreen(),
+          builder: EasyLoading.init(),
         );
       },
     );

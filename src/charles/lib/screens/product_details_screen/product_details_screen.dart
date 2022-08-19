@@ -4,7 +4,6 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexabyte/screens/product_details_screen/widgets/payment_success_screen.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
-import 'package:velocity_x/velocity_x.dart';
 
 class ProductDetailsPage extends StatefulWidget {
   final String? productName;
@@ -136,7 +135,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                       padding: const EdgeInsets.all(11.0),
                       child: Text(
                         widget.productName!,
-                        style: GoogleFonts.exo(
+                        style: GoogleFonts.roboto(
                           fontSize: 35,
                           fontWeight: FontWeight.bold,
                           color: color,
@@ -150,31 +149,31 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                           padding: const EdgeInsets.fromLTRB(15.0, 0, 15, 0),
                           child: Text(
                             "Rs. " + widget.price! + " /-  per kg ",
-                            style: GoogleFonts.exo(fontSize: 20, fontWeight: FontWeight.bold),
+                            style: GoogleFonts.roboto(fontSize: 20, fontWeight: FontWeight.bold),
                           ),
                         ),
                         Row(
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: VxStepper(
-                                defaultValue: 1,
-                                max: int.parse(widget.weight!),
-                                min: 1,
-                                onChange: (value) {
-                                  setState(() {
-                                    _stepperValue = value;
-                                    _oneTimeBuyCost = _stepperValue! * int.parse(widget.price!);
-                                    _contractBuyCost = _oneTimeBuyCost! * _month!;
-                                  });
-                                },
-                              ),
-                            ),
+                            // Padding(
+                            //   padding: const EdgeInsets.all(8.0),
+                            //   child: VxStepper(
+                            //     defaultValue: 1,
+                            //     max: int.parse(widget.weight!),
+                            //     min: 1,
+                            //     onChange: (value) {
+                            //       setState(() {
+                            //         _stepperValue = value;
+                            //         _oneTimeBuyCost = _stepperValue! * int.parse(widget.price!);
+                            //         _contractBuyCost = _oneTimeBuyCost! * _month!;
+                            //       });
+                            //     },
+                            //   ),
+                            // ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
                                 'KGs',
-                                style: GoogleFonts.exo(fontSize: 18, fontWeight: FontWeight.bold),
+                                style: GoogleFonts.roboto(fontSize: 18, fontWeight: FontWeight.bold),
                               ),
                             )
                           ],
@@ -185,7 +184,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                       padding: const EdgeInsets.fromLTRB(15.0, 25, 15, 0),
                       child: Text(
                         widget.description!,
-                        style: GoogleFonts.exo(
+                        style: GoogleFonts.roboto(
                           fontSize: 18,
                         ),
                       ),
@@ -215,7 +214,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                               child: Center(
                                 child: Text(
                                   'One Time Buy',
-                                  style: GoogleFonts.exo(color: Colors.white),
+                                  style: GoogleFonts.roboto(color: Colors.white),
                                 ),
                               ),
                             ),
@@ -226,7 +225,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                           child: Center(
                             child: Text(
                               'Or',
-                              style: GoogleFonts.exo(
+                              style: GoogleFonts.roboto(
                                 fontSize: 18,
                               ),
                             ),
@@ -310,7 +309,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                               color: color,
                               child: Text(
                                 "Contract Buy",
-                                style: GoogleFonts.exo(color: Colors.white),
+                                style: GoogleFonts.roboto(color: Colors.white),
                               ),
                               onPressed: () {
                                 _formKey.currentState!.save();
@@ -350,7 +349,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
             width: size.width * 0.43,
             child: Text(
               question!,
-              style: GoogleFonts.exo(fontSize: 18, fontWeight: FontWeight.bold),
+              style: GoogleFonts.roboto(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),
         ),
@@ -360,7 +359,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
             width: size.width * 0.43,
             child: Text(
               ans!,
-              style: GoogleFonts.exo(fontSize: 18, color: color, fontWeight: FontWeight.bold),
+              style: GoogleFonts.roboto(fontSize: 18, color: color, fontWeight: FontWeight.bold),
             ),
           ),
         ),
