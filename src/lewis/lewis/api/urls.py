@@ -23,4 +23,5 @@ urlpatterns = [
     path('item_addition/', item_views.item_addition),
     path('item_get/<str:id>/',item_views.item_get),
     path('item_edit/<str:id>/',item_views.item_edit),
+    path('search/', views.search_api)
 ]
