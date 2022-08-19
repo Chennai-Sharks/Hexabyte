@@ -23,8 +23,8 @@ class NavigationLayoutState extends State<NavigationLayout> {
     final tabNavigations = [
       HomeScreen(),
       SearchPage(),
-      AddProductsScreen(),
       Container(),
+      const AddProductsScreen(),
       ProfileScreen(),
     ];
     return Scaffold(
@@ -43,7 +43,7 @@ class NavigationLayoutState extends State<NavigationLayout> {
             icon: const FaIcon(FontAwesomeIcons.home, size: 20),
             title: Center(
               child: Text(
-                'Home',
+                'HexaByte',
                 style: GoogleFonts.montserrat(
                   fontSize: 12,
                 ),
@@ -53,10 +53,23 @@ class NavigationLayoutState extends State<NavigationLayout> {
             inactiveColor: color,
           ),
           BottomNavyBarItem(
-            icon: const FaIcon(FontAwesomeIcons.search, size: 20),
+            icon: const FaIcon(FontAwesomeIcons.cartArrowDown, size: 20),
             title: Center(
               child: Text(
-                'Search',
+                'Quick buy',
+                style: GoogleFonts.montserrat(
+                  fontSize: 12,
+                ),
+              ),
+            ),
+            activeColor: color,
+            inactiveColor: color,
+          ),
+          BottomNavyBarItem(
+            icon: const Icon(Icons.create, size: 20),
+            title: Center(
+              child: Text(
+                'Curation',
                 style: GoogleFonts.montserrat(
                   fontSize: 12,
                 ),
@@ -69,20 +82,7 @@ class NavigationLayoutState extends State<NavigationLayout> {
             icon: const Icon(Icons.add, size: 20),
             title: Center(
               child: Text(
-                'Add Items',
-                style: GoogleFonts.montserrat(
-                  fontSize: 12,
-                ),
-              ),
-            ),
-            activeColor: color,
-            inactiveColor: color,
-          ),
-          BottomNavyBarItem(
-            icon: const FaIcon(FontAwesomeIcons.chartPie, size: 20),
-            title: Center(
-              child: Text(
-                'Metrics',
+                'Add Product',
                 style: GoogleFonts.montserrat(
                   fontSize: 12,
                 ),
