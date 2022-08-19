@@ -62,44 +62,6 @@ class HomeScreen extends StatelessWidget {
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.03,
             ),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.end,
-            //   children: [
-            //     Container(
-            //       margin: const EdgeInsets.only(right: 10),
-            //       child: GestureDetector(
-            //         onTap: () {
-            //           Navigator.of(context).push(
-            //             MaterialPageRoute(
-            //               builder: (context) => const ProfileScreen(),
-            //             ),
-            //           );
-            //         },
-            //         child: CircleAvatar(
-            //           child: Image.asset('assets/logo.png'),
-            //           maxRadius: 22,
-            //         ),
-            //       ),
-            //     )
-            //   ],
-            // ),
-
-            Center(
-              child: AutoSizeText(
-                'Explore',
-                textAlign: TextAlign.center,
-                style: GoogleFonts.roboto(
-                  color: Theme.of(context).secondaryHeaderColor,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 25,
-                ),
-              ),
-            ),
-
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.03,
-            ),
-
             Padding(
               padding: const EdgeInsets.only(left: 20.0),
               child: AutoSizeText(
@@ -133,7 +95,6 @@ class HomeScreen extends StatelessWidget {
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.02,
             ),
-
             Padding(
               padding: const EdgeInsets.only(left: 20.0),
               child: AutoSizeText(
