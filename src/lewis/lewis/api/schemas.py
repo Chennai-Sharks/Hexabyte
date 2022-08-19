@@ -25,8 +25,8 @@ class ItemDataSerializer(serializers.Serializer):
 
 class OrderDataSerializer(serializers.Serializer):
     customer_id  = serializers.CharField()
-    item_id = serializers.CharField()
+    item_id = serializers.JSONField()
     duration = serializers.IntegerField()
     subscribed_qty = serializers.IntegerField()
     cost_per_kg = serializers.IntegerField()
-    date = serializers.DateField(required=False)
+    one_time = serializers.BooleanField()
