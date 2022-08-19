@@ -83,26 +83,23 @@ class HomeScreen extends StatelessWidget {
             //     )
             //   ],
             // ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.01,
-            ),
-            AutoSizeText(
-              'What would you like to order today?',
-              textAlign: TextAlign.center,
-              style: GoogleFonts.roboto(
-                color: Theme.of(context).secondaryHeaderColor,
-                fontWeight: FontWeight.bold,
-                fontSize: 25,
+
+            Center(
+              child: AutoSizeText(
+                'Explore',
+                textAlign: TextAlign.center,
+                style: GoogleFonts.roboto(
+                  color: Theme.of(context).secondaryHeaderColor,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 25,
+                ),
               ),
             ),
 
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.04,
+              height: MediaQuery.of(context).size.height * 0.03,
             ),
 
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.01,
-            ),
             Padding(
               padding: const EdgeInsets.only(left: 20.0),
               child: AutoSizeText(
