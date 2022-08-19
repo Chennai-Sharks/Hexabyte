@@ -11,10 +11,10 @@ class NavigationLayout extends StatefulWidget {
   const NavigationLayout({Key? key}) : super(key: key);
 
   @override
-  _NavigationLayoutState createState() => _NavigationLayoutState();
+  NavigationLayoutState createState() => NavigationLayoutState();
 }
 
-class _NavigationLayoutState extends State<NavigationLayout> {
+class NavigationLayoutState extends State<NavigationLayout> {
   int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
