@@ -6,6 +6,7 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view
 from lewis.settings import db
 from bson import ObjectId, json_util
+import json
 
 @api_view(['POST'])
 @csrf_exempt
@@ -16,12 +17,17 @@ def item_addition(request):
     :return: A success or a failure JSON Response
     '''
     try:
+        import pdb 
+        pdb.set_trace()
         data_ = request.body
         data = bytes_to_json(data_)
         serializer = ItemDataSerializer(data = data)
         if serializer.is_valid():
+            metadata = db.metadata.find_one({"phone": data["producer_id"]})
+            metadata = json.loads(json_util.dumps(metadata))
+            data["location"] = metadata["location"]
             data["subscribed_qty"]=0
-            data["balance_qty"]=data["total_qty"]
+            data["balance_qty"]=data["total_qty"]            
             result = db.Items.insert_one(data)
             return JsonResponse({
                 "status": "Success",
