@@ -98,7 +98,7 @@ class _AfterSearchState extends State<AfterSearch> {
                 margin: const EdgeInsets.only(left: 25),
                 child: AutoSizeText(
                   'Results matching your search',
-                  style: GoogleFonts.roboto(
+                  style: GoogleFonts.montserrat(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
                   ),

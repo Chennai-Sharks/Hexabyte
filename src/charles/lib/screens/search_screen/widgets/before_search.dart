@@ -121,7 +121,7 @@ class _BeforeSearchState extends State<BeforeSearch> {
                 margin: const EdgeInsets.only(left: 25),
                 child: AutoSizeText(
                   'Recent Searches',
-                  style: GoogleFonts.roboto(
+                  style: GoogleFonts.montserrat(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
                   ),
@@ -161,7 +161,7 @@ class _BeforeSearchState extends State<BeforeSearch> {
                                   ),
                                   Text(
                                     eachItem.sentenceCase,
-                                    style: GoogleFonts.roboto(color: Colors.black),
+                                    style: GoogleFonts.montserrat(color: Colors.black),
                                   ),
                                 ],
                               ),
@@ -183,7 +183,7 @@ class _BeforeSearchState extends State<BeforeSearch> {
                 margin: const EdgeInsets.only(left: 25),
                 child: AutoSizeText(
                   'Recommended products',
-                  style: GoogleFonts.roboto(
+                  style: GoogleFonts.montserrat(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
                   ),
@@ -223,7 +223,7 @@ class _BeforeSearchState extends State<BeforeSearch> {
                                   ),
                                   Text(
                                     eachItem.sentenceCase,
-                                    style: GoogleFonts.roboto(color: Colors.black),
+                                    style: GoogleFonts.montserrat(color: Colors.black),
                                   ),
                                 ],
                               ),

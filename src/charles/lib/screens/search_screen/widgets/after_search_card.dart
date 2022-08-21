@@ -37,7 +37,7 @@ class AfterSearchCard extends StatelessWidget {
                   children: [
                     AutoSizeText(
                       'Product name',
-                      style: GoogleFonts.roboto(
+                      style: GoogleFonts.montserrat(
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
                       ),
@@ -51,7 +51,7 @@ class AfterSearchCard extends StatelessWidget {
                         AutoSizeText(
                           'Score',
                           overflow: TextOverflow.ellipsis,
-                          style: GoogleFonts.roboto(
+                          style: GoogleFonts.montserrat(
                             fontWeight: FontWeight.bold,
                             fontSize: 15,
                             color: Colors.grey,
@@ -63,7 +63,7 @@ class AfterSearchCard extends StatelessWidget {
                         AutoSizeText(
                           '. add something',
                           overflow: TextOverflow.ellipsis,
-                          style: GoogleFonts.roboto(
+                          style: GoogleFonts.montserrat(
                             fontWeight: FontWeight.bold,
                             color: Colors.grey,
                             fontSize: 15,
@@ -77,7 +77,7 @@ class AfterSearchCard extends StatelessWidget {
                     AutoSizeText(
                       '100/- Rs',
                       overflow: TextOverflow.ellipsis,
-                      style: GoogleFonts.roboto(
+                      style: GoogleFonts.montserrat(
                         fontWeight: FontWeight.bold,
                         color: Colors.grey,
                         fontSize: 15,
@@ -89,7 +89,7 @@ class AfterSearchCard extends StatelessWidget {
                     AutoSizeText(
                       'Some content',
                       overflow: TextOverflow.ellipsis,
-                      style: GoogleFonts.roboto(
+                      style: GoogleFonts.montserrat(
                         fontWeight: FontWeight.bold,
                         color: Colors.grey,
                         fontSize: 15,
@@ -102,7 +102,7 @@ class AfterSearchCard extends StatelessWidget {
                       'Chennai . 4.9 km',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: GoogleFonts.roboto(
+                      style: GoogleFonts.montserrat(
                         fontWeight: FontWeight.bold,
                         color: Colors.grey,
                         fontSize: 15,
