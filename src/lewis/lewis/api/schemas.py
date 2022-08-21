@@ -30,3 +30,8 @@ class OrderDataSerializer(serializers.Serializer):
     subscribed_qty = serializers.IntegerField()
     cost_per_kg = serializers.IntegerField()
     one_time = serializers.BooleanField()
+
+class UserRatingSerializer(serializers.Serializer):
+    customer_id  = serializers.CharField()
+    item_id = serializers.JSONField()
+    rating = serializers.IntegerField()

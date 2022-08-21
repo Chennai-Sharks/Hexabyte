@@ -2,7 +2,7 @@ from datetime import  date,timedelta
 from logging import log
 from django.http import HttpResponse, JsonResponse
 from lewis.api.utils import  bytes_to_json # ,get_db_handle,
-from lewis.api.schemas import MetadataSerializer , OrderDataSerializer
+from lewis.api.schemas import MetadataSerializer , OrderDataSerializer ,UserRatingSerializer
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view
 from lewis.settings import db
@@ -47,7 +47,7 @@ def data_collection(request):
 @api_view(['POST'])
 @csrf_exempt
 def purchase_item(request):
-    # try:
+    try:
         data_ = request.body
         data = bytes_to_json(data_)
         serializer = OrderDataSerializer(data = data)
@@ -85,7 +85,26 @@ def purchase_item(request):
                 "status": "Failure",
                 "message": "Invalid data or format"
             }, status = 400)
-    # except Exception as e:
-    #     print(e)    
+    except Exception as e:
+        print(e)    
 
- 
+@api_view(['POST'])
+@csrf_exempt
+def item_rating(request):
+    try:
+        data_ = request.body
+        data = bytes_to_json(data_)
+        serializer = UserRatingSerializer(data = data)
+        if serializer.is_valid():
+            results = db.Ratings.insert_one(data)
+            return JsonResponse({
+                "status": "Success",
+                "message": "Data stored successfully"
+            }, status = 200)
+        else:
+                return JsonResponse({
+                    "status": "Failure",
+                    "message": "Invalid data or format"
+                }, status = 400)
+    except Exception as e:
+        print(e)    
