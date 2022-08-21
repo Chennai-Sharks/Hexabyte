@@ -1,17 +1,12 @@
 from rest_framework import serializers
 # from phonenumber_field.modelfields import PhoneNumberField
-
-class LocationSerializer(serializers.Serializer):
-    type = serializers.CharField()
-    coordinates = serializers.ListField(child = serializers.FloatField(), allow_empty = False,  min_length=2, max_length=2)
     
 class MetadataSerializer(serializers.Serializer):
     name = serializers.CharField()
     age = serializers.IntegerField()
     phone = serializers.IntegerField()
     business = serializers.CharField()
-    location = LocationSerializer()
-    location = serializers.DictField()
+    location = serializers.ListField(child = serializers.FloatField(), allow_empty = False,  min_length=2, max_length=2,required=False)
     email = serializers.CharField()
     subscription_threshold_count = serializers.IntegerField(required=False)
 
@@ -22,9 +17,11 @@ class ItemDataSerializer(serializers.Serializer):
     tags = serializers.ListField(child = serializers.CharField())
     duration = serializers.IntegerField()    
     description = serializers.CharField()
+    location = serializers.ListField(child = serializers.FloatField(), allow_empty = False,  min_length=2, max_length=2,required=False)
     total_qty = serializers.IntegerField()
     subscribed_qty = serializers.IntegerField(required=False)
     available_qty =  serializers.IntegerField(required=False)
+    is_active = serializers.BooleanField(default=True)
 
 class OrderDataSerializer(serializers.Serializer):
     customer_id  = serializers.CharField()
