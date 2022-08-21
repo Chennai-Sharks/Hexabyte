@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hexabyte/screens/search_screen/api/Search_api.dart';
 import 'package:recase/recase.dart';
 
 class BeforeSearch extends StatefulWidget {
@@ -54,7 +55,16 @@ class _BeforeSearchState extends State<BeforeSearch> {
                     ),
                     Expanded(
                       child: TypeAheadField(
-                        hideOnLoading: true,
+                        hideOnLoading: false,
+                        hideOnEmpty: true,
+                        keepSuggestionsOnLoading: false,
+                        loadingBuilder: (context) => const Padding(
+                          padding: EdgeInsets.all(20),
+                          child: Text(
+                            'Loading...',
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
                         textFieldConfiguration: TextFieldConfiguration(
                           autofocus: true,
                           controller: widget.searchController,
@@ -77,19 +87,22 @@ class _BeforeSearchState extends State<BeforeSearch> {
                           if (pattern.isEmpty) {
                             return [];
                           }
-                          return [
-                            {'product_name': 'hello'}
-                          ];
+
+                          final searchResults = await SearchApi.productSearch(searchText: pattern);
+                          return searchResults;
                         },
                         itemBuilder: (context, suggestion) {
                           return ListTile(
-                            title: Text((suggestion as Map)['product_name']),
+                            title: Text((suggestion as Map)['title']),
                             // subtitle: Text('${suggestion['price'].toString()} Rs'),
                           );
                         },
                         onSuggestionSelected: (suggestion) {
                           final data = suggestion as Map;
                           print(data);
+                          widget.searchController.text = suggestion['title'];
+                          widget.searchDone();
+
                           // Navigator.of(context).push(
                           //   MaterialPageRoute(
                           //     builder: (context) => ProductDetailsPage(

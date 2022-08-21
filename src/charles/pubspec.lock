@@ -228,6 +228,20 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_onboarding_screen:
+    dependency: "direct main"
+    description:
+      name: flutter_onboarding_screen
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.2"
+  flutter_rating_bar:
+    dependency: "direct main"
+    description:
+      name: flutter_rating_bar
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.0.1"
   flutter_secure_storage:
     dependency: "direct main"
     description:
