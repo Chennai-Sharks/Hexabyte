@@ -64,7 +64,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                 padding: const EdgeInsets.all(11.0),
                 child: Text(
                   widget.productName!,
-                  style: GoogleFonts.roboto(
+                  style: GoogleFonts.montserrat(
                     fontSize: 35,
                     fontWeight: FontWeight.bold,
                     color: color,
@@ -75,14 +75,14 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                 padding: const EdgeInsets.fromLTRB(15.0, 0, 15, 0),
                 child: Text(
                   "Rs. " + widget.price! + " /-  for " + widget.weight! + ' kg',
-                  style: GoogleFonts.roboto(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: GoogleFonts.montserrat(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(15.0, 25, 15, 0),
                 child: Text(
                   widget.description!,
-                  style: GoogleFonts.roboto(
+                  style: GoogleFonts.montserrat(
                     fontSize: 18,
                   ),
                 ),
@@ -115,7 +115,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
             width: size.width * 0.45,
             child: Text(
               question!,
-              style: GoogleFonts.roboto(fontSize: 18, fontWeight: FontWeight.bold),
+              style: GoogleFonts.montserrat(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),
         ),
@@ -125,7 +125,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
             width: size.width * 0.45,
             child: Text(
               ans!,
-              style: GoogleFonts.roboto(fontSize: 18, color: color, fontWeight: FontWeight.bold),
+              style: GoogleFonts.montserrat(fontSize: 18, color: color, fontWeight: FontWeight.bold),
             ),
           ),
         ),
