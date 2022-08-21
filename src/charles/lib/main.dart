@@ -4,6 +4,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:form_builder_validators/localization/l10n.dart';
 import 'package:hexabyte/screens/intermediate_screen/intermediate_screen.dart';
+import 'package:hexabyte/theme_provider/app_theme.dart';
 // import 'package:hexabyte/screens/onboarding_screen/onboarding_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -26,12 +27,13 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => ThemeProvider(),
       builder: (context, _) {
-        final themeProvider = Provider.of<ThemeProvider>(context);
+        // final themeProvider = Provider.of<ThemeProvider>(context);
 
         return MaterialApp(
           title: 'HexaByte',
-          theme: MyThemes.lightTheme,
-          darkTheme: MyThemes.darkTheme,
+          // theme: MyThemes.lightTheme,
+          // darkTheme: MyThemes.darkTheme,
+          theme: appPrimaryTheme(),
           debugShowCheckedModeBanner: false,
           // themeMode: themeProvider.themeMode,
           supportedLocales: const [
