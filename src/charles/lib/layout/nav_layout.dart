@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexabyte/screens/add_product_screen/add_product_screen.dart';
+import 'package:hexabyte/screens/curation_screen/curation_screen.dart';
 import 'package:hexabyte/screens/home_screen/home_screen.dart';
 import 'package:hexabyte/screens/profile_screen/profile_screen.dart';
-import 'package:hexabyte/screens/search_screen/search_screen.dart';
+import 'package:hexabyte/screens/quick_buy_screen/quick_buy_screen.dart';
 
 class NavigationLayout extends StatefulWidget {
   const NavigationLayout({Key? key}) : super(key: key);
@@ -22,8 +23,8 @@ class NavigationLayoutState extends State<NavigationLayout> {
 
     final tabNavigations = [
       HomeScreen(),
-      SearchPage(),
-      Container(),
+      QuickBuyScreen(),
+      CurationScreen(),
       const AddProductsScreen(),
       ProfileScreen(),
     ];
