@@ -7,6 +7,7 @@ import 'package:hexabyte/screens/product_details_screen/widgets/payment_success_
 import 'package:hexabyte/screens/search_screen/search_screen.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:count_stepper/count_stepper.dart';
+import 'package:recase/recase.dart';
 
 class ProductDetailsPage extends StatefulWidget {
   final String? productName;
@@ -20,6 +21,9 @@ class ProductDetailsPage extends StatefulWidget {
   final String? imageUrl;
   final String? sellerId;
 
+  final String? id;
+  final Map? productData;
+
   const ProductDetailsPage({
     Key? key,
     this.productName,
@@ -32,6 +36,8 @@ class ProductDetailsPage extends StatefulWidget {
     this.description,
     this.location,
     this.sellerId,
+    this.id,
+    this.productData,
   }) : super(key: key);
 
   @override
@@ -49,8 +55,8 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
   void initState() {
     super.initState();
     initaliseRazorPay();
-    _oneTimeBuyCost = int.parse(widget.price!);
-    _contractBuyCost = int.parse(widget.price!) * _days!;
+    _oneTimeBuyCost = widget.productData!['cost_per_kg'] ?? 200;
+    _contractBuyCost = (widget.productData!['cost_per_kg'] ?? 200) * _days!;
   }
 
   Razorpay? _razorpay;
@@ -69,7 +75,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
   void launchRazorPay() {
     var options = {
       "key": "rzp_test_ZdIhaAYTQ8urAz",
-      "amount": (int.parse(widget.price!) * 100 * _stepperValue!).toString(),
+      "amount": (int.parse(widget.productData!['cost_per_kg']!) * 100 * _stepperValue!).toString(),
       "name": "Kishore M",
       "description": "Purchase of ${widget.productName}"
     };
@@ -84,7 +90,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
   void launchRazorPayForMonths(int? val, int? _stepperValue) {
     var options = {
       "key": "rzp_test_ZdIhaAYTQ8urAz",
-      "amount": (int.parse(widget.price!) * 100 * val! * _stepperValue!).toString(),
+      "amount": (int.parse(widget.productData!['cost_per_kg']!) * 100 * val! * _stepperValue!).toString(),
       "name": "Kishore M",
       "description": "Purchase of ${widget.productName}"
     };
@@ -98,6 +104,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
+    print(widget.productData);
     Size? size = MediaQuery.of(context).size;
     Color? color = Colors.redAccent.shade700;
     return Scaffold(
@@ -128,12 +135,12 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    'Product name',
+                    widget.productData!['title'] ?? 'N/A',
                     style: GoogleFonts.montserrat(fontWeight: FontWeight.bold, fontSize: 18.0),
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'Seller name: Hello',
+                    'Seller id: ${widget.productData!['producer_id'] ?? 'N/A'}',
                     style: GoogleFonts.montserrat(
                       fontSize: 15.0,
                       fontWeight: FontWeight.w400,
@@ -141,7 +148,8 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  Text('Tags: food waste, fruit peels', style: Theme.of(context).textTheme.bodyText1),
+                  Text('Tags: ${((widget.productData!['tags'] ?? ['NA']).join() as String).titleCase}',
+                      style: Theme.of(context).textTheme.bodyText1),
                   const SizedBox(height: 8),
                   const CustomDividerView(dividerHeight: 1.0),
                   Row(
@@ -149,7 +157,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                     children: <Widget>[
                       _buildVerticalStack(context, '4.1', 'Points'),
                       _buildVerticalStack(context, '29 Kms', 'Distance'),
-                      _buildVerticalStack(context, 'Rs150', 'Per Kg'),
+                      _buildVerticalStack(context, 'Rs ${widget.productData!['cost_per_kg'] ?? 'N/A'}/-', 'Per Kg'),
                     ],
                   ),
                   const CustomDividerView(dividerHeight: 1.0),
@@ -176,7 +184,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(15, 15, 15, 25.0),
                     child: Text(
-                      widget.description!,
+                      widget.productData!['description'] ?? 'N/A',
                       style: GoogleFonts.montserrat(
                         fontSize: 18,
                       ),
@@ -188,7 +196,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(15.0, 0, 15, 0),
                         child: Text(
-                          "Rs. ${widget.price!} /-  per kg ",
+                          "Rs. ${widget.productData!['cost_per_kg'] ?? '200'} /-  per kg ",
                           style: GoogleFonts.montserrat(fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                       ),
@@ -198,12 +206,13 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                             padding: const EdgeInsets.all(8.0),
                             child: CountStepper(
                               defaultValue: 1,
-                              max: int.parse(widget.weight!),
+                              max: widget.productData!['balance_qty'] ?? 1,
                               min: 1,
                               onPressed: (value) {
                                 setState(() {
                                   _stepperValue = value;
-                                  _oneTimeBuyCost = _stepperValue! * int.parse(widget.price!);
+                                  int price = widget.productData!['cost_per_kg'] ?? 200;
+                                  _oneTimeBuyCost = _stepperValue! * price;
                                   _contractBuyCost = _oneTimeBuyCost! * _days!;
                                 });
                               },
