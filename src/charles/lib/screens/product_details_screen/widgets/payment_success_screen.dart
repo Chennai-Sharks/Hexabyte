@@ -1,13 +1,13 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexabyte/layout/nav_layout.dart';
+import 'package:hexabyte/utils/app_colors.dart';
 
 class PaymentSuccessPage extends StatefulWidget {
   const PaymentSuccessPage({Key? key}) : super(key: key);
 
   @override
-  _PaymentSuccessPageState createState() => _PaymentSuccessPageState();
+  State<PaymentSuccessPage> createState() => _PaymentSuccessPageState();
 }
 
 class _PaymentSuccessPageState extends State<PaymentSuccessPage> {
@@ -20,7 +20,7 @@ class _PaymentSuccessPageState extends State<PaymentSuccessPage> {
         children: [
           Text(
             'Your Payment is Successful !!!',
-            style: GoogleFonts.roboto(fontSize: 25, color: Colors.black),
+            style: GoogleFonts.montserrat(fontSize: 25, color: Colors.black),
           ),
           SizedBox(height: MediaQuery.of(context).size.height * 0.6),
           Center(
@@ -31,11 +31,11 @@ class _PaymentSuccessPageState extends State<PaymentSuccessPage> {
               child: Container(
                 width: MediaQuery.of(context).size.width * 0.4,
                 height: 50,
-                decoration: BoxDecoration(color: Colors.redAccent.shade700, borderRadius: BorderRadius.circular(15)),
+                decoration: BoxDecoration(color: darkOrange, borderRadius: BorderRadius.circular(15)),
                 child: Center(
                   child: Text(
                     'Go To Home Page',
-                    style: GoogleFonts.roboto(color: Colors.white),
+                    style: GoogleFonts.montserrat(color: Colors.white),
                   ),
                 ),
               ),

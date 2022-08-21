@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hexabyte/common/custom_divider.dart';
 import 'package:hexabyte/screens/product_details_screen/widgets/payment_success_screen.dart';
+import 'package:hexabyte/screens/search_screen/search_screen.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
+import 'package:count_stepper/count_stepper.dart';
 
 class ProductDetailsPage extends StatefulWidget {
   final String? productName;
@@ -32,12 +35,12 @@ class ProductDetailsPage extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _ProductDetailsPageState createState() => _ProductDetailsPageState();
+  State<ProductDetailsPage> createState() => _ProductDetailsPageState();
 }
 
 class _ProductDetailsPageState extends State<ProductDetailsPage> {
   final _formKey = GlobalKey<FormBuilderState>();
-  int? _month = 30;
+  int? _days = 1;
   int? _stepperValue = 1;
   int? _contractBuyCost;
   int? _oneTimeBuyCost;
@@ -47,7 +50,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
     super.initState();
     initaliseRazorPay();
     _oneTimeBuyCost = int.parse(widget.price!);
-    _contractBuyCost = int.parse(widget.price!) * _month!;
+    _contractBuyCost = int.parse(widget.price!) * _days!;
   }
 
   Razorpay? _razorpay;
@@ -98,250 +101,267 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
     Size? size = MediaQuery.of(context).size;
     Color? color = Colors.redAccent.shade700;
     return Scaffold(
-      body: Container(
-        color: Colors.white,
-        height: size.height,
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ClipRRect(
-                borderRadius: const BorderRadius.only(
-                  bottomRight: Radius.circular(50),
-                  bottomLeft: Radius.circular(50),
-                ),
-                child: Card(
-                  elevation: 20,
-                  child: Container(
-                    height: size.height * 0.38,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: AssetImage(
-                        'assets/logo.png',
-                      ),
-                    )),
+      backgroundColor: const Color(0xffEEEEEE),
+      appBar: AppBar(
+        iconTheme: const IconThemeData(color: Colors.black),
+        elevation: 0.0,
+        backgroundColor: Colors.white,
+        actions: <Widget>[
+          // const Icon(Icons.favorite_border),
+          IconButton(
+            icon: const Icon(Icons.search),
+            onPressed: () {
+              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => SearchPage()));
+            },
+          ),
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          // mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              color: Colors.white,
+              padding: const EdgeInsets.all(15.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    'Product name',
+                    style: GoogleFonts.montserrat(fontWeight: FontWeight.bold, fontSize: 18.0),
                   ),
-                ),
+                  const SizedBox(height: 8),
+                  Text(
+                    'Seller name: Hello',
+                    style: GoogleFonts.montserrat(
+                      fontSize: 15.0,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.black,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text('Tags: food waste, fruit peels', style: Theme.of(context).textTheme.bodyText1),
+                  const SizedBox(height: 8),
+                  const CustomDividerView(dividerHeight: 1.0),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      _buildVerticalStack(context, '4.1', 'Points'),
+                      _buildVerticalStack(context, '29 Kms', 'Distance'),
+                      _buildVerticalStack(context, 'Rs150', 'Per Kg'),
+                    ],
+                  ),
+                  const CustomDividerView(dividerHeight: 1.0),
+                  // const SizedBox(height: 8),
+                  // Column(
+                  //   children: <Widget>[
+                  //     _buildOfferTile(context, '30% off up to Rs75 | Use code SWIGGYIT'),
+                  //     _buildOfferTile(
+                  //         context, '20% off up to Rs100 with SBI credit cards, once per week | Use code 100SBI')
+                  //   ],
+                  // ),
+                  // SizedBox(height: 16),
+                ],
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(11.0),
-                      child: Text(
-                        widget.productName!,
-                        style: GoogleFonts.roboto(
-                          fontSize: 35,
-                          fontWeight: FontWeight.bold,
-                          color: color,
-                        ),
+            ),
+            const SizedBox(height: 10),
+            Container(
+              color: Colors.white,
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(15, 15, 15, 25.0),
+                    child: Text(
+                      widget.description!,
+                      style: GoogleFonts.montserrat(
+                        fontSize: 18,
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(15.0, 0, 15, 0),
-                          child: Text(
-                            "Rs. " + widget.price! + " /-  per kg ",
-                            style: GoogleFonts.roboto(fontSize: 20, fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        Row(
-                          children: [
-                            // Padding(
-                            //   padding: const EdgeInsets.all(8.0),
-                            //   child: VxStepper(
-                            //     defaultValue: 1,
-                            //     max: int.parse(widget.weight!),
-                            //     min: 1,
-                            //     onChange: (value) {
-                            //       setState(() {
-                            //         _stepperValue = value;
-                            //         _oneTimeBuyCost = _stepperValue! * int.parse(widget.price!);
-                            //         _contractBuyCost = _oneTimeBuyCost! * _month!;
-                            //       });
-                            //     },
-                            //   ),
-                            // ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                'KGs',
-                                style: GoogleFonts.roboto(fontSize: 18, fontWeight: FontWeight.bold),
-                              ),
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(15.0, 25, 15, 0),
-                      child: Text(
-                        widget.description!,
-                        style: GoogleFonts.roboto(
-                          fontSize: 18,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(15.0, 0, 15, 0),
+                        child: Text(
+                          "Rs. ${widget.price!} /-  per kg ",
+                          style: GoogleFonts.montserrat(fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                       ),
-                    ),
-                    SizedBox(height: size.height * 0.025),
-                    qAndAns(color, "One Time Buy Price ", "Rs. " + _oneTimeBuyCost.toString() + " /-", context),
-                    qAndAns(color, "Contract Buy Price ", "Rs. " + _contractBuyCost.toString() + " /-", context),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        qAndAns(color, "Category ", widget.category!, context),
-                        qAndAns(color, "Order Type ", widget.orderType!, context),
-                        qAndAns(color, "Status of Order ", widget.orderStatus.toString(), context),
-                        qAndAns(color, "Location ", widget.location!, context),
-                        SizedBox(height: size.height * 0.05),
-                        Center(
-                          child: GestureDetector(
-                            onTap: () {
-                              launchRazorPay();
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => PaymentSuccessPage()));
-                            },
-                            child: Container(
-                              width: size.width * 0.4,
-                              height: 50,
-                              decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(15)),
-                              child: Center(
-                                child: Text(
-                                  'One Time Buy',
-                                  style: GoogleFonts.roboto(color: Colors.white),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: Center(
-                            child: Text(
-                              'Or',
-                              style: GoogleFonts.roboto(
-                                fontSize: 18,
-                              ),
-                            ),
-                          ),
-                        ),
-                        FormBuilder(
-                          key: _formKey,
-                          initialValue: const {
-                            "month": "1 month",
-                          },
-                          child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                Padding(
-                                  padding: const EdgeInsets.all(9),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                        color: Colors.grey.shade200, borderRadius: BorderRadius.circular(20)),
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(horizontal: 11.0),
-                                      child: Center(
-                                        child: FormBuilderDropdown(
-                                          name: 'month',
-                                          decoration: const InputDecoration(
-                                            labelText: 'Choose Contract',
-                                            labelStyle: TextStyle(color: Colors.black),
-                                            border: InputBorder.none,
-                                          ),
-                                          // initialValue: 'Male',
-                                          allowClear: true,
-                                          onChanged: (value) {
-                                            if (value == '1 month') {
-                                              setState(() {
-                                                _month = 30;
-                                                _contractBuyCost = _oneTimeBuyCost! * _month!;
-                                              });
-                                            } else if (value == '3 months') {
-                                              setState(() {
-                                                _month = 90;
-                                                _contractBuyCost = _oneTimeBuyCost! * _month!;
-                                              });
-                                            } else if (value == '6 months') {
-                                              setState(() {
-                                                _month = 180;
-                                                _contractBuyCost = _oneTimeBuyCost! * _month!;
-                                              });
-                                            } else if (value == '12 months') {
-                                              setState(() {
-                                                _month = 360;
-                                                _contractBuyCost = _oneTimeBuyCost! * _month!;
-                                              });
-                                            } else {
-                                              setState(() {
-                                                _month = 720;
-                                                _contractBuyCost = _oneTimeBuyCost! * _month!;
-                                              });
-                                            }
-                                          },
-                                          validator:
-                                              FormBuilderValidators.compose([FormBuilderValidators.required(context)]),
-                                          items: monthOptions
-                                              .map((gender) => DropdownMenuItem(
-                                                    value: gender,
-                                                    child: Text(gender),
-                                                  ))
-                                              .toList(),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ]),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: Center(
-                            child: MaterialButton(
-                              height: size.height * 0.05,
-                              minWidth: size.width * 0.4,
-                              color: color,
-                              child: Text(
-                                "Contract Buy",
-                                style: GoogleFonts.roboto(color: Colors.white),
-                              ),
-                              onPressed: () {
-                                _formKey.currentState!.save();
-                                if (_formKey.currentState!.validate()) {
-                                  print(_formKey.currentState!.value);
-                                  launchRazorPayForMonths(_month, _stepperValue);
-                                  Navigator.push(
-                                      context, MaterialPageRoute(builder: (context) => PaymentSuccessPage()));
-                                } else {
-                                  print("validation failed");
-                                }
+                      Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: CountStepper(
+                              defaultValue: 1,
+                              max: int.parse(widget.weight!),
+                              min: 1,
+                              onPressed: (value) {
+                                setState(() {
+                                  _stepperValue = value;
+                                  _oneTimeBuyCost = _stepperValue! * int.parse(widget.price!);
+                                  _contractBuyCost = _oneTimeBuyCost! * _days!;
+                                });
                               },
                             ),
                           ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              'Kgs',
+                              style: GoogleFonts.montserrat(fontSize: 18, fontWeight: FontWeight.bold),
+                            ),
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: size.height * 0.025),
+                  qAndAns(color, "One Time Buy Price ", "Rs. $_oneTimeBuyCost /-", context),
+                  qAndAns(color, "Contract Buy Price ", "Rs. $_contractBuyCost /-", context),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // qAndAns(color, "Category ", widget.category!, context),
+                      // qAndAns(color, "Order Type ", widget.orderType!, context),
+                      // qAndAns(color, "Status of Order ", widget.orderStatus.toString(), context),
+                      // qAndAns(color, "Location ", widget.location!, context),
+                      SizedBox(height: size.height * 0.05),
+                      Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Center(
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                primary: Colors.greenAccent,
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
+                            child: Text(
+                              "One-time Buy",
+                              style: GoogleFonts.montserrat(color: Colors.black),
+                            ),
+                            onPressed: () {
+                              launchRazorPay();
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => PaymentSuccessPage()));
+                            },
+                          ),
                         ),
-                      ],
-                    ),
-                  ],
-                ),
+                      ),
+
+                      Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Center(
+                          child: Text(
+                            'Or',
+                            style: GoogleFonts.montserrat(
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                      ),
+                      FormBuilder(
+                        key: _formKey,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.all(9),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.grey.shade200,
+                                  borderRadius: BorderRadius.circular(20),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey[300]!,
+                                      blurRadius: 2.0,
+                                      spreadRadius: 0.0,
+                                      offset: const Offset(2.0, 2.0),
+                                    )
+                                  ],
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 11.0),
+                                  child: Center(
+                                    child: FormBuilderTextField(
+                                      name: 'duration',
+                                      initialValue: '1',
+                                      maxLength: 10,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          _days = int.parse(value ?? '1');
+                                          _contractBuyCost = _oneTimeBuyCost! * _days!;
+                                        });
+                                      },
+                                      decoration: InputDecoration(
+                                        labelText: 'Enter Number of days:',
+                                        labelStyle: const TextStyle(
+                                          color: Colors.black,
+                                        ),
+                                        hintStyle: Theme.of(context).textTheme.subtitle2!.copyWith(
+                                              color: Colors.grey,
+                                              fontSize: 17.0,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                        counterText: '',
+                                        border: InputBorder.none,
+                                      ),
+                                      validator: FormBuilderValidators.compose([
+                                        FormBuilderValidators.required(context),
+                                      ]),
+                                      keyboardType: TextInputType.number,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Center(
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                primary: Colors.greenAccent,
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
+                            child: Text(
+                              "Contract Buy",
+                              style: GoogleFonts.montserrat(color: Colors.black),
+                            ),
+                            onPressed: () {
+                              _formKey.currentState!.save();
+                              if (_formKey.currentState!.validate()) {
+                                print(_formKey.currentState!.value);
+                                launchRazorPayForMonths(_days, _stepperValue);
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => PaymentSuccessPage()));
+                              } else {
+                                print("validation failed");
+                              }
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
   }
 
-  var monthOptions = ['1 month', '3 months', '6 months', '12 months', '24 months'];
+  var monthOptions = ['30 month', '3 months', '6 months', '12 months', '24 months'];
 
   Widget qAndAns(Color? color, String? question, String? ans, BuildContext context) {
     Size? size = MediaQuery.of(context).size;
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Padding(
           padding: const EdgeInsets.all(8.0),
@@ -349,7 +369,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
             width: size.width * 0.43,
             child: Text(
               question!,
-              style: GoogleFonts.roboto(fontSize: 18, fontWeight: FontWeight.bold),
+              style: GoogleFonts.montserrat(fontSize: 16, fontWeight: FontWeight.bold),
             ),
           ),
         ),
@@ -359,7 +379,9 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
             width: size.width * 0.43,
             child: Text(
               ans!,
-              style: GoogleFonts.roboto(fontSize: 18, color: color, fontWeight: FontWeight.bold),
+              style: GoogleFonts.montserrat(
+                fontSize: 18,
+              ),
             ),
           ),
         ),
@@ -367,3 +389,21 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
     );
   }
 }
+
+Expanded _buildVerticalStack(BuildContext context, String title, String subtitle) => Expanded(
+      child: SizedBox(
+        height: 60.0,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              title,
+              style: Theme.of(context).textTheme.subtitle2!.copyWith(fontSize: 15.0),
+            ),
+            const SizedBox(height: 4),
+            Text(subtitle, style: Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 13.0))
+          ],
+        ),
+      ),
+    );
