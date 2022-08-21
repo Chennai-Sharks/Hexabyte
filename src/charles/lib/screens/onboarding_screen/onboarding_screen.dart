@@ -137,7 +137,10 @@ class OnboardingScreenState extends State<OnboardingScreen> {
                         formValue.update('age', (value) => int.parse(value));
                         final response = await OnboardingApi.dataCollection(data: {
                           ...formValue,
-                          'location': [position.latitude, position.longitude],
+                          'location': {
+                            'type': 'Point',
+                            'coordinates': [position.longitude, position.latitude]
+                          },
                           'phone': FirebaseAuth.instance.currentUser!.phoneNumber!.substring(3)
                         });
                         if (response == 1) {
