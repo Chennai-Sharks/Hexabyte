@@ -4,6 +4,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hexabyte/screens/search_screen/api/Search_api.dart';
 import 'package:hexabyte/screens/search_screen/widgets/after_search_card.dart';
 
 class AfterSearch extends StatefulWidget {
@@ -77,7 +78,6 @@ class _AfterSearchState extends State<AfterSearch> {
                         itemBuilder: (context, suggestion) {
                           return const ListTile(
                             title: Text(''),
-                            // subtitle: Text('${suggestion['price'].toString()} Rs'),
                           );
                         },
                         onSuggestionSelected: (suggestion) {},
@@ -107,11 +107,38 @@ class _AfterSearchState extends State<AfterSearch> {
               SizedBox(
                 height: height * 0.02,
               ),
-              const AfterSearchCard(),
-              const AfterSearchCard(),
-              const AfterSearchCard(),
-              const AfterSearchCard(),
-              const AfterSearchCard(),
+              FutureBuilder(
+                future: SearchApi.productSearch(searchText: widget.searchController.text),
+                builder: ((context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    print(snapshot.data);
+                    final response = snapshot.data as List<dynamic>;
+                    return ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: response.length,
+                      itemBuilder: (context, index) => SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        child: AfterSearchCard(
+                          id: response[index]['_id']['\$oid'],
+                          name: response[index]['title'],
+                          price: response[index]['cost_per_kg'],
+                          availableQty: response[index]['balance_qty'],
+                          distance: '4.9 km',
+                          duration: response[index]['duration'],
+                          productData: response[index],
+                        ),
+                      ),
+                    );
+                  }
+                  return const Center(child: Text('Loading...'));
+                }),
+              ),
+              // const AfterSearchCard(),
+              // const AfterSearchCard(),
+              // const AfterSearchCard(),
+              // const AfterSearchCard(),
+              // const AfterSearchCard(),
               SizedBox(
                 height: height * 0.06,
               ),
