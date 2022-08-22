@@ -38,9 +38,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
           // const Icon(Icons.favorite_border),
           IconButton(
             icon: const Icon(Icons.logout),
-            onPressed: () async{
-            await  FirebaseAuth.instance.signOut();
-              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => AuthScreen()));
+            onPressed: () async {
+              final navContext = Navigator.of(context);
+              await FirebaseAuth.instance.signOut();
+              navContext.pushReplacement(MaterialPageRoute(builder: (context) => AuthScreen()));
             },
           ),
         ],
