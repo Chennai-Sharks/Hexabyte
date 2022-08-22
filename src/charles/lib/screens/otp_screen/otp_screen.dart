@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexabyte/layout/nav_layout.dart';
-import 'package:hexabyte/providers/auth/auth_provider.dart';
 import 'package:hexabyte/screens/onboarding_screen/onboarding_screen.dart';
 import 'package:pinput/pinput.dart';
 
@@ -21,7 +21,6 @@ class OtpScreen extends StatefulWidget {
 }
 
 class _OtpScreenState extends State<OtpScreen> {
-  AuthProvider authProvider = AuthProvider();
   String? verificationCode;
 
   Future<void> verifyPhoneSendOtp({
@@ -125,6 +124,8 @@ class _OtpScreenState extends State<OtpScreen> {
               submittedPinTheme: defaultPinTheme,
               hapticFeedbackType: HapticFeedbackType.heavyImpact,
               onCompleted: ((value) async {
+                final navContext = Navigator.of(context);
+                EasyLoading.show(status: 'Loading...');
                 try {
                   final userData = await FirebaseAuth.instance.signInWithCredential(
                     PhoneAuthProvider.credential(
@@ -132,27 +133,24 @@ class _OtpScreenState extends State<OtpScreen> {
                       smsCode: value,
                     ),
                   );
-                  if (!mounted) return;
                   final bool isNewUser = userData.additionalUserInfo?.isNewUser as bool;
-                  // add the login route code (connection with backend)
                   if (isNewUser) {
-                    // await authProvider.register(userId: FirebaseAuth.instance.currentUser!.uid);
-                    Navigator.of(context).pushAndRemoveUntil(
+                    await EasyLoading.dismiss();
+                    navContext.pushAndRemoveUntil(
                         MaterialPageRoute(
                           builder: (context) => const OnboardingScreen(),
                         ),
                         (route) => false);
                   } else {
-                    //uncomment this afterwards.
-                    // await authProvider.login(userId: FirebaseAuth.instance.currentUser!.uid);
-                    if (!mounted) return;
-                    Navigator.of(context).pushAndRemoveUntil(
+                    await EasyLoading.dismiss();
+                    navContext.pushAndRemoveUntil(
                         MaterialPageRoute(
                           builder: (context) => const NavigationLayout(),
                         ),
                         (route) => false);
                   }
                 } catch (error) {
+                  await EasyLoading.dismiss();
                   Fluttertoast.showToast(
                     msg: 'Problem: ${error.toString()}',
                     toastLength: Toast.LENGTH_LONG,

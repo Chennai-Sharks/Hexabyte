@@ -5,7 +5,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexabyte/common/custom_divider.dart';
 import 'package:hexabyte/layout/nav_layout.dart';
-import 'package:hexabyte/providers/auth/auth_provider.dart';
 import 'package:hexabyte/screens/auth_screen/auth_screen.dart';
 import 'package:hexabyte/screens/loading_screen/loading_screen.dart';
 import 'package:hexabyte/screens/profile_screen/widgets/order_history_card.dart';
@@ -35,6 +34,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const NavigationLayout()));
           },
         ),
+        actions: <Widget>[
+          // const Icon(Icons.favorite_border),
+          IconButton(
+            icon: const Icon(Icons.logout),
+            onPressed: () async {
+              final navContext = Navigator.of(context);
+              await FirebaseAuth.instance.signOut();
+              navContext.pushReplacement(MaterialPageRoute(builder: (context) => AuthScreen()));
+            },
+          ),
+        ],
       ),
       body: RefreshIndicator(
         onRefresh: () async {},
