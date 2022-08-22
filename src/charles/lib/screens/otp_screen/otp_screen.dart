@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexabyte/layout/nav_layout.dart';
-import 'package:hexabyte/providers/auth/auth_provider.dart';
 import 'package:hexabyte/screens/onboarding_screen/onboarding_screen.dart';
 import 'package:pinput/pinput.dart';
 
@@ -21,7 +20,6 @@ class OtpScreen extends StatefulWidget {
 }
 
 class _OtpScreenState extends State<OtpScreen> {
-  AuthProvider authProvider = AuthProvider();
   String? verificationCode;
 
   Future<void> verifyPhoneSendOtp({
@@ -134,17 +132,13 @@ class _OtpScreenState extends State<OtpScreen> {
                   );
                   if (!mounted) return;
                   final bool isNewUser = userData.additionalUserInfo?.isNewUser as bool;
-                  // add the login route code (connection with backend)
                   if (isNewUser) {
-                    // await authProvider.register(userId: FirebaseAuth.instance.currentUser!.uid);
                     Navigator.of(context).pushAndRemoveUntil(
                         MaterialPageRoute(
                           builder: (context) => const OnboardingScreen(),
                         ),
                         (route) => false);
                   } else {
-                    //uncomment this afterwards.
-                    // await authProvider.login(userId: FirebaseAuth.instance.currentUser!.uid);
                     if (!mounted) return;
                     Navigator.of(context).pushAndRemoveUntil(
                         MaterialPageRoute(

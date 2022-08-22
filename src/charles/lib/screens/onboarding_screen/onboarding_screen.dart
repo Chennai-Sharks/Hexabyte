@@ -6,8 +6,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexabyte/layout/nav_layout.dart';
-import 'package:hexabyte/providers/auth/auth_provider.dart';
-import 'package:hexabyte/providers/proflile/profile_provider.dart';
 import 'package:hexabyte/screens/onboarding_screen/api/onboading_api.dart';
 import 'package:hexabyte/screens/onboarding_screen/config/form_structure.dart';
 import 'package:hexabyte/utils/utils.dart';
@@ -22,8 +20,6 @@ class OnboardingScreen extends StatefulWidget {
 }
 
 class OnboardingScreenState extends State<OnboardingScreen> {
-  // final AuthProvider _authProvider = AuthProvider();
-  // final ProfileProvider _profileProvider = ProfileProvider();
   final _formKey = GlobalKey<FormBuilderState>();
 
   @override
