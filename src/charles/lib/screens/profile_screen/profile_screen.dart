@@ -34,6 +34,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const NavigationLayout()));
           },
         ),
+        actions: <Widget>[
+          // const Icon(Icons.favorite_border),
+          IconButton(
+            icon: const Icon(Icons.logout),
+            onPressed: () async{
+            await  FirebaseAuth.instance.signOut();
+              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => AuthScreen()));
+            },
+          ),
+        ],
       ),
       body: RefreshIndicator(
         onRefresh: () async {},
