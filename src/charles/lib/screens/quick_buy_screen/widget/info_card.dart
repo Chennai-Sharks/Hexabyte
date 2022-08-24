@@ -24,6 +24,8 @@ class InfoCard extends StatelessWidget {
               productName: 'Product name',
               sellerId: 'Seller id',
               weight: '100',
+              productData: {},
+              id: null,
             ),
           ),
         );
