@@ -1,9 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CommonAppBar extends StatefulWidget {
+  const CommonAppBar({Key? key}) : super(key: key);
+
   @override
   _CommonAppBarState createState() => _CommonAppBarState();
 }
@@ -55,48 +55,52 @@ class _CommonAppBarState extends State<CommonAppBar> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              left: 10,
-                            ),
-                            child: Center(
-                              child: Icon(
-                                Icons.location_pin,
-                                // size: 10,
-                                color: Theme.of(context).primaryColor,
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10, top: 2),
-                            child: Center(
-                              child: RichText(
-                                text: TextSpan(
-                                  style: GoogleFonts.montserrat(
+                        Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                  left: 10,
+                                ),
+                                child: Center(
+                                  child: Icon(
+                                    Icons.location_pin,
+                                    // size: 10,
                                     color: Theme.of(context).primaryColor,
-                                    fontSize: 14,
                                   ),
-                                  children: <TextSpan>[
-                                    TextSpan(
-                                      text: 'Deliver to ',
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 10, top: 2),
+                                child: Center(
+                                  child: RichText(
+                                    text: TextSpan(
                                       style: GoogleFonts.montserrat(
                                         color: Theme.of(context).primaryColor,
                                         fontSize: 14,
                                       ),
+                                      children: <TextSpan>[
+                                        TextSpan(
+                                          text: 'Deliver to ',
+                                          style: GoogleFonts.montserrat(
+                                            color:
+                                                Theme.of(context).primaryColor,
+                                            fontSize: 14,
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ],
+                                  ),
                                 ),
+                                // Text(
+                                //   '${}',
+                                //   softWrap: true,
+                                //
+                                //
+                                // ),
                               ),
-                            ),
-                            // Text(
-                            //   '${}',
-                            //   softWrap: true,
-                            //
-                            //
-                            // ),
-                          ),
-                        ]),
+                            ]),
                         Padding(
                           padding: const EdgeInsets.only(right: 15.0),
                           child: Center(
@@ -123,6 +127,8 @@ class _CommonAppBarState extends State<CommonAppBar> {
 }
 
 class HomePageAppBar extends StatefulWidget {
+  const HomePageAppBar({Key? key}) : super(key: key);
+
   @override
   _HomePageAppBarState createState() => _HomePageAppBarState();
 }
@@ -132,7 +138,7 @@ class _HomePageAppBarState extends State<HomePageAppBar> {
   Widget build(BuildContext context) {
     Color? color = Colors.redAccent.shade700;
     return Container(
-      padding: EdgeInsets.only(
+      padding: const EdgeInsets.only(
         bottom: 15,
       ),
       color: color,
@@ -264,8 +270,8 @@ class TextFieldControllers extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: Container(
-          margin: EdgeInsets.symmetric(vertical: 5),
-          padding: EdgeInsets.symmetric(
+          margin: const EdgeInsets.symmetric(vertical: 5),
+          padding: const EdgeInsets.symmetric(
             horizontal: 10,
           ),
           width: size.width * 0.80,
