@@ -36,7 +36,7 @@ from pymongo import GEO2D
         
 
 
-@api_view(['GET'])
+@api_view(['POST'])
 @csrf_exempt
 def product_search(request):
     '''
