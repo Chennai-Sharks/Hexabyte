@@ -1,9 +1,15 @@
 from rest_framework import serializers
-# from phonenumber_field.modelfields import PhoneNumberField
     
-class MetadataSerializer(serializers.Serializer):
-    name = serializers.CharField()
-    age = serializers.IntegerField()
+class consumerMetadataSerializer(serializers.Serializer):
+    name = serializers.CharField()    
+    phone = serializers.IntegerField()
+    business = serializers.CharField()
+    tags = serializers.ListField(child = serializers.CharField())
+    location = serializers.ListField(child = serializers.FloatField(), allow_empty = False,  min_length=2, max_length=2,required=False)
+    email = serializers.CharField()        
+
+class producerMetadataSerializer(serializers.Serializer):
+    name = serializers.CharField()    
     phone = serializers.IntegerField()
     business = serializers.CharField()
     location = serializers.ListField(child = serializers.FloatField(), allow_empty = False,  min_length=2, max_length=2,required=False)
@@ -24,6 +30,7 @@ class ItemDataSerializer(serializers.Serializer):
     is_active = serializers.BooleanField(default=True)
 
 class OrderDataSerializer(serializers.Serializer):
+    producer_id = serializers.CharField()
     customer_id  = serializers.CharField()
     item_id = serializers.CharField()
     duration = serializers.IntegerField()

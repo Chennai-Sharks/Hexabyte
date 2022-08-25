@@ -4,36 +4,13 @@ from pprint import pprint
 # from textwrap import indent
 from django.http import HttpResponse, JsonResponse
 from lewis.api.utils import  bytes_to_json # ,get_db_handle,
-from lewis.api.schemas import MetadataSerializer , ItemDataSerializer
+from lewis.api.schemas import consumerMetadataSerializer , producerMetadataSerializer
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view
 from bson import json_util
 from lewis.settings import db
 from pymongo import GEO2D
-
-# class search:
-#     def __init__(self, product_id, phone):
-#         self.product_id = product_id
-#         self.phone = phone
-    
-#     def product_search(self):
-        # search_tags = []
-        # search_tags.append(self.product_id)
-        
-        # data_cursor = db.Items.aggregate([
-        #     {
-        #         "$geoNear": {
-        #             "near": location,
-        #             "spherical": True, 
-        #             "query": {"tags" : search_tags},
-        #             "uniqueDocs": True,
-        #             "distanceField": "distance", 
-        #             "maxDistance": 50000
-        #         }
-        #     }
-        # ])
-        #data_cursor = db.Items.find({"tags" : search_tags})
-        
+from itertools import combinations
 
 
 @api_view(['POST'])
@@ -87,6 +64,21 @@ def product_search(request):
     #         "message": "Cannot perform the requested search"
     #     }, status = 400)
 
+@api_view(['GET'])
+@csrf_exempt
+def combo_buy(request):
+    '''
+    Get the tags from the metadata and search for the related products to that tag and compute the distance 
+    and cost for all the permutations combinations. 
+    :param request: User ID and metadata
+    :return: A success or failure JSON Response
+    '''
+    data_ = request.body
+    data = bytes_to_json(data_)
+    tags = data["tags"]
+    for tag in tags:
+        pass                    
+            
 @api_view(['POST'])
 @csrf_exempt
 def data_collection(request):   
@@ -101,25 +93,24 @@ def data_collection(request):
     phone = data['phone'] 
     is_phone_exist = db.metadata.find_one({"phone": phone})        
     if is_phone_exist is None:
-        try:            
-            serializer = MetadataSerializer(data = data)                            
-            if serializer.is_valid():                                                                              
-                location = data["location"]["coordinates"]
-                import pdb
-                pdb.set_trace()                    
-                db.metadata.create_index([(location, GEO2D)], unique = True)
-                pprint(db.metadata.index_information())
-                result = db.metadata.insert_one(data)
-                #print(result)
-                return JsonResponse({
-                    "status": "Success",
-                    "message": "Data stored successfully"
-                }, status = 200)
-            else: 
-                return JsonResponse({
-                "status": "Failure",
-                "message": "Invalid data or format"                    
-            }, status = 400)
+        try:    
+            if data["role"] == "consumer":
+                serializer = consumerMetadataSerializer(data = data)                            
+                if serializer.is_valid():                                                                              
+                    location = data["location"]["coordinates"]  
+                    result = db.metadata.insert_one(data)
+                    #print(result)
+                    return JsonResponse({
+                        "status": "Success",
+                        "message": "Data stored successfully"
+                    }, status = 200)
+                else: 
+                    return JsonResponse({
+                    "status": "Failure",
+                    "message": "Invalid data or format"                    
+                }, status = 400)
+            else:
+                serializer = producerMetadataSerializer(data = data)
         except Exception as e:
             print(e) 
             return JsonResponse({
