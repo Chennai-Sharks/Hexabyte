@@ -141,7 +141,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
       ),
       body: SingleChildScrollView(
         child: Column(
-          // mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
@@ -150,26 +150,49 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(
-                    widget.productData!['food_waste_title'] ?? 'N/A',
-                    style: GoogleFonts.montserrat(
-                        fontWeight: FontWeight.bold, fontSize: 18.0),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    'Seller id: ${widget.productData!['producer_id'] ?? 'N/A'}',
-                    style: GoogleFonts.montserrat(
-                      fontSize: 15.0,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.black,
+                  SizedBox(
+                    width: size.width * 0.45,
+                    child: Text(
+                      widget.productData!['food_waste_title'] ?? 'N/A',
+                      style: GoogleFonts.montserrat(
+                          fontWeight: FontWeight.bold, fontSize: 24.0),
                     ),
                   ),
                   const SizedBox(height: 8),
-                  Text(
-                      'Tags: ${((widget.productData!['applicable_tags'] ?? [
-                            'NA'
-                          ]).join(', ') as String).titleCase}',
-                      style: Theme.of(context).textTheme.bodyText1),
+                  SizedBox(
+                    width: size.width * 0.45,
+                    child: Text(
+                      'Seller id: ${widget.productData!['producer_id'] ?? 'N/A'}',
+                      style: GoogleFonts.montserrat(
+                        fontSize: 15.0,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Container(
+                    height: 50,
+                    color: Colors.white,
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: widget.productData!['applicable_tags'].length,
+                      itemBuilder: (context, index) => Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Chip(
+                          label: Text(
+                            widget.productData!['applicable_tags'][index]
+                                .toString()
+                                .sentenceCase,
+                            textAlign: TextAlign.left,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+
                   const SizedBox(height: 8),
                   const CustomDividerView(dividerHeight: 1.0),
                   Row(

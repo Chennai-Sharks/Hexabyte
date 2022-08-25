@@ -66,15 +66,44 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
                 const SizedBox(height: 16),
+                 Padding(
+                   padding: const EdgeInsets.all(8.0),
+                   child: Container(
+                    color: Colors.white,
+                    padding: const EdgeInsets.only(bottom: 10.0, left: 15.0, top: 10),
+                    width: size.width,
+                    child: Text(
+                      'Kishore M',
+                      style: GoogleFonts.montserrat(fontWeight: FontWeight.bold, fontSize: 24.0),
+                    ),
+                ),
+
+
+                 ),
+                 Padding(
+                   padding: const EdgeInsets.all(8.0),
+                   child: Container(
+                    color: Colors.white,
+                    padding: const EdgeInsets.only(bottom: 10.0, left: 15.0, top: 10),
+                    width: size.width,
+                    child: Text(
+                      'Small Scale Business',
+                      style: GoogleFonts.montserrat( fontSize: 22.0),
+                    ),
+                ),
+                 ),
+
                 Container(
                   color: Colors.white,
                   padding: const EdgeInsets.only(bottom: 10.0, left: 15.0, top: 10),
                   width: size.width,
                   child: Text(
                     'Order History',
-                    style: GoogleFonts.montserrat(fontWeight: FontWeight.bold, fontSize: 16.0),
+                    style: GoogleFonts.montserrat(fontWeight: FontWeight.bold, fontSize: 22.0),
                   ),
                 ),
+
+
                 Container(
                   color: Colors.white,
                   child: ListView.builder(
