@@ -6,6 +6,7 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexabyte/screens/search_screen/api/Search_api.dart';
 import 'package:hexabyte/screens/search_screen/widgets/after_search_card.dart';
+import 'package:hexabyte/screens/search_screen/widgets/map.dart';
 
 class AfterSearch extends StatefulWidget {
   final Function goBackToFirstSearch;
@@ -30,6 +31,8 @@ class _AfterSearchState extends State<AfterSearch> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // const SizedBox(height: 200, width: 200, child: MapWidget()),
+              // Flexible(child: MapWidget()),
               SizedBox(height: MediaQuery.of(context).size.height * 0.06),
               Container(
                 padding: const EdgeInsets.only(left: 15.0, top: 2.0, bottom: 2.0),

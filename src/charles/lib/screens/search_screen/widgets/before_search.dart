@@ -117,20 +117,20 @@ class _BeforeSearchState extends State<BeforeSearch> {
                               },
                               itemBuilder: (context, suggestion) {
                                 return ListTile(
-                                  title: Text((suggestion as Map)['title']),
+                                  title: Text((suggestion as Map)['food_waste_title']),
                                   // subtitle: Text('${suggestion['price'].toString()} Rs'),
                                 );
                               },
                               onSuggestionSelected: (suggestion) async {
                                 final data = suggestion as Map;
-                                widget.searchController.text = data['title'];
+                                widget.searchController.text = data['food_waste_title'];
                                 final search = snapshot.data!.getStringList('trending_search');
                                 if (search != null) {
-                                  final recentSearches = [data['title'], ...search] as List<String>;
+                                  final List<String> recentSearches = [data['food_waste_title'], ...search];
 
                                   snapshot.data!.setStringList('trending_search', recentSearches);
                                 } else {
-                                  snapshot.data!.setStringList('trending_search', [data['title']]);
+                                  snapshot.data!.setStringList('trending_search', [data['food_waste_title']]);
                                 }
 
                                 widget.searchDone();
