@@ -1,14 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hexabyte/common/custom_divider.dart';
 import 'package:hexabyte/layout/nav_layout.dart';
 import 'package:hexabyte/screens/auth_screen/auth_screen.dart';
-import 'package:hexabyte/screens/loading_screen/loading_screen.dart';
 import 'package:hexabyte/screens/profile_screen/widgets/order_history_card.dart';
-import 'package:hexabyte/utils/utils.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -86,7 +81,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     shrinkWrap: true,
                     itemCount: 10,
                     physics: const NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) => OrderHistoryCard(),
+                    itemBuilder: (context, index) => const OrderHistoryCard(),
                   ),
                 ),
               ],

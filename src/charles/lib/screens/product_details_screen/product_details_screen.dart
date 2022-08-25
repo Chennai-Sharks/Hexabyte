@@ -90,13 +90,13 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
     }
   }
 
-  void launchRazorPayForMonths(int? val, int? _stepperValue) {
+  void launchRazorPayForMonths(int? val, int? stepperValue) {
     var options = {
       "key": "rzp_test_ZdIhaAYTQ8urAz",
       "amount": (int.parse(widget.productData!['cost_per_kg']!) *
               100 *
               val! *
-              _stepperValue!)
+              stepperValue!)
           .toString(),
       "name": "Kishore M",
       "description": "Purchase of ${widget.productName}"
@@ -134,7 +134,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
             icon: const Icon(Icons.search),
             onPressed: () {
               Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => SearchPage()));
+                  MaterialPageRoute(builder: (context) => const SearchPage()));
             },
           ),
         ],
@@ -152,7 +152,8 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                 children: <Widget>[
                   Text(
                     widget.productData!['food_waste_title'] ?? 'N/A',
-                    style: GoogleFonts.montserrat(fontWeight: FontWeight.bold, fontSize: 18.0),
+                    style: GoogleFonts.montserrat(
+                        fontWeight: FontWeight.bold, fontSize: 18.0),
                   ),
                   const SizedBox(height: 8),
                   Text(
@@ -164,7 +165,10 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  Text('Tags: ${((widget.productData!['applicable_tags'] ?? ['NA']).join(', ') as String).titleCase}',
+                  Text(
+                      'Tags: ${((widget.productData!['applicable_tags'] ?? [
+                            'NA'
+                          ]).join(', ') as String).titleCase}',
                       style: Theme.of(context).textTheme.bodyText1),
                   const SizedBox(height: 8),
                   const CustomDividerView(dividerHeight: 1.0),
@@ -173,12 +177,15 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                     children: <Widget>[
                       _buildVerticalStack(context, '5.0', 'Points'),
                       _buildVerticalStack(context, '29 Kms', 'Distance'),
-                      _buildVerticalStack(context, 'Rs ${widget.productData!['cost_per_kg'] ?? '200'}/-', 'Per Kg'),
+                      _buildVerticalStack(
+                          context,
+                          'Rs ${widget.productData!['cost_per_kg'] ?? '200'}/-',
+                          'Per Kg'),
                     ],
                   ),
                   const CustomDividerView(
                     dividerHeight: 1.0,
-                    color: const Color(0xFFE9EFC0),
+                    color: Color(0xFFE9EFC0),
                   ),
                   // const SizedBox(height: 8),
                   // Column(
@@ -203,7 +210,8 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(15, 15, 15, 25.0),
                     child: Text(
-                      'Description: ' + (widget.productData!['description'] ?? 'N/A'),
+                      "Description: " +
+                          (widget.productData!['description'] ?? 'N/A'),
                       style: GoogleFonts.montserrat(
                         fontSize: 18,
                       ),
@@ -242,7 +250,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                       Container(
                         decoration: BoxDecoration(
                           border: Border.all(
-                            color: Color(0xFFB4E197),
+                            color: const Color(0xFFB4E197),
                             width: 1,
                           ),
                           borderRadius: BorderRadius.circular(10),
@@ -304,7 +312,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                         child: Center(
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                                primary: Color(0xFFB4E197),
+                                primary: const Color(0xFFB4E197),
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(12))),
                             child: Text(
@@ -318,7 +326,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          PaymentSuccessPage()));
+                                          const PaymentSuccessPage()));
                             },
                           ),
                         ),
@@ -404,7 +412,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                         child: Center(
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                                primary: Color(0xFFB4E197),
+                                primary: const Color(0xFFB4E197),
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(12))),
                             child: Text(
@@ -421,7 +429,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            PaymentSuccessPage()));
+                                            const PaymentSuccessPage()));
                               } else {
                                 print("validation failed");
                               }

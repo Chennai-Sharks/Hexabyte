@@ -24,21 +24,21 @@ class NavigationLayoutState extends State<NavigationLayout> {
   Widget build(BuildContext context) {
     final tabNavigations = widget.isConsumer
         ? [
-            HomeScreen(),
-            QuickBuyScreen(),
-            CurationScreen(),
-            ProfileScreen(),
+            const HomeScreen(),
+            const QuickBuyScreen(),
+            const CurationScreen(),
+            const ProfileScreen(),
           ]
         : [
-            ListedProductsScreen(),
+            const ListedProductsScreen(),
             const AddProductsScreen(),
-            ProfileScreen(),
+            const ProfileScreen(),
           ];
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
         leading: const Text(''),
-        backgroundColor: Color(0xFFE9EFC0),
+        backgroundColor: const Color(0xFFE9EFC0),
         toolbarHeight: 0,
       ),
       body: tabNavigations[_currentIndex],

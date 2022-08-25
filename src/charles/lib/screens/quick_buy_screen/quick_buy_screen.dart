@@ -1,7 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexabyte/common/search_bar.dart';
 import 'package:hexabyte/screens/quick_buy_screen/api/quick_buy_api.dart';
@@ -21,7 +19,7 @@ class _QuickBuyScreenState extends State<QuickBuyScreen> {
   @override
   Widget build(BuildContext context) {
     Size? size = MediaQuery.of(context).size;
-    Color? color =const  Color(0xFFE9EFC0);
+    Color? color = const Color(0xFFE9EFC0);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFFE9EFC0),
@@ -39,7 +37,10 @@ class _QuickBuyScreenState extends State<QuickBuyScreen> {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileScreen()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ProfileScreen()));
               },
               child: CircleAvatar(
                 backgroundColor: Colors.white,
@@ -71,7 +72,7 @@ class _QuickBuyScreenState extends State<QuickBuyScreen> {
               child: const SearchBar(),
               onTap: () => Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => SearchPage(),
+                  builder: (context) => const SearchPage(),
                 ),
               ),
             ),
@@ -109,15 +110,29 @@ class _QuickBuyScreenState extends State<QuickBuyScreen> {
                         itemCount: 4,
                         itemBuilder: (context, index) => SizedBox(
                           width: MediaQuery.of(context).size.width,
-                          child: InfoCard(
-                            id: response[5 + index]['_id']['\$oid'],
-                            name: response[5 + index]['food_waste_title'],
-                            price: response[5 + index]['cost'],
-                            availableQty: response[5 + index]['balance_qty'],
+                          child:response != null ? InfoCard(
+                            id: response[5 + index]['_id']['\$oid'] != null
+                                ? response[5 + index]['_id']['\$oid']
+                                : "nil",
+                            name:
+                                response[5 + index]['food_waste_title'] != null
+                                    ? response[5 + index]['food_waste_title']
+                                    : "nil",
+                            price: response[5 + index]['cost'] != null
+                                ? response[5 + index]['cost']
+                                : "nil",
+                            availableQty:
+                                response[5 + index]['balance_qty'] != null
+                                    ? response[5 + index]['balance_qty']
+                                    : "nil",
                             distance: '4.9 km',
-                            duration: response[5 + index]['duration'],
-                            productData: response[5 + index],
-                          ),
+                            duration: response[5 + index]['duration'] != null
+                                ? response[5 + index]['duration']
+                                : "nil",
+                            productData: response[5 + index] != null
+                                ? response[5 + index]
+                                : "nil",
+                          ) : Container(),
                         ),
                       ),
                     );
@@ -175,9 +190,9 @@ class _QuickBuyScreenState extends State<QuickBuyScreen> {
                     return Container();
                   }
                 }),
-            SizedBox(
+            Container(
               height: MediaQuery.of(context).size.height * 0.03,
-              color : Colors.white,
+              color: Colors.white,
             ),
           ],
         ),

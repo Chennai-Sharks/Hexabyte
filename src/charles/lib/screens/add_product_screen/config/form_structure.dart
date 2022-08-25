@@ -11,9 +11,21 @@ final List<Map<String, dynamic>> addProductFormStructure = [
   {
     'type': 'text',
     'name': 'duration',
-    'label': 'Enter duration(no. of months)',
+    'label': 'Enter duration',
     'required': true,
     'keyboardType': TextInputType.number
+  },
+  {
+    'type': 'dropdown',
+    'name': 'durationType',
+    'label': 'Duration Type',
+    'required': true,
+    'values': [
+      'days',
+      'weeks',
+      'months',
+      'years',
+    ],
   },
   {
     'type': 'text',
@@ -47,4 +59,5 @@ final List<Map<String, dynamic>> addProductFormStructure = [
       'edible_oilwaste',
     ],
   },
+
 ];

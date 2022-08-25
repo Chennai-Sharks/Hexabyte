@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-
 import 'package:hexabyte/common/custom_divider.dart';
 import 'package:hexabyte/common/dotted_seperator.dart';
 
@@ -75,7 +74,7 @@ class OrderHistoryCard extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text('Something'),
+              const Text('Something'),
               const SizedBox(
                 height: 8,
               ),
@@ -94,27 +93,27 @@ class OrderHistoryCard extends StatelessWidget {
                   itemBuilder: (context, index) {
                     switch (index) {
                       case 0:
-                        return Icon(
+                        return const Icon(
                           Icons.sentiment_very_dissatisfied,
                           color: Colors.red,
                         );
                       case 1:
-                        return Icon(
+                        return const Icon(
                           Icons.sentiment_dissatisfied,
                           color: Colors.redAccent,
                         );
                       case 2:
-                        return Icon(
+                        return const Icon(
                           Icons.sentiment_neutral,
                           color: Colors.amber,
                         );
                       case 3:
-                        return Icon(
+                        return const Icon(
                           Icons.sentiment_satisfied,
                           color: Colors.lightGreen,
                         );
                       case 4:
-                        return Icon(
+                        return const Icon(
                           Icons.sentiment_very_satisfied,
                           color: Colors.green,
                         );

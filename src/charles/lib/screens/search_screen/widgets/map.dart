@@ -21,7 +21,7 @@ class _MapWidgetState extends State<MapWidget> {
               point: LatLng(30, 40),
               width: 80,
               height: 80,
-              builder: (context) => FlutterLogo(),
+              builder: (context) => const FlutterLogo(),
             ),
           ],
         ),

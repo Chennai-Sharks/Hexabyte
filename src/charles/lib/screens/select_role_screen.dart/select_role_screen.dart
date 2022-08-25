@@ -28,6 +28,7 @@ class SelectRoleScreen extends StatelessWidget {
                   padding: const EdgeInsets.fromLTRB(8.0, 8, 8, 30),
                   child: Container(
                       height: size.height * 0.25,
+                      color: Colors.white,
                       child: SvgPicture.asset('assets/mobile_login.svg')),
                 ),
                 Text(
@@ -45,13 +46,13 @@ class SelectRoleScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(6.0),
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          primary: Color(0xFFB4E197),
+                          primary: const Color(0xFFB4E197),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12))),
                       onPressed: () => {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: ((context) =>
-                                NavigationLayout(isConsumer: true))))
+                                const NavigationLayout(isConsumer: true))))
                       },
                       child: Text('Consumer',
                           style: GoogleFonts.montserrat(
@@ -69,13 +70,13 @@ class SelectRoleScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(6.0),
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          primary: Color(0xFFB4E197),
+                          primary: const Color(0xFFB4E197),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12))),
                       onPressed: () => {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: ((context) =>
-                                NavigationLayout(isConsumer: false))))
+                                const NavigationLayout(isConsumer: false))))
                       },
                       child: Text('Producer',
                           style: GoogleFonts.montserrat(

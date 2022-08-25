@@ -1,9 +1,7 @@
 import 'dart:convert';
 
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:http/http.dart' as http;
-
 import 'package:hexabyte/utils/utils.dart';
+import 'package:http/http.dart' as http;
 
 class ListedProductApi {
   static Future<void> getMyProducts({required List data}) async {

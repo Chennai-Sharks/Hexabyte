@@ -69,7 +69,7 @@ class _CurationScreenState extends State<CurationScreen> {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             )
           ],
@@ -99,7 +99,7 @@ class _CurationScreenState extends State<CurationScreen> {
                   padding: const EdgeInsets.all(18),
                   child: Container(
                     decoration: BoxDecoration(
-                        color: Color(0xFFE9EFC0),
+                        color: const Color(0xFFE9EFC0),
                         borderRadius: BorderRadius.circular(20)),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -123,7 +123,7 @@ class _CurationScreenState extends State<CurationScreen> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          options: (preferenceList as List<String?>)
+                          options: (preferenceList)
                               .map(
                                 (eachItem) => FormBuilderFieldOption(
                                   key: Key(eachItem!),
@@ -155,7 +155,6 @@ class _CurationScreenState extends State<CurationScreen> {
                         elevation: 3,
                       ),
                       onPressed: () async {
-                        final navContext = Navigator.of(context);
                         _formKey.currentState!.save();
                         if (_formKey.currentState!.validate()) {
                           // EasyLoading.show(status: 'Loading...');
@@ -163,7 +162,7 @@ class _CurationScreenState extends State<CurationScreen> {
                           final List<dynamic> finalList =
                               _formKey.currentState!.value['preferences'];
 
-                          if (finalList.length == 0) {
+                          if (finalList.isEmpty) {
                             EasyLoading.dismiss();
                             Fluttertoast.showToast(
                                 msg: 'No products has been added!');

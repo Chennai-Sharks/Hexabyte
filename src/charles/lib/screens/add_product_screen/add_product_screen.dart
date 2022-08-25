@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexabyte/layout/nav_layout.dart';
@@ -35,7 +36,7 @@ class AddProductsScreenState extends State<AddProductsScreen> {
         ),
         centerTitle: true,
         backgroundColor: const Color(0xFFE9EFC0),
-        iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: const IconThemeData(color: Colors.black),
       ),
       body: SingleChildScrollView(
         child: Center(
@@ -67,8 +68,8 @@ class AddProductsScreenState extends State<AddProductsScreen> {
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 11.0),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 11.0),
                                 child: Center(
                                   child: FormBuilderTextField(
                                     name: item['name'],
@@ -79,7 +80,8 @@ class AddProductsScreenState extends State<AddProductsScreen> {
                                       border: InputBorder.none,
                                     ),
 
-                                    maxLines: item['multiline'] ?? false ? 5 : 1,
+                                    maxLines:
+                                        item['multiline'] ?? false ? 5 : 1,
 
                                     // valueTransformer: (text) => num.tryParse(text),
                                     validator: FormBuilderValidators.compose([
@@ -110,7 +112,8 @@ class AddProductsScreenState extends State<AddProductsScreen> {
                                         : null,
                                     checkmarkColor: Colors.black,
                                     disabledColor: Colors.grey.shade100,
-                                    crossAxisAlignment: WrapCrossAlignment.start,
+                                    crossAxisAlignment:
+                                        WrapCrossAlignment.start,
                                     decoration: InputDecoration(
                                       labelText: item['label'],
                                       border: InputBorder.none,
@@ -138,7 +141,44 @@ class AddProductsScreenState extends State<AddProductsScreen> {
                             ),
                           );
                         } else {
-                          return Container();
+                          return Padding(
+                            padding: const EdgeInsets.all(9.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.grey.shade200,
+                                  borderRadius: BorderRadius.circular(20)),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Center(
+                                  child: FormBuilderDropdown<String>(
+                                    // autovalidate: true,
+                                    name: 'gender',
+                                    decoration: const InputDecoration(
+                                      border: InputBorder.none,
+                                      labelText: 'Duration Type',
+                                      suffix: FaIcon(FontAwesomeIcons.calendar),
+                                      hintText: '',
+                                    ),
+                                    validator: FormBuilderValidators.compose([
+                                      FormBuilderValidators.required(context)
+                                    ]),
+                                    items: (item['values'] as List<String?>)
+                                        .map((value) => DropdownMenuItem(
+                                              alignment:
+                                                  AlignmentDirectional.center,
+                                              value: value,
+                                              child: Text(value!),
+                                            ))
+                                        .toList(),
+                                    onChanged: (val) {
+                                      setState(() {});
+                                    },
+                                    valueTransformer: (val) => val?.toString(),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
                         }
                       }).toList(),
                     ),

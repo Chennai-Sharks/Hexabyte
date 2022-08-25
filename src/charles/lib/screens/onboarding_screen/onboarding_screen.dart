@@ -4,14 +4,12 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hexabyte/layout/nav_layout.dart';
 import 'package:hexabyte/screens/onboarding_screen/api/onboading_api.dart';
 import 'package:hexabyte/screens/onboarding_screen/config/form_structure.dart';
 import 'package:hexabyte/screens/select_role_screen.dart/select_role_screen.dart';
 import 'package:hexabyte/utils/utils.dart';
-
-import 'package:geolocator/geolocator.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({Key? key}) : super(key: key);
@@ -48,7 +46,10 @@ class OnboardingScreenState extends State<OnboardingScreen> {
             Center(
               child: Text(
                 'Welcome! Enter your details',
-                style: GoogleFonts.montserrat(fontSize: 24, color: Colors.grey.shade900, fontWeight: FontWeight.bold),
+                style: GoogleFonts.montserrat(
+                    fontSize: 24,
+                    color: Colors.grey.shade900,
+                    fontWeight: FontWeight.bold),
               ),
             ),
             SizedBox(
@@ -72,13 +73,15 @@ class OnboardingScreenState extends State<OnboardingScreen> {
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 11.0),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 11.0),
                               child: Center(
                                 child: FormBuilderTextField(
                                   name: item['name'],
                                   decoration: InputDecoration(
                                     labelText: item['label'],
-                                    labelStyle: const TextStyle(fontSize: 16, color: Colors.black),
+                                    labelStyle: const TextStyle(
+                                        fontSize: 16, color: Colors.black),
                                     border: InputBorder.none,
                                   ),
 
@@ -115,31 +118,37 @@ class OnboardingScreenState extends State<OnboardingScreen> {
                       final navContext = Navigator.of(context);
                       _formKey.currentState!.save();
                       if (_formKey.currentState!.validate()) {
-                        LocationPermission permission = await Geolocator.requestPermission();
+                        LocationPermission permission =
+                            await Geolocator.requestPermission();
 
                         if (permission == LocationPermission.denied) {
-                          Fluttertoast.showToast(msg: 'Location is needed to move further.');
+                          Fluttertoast.showToast(
+                              msg: 'Location is needed to move further.');
                           return;
                         }
 
                         EasyLoading.show(status: 'loading...');
 
-                        Position position =
-                            await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.bestForNavigation);
+                        Position position = await Geolocator.getCurrentPosition(
+                            desiredAccuracy:
+                                LocationAccuracy.bestForNavigation);
                         print(position.longitude);
                         print(position.latitude);
                         print(_formKey.currentState!.value);
                         print(FirebaseAuth.instance.currentUser!.phoneNumber!);
                         final formValue = {..._formKey.currentState!.value};
                         formValue.update('age', (value) => int.parse(value));
-                        final response = await OnboardingApi.dataCollection(data: {
+                        final response =
+                            await OnboardingApi.dataCollection(data: {
                           ...formValue,
                           // 'location': {
                           //   'type': 'Point',
                           //   'coordinates': [position.longitude, position.latitude]
                           // },
                           'location': [position.latitude, position.longitude],
-                          'phone': FirebaseAuth.instance.currentUser!.phoneNumber!.substring(3)
+                          'phone': FirebaseAuth
+                              .instance.currentUser!.phoneNumber!
+                              .substring(3)
                         });
                         if (response == 1) {
                           EasyLoading.dismiss();
