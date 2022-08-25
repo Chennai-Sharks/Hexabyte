@@ -62,7 +62,7 @@ class AfterSearchCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       AutoSizeText(
-                        'Seller Name',
+                        'Seller id: ${productData!['producer_id']}',
                         style: GoogleFonts.montserrat(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
@@ -74,7 +74,7 @@ class AfterSearchCard extends StatelessWidget {
                       AutoSizeText(
                         name ?? 'N/A',
                         style: GoogleFonts.montserrat(
-                          // fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.bold,
                           fontSize: 16,
                         ),
                       ),
@@ -85,7 +85,7 @@ class AfterSearchCard extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           AutoSizeText(
-                            'Score',
+                            'Score: 5.0',
                             overflow: TextOverflow.ellipsis,
                             style: GoogleFonts.montserrat(
                               fontWeight: FontWeight.bold,
@@ -96,15 +96,15 @@ class AfterSearchCard extends StatelessWidget {
                           const SizedBox(
                             width: 5,
                           ),
-                          AutoSizeText(
-                            '. ${duration ?? 'N/A'} days',
-                            overflow: TextOverflow.ellipsis,
-                            style: GoogleFonts.montserrat(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.grey,
-                              fontSize: 15,
-                            ),
-                          ),
+                          // AutoSizeText(
+                          //   '. ${duration ?? 'N/A'} days',
+                          //   overflow: TextOverflow.ellipsis,
+                          //   style: GoogleFonts.montserrat(
+                          //     fontWeight: FontWeight.bold,
+                          //     color: Colors.grey,
+                          //     fontSize: 15,
+                          //   ),
+                          // ),
                         ],
                       ),
                       const SizedBox(
@@ -135,7 +135,7 @@ class AfterSearchCard extends StatelessWidget {
                         height: 6,
                       ),
                       AutoSizeText(
-                        'Chennai . 4.9 km',
+                        ' 4.9 km',
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: GoogleFonts.montserrat(

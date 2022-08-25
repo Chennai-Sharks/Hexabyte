@@ -1,10 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:hexabyte/screens/product_details_screen/product_details_screen.dart';
 import 'package:hexabyte/utils/utils.dart';
+import 'package:recase/recase.dart';
 
 class InfoCard extends StatelessWidget {
+  final Map<dynamic, dynamic> productData;
+  final String id;
+  final String? name;
+  final int? price;
+  final int? availableQty;
+  final String? distance;
+  final int? duration;
   const InfoCard({
     Key? key,
+    required this.id,
+    required this.productData,
+    required this.availableQty,
+    required this.distance,
+    required this.name,
+    required this.price,
+    required this.duration,
   }) : super(key: key);
 
   @override
@@ -14,7 +29,7 @@ class InfoCard extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => const ProductDetailsPage(
+            builder: (context) => ProductDetailsPage(
               category: 'some category',
               description: 'Some descritption',
               imageUrl: 'assets/logo.png',
@@ -25,8 +40,8 @@ class InfoCard extends StatelessWidget {
               productName: 'Product name',
               sellerId: 'Seller id',
               weight: '100',
-              productData: {},
-              id: null,
+              productData: productData,
+              id: id,
             ),
           ),
         );
@@ -65,19 +80,19 @@ class InfoCard extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     // restaurant.name,
-                    'Name',
+                    name ?? 'N/A',
                     maxLines: 1,
                     style: Theme.of(context).textTheme.subtitle2!.copyWith(fontSize: 20.0),
                   ),
                   Text(
                     // restaurant.desc,
-                    'within 20kms',
+                    'Available Qty: $availableQty KG',
                     maxLines: 2,
                     style: Theme.of(context).textTheme.bodyText1!.copyWith(color: Colors.grey[800], fontSize: 13.5),
                   ),
                   Text(
                     // restaurant.coupon,
-                    'some info',
+                    (productData['business'] as String).titleCase,
                     style: Theme.of(context).textTheme.bodyText1!.copyWith(color: Utils.primaryColor, fontSize: 13.0),
                   ),
                   const Divider(),
@@ -91,7 +106,7 @@ class InfoCard extends StatelessWidget {
                         ),
                         Text(
                           // restaurant.ratingTimePrice,
-                          '5.0 - Rs.100/- per Kg',
+                          '5.0 - ${productData['balance_qty']} per Kg', // change this to price
                           style: const TextStyle(fontSize: 12.0),
                         )
                       ],

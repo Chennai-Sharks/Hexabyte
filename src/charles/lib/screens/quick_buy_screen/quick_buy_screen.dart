@@ -4,6 +4,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexabyte/common/search_bar.dart';
+import 'package:hexabyte/screens/quick_buy_screen/api/quick_buy_api.dart';
 import 'package:hexabyte/screens/quick_buy_screen/widget/info_card.dart';
 import 'package:hexabyte/screens/search_screen/search_screen.dart';
 
@@ -75,41 +76,41 @@ class _QuickBuyScreenState extends State<QuickBuyScreen> {
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.03,
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20, bottom: 20),
-              child: AutoSizeText(
-                'Recommended for you',
-                style: GoogleFonts.montserrat(
-                  color: Theme.of(context).secondaryHeaderColor,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),
-                textAlign: TextAlign.start,
-              ),
-            ),
-            Container(
-              color: Colors.white,
-              child: LimitedBox(
-                maxHeight: 270.0,
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 10,
-                  itemBuilder: (context, index) => index % 2 == 0
-                      ? SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.9,
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: const <Widget>[
-                              InfoCard(),
-                              InfoCard(),
-                            ],
-                          ),
-                        )
-                      : Container(),
-                ),
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.only(left: 20, bottom: 20),
+            //   child: AutoSizeText(
+            //     'Recommended for you',
+            //     style: GoogleFonts.montserrat(
+            //       color: Theme.of(context).secondaryHeaderColor,
+            //       fontWeight: FontWeight.bold,
+            //       fontSize: 20,
+            //     ),
+            //     textAlign: TextAlign.start,
+            //   ),
+            // ),
+            // Container(
+            //   color: Colors.white,
+            //   child: LimitedBox(
+            //     maxHeight: 270.0,
+            //     child: ListView.builder(
+            //       shrinkWrap: true,
+            //       scrollDirection: Axis.horizontal,
+            //       itemCount: 10,
+            //       itemBuilder: (context, index) => index % 2 == 0
+            //           ? SizedBox(
+            //               width: MediaQuery.of(context).size.width * 0.9,
+            //               child: Column(
+            //                 mainAxisSize: MainAxisSize.min,
+            //                 children: const <Widget>[
+            //                   InfoCard(),
+            //                   InfoCard(),
+            //                 ],
+            //               ),
+            //             )
+            //           : Container(),
+            //     ),
+            //   ),
+            // ),
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.02,
             ),
@@ -125,19 +126,41 @@ class _QuickBuyScreenState extends State<QuickBuyScreen> {
                 textAlign: TextAlign.start,
               ),
             ),
-            Container(
-              color: Colors.white,
-              child: ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                // scrollDirection: Axis.horizontal,
-                itemCount: 10,
-                itemBuilder: (context, index) => SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  child: InfoCard(),
-                ),
-              ),
-            ),
+            FutureBuilder(
+                future: QuickBuyApi.nearestItems(),
+                builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (snapshot.connectionState == ConnectionState.done) {
+                    // print(snapshot.data);
+                    final response = snapshot.data as List<dynamic>;
+                    print(response[0]);
+                    return Container(
+                      color: Colors.white,
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: snapshot.data?.length ?? 1,
+                        itemBuilder: (context, index) => SizedBox(
+                          width: MediaQuery.of(context).size.width,
+                          child: InfoCard(
+                            id: response[index]['_id']['\$oid'],
+                            name: response[index]['food_waste_title'],
+                            price: response[index]['cost'],
+                            availableQty: response[index]['balance_qty'],
+                            distance: '4.9 km',
+                            duration: response[index]['duration'],
+                            productData: response[index],
+                          ),
+                        ),
+                      ),
+                    );
+                  } else {
+                    return Container();
+                  }
+                }),
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.03,
             ),

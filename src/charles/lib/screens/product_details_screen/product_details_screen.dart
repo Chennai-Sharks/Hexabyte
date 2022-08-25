@@ -149,16 +149,16 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  Text('Tags: ${((widget.productData!['tags'] ?? ['NA']).join() as String).titleCase}',
+                  Text('Tags: ${((widget.productData!['applicable_tags'] ?? ['NA']).join(', ') as String).titleCase}',
                       style: Theme.of(context).textTheme.bodyText1),
                   const SizedBox(height: 8),
                   const CustomDividerView(dividerHeight: 1.0),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      _buildVerticalStack(context, '4.1', 'Points'),
+                      _buildVerticalStack(context, '5.0', 'Points'),
                       _buildVerticalStack(context, '29 Kms', 'Distance'),
-                      _buildVerticalStack(context, 'Rs ${widget.productData!['cost_per_kg'] ?? 'N/A'}/-', 'Per Kg'),
+                      _buildVerticalStack(context, 'Rs ${widget.productData!['cost_per_kg'] ?? '200'}/-', 'Per Kg'),
                     ],
                   ),
                   const CustomDividerView(dividerHeight: 1.0),
@@ -185,7 +185,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(15, 15, 15, 25.0),
                     child: Text(
-                      widget.productData!['description'] ?? 'N/A',
+                      'Description: ' + (widget.productData!['description'] ?? 'N/A'),
                       style: GoogleFonts.montserrat(
                         fontSize: 18,
                       ),
