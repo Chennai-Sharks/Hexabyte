@@ -17,13 +17,13 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Size? size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: const Color(0xFFE9EFC0),
+      backgroundColor: Color(0xFFE9EFC0),
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(130),
         child: Container(
-          decoration: const BoxDecoration(
-              image: DecorationImage(
-                  fit: BoxFit.cover, image: AssetImage('assets/home_bg.png'))),
+          decoration: BoxDecoration(
+            color: const Color(0xFFE9EFC0),
+          ),
           child: Column(
             children: [
               const SizedBox(
@@ -46,7 +46,10 @@ class HomeScreen extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileScreen()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const ProfileScreen()));
                     },
                     child: CircleAvatar(
                       backgroundColor: Colors.white,
@@ -76,8 +79,9 @@ class HomeScreen extends StatelessWidget {
       ),
       body: Container(
         height: size.height,
-        decoration:
-            const BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/home_bg.png'))),
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                fit: BoxFit.cover, image: AssetImage('assets/home_bg.png'))),
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: Column(
@@ -95,7 +99,8 @@ class HomeScreen extends StatelessWidget {
               ),
               const HomeScreenCard(
                 color: Colors.orange,
-                imageUrl: "https://c.tenor.com/6kZnvYgHAMMAAAAC/wasted-house-parched.gif",
+                imageUrl:
+                    "https://c.tenor.com/6kZnvYgHAMMAAAAC/wasted-house-parched.gif",
                 descriptionText: "Products across the country",
                 sloganText: "Come let's purchase !!!",
                 buttonText: "EXPLORE QUICK BUY",
@@ -114,7 +119,8 @@ class HomeScreen extends StatelessWidget {
               ),
               const HomeScreenCard(
                 color: Colors.green,
-                imageUrl: "https://i.pinimg.com/originals/39/a0/51/39a0515d87ac9194c801e6104e9552f7.gif",
+                imageUrl:
+                    "https://i.pinimg.com/originals/39/a0/51/39a0515d87ac9194c801e6104e9552f7.gif",
                 descriptionText: "Products across the country",
                 sloganText: "Come let's purchase !!!",
                 buttonText: "EXPLORE COMBO BUY",
