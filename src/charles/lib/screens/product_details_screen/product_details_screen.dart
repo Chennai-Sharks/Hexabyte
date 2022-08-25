@@ -136,7 +136,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    widget.productData!['title'] ?? 'N/A',
+                    widget.productData!['food_waste_title'] ?? 'N/A',
                     style: GoogleFonts.montserrat(fontWeight: FontWeight.bold, fontSize: 18.0),
                   ),
                   const SizedBox(height: 8),
