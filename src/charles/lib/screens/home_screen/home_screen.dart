@@ -16,13 +16,10 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Size? size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Theme.of(context).primaryColor,
+      backgroundColor: const Color(0xFFE9EFC0),
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(130),
         child: Container(
-          decoration: const BoxDecoration(
-              image: DecorationImage(
-                  fit: BoxFit.cover, image: AssetImage('assets/home_bg.png'))),
           child: Column(
             children: [
               const SizedBox(

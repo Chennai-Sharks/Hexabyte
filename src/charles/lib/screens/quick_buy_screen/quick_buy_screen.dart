@@ -19,43 +19,63 @@ class QuickBuyScreen extends StatefulWidget {
 class _QuickBuyScreenState extends State<QuickBuyScreen> {
   @override
   Widget build(BuildContext context) {
+    Size? size = MediaQuery.of(context).size;
+    Color? color =const  Color(0xFFE9EFC0);
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color(0xFFE9EFC0),
-        elevation: 0,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'Quick Buy',
-              style: GoogleFonts.montserrat(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
+      backgroundColor: const Color(0xFFE9EFC0),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(130),
+        child: Container(
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 10,
               ),
-            ),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileScreen()));
-              },
-              child: CircleAvatar(
-                backgroundColor: Colors.white,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(40),
-                  child: const Icon(
-                    Icons.account_circle,
-                    color: Colors.black,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Image.asset(
+                    "assets/logo.png",
+                    height: 42,
+                  ),
+                  Text(
+                    'HexaByte',
+                    style: GoogleFonts.roboto(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const ProfileScreen()));
+                    },
+                    child: CircleAvatar(
+                      backgroundColor: Colors.white,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(50),
+                        child: const Icon(
+                          Icons.account_circle,
+                          color: Colors.black,
+                          size: 32,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              GestureDetector(
+                child: const SearchBar(),
+                onTap: () => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => SearchPage(),
                   ),
                 ),
               ),
-            ),
-          ],
-        ),
-        leading: Padding(
-          padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-          child: Image.asset(
-            "assets/logo.png",
-            height: 40,
+            ],
           ),
         ),
       ),
@@ -64,27 +84,20 @@ class _QuickBuyScreenState extends State<QuickBuyScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            GestureDetector(
-              child: const SearchBar(),
-              onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => SearchPage(),
+            Container(
+              color: Colors.white,
+              width: size.width,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(20, 20, 0, 20),
+                child: AutoSizeText(
+                  'Recommended for you',
+                  style: GoogleFonts.montserrat(
+                    color: Theme.of(context).secondaryHeaderColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
+                  textAlign: TextAlign.start,
                 ),
-              ),
-            ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.03,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20, bottom: 20),
-              child: AutoSizeText(
-                'Recommended for you',
-                style: GoogleFonts.montserrat(
-                  color: Theme.of(context).secondaryHeaderColor,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),
-                textAlign: TextAlign.start,
               ),
             ),
             Container(
@@ -110,19 +123,20 @@ class _QuickBuyScreenState extends State<QuickBuyScreen> {
                 ),
               ),
             ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.02,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20, bottom: 20),
-              child: AutoSizeText(
-                'All Items nearby',
-                style: GoogleFonts.montserrat(
-                  color: Theme.of(context).secondaryHeaderColor,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
+            Container(
+              width: size.width,
+              color: Colors.white,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 20, bottom: 20, top: 15),
+                child: AutoSizeText(
+                  'All Items nearby',
+                  style: GoogleFonts.montserrat(
+                    color: Theme.of(context).secondaryHeaderColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
+                  textAlign: TextAlign.start,
                 ),
-                textAlign: TextAlign.start,
               ),
             ),
             Container(
@@ -138,8 +152,9 @@ class _QuickBuyScreenState extends State<QuickBuyScreen> {
                 ),
               ),
             ),
-            SizedBox(
+            Container(
               height: MediaQuery.of(context).size.height * 0.03,
+              color : Colors.white,
             ),
           ],
         ),

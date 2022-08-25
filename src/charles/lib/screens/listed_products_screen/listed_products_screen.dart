@@ -17,8 +17,9 @@ class _ListedProductsScreenState extends State<ListedProductsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFE9EFC0),
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xFFE9EFC0),
         elevation: 0,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -63,7 +64,8 @@ class _ListedProductsScreenState extends State<ListedProductsScreen> {
                     },
                     child: ListView.builder(
                       itemCount: 10,
-                      itemBuilder: (BuildContext context, index) => ListedProductCard(),
+                      itemBuilder: (BuildContext context, index) =>
+                          ListedProductCard(),
                     ),
                   );
                 }

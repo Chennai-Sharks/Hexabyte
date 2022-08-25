@@ -34,37 +34,44 @@ class _CurationScreenState extends State<CurationScreen> {
     Size? size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: const Color(0xFFE9EFC0),
         elevation: 0,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        title: Column(
           children: [
-            Text(
-              'Combo Buys',
-              style: GoogleFonts.montserrat(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
-            ),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const ProfileScreen()));
-              },
-              child: CircleAvatar(
-                backgroundColor: Colors.white,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(40),
-                  child: const Icon(
-                    Icons.account_circle,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Combo Buys',
+                  style: GoogleFonts.montserrat(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
                     color: Colors.black,
                   ),
                 ),
-              ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const ProfileScreen()));
+                  },
+                  child: CircleAvatar(
+                    backgroundColor: Colors.white,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(40),
+                      child: const Icon(
+                        Icons.account_circle,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
+            SizedBox(
+              height: 10,
+            )
           ],
         ),
         leading: Padding(
@@ -75,112 +82,125 @@ class _CurationScreenState extends State<CurationScreen> {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: FormBuilder(
-          key: _formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              SizedBox(height: size.height * 0.05),
-              Padding(
-                padding: const EdgeInsets.all(9),
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: Colors.grey.shade200,
-                      borderRadius: BorderRadius.circular(20)),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Center(
-                      child: FormBuilderFilterChip(
-                        name: "preferences",
-                        spacing: 10,
-                        initialValue: const [],
-                        validator: (value) => value!.isEmpty
-                            ? 'This field cannot be empty.'
-                            : null,
-                        checkmarkColor: Colors.black,
-                        disabledColor: Colors.grey.shade100,
-                        crossAxisAlignment: WrapCrossAlignment.start,
-                        decoration: InputDecoration(
-                          labelText: "Pick any 3 out",
-                          border: InputBorder.none,
-                          labelStyle: GoogleFonts.montserrat(
-                            fontSize: 18,
-                            color: Colors.black,
+      body: Container(
+        height: size.height,
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                fit: BoxFit.cover,
+                image: AssetImage('assets/curation_bg.gif'))),
+        child: SingleChildScrollView(
+          child: FormBuilder(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(height: size.height * 0.05),
+                Padding(
+                  padding: const EdgeInsets.all(18),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Color(0xFFE9EFC0),
+                        borderRadius: BorderRadius.circular(20)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Center(
+                        child: FormBuilderFilterChip(
+                          name: "preferences",
+                          spacing: 10,
+                          initialValue: const [],
+                          validator: (value) => value!.isEmpty
+                              ? 'This field cannot be empty.'
+                              : null,
+                          checkmarkColor: Colors.black,
+                          disabledColor: Colors.grey.shade100,
+                          crossAxisAlignment: WrapCrossAlignment.start,
+                          decoration: InputDecoration(
+                            labelText: "Pick any 3 out",
+                            border: InputBorder.none,
+                            labelStyle: GoogleFonts.montserrat(
+                              fontSize: 23,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
-                        options: (preferenceList as List<String?>)
-                            .map(
-                              (eachItem) => FormBuilderFieldOption(
-                                key: Key(eachItem!),
-                                value: eachItem,
-                                child: Text(
-                                  eachItem.sentenceCase,
-                                  style: GoogleFonts.montserrat(
-                                      color: Colors.black),
+                          options: (preferenceList as List<String?>)
+                              .map(
+                                (eachItem) => FormBuilderFieldOption(
+                                  key: Key(eachItem!),
+                                  value: eachItem,
+                                  child: Text(
+                                    eachItem.sentenceCase,
+                                    style: GoogleFonts.montserrat(
+                                        color: Colors.black),
+                                  ),
                                 ),
-                              ),
-                            )
-                            .toList(),
+                              )
+                              .toList(),
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.5,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Utils.primaryColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
-                    elevation: 3,
-                  ),
-                  onPressed: () async {
-                    final navContext = Navigator.of(context);
-                    _formKey.currentState!.save();
-                    if (_formKey.currentState!.validate()) {
-                      // EasyLoading.show(status: 'Loading...');
-                      // final formValue = {..._formKey.currentState!.value};
-                      final List<dynamic> finalList =
-                          _formKey.currentState!.value['preferences'];
+                SizedBox(
+                  width: size.width * 0.8,
+                  height: size.height * 0.14,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(10, 50, 10, 10.0),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Utils.primaryColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
+                        elevation: 3,
+                      ),
+                      onPressed: () async {
+                        final navContext = Navigator.of(context);
+                        _formKey.currentState!.save();
+                        if (_formKey.currentState!.validate()) {
+                          // EasyLoading.show(status: 'Loading...');
+                          // final formValue = {..._formKey.currentState!.value};
+                          final List<dynamic> finalList =
+                              _formKey.currentState!.value['preferences'];
 
-                      if (finalList.length == 0) {
-                        EasyLoading.dismiss();
-                        Fluttertoast.showToast(
-                            msg: 'No products has been added!');
-                      } else if (finalList.length > 3) {
-                        EasyLoading.dismiss();
-                        Fluttertoast.showToast(
-                            msg:
-                                'Number of products must be less than or equal to 3 ... ');
-                      } else {
-                        for (int i = 0; i < finalList.length; i++) {
-                          print(finalList[i]);
+                          if (finalList.length == 0) {
+                            EasyLoading.dismiss();
+                            Fluttertoast.showToast(
+                                msg: 'No products has been added!');
+                          } else if (finalList.length > 3) {
+                            EasyLoading.dismiss();
+                            Fluttertoast.showToast(
+                                msg:
+                                    'Number of products must be less than or equal to 3 ... ');
+                          } else {
+                            for (int i = 0; i < finalList.length; i++) {
+                              print(finalList[i]);
+                            }
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => CurationProviderPage(
+                                        preferencesList:
+                                            finalList as dynamic)));
+                            Fluttertoast.showToast(
+                                msg: 'Fetching your preferences ...');
+                          }
+                        } else {
+                          Fluttertoast.showToast(msg: 'Validation Failed ...');
                         }
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => CurationProviderPage(
-                                    preferencesList: finalList as dynamic)));
-                        Fluttertoast.showToast(
-                            msg: 'Fetching your preferences ...');
-                      }
-                    } else {
-                      Fluttertoast.showToast(msg: 'Validation Failed ...');
-                    }
-                  },
-                  child: const Text(
-                    'Submit',
-                    style: TextStyle(
-                      fontSize: 15,
-                      color: Utils.white,
+                      },
+                      child: Text(
+                        'Submit',
+                        style: GoogleFonts.montserrat(
+                          fontSize: 20,
+                          color: Utils.white,
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

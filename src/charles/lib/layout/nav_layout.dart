@@ -10,7 +10,8 @@ import 'package:hexabyte/screens/quick_buy_screen/quick_buy_screen.dart';
 
 class NavigationLayout extends StatefulWidget {
   final bool isConsumer;
-  const NavigationLayout({Key? key, required this.isConsumer}) : super(key: key);
+  const NavigationLayout({Key? key, required this.isConsumer})
+      : super(key: key);
 
   @override
   NavigationLayoutState createState() => NavigationLayoutState();
@@ -65,8 +66,11 @@ class NavigationLayoutState extends State<NavigationLayout> {
                     icon: FaIcon(FontAwesomeIcons.home, size: 20),
                     label: "Home",
                   ),
-                  NavigationDestination(icon: FaIcon(FontAwesomeIcons.cartArrowDown, size: 20), label: 'Quick Buy'),
-                  NavigationDestination(icon: Icon(Icons.create, size: 20), label: 'Curation'),
+                  NavigationDestination(
+                      icon: FaIcon(FontAwesomeIcons.cartArrowDown, size: 20),
+                      label: 'Quick Buy'),
+                  NavigationDestination(
+                      icon: Icon(Icons.create, size: 20), label: 'Combo Buy'),
                 ]
               : const [
                   NavigationDestination(
@@ -77,7 +81,8 @@ class NavigationLayoutState extends State<NavigationLayout> {
                     ),
                     label: 'ListedProducts',
                   ),
-                  NavigationDestination(icon: Icon(Icons.add, size: 20), label: 'Add Product'),
+                  NavigationDestination(
+                      icon: Icon(Icons.add, size: 20), label: 'Add Product'),
                   NavigationDestination(
                     icon: FaIcon(
                       FontAwesomeIcons.userCircle,
