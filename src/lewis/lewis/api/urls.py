@@ -32,4 +32,5 @@ urlpatterns = [
     path('live_orders/<str:phone>/', next_views.live_orders),    
     path('profile_page/<str:phone>/', next_views.profile_page), 
     path('producer_items/<str:phone>/', next_views.producer_items),  
+    path('customer_orders/<str:phone>/', next_views.customer_orders),  
 ]
