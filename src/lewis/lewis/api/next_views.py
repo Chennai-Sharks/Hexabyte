@@ -6,7 +6,7 @@ from pprint import pprint
 # from textwrap import indent
 from django.http import HttpResponse, JsonResponse
 from lewis.api.utils import  bytes_to_json # ,get_db_handle,
-from lewis.api.schemas import consumerMetadataSerializer , producerMetadataSerializer,  OrderDataSerializer ,UserRatingSerializer
+from lewis.api.schemas import  OrderDataSerializer ,UserRatingSerializer
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view
 from lewis.settings import db
@@ -73,6 +73,57 @@ def live_orders(request,phone):
             "status": "Success",
             "message": "Fetched search results",
             "data": final_result
+        }, status = 200)
+    else:
+        return JsonResponse({
+            "status": "Failure",
+            "message": "Couldn't fetch search results",            
+        }, status = 400)
+
+@api_view(['GET'])
+@csrf_exempt
+def profile_page(request,phone):
+    results = db.metadata.find_one({"phone":phone})
+    if results is not None:                           
+        data_cursor = json.loads(json_util.dumps(results))
+        return JsonResponse({
+            "status": "Success",
+            "message": "Fetched search results",
+            "data": data_cursor
+        }, status = 200)
+    else:
+        return JsonResponse({
+            "status": "Failure",
+            "message": "Couldn't fetch search results",            
+        }, status = 400)
+
+@api_view(['GET'])
+@csrf_exempt
+def producer_items(request,phone):
+    results = db.Items.find({"producer_id":phone})
+    if results is not None:                           
+        data_cursor = json.loads(json_util.dumps(results))
+        return JsonResponse({
+            "status": "Success",
+            "message": "Fetched search results",
+            "data": data_cursor
+        }, status = 200)
+    else:
+        return JsonResponse({
+            "status": "Failure",
+            "message": "Couldn't fetch search results",            
+        }, status = 400)
+
+@api_view(['GET'])
+@csrf_exempt
+def customer_orders(request,phone):
+    results = db.Orders.find({"customer_id":phone})
+    if results is not None:                           
+        data_cursor = json.loads(json_util.dumps(results))
+        return JsonResponse({
+            "status": "Success",
+            "message": "Fetched search results",
+            "data": data_cursor
         }, status = 200)
     else:
         return JsonResponse({
