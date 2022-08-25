@@ -12,18 +12,26 @@ class MetadataSerializer(serializers.Serializer):
 
 class ItemDataSerializer(serializers.Serializer):
     producer_id = serializers.CharField()
-    location = serializers.ListField(child = serializers.FloatField(), allow_empty = False,  min_length=2, max_length=2)
-    business = serializers.CharField()
+    location = serializers.ListField(child = serializers.FloatField(), allow_empty = False,  min_length=2, max_length=2,required=False)
+    business = serializers.CharField(required=False)
     title = serializers.CharField()
     tags = serializers.ListField(child = serializers.CharField())
     duration = serializers.IntegerField()
     description = serializers.CharField()
     total_qty = serializers.IntegerField()
+    cost_per_kg = serializers.IntegerField()
     subscribed_qty = serializers.IntegerField(required=False)
     available_qty =  serializers.IntegerField(required=False)
 
 class OrderDataSerializer(serializers.Serializer):
     customer_id  = serializers.CharField()
-    item_id = serializers.CharField()
+    item_id = serializers.JSONField()
     duration = serializers.IntegerField()
     subscribed_qty = serializers.IntegerField()
+    cost_per_kg = serializers.IntegerField()
+    one_time = serializers.BooleanField()
+
+class UserRatingSerializer(serializers.Serializer):
+    customer_id  = serializers.CharField()
+    item_id = serializers.JSONField()
+    rating = serializers.IntegerField()

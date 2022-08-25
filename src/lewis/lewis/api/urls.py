@@ -23,4 +23,7 @@ urlpatterns = [
     path('item_addition/', item_views.item_addition),
     path('item_get/<str:id>/',item_views.item_get),
     path('item_edit/<str:id>/',item_views.item_edit),
+    path('purchase_item/',views.purchase_item),
+    path('item_rating/',views.item_rating),
+    path('recomm/<str:phone>/',views.recomm),    
 ]

@@ -19,13 +19,22 @@ def item_addition(request):
         data = bytes_to_json(data_)
         serializer = ItemDataSerializer(data = data)
         if serializer.is_valid():
-            data["subscribed_qty"]=0
-            data["balance_qty"]=data["total_qty"]
-            result = db.Items.insert_one(data)
-            return JsonResponse({
-                "status": "Success",
-                "message": "Data stored successfully"
-            }, status = 200)
+            user_data = db.metadata.find_one({"phone": data['producer_id']})        
+            if user_data is None:
+                return JsonResponse({
+                    "status": "Failure",
+                    "message": "No such User"
+                }, status = 400)
+            else:
+                data['business']=user_data['business']
+                data['location']=user_data['location']
+                data["subscribed_qty"]=0
+                data["balance_qty"]=data["total_qty"]
+                result = db.Items.insert_one(data)
+                return JsonResponse({
+                    "status": "Success",
+                    "message": "Data stored successfully"
+                }, status = 200)
         else:
             return JsonResponse({
                 "status": "Failure",
