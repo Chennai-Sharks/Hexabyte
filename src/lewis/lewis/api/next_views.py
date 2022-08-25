@@ -79,3 +79,37 @@ def live_orders(request,phone):
             "status": "Failure",
             "message": "Couldn't fetch search results",            
         }, status = 400)
+
+@api_view(['GET'])
+@csrf_exempt
+def profile_page(request,phone):
+    results = db.metadata.find_one({"phone":phone})
+    if results is not None:                           
+        data_cursor = json.loads(json_util.dumps(results))
+        return JsonResponse({
+            "status": "Success",
+            "message": "Fetched search results",
+            "data": data_cursor
+        }, status = 200)
+    else:
+        return JsonResponse({
+            "status": "Failure",
+            "message": "Couldn't fetch search results",            
+        }, status = 400)
+
+@api_view(['GET'])
+@csrf_exempt
+def producer_items(request,phone):
+    results = db.Items.find({"producer_id":phone})
+    if results is not None:                           
+        data_cursor = json.loads(json_util.dumps(results))
+        return JsonResponse({
+            "status": "Success",
+            "message": "Fetched search results",
+            "data": data_cursor
+        }, status = 200)
+    else:
+        return JsonResponse({
+            "status": "Failure",
+            "message": "Couldn't fetch search results",            
+        }, status = 400)
