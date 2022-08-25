@@ -1,7 +1,7 @@
 from logging import log
 from django.http import HttpResponse, JsonResponse
 from lewis.api.utils import  bytes_to_json 
-from lewis.api.schemas import MetadataSerializer , ItemDataSerializer
+from lewis.api.schemas import ItemDataSerializer
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view
 from lewis.settings import db

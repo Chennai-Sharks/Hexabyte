@@ -55,17 +55,18 @@ def product_search(request):
                                     ]})
     if data_cursor is not None:                           
         data_cursor = json.loads(json_util.dumps(data_cursor))
-    return JsonResponse({
-        "status": "Success",
-        "message": "Fetched search results",
-        "data": data_cursor
-    }, status = 200)
-    # else:
-    #     return JsonResponse({
-    #         "status": "Failure",
-    #         "message": "Cannot perform the requested search"
-    #     }, status = 400)
-
+        return JsonResponse({
+            "status": "Success",
+            "message": "Fetched search results",
+            "data": data_cursor
+        }, status = 200)
+    else:
+        return JsonResponse({
+            "status": "Failure",
+            "message": "Couldn't fetch search results",            
+        }, status = 400)
+    
+    
 @api_view(['GET'])
 @csrf_exempt
 def combo_buy(request):
@@ -158,7 +159,6 @@ def purchase_item(request):
             
             order_result = db.Orders.insert_one(data)
             
-
             return JsonResponse({
                 "status": "Success",
                 "message": "Data stored successfully"
@@ -170,6 +170,17 @@ def purchase_item(request):
             }, status = 400)
     except Exception as e:
         print(e)    
+
+@api_view(['GET'])
+@csrf_exempt
+def producer_manage_orders(request):
+    data_ = request.body
+    data = bytes_to_json(data_)
+    phone = data['phone'] 
+    item_data_cursor = db.Orders.find({"producer_id": phone})  
+    if item_data_cursor is not None:                           
+        item_data = json.loads(json_util.dumps(item_data_cursor))
+
 
 @api_view(['POST'])
 @csrf_exempt
