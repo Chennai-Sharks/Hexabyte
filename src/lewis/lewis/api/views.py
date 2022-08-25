@@ -31,13 +31,14 @@ def product_search(request):
         # search_results = search_object.product_search()                    
     metadata = db.metadata.find_one({"phone": data["phone"]})
     location = metadata["location"]
+    print(data)
     if data["tags"] == []:
         data_cursor = db.Items.find({"$and":[
                                         {"location": {"$near": location}},
-                                        # {"tags":{'$in':data["tags"]}},
+                                        # {"applicable_tags":{'$in':data["tags"]}},
                                         {
                                             "$or":[
-                                                {"title":{'$regex':data["query"],"$options":"i"}},
+                                                {"food_waste_title":{'$regex':data["query"],"$options":"i"}},
                                                 {"description":{'$regex':data["query"],"$options":"i"}}
                                             ]
                                         }
@@ -45,10 +46,10 @@ def product_search(request):
     else:
         data_cursor = db.Items.find({"$and":[
                                         {"location": {"$near": location}},
-                                        {"tags":{'$in':data["tags"]}},
+                                        {"applicable_tags":{'$in':data["tags"]}},
                                         {
                                             "$or":[
-                                                {"title":{'$regex':data["query"],"$options":"i"}},
+                                                {"food_waste_title":{'$regex':data["query"],"$options":"i"}},
                                                 {"description":{'$regex':data["query"],"$options":"i"}}
                                             ]
                                         }
@@ -65,7 +66,35 @@ def product_search(request):
             "status": "Failure",
             "message": "Couldn't fetch search results",            
         }, status = 400)
+
     
+@api_view(['GET'])
+@csrf_exempt
+def nearest(request,phone):
+    metadata = db.metadata.find_one({"phone": phone})
+    location = metadata["location"]
+    data_cursor = db.Items.find(
+                                            {"location": {"$near": location}}
+                                            # {"applicable_tags":{'$in':data["tags"]}},
+                                            # {
+                                            #     "$or":[
+                                            #         {"food_waste_title":{'$regex':data["query"],"$options":"i"}},
+                                            #         {"description":{'$regex':data["query"],"$options":"i"}}
+                                            #     ]
+                                            # }
+                                        )
+    if data_cursor is not None:                           
+        data_cursor = json.loads(json_util.dumps(data_cursor[:10]))
+        return JsonResponse({
+            "status": "Success",
+            "message": "Fetched search results",
+            "data": data_cursor
+        }, status = 200)
+    else:
+        return JsonResponse({
+            "status": "Failure",
+            "message": "Couldn't fetch search results",            
+        }, status = 400)
     
 @api_view(['GET'])
 @csrf_exempt
@@ -252,8 +281,17 @@ def recomm(request,phone):
         resul=[]
         for oid in results:
             resul.append(ObjectId(oid))
+        print(resul)
         final_result = db.Items.find({'_id':{'$in':resul}})
-        print(type(final_result))
-        return HttpResponse(final_result)
+        result_arr=[]
+        for i in final_result:
+            # result_arr.append(i)
+            print(i)
+        return JsonResponse({
+                    "status": "Success",
+                    "message": "Data stored successfully",
+                    # "data":json.loads(json_util.dumps(final_result))
+                }, status = 200)
+        # return HttpResponse(result_arr)
     # except Exception as e:
     #     print(e)
