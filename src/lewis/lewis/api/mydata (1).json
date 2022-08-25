@@ -1,0 +1,527 @@
+[
+    {
+        "user_id": "1111100000",
+        "item_id": { "$oid": "6306569246fca77cacb91c26" },
+        "rating": 2.0
+    },
+    {
+        "user_id": "1111100000",
+        "item_id": { "$oid": "6307168546fca77cacb91cc7" },
+        "rating": 2.0
+    },
+    {
+        "user_id": "1111100000",
+        "item_id": { "$oid": "6307168546fca77cacb91cc8" },
+        "rating": 8.0
+    },
+    {
+        "user_id": "1111100000",
+        "item_id": { "$oid": "6307168546fca77cacb91cc9" },
+        "rating": 0.0
+    },
+    {
+        "user_id": "1111100000",
+        "item_id": { "$oid": "6307168546fca77cacb91cca" },
+        "rating": 10.0
+    },
+    {
+        "user_id": "1111100000",
+        "item_id": { "$oid": "6307168546fca77cacb91ccb" },
+        "rating": 3.0
+    },
+    {
+        "user_id": "1111100000",
+        "item_id": { "$oid": "6307168546fca77cacb91ccc" },
+        "rating": 0.0
+    },
+    {
+        "user_id": "1111100000",
+        "item_id": { "$oid": "6307168546fca77cacb91ccd" },
+        "rating": 0.0
+    },
+    {
+        "user_id": "1111100000",
+        "item_id": { "$oid": "6307168546fca77cacb91cce" },
+        "rating": 0.0
+    },
+    {
+        "user_id": "1111100000",
+        "item_id": { "$oid": "6307168546fca77cacb91ccf" },
+        "rating": 1.0
+    },
+    {
+        "user_id": "1111100000",
+        "item_id": { "$oid": "6307168546fca77cacb91cd0" },
+        "rating": 0.0
+    },
+    {
+        "user_id": "1111100000",
+        "item_id": { "$oid": "6307168546fca77cacb91cd1" },
+        "rating": 0.0
+    },
+    {
+        "user_id": "1111100000",
+        "item_id": { "$oid": "6307168546fca77cacb91cd2" },
+        "rating": 9.0
+    },
+    {
+        "user_id": "1111100000",
+        "item_id": { "$oid": "6307168546fca77cacb91cd3" },
+        "rating": 0.0
+    },
+    {
+        "user_id": "1111100000",
+        "item_id": { "$oid": "6307168546fca77cacb91cd4" },
+        "rating": 9.0
+    },
+    {
+        "user_id": "2222200000",
+        "item_id": { "$oid": "6306569246fca77cacb91c26" },
+        "rating": 2.0
+    },
+    {
+        "user_id": "2222200000",
+        "item_id": { "$oid": "6307168546fca77cacb91cc7" },
+        "rating": 1.0
+    },
+    {
+        "user_id": "2222200000",
+        "item_id": { "$oid": "6307168546fca77cacb91cc8" },
+        "rating": 9.0
+    },
+    {
+        "user_id": "2222200000",
+        "item_id": { "$oid": "6307168546fca77cacb91cc9" },
+        "rating": 8.0
+    },
+    {
+        "user_id": "2222200000",
+        "item_id": { "$oid": "6307168546fca77cacb91cca" },
+        "rating": 0.0
+    },
+    {
+        "user_id": "2222200000",
+        "item_id": { "$oid": "6307168546fca77cacb91ccb" },
+        "rating": 2.0
+    },
+    {
+        "user_id": "2222200000",
+        "item_id": { "$oid": "6307168546fca77cacb91ccc" },
+        "rating": 2.0
+    },
+    {
+        "user_id": "2222200000",
+        "item_id": { "$oid": "6307168546fca77cacb91ccd" },
+        "rating": 1.0
+    },
+    {
+        "user_id": "2222200000",
+        "item_id": { "$oid": "6307168546fca77cacb91cce" },
+        "rating": 2.0
+    },
+    {
+        "user_id": "2222200000",
+        "item_id": { "$oid": "6307168546fca77cacb91ccf" },
+        "rating": 0.0
+    },
+    {
+        "user_id": "2222200000",
+        "item_id": { "$oid": "6307168546fca77cacb91cd0" },
+        "rating": 2.0
+    },
+    {
+        "user_id": "2222200000",
+        "item_id": { "$oid": "6307168546fca77cacb91cd1" },
+        "rating": 1.0
+    },
+    {
+        "user_id": "2222200000",
+        "item_id": { "$oid": "6307168546fca77cacb91cd2" },
+        "rating": 9.0
+    },
+    {
+        "user_id": "2222200000",
+        "item_id": { "$oid": "6307168546fca77cacb91cd3" },
+        "rating": 0.0
+    },
+    {
+        "user_id": "2222200000",
+        "item_id": { "$oid": "6307168546fca77cacb91cd4" },
+        "rating": 8.0
+    },
+    {
+        "user_id": "3333300000",
+        "item_id": { "$oid": "6306569246fca77cacb91c26" },
+        "rating": 0.0
+    },
+    {
+        "user_id": "3333300000",
+        "item_id": { "$oid": "6307168546fca77cacb91cc7" },
+        "rating": 2.0
+    },
+    {
+        "user_id": "3333300000",
+        "item_id": { "$oid": "6307168546fca77cacb91cc8" },
+        "rating": 9.0
+    },
+    {
+        "user_id": "3333300000",
+        "item_id": { "$oid": "6307168546fca77cacb91cc9" },
+        "rating": 10.0
+    },
+    {
+        "user_id": "3333300000",
+        "item_id": { "$oid": "6307168546fca77cacb91cca" },
+        "rating": 9.0
+    },
+    {
+        "user_id": "3333300000",
+        "item_id": { "$oid": "6307168546fca77cacb91ccb" },
+        "rating": 1.0
+    },
+    {
+        "user_id": "3333300000",
+        "item_id": { "$oid": "6307168546fca77cacb91ccc" },
+        "rating": 0.0
+    },
+    {
+        "user_id": "3333300000",
+        "item_id": { "$oid": "6307168546fca77cacb91ccd" },
+        "rating": 0.0
+    },
+    {
+        "user_id": "3333300000",
+        "item_id": { "$oid": "6307168546fca77cacb91cce" },
+        "rating": 1.0
+    },
+    {
+        "user_id": "3333300000",
+        "item_id": { "$oid": "6307168546fca77cacb91ccf" },
+        "rating": 0.0
+    },
+    {
+        "user_id": "3333300000",
+        "item_id": { "$oid": "6307168546fca77cacb91cd0" },
+        "rating": 1.0
+    },
+    {
+        "user_id": "3333300000",
+        "item_id": { "$oid": "6307168546fca77cacb91cd1" },
+        "rating": 2.0
+    },
+    {
+        "user_id": "3333300000",
+        "item_id": { "$oid": "6307168546fca77cacb91cd2" },
+        "rating": 8.0
+    },
+    {
+        "user_id": "3333300000",
+        "item_id": { "$oid": "6307168546fca77cacb91cd3" },
+        "rating": 2.0
+    },
+    {
+        "user_id": "3333300000",
+        "item_id": { "$oid": "6307168546fca77cacb91cd4" },
+        "rating": 7.0
+    },
+    {
+        "user_id": "4444400000",
+        "item_id": { "$oid": "6306569246fca77cacb91c26" },
+        "rating": 3.0
+    },
+    {
+        "user_id": "4444400000",
+        "item_id": { "$oid": "6307168546fca77cacb91cc7" },
+        "rating": 0.0
+    },
+    {
+        "user_id": "4444400000",
+        "item_id": { "$oid": "6307168546fca77cacb91cc8" },
+        "rating": 2.0
+    },
+    {
+        "user_id": "4444400000",
+        "item_id": { "$oid": "6307168546fca77cacb91cc9" },
+        "rating": 1.0
+    },
+    {
+        "user_id": "4444400000",
+        "item_id": { "$oid": "6307168546fca77cacb91cca" },
+        "rating": 3.0
+    },
+    {
+        "user_id": "4444400000",
+        "item_id": { "$oid": "6307168546fca77cacb91ccb" },
+        "rating": 9.0
+    },
+    {
+        "user_id": "4444400000",
+        "item_id": { "$oid": "6307168546fca77cacb91ccc" },
+        "rating": 8.0
+    },
+    {
+        "user_id": "4444400000",
+        "item_id": { "$oid": "6307168546fca77cacb91ccd" },
+        "rating": 2.0
+    },
+    {
+        "user_id": "4444400000",
+        "item_id": { "$oid": "6307168546fca77cacb91cce" },
+        "rating": 10.0
+    },
+    {
+        "user_id": "4444400000",
+        "item_id": { "$oid": "6307168546fca77cacb91ccf" },
+        "rating": 0.0
+    },
+    {
+        "user_id": "4444400000",
+        "item_id": { "$oid": "6307168546fca77cacb91cd0" },
+        "rating": 3.0
+    },
+    {
+        "user_id": "4444400000",
+        "item_id": { "$oid": "6307168546fca77cacb91cd1" },
+        "rating": 10.0
+    },
+    {
+        "user_id": "4444400000",
+        "item_id": { "$oid": "6307168546fca77cacb91cd2" },
+        "rating": 0.0
+    },
+    {
+        "user_id": "4444400000",
+        "item_id": { "$oid": "6307168546fca77cacb91cd3" },
+        "rating": 1.0
+    },
+    {
+        "user_id": "4444400000",
+        "item_id": { "$oid": "6307168546fca77cacb91cd4" },
+        "rating": 2.0
+    },
+    {
+        "user_id": "5555500000",
+        "item_id": { "$oid": "6306569246fca77cacb91c26" },
+        "rating": 2.0
+    },
+    {
+        "user_id": "5555500000",
+        "item_id": { "$oid": "6307168546fca77cacb91cc7" },
+        "rating": 3.0
+    },
+    {
+        "user_id": "5555500000",
+        "item_id": { "$oid": "6307168546fca77cacb91cc8" },
+        "rating": 0.0
+    },
+    {
+        "user_id": "5555500000",
+        "item_id": { "$oid": "6307168546fca77cacb91cc9" },
+        "rating": 3.0
+    },
+    {
+        "user_id": "5555500000",
+        "item_id": { "$oid": "6307168546fca77cacb91cca" },
+        "rating": 1.0
+    },
+    {
+        "user_id": "5555500000",
+        "item_id": { "$oid": "6307168546fca77cacb91ccb" },
+        "rating": 8.0
+    },
+    {
+        "user_id": "5555500000",
+        "item_id": { "$oid": "6307168546fca77cacb91ccc" },
+        "rating": 8.0
+    },
+    {
+        "user_id": "5555500000",
+        "item_id": { "$oid": "6307168546fca77cacb91ccd" },
+        "rating": 3.0
+    },
+    {
+        "user_id": "5555500000",
+        "item_id": { "$oid": "6307168546fca77cacb91cce" },
+        "rating": 8.0
+    },
+    {
+        "user_id": "5555500000",
+        "item_id": { "$oid": "6307168546fca77cacb91ccf" },
+        "rating": 8.0
+    },
+    {
+        "user_id": "5555500000",
+        "item_id": { "$oid": "6307168546fca77cacb91cd0" },
+        "rating": 2.0
+    },
+    {
+        "user_id": "5555500000",
+        "item_id": { "$oid": "6307168546fca77cacb91cd1" },
+        "rating": 9.0
+    },
+    {
+        "user_id": "5555500000",
+        "item_id": { "$oid": "6307168546fca77cacb91cd2" },
+        "rating": 0.0
+    },
+    {
+        "user_id": "5555500000",
+        "item_id": { "$oid": "6307168546fca77cacb91cd3" },
+        "rating": 1.0
+    },
+    {
+        "user_id": "5555500000",
+        "item_id": { "$oid": "6307168546fca77cacb91cd4" },
+        "rating": 0.0
+    },
+    {
+        "user_id": "6666600000",
+        "item_id": { "$oid": "6306569246fca77cacb91c26" },
+        "rating": 0.0
+    },
+    {
+        "user_id": "6666600000",
+        "item_id": { "$oid": "6307168546fca77cacb91cc7" },
+        "rating": 2.0
+    },
+    {
+        "user_id": "6666600000",
+        "item_id": { "$oid": "6307168546fca77cacb91cc8" },
+        "rating": 0.0
+    },
+    {
+        "user_id": "6666600000",
+        "item_id": { "$oid": "6307168546fca77cacb91cc9" },
+        "rating": 2.0
+    },
+    {
+        "user_id": "6666600000",
+        "item_id": { "$oid": "6307168546fca77cacb91cca" },
+        "rating": 2.0
+    },
+    {
+        "user_id": "6666600000",
+        "item_id": { "$oid": "6307168546fca77cacb91ccb" },
+        "rating": 9.0
+    },
+    {
+        "user_id": "6666600000",
+        "item_id": { "$oid": "6307168546fca77cacb91ccc" },
+        "rating": 10.0
+    },
+    {
+        "user_id": "6666600000",
+        "item_id": { "$oid": "6307168546fca77cacb91ccd" },
+        "rating": 1.0
+    },
+    {
+        "user_id": "6666600000",
+        "item_id": { "$oid": "6307168546fca77cacb91cce" },
+        "rating": 9.0
+    },
+    {
+        "user_id": "6666600000",
+        "item_id": { "$oid": "6307168546fca77cacb91ccf" },
+        "rating": 9.0
+    },
+    {
+        "user_id": "6666600000",
+        "item_id": { "$oid": "6307168546fca77cacb91cd0" },
+        "rating": 0.0
+    },
+    {
+        "user_id": "6666600000",
+        "item_id": { "$oid": "6307168546fca77cacb91cd1" },
+        "rating": 9.0
+    },
+    {
+        "user_id": "6666600000",
+        "item_id": { "$oid": "6307168546fca77cacb91cd2" },
+        "rating": 2.0
+    },
+    {
+        "user_id": "6666600000",
+        "item_id": { "$oid": "6307168546fca77cacb91cd3" },
+        "rating": 0.0
+    },
+    {
+        "user_id": "6666600000",
+        "item_id": { "$oid": "6307168546fca77cacb91cd4" },
+        "rating": 2.0
+    },
+    {
+        "user_id": "7777700000",
+        "item_id": { "$oid": "6306569246fca77cacb91c26" },
+        "rating": 1.0
+    },
+    {
+        "user_id": "7777700000",
+        "item_id": { "$oid": "6307168546fca77cacb91cc7" },
+        "rating": 2.0
+    },
+    {
+        "user_id": "7777700000",
+        "item_id": { "$oid": "6307168546fca77cacb91cc8" },
+        "rating": 2.0
+    },
+    {
+        "user_id": "7777700000",
+        "item_id": { "$oid": "6307168546fca77cacb91cc9" },
+        "rating": 2.0
+    },
+    {
+        "user_id": "7777700000",
+        "item_id": { "$oid": "6307168546fca77cacb91cca" },
+        "rating": 2.0
+    },
+    {
+        "user_id": "7777700000",
+        "item_id": { "$oid": "6307168546fca77cacb91ccb" },
+        "rating": 0.0
+    },
+    {
+        "user_id": "7777700000",
+        "item_id": { "$oid": "6307168546fca77cacb91ccc" },
+        "rating": 8.0
+    },
+    {
+        "user_id": "7777700000",
+        "item_id": { "$oid": "6307168546fca77cacb91ccd" },
+        "rating": 2.0
+    },
+    {
+        "user_id": "7777700000",
+        "item_id": { "$oid": "6307168546fca77cacb91cce" },
+        "rating": 9.0
+    },
+    {
+        "user_id": "7777700000",
+        "item_id": { "$oid": "6307168546fca77cacb91ccf" },
+        "rating": 0.0
+    },
+    {
+        "user_id": "7777700000",
+        "item_id": { "$oid": "6307168546fca77cacb91cd0" },
+        "rating": 1.0
+    },
+    {
+        "user_id": "7777700000",
+        "item_id": { "$oid": "6307168546fca77cacb91cd1" },
+        "rating": 0.0
+    },
+    {
+        "user_id": "7777700000",
+        "item_id": { "$oid": "6307168546fca77cacb91cd2" },
+        "rating": 1.0
+    },
+    {
+        "user_id": "7777700000",
+        "item_id": { "$oid": "6307168546fca77cacb91cd3" },
+        "rating": 2.0
+    },
+    {
+        "user_id": "7777700000",
+        "item_id": { "$oid": "6307168546fca77cacb91cd4" },
+        "rating": 2.0
+    }
+]

@@ -1,0 +1,16 @@
+phone,location,business,food_waste_title,applicable_tags,description,amount_processed,subscribed_qty,balance_qty
+1111111111,"[28.6138954,77.2090057]",restaurant_caterers,Rice,"['food_waste','organic_waste']",,430,253,177
+2222222222,"[27.1752554,78.0098161]",restaurant_caterers,Rice,"['food_waste','organic_waste']",,422,267,155
+3333333333,"[26.9154576,75.8189817]",juice_factory,Orange Peels and Pulps,"['fruit_pulp','fruit_peels','organic_waste']",,371,279,92
+4444444444,"[19.0785451,72.878176]",juice_factory,Dried Apple Peels,"['fruit_pulp','fruit_peels','organic_waste']",,418,253,165
+5555555555,"[18.521428,73.8544541]",farmers_agriculture,Fruits and Vegetables,"['fruit_pulp','fruit_peels','vegetable_peels','organic_waste']",,388,255,133
+6666666666,"[20.0112475,73.7902364]",restaurant_caterers,Bread and Cakes,"['sugary_starchy_waste','fatty_foodwaste','organic_waste']",,531,252,279
+7777777777,"[12.9767936,77.590082]",juice_factory,Sugarcane Bagasse,"['sugary_starchy_waste','organic_waste']",,471,269,202
+8888888888,"[12.7328844,77.8309478]",restaurant_caterers,Cooking Oil,"['edible_oilwaste','fatty_foodwaste']",,424,325,99
+9999999999,"[12.3051828,76.6553609]",farmers_agriculture,Wheat Straws,"['sugary_starchy_waste','organic_waste']",,542,299,243
+1000000000,"[11.4126769,76.7030504]",restaurant_caterers,Cake Cream,"['sugary_starchy_waste','fatty_foodwaste','organic_waste']",,407,299,108
+1100000000,"[13.0836939,80.270186]",juice_factory,Mango Seeds,"['fruit_seeds','organic_waste']",,457,288,169
+1200000000,"[12.8796051,79.7042762]",farmers_agriculture,Corn Stover,"['sugary_starchy_waste','organic_waste']",,380,349,31
+1300000000,"[11.9340568,79.8306447]",juice_factory,Orange Peels and Pulps,"['fruit_pulp','fruit_peels','organic_waste']",,470,250,220
+1400000000,"[8.4882267,76.947551]",farmers_agriculture,Waste Pulses,"['food_waste','organic_waste']",,356,329,27
+1500000000,"[9.3181018,76.3809006]",juice_factory,Citrus Peels,"['fruit_peels','organic_waste']",,439,339,100
