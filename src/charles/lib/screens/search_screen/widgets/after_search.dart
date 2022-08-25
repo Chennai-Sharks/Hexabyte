@@ -2,9 +2,8 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
-import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hexabyte/screens/search_screen/api/Search_api.dart';
+import 'package:hexabyte/screens/search_screen/api/search_api.dart';
 import 'package:hexabyte/screens/search_screen/widgets/after_search_card.dart';
 import 'package:hexabyte/screens/search_screen/widgets/map.dart';
 
@@ -31,8 +30,6 @@ class _AfterSearchState extends State<AfterSearch> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // const SizedBox(height: 200, width: 200, child: MapWidget()),
-              // Flexible(child: MapWidget()),
               SizedBox(height: MediaQuery.of(context).size.height * 0.06),
               Container(
                 padding: const EdgeInsets.only(left: 15.0, top: 2.0, bottom: 2.0),
@@ -111,6 +108,29 @@ class _AfterSearchState extends State<AfterSearch> {
                 height: height * 0.02,
               ),
               FutureBuilder(
+                future: SearchApi.productSearch(searchText: widget.searchController.text, isMap: true),
+                builder: ((context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    print(snapshot.data);
+                    final response = snapshot.data as List<dynamic>;
+                    print('here');
+                    print(response[1]);
+                    return SizedBox(
+                      height: 300,
+                      width: MediaQuery.of(context).size.width,
+                      child: MapWidget(
+                        myLocation: response[0]['my-location'],
+                        prodData: response[1],
+                      ),
+                    );
+                  }
+                  return const Center(child: Text('Loading...'));
+                }),
+              ),
+              SizedBox(
+                height: height * 0.02,
+              ),
+              FutureBuilder(
                 future: SearchApi.productSearch(searchText: widget.searchController.text),
                 builder: ((context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
@@ -137,11 +157,6 @@ class _AfterSearchState extends State<AfterSearch> {
                   return const Center(child: Text('Loading...'));
                 }),
               ),
-              // const AfterSearchCard(),
-              // const AfterSearchCard(),
-              // const AfterSearchCard(),
-              // const AfterSearchCard(),
-              // const AfterSearchCard(),
               SizedBox(
                 height: height * 0.06,
               ),
