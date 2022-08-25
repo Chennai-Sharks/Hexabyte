@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-
 import 'package:google_fonts/google_fonts.dart';
+
+import '../profile_screen/profile_screen.dart';
 
 class CurationScreen extends StatefulWidget {
   const CurationScreen({Key? key}) : super(key: key);
@@ -27,13 +28,21 @@ class _CurationScreenState extends State<CurationScreen> {
                 color: Colors.black,
               ),
             ),
-            CircleAvatar(
-              backgroundColor: Colors.white,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(40),
-                child: const Icon(
-                  Icons.account_circle,
-                  color: Colors.black,
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ProfileScreen()));
+              },
+              child: CircleAvatar(
+                backgroundColor: Colors.white,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(40),
+                  child: const Icon(
+                    Icons.account_circle,
+                    color: Colors.black,
+                  ),
                 ),
               ),
             ),

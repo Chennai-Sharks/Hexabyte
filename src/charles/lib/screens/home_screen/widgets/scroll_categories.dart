@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ScrollableCategories extends StatelessWidget {
@@ -79,8 +78,8 @@ class ScrollableCategories extends StatelessWidget {
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(top: 4.0),
-                              child: SvgPicture.asset(categoriesImg[index]!,
-                                  width: 100, height: 50),
+                              child: Image.asset(categoriesImg[index]!,
+                                  fit: BoxFit.cover, width: 100, height: 50),
                             ),
                             Padding(
                               padding: const EdgeInsets.only(
@@ -92,7 +91,7 @@ class ScrollableCategories extends StatelessWidget {
                                   style: GoogleFonts.mukta(
                                       color: Theme.of(context)
                                           .secondaryHeaderColor,
-                                      fontSize: 13,
+                                      fontSize: 15,
                                       fontWeight: FontWeight.bold),
                                 ),
                               ),
@@ -111,20 +110,21 @@ class ScrollableCategories extends StatelessWidget {
 }
 
 List<String?> categories = [
-  "Clothing",
+  "Combo Buys",
   "Fancy Dresses",
   'Shoes',
 ];
 
 List<String?> categoriesImg = [
-  "assets/clothes.svg",
-  "assets/fancy.svg",
-  'assets/shoe.svg',
+  "assets/combo_buy.jpeg",
+  "assets/combo_buy.jpeg",
+  "assets/combo_buy.jpeg",
 ];
 
-List<String?> secondCategories = ["Jewelry", 'Sunglasses'];
+List<String?> secondCategories = ["Jewelry", 'Sunglasses', "Others"];
 
 List<String?> secondCategoriesImg = [
-  "assets/jewelry.svg",
-  'assets/sunglass.svg'
+  "assets/combo_buy.jpeg",
+  "assets/combo_buy.jpeg",
+  "assets/combo_buy.jpeg",
 ];

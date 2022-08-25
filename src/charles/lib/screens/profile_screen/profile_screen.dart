@@ -27,6 +27,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.black),
         elevation: 0.0,
+        centerTitle:true,
+        title: Text("Your Profile",
+           style : GoogleFonts.montserrat(
+           fontSize: 20,
+            fontWeight : FontWeight.bold,
+            color : Colors.black
+           ),
+        ),
         backgroundColor: Colors.white,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),

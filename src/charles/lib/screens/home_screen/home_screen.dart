@@ -6,6 +6,7 @@ import 'package:hexabyte/screens/home_screen/widgets/home_screen_card.dart';
 import 'package:hexabyte/screens/home_screen/widgets/search_bar.dart';
 import 'package:hexabyte/screens/search_screen/search_screen.dart';
 
+import '../profile_screen/profile_screen.dart';
 import 'widgets/scroll_categories.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -17,13 +18,16 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(120),
+        preferredSize: const Size.fromHeight(130),
         child: Container(
           decoration: const BoxDecoration(
               image: DecorationImage(
                   fit: BoxFit.cover, image: AssetImage('assets/home_bg.png'))),
           child: Column(
             children: [
+              const SizedBox(
+                height: 10,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -34,18 +38,27 @@ class HomeScreen extends StatelessWidget {
                   Text(
                     'HexaByte',
                     style: GoogleFonts.roboto(
-                      fontSize: 22,
+                      fontSize: 24,
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
                     ),
                   ),
-                  CircleAvatar(
-                    backgroundColor: Colors.white,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(40),
-                      child: const Icon(
-                        Icons.account_circle,
-                        color: Colors.black,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const ProfileScreen()));
+                    },
+                    child: CircleAvatar(
+                      backgroundColor: Colors.white,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(50),
+                        child: const Icon(
+                          Icons.account_circle,
+                          color: Colors.black,
+                          size: 32,
+                        ),
                       ),
                     ),
                   ),
