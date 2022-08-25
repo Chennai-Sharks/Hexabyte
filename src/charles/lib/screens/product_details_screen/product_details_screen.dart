@@ -150,65 +150,30 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(8, 0, 0, 10.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              widget.productData!['title'] ?? 'N/A',
-                              overflow: TextOverflow.ellipsis,
-                              style: GoogleFonts.montserrat(
-                                  fontWeight: FontWeight.bold, fontSize: 22.0),
-                            ),
-                            const SizedBox(height: 8),
-                            Text(
-                              'Seller id: ${widget.productData!['producer_id'] ?? 'N/A'}',
-                              overflow: TextOverflow.ellipsis,
-                              style: GoogleFonts.montserrat(
-                                fontSize: 15.0,
-                                fontWeight: FontWeight.w400,
-                                color: Colors.black,
-                              ),
-                            ),
-                            const SizedBox(height: 8),
-                            Text(
-                                'Tags: ${((widget.productData!['tags'] ?? [
-                                      'NA'
-                                    ]).join() as String).titleCase}',
-                                overflow: TextOverflow.ellipsis,
-                                style: Theme.of(context).textTheme.bodyText1),
-                            const SizedBox(height: 8),
-                          ],
-                        ),
-                      ),
-                      Container(
-                          height: size.height * 0.2,
-                          width: size.height * 0.2,
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.only(right: 8.0, bottom: 10),
-                            child: Image.asset(widget.imageUrl!,
-                                fit: BoxFit.cover),
-                          )),
-                    ],
+                  Text(
+                    widget.productData!['food_waste_title'] ?? 'N/A',
+                    style: GoogleFonts.montserrat(fontWeight: FontWeight.bold, fontSize: 18.0),
                   ),
-                  const CustomDividerView(
-                    dividerHeight: 1.0,
-                    color: const Color(0xFFE9EFC0),
+                  const SizedBox(height: 8),
+                  Text(
+                    'Seller id: ${widget.productData!['producer_id'] ?? 'N/A'}',
+                    style: GoogleFonts.montserrat(
+                      fontSize: 15.0,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.black,
+                    ),
                   ),
+                  const SizedBox(height: 8),
+                  Text('Tags: ${((widget.productData!['applicable_tags'] ?? ['NA']).join(', ') as String).titleCase}',
+                      style: Theme.of(context).textTheme.bodyText1),
+                  const SizedBox(height: 8),
+                  const CustomDividerView(dividerHeight: 1.0),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      _buildVerticalStack(context, '4.1', 'Points'),
+                      _buildVerticalStack(context, '5.0', 'Points'),
                       _buildVerticalStack(context, '29 Kms', 'Distance'),
-                      _buildVerticalStack(
-                          context,
-                          'Rs ${widget.productData!['cost_per_kg'] ?? 'N/A'}/-',
-                          'Per Kg'),
+                      _buildVerticalStack(context, 'Rs ${widget.productData!['cost_per_kg'] ?? '200'}/-', 'Per Kg'),
                     ],
                   ),
                   const CustomDividerView(
@@ -238,7 +203,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(15, 15, 15, 25.0),
                     child: Text(
-                      widget.productData!['description'] ?? 'N/A',
+                      'Description: ' + (widget.productData!['description'] ?? 'N/A'),
                       style: GoogleFonts.montserrat(
                         fontSize: 18,
                       ),

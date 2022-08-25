@@ -124,8 +124,8 @@ class _AfterSearchState extends State<AfterSearch> {
                         width: MediaQuery.of(context).size.width,
                         child: AfterSearchCard(
                           id: response[index]['_id']['\$oid'],
-                          name: response[index]['title'],
-                          price: response[index]['cost_per_kg'],
+                          name: response[index]['food_waste_title'],
+                          price: response[index]['amount_processed'],
                           availableQty: response[index]['balance_qty'],
                           distance: '4.9 km',
                           duration: response[index]['duration'],
