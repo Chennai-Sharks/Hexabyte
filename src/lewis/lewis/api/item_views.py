@@ -7,6 +7,7 @@ from rest_framework.decorators import api_view
 from lewis.settings import db
 from bson import ObjectId, json_util
 import json
+from geopy import distance
 
 @api_view(['POST'])
 @csrf_exempt
@@ -102,15 +103,18 @@ def combo_buy(request):
         "data": final_dict
      })       
 
-# @api_view(['POST'])
-# @csrf_exempt
-# def find_distance(request):
-#     data_ = request.body
-#     data = bytes_to_json(data_)
-#     metadata = db.metadata.find_one({"phone": data["phone"]})
-#     location = metadata["location"]
-#     data_cursor = db.Items.find({"$and":[
-#                                         {"location": {"$near": location}},
-#                                         {"distanceField": "distance"},
-#                                         {"applicable_tags":{'$in':["organic_waste"]}}                                                                              
-#                                     ]})
+@api_view(['POST'])
+@csrf_exempt
+def find_distance(request):
+    data_ = request.body
+    data = bytes_to_json(data_)
+    metadata = db.metadata.find_one({"phone": data["phone"]})
+    location = metadata["location"]
+    import pdb
+    pdb.set_trace()    
+
+    coords_1 = (52.2296756, 21.0122287)
+    coords_2 = (52.406374, 16.9251681)
+
+    data = distance.geodesic(coords_1, coords_2).km    
+    return HttpResponse(data)
