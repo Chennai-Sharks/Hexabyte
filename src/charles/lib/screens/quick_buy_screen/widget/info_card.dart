@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hexabyte/screens/product_details_screen/product_details_screen.dart';
+import 'package:hexabyte/utils/utils.dart';
 
 class InfoCard extends StatelessWidget {
   const InfoCard({
@@ -77,7 +78,7 @@ class InfoCard extends StatelessWidget {
                   Text(
                     // restaurant.coupon,
                     'some info',
-                    style: Theme.of(context).textTheme.bodyText1!.copyWith(color: Colors.red[900], fontSize: 13.0),
+                    style: Theme.of(context).textTheme.bodyText1!.copyWith(color: Utils.primaryColor, fontSize: 13.0),
                   ),
                   const Divider(),
                   FittedBox(

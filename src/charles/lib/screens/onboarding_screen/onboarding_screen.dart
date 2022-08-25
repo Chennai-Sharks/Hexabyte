@@ -8,6 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hexabyte/layout/nav_layout.dart';
 import 'package:hexabyte/screens/onboarding_screen/api/onboading_api.dart';
 import 'package:hexabyte/screens/onboarding_screen/config/form_structure.dart';
+import 'package:hexabyte/screens/select_role_screen.dart/select_role_screen.dart';
 import 'package:hexabyte/utils/utils.dart';
 
 import 'package:geolocator/geolocator.dart';
@@ -144,7 +145,7 @@ class OnboardingScreenState extends State<OnboardingScreen> {
                           EasyLoading.dismiss();
                           navContext.pushReplacement(
                             MaterialPageRoute(
-                              builder: (context) => const NavigationLayout(),
+                              builder: (context) => const SelectRoleScreen(),
                             ),
                           );
                         } else {
