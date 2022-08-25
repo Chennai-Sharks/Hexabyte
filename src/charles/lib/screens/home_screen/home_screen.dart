@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hexabyte/screens/add_product_screen/add_product_screen.dart';
 import 'package:hexabyte/screens/home_screen/widgets/home_screen_card.dart';
 import 'package:hexabyte/screens/home_screen/widgets/search_bar.dart';
+import 'package:hexabyte/screens/profile_screen/widgets/order_history_page.dart';
 import 'package:hexabyte/screens/quick_buy_screen/quick_buy_screen.dart';
 import 'package:hexabyte/screens/search_screen/search_screen.dart';
 
@@ -98,7 +99,7 @@ class HomeScreen extends StatelessWidget {
               ScrollableCategories(
                 categories: secondCategories,
                 categoriesImgList: secondCategoriesImg,
-                widget: [const ProfileScreen(), const ProfileScreen()],
+                widget: [const OrderHistoryPage(), const ProfileScreen()],
               ),
               const HomeScreenCard(
                 color: Colors.orange,

@@ -1,10 +1,10 @@
 import 'package:count_stepper/count_stepper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexabyte/common/custom_divider.dart';
-import 'package:hexabyte/screens/product_details_screen/widgets/payment_success_screen.dart';
+import 'package:hexabyte/screens/checkout_screen/contract_buy_checkout_screen.dart';
+import 'package:hexabyte/screens/checkout_screen/onetime_buy_checkout_screen.dart';
 import 'package:hexabyte/screens/search_screen/search_screen.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:recase/recase.dart';
@@ -140,332 +140,324 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
         ],
       ),
       body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              color: Colors.white,
-              padding: const EdgeInsets.all(15.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  SizedBox(
-                    width: size.width * 0.45,
-                    child: Text(
-                      widget.productData!['food_waste_title'] ?? 'N/A',
-                      style: GoogleFonts.montserrat(
-                          fontWeight: FontWeight.bold, fontSize: 24.0),
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  SizedBox(
-                    width: size.width * 0.45,
-                    child: Text(
-                      'Seller id: ${widget.productData!['producer_id'] ?? 'N/A'}',
-                      style: GoogleFonts.montserrat(
-                        fontSize: 15.0,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Container(
-                    height: 50,
-                    color: Colors.white,
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: widget.productData!['applicable_tags'].length,
-                      itemBuilder: (context, index) => Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Chip(
-                          label: Text(
-                            widget.productData!['applicable_tags'][index]
-                                .toString()
-                                .sentenceCase,
-                            textAlign: TextAlign.left,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-
-                  const SizedBox(height: 8),
-                  const CustomDividerView(dividerHeight: 1.0),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      _buildVerticalStack(context, '5.0', 'Points'),
-                      _buildVerticalStack(context, '29 Kms', 'Distance'),
-                      _buildVerticalStack(
-                          context,
-                          'Rs ${widget.productData!['cost_per_kg'] ?? '200'}/-',
-                          'Per Kg'),
-                    ],
-                  ),
-                  const CustomDividerView(
-                    dividerHeight: 1.0,
-                    color: Color(0xFFE9EFC0),
-                  ),
-                  // const SizedBox(height: 8),
-                  // Column(
-                  //   children: <Widget>[
-                  //     _buildOfferTile(context, '30% off up to Rs75 | Use code SWIGGYIT'),
-                  //     _buildOfferTile(
-                  //         context, '20% off up to Rs100 with SBI credit cards, once per week | Use code 100SBI')
-                  //   ],
-                  // ),
-                  // SizedBox(height: 16),
-                ],
-              ),
-            ),
-            Container(height: 10, color: Colors.white),
-            Container(
-              color: Colors.white,
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(15, 15, 15, 25.0),
-                    child: Text(
-                      "Description: " +
-                          (widget.productData!['description'] ?? 'N/A'),
-                      style: GoogleFonts.montserrat(
-                        fontSize: 18,
-                      ),
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(15.0, 0, 15, 0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
+        child: Container(
+          height: size.height,
+          color: Colors.white,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                color: Colors.white,
+                padding: const EdgeInsets.all(15.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
                           children: [
-                            Text(
-                              "Rs. ",
-                              style: GoogleFonts.montserrat(
-                                fontSize: 20,
+                            SizedBox(
+                              width: size.width * 0.45,
+                              child: Text(
+                                widget.productData!['food_waste_title'] ??
+                                    'N/A',
+                                style: GoogleFonts.montserrat(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 24.0),
                               ),
                             ),
-                            Text(
-                              "${widget.productData!['cost_per_kg'] ?? '200'}  ",
-                              style: GoogleFonts.montserrat(
-                                  fontSize: 23,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.green.shade700),
-                            ),
-                            Text(
-                              "/-  per kg",
-                              style: GoogleFonts.montserrat(
-                                fontSize: 20,
+                            const SizedBox(height: 8),
+                            SizedBox(
+                              width: size.width * 0.45,
+                              child: Text(
+                                'Seller id: ${widget.productData!['producer_id'] ?? 'N/A'}',
+                                style: GoogleFonts.montserrat(
+                                  fontSize: 15.0,
+                                  fontWeight: FontWeight.w400,
+                                  color: Colors.black,
+                                ),
                               ),
                             ),
+                            const SizedBox(height: 8),
                           ],
                         ),
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: const Color(0xFFB4E197),
-                            width: 1,
-                          ),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Padding(
+                        Container(
+                          height: size.width * 0.4,
+                          width: size.width * 0.4,
+                          child:
+                              Image.asset(widget.imageUrl!, fit: BoxFit.cover),
+                        )
+                      ],
+                    ),
+                    Container(
+                      height: 50,
+                      color: Colors.white,
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount:
+                            widget.productData!['applicable_tags'].length,
+                        itemBuilder: (context, index) => Padding(
                           padding: const EdgeInsets.all(5.0),
+                          child: Chip(
+                            label: Text(
+                              widget.productData!['applicable_tags'][index]
+                                  .toString()
+                                  .sentenceCase,
+                              textAlign: TextAlign.left,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(height: 8),
+                    const CustomDividerView(dividerHeight: 1.0),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        _buildVerticalStack(context, '5.0', 'Points'),
+                        _buildVerticalStack(context, '29 Kms', 'Distance'),
+                        _buildVerticalStack(
+                            context,
+                            'Rs ${widget.productData!['cost_per_kg'] ?? '200'}/-',
+                            'Per Kg'),
+                      ],
+                    ),
+                    const CustomDividerView(
+                      dividerHeight: 1.0,
+                      color: Color(0xFFE9EFC0),
+                    ),
+                    // const SizedBox(height: 8),
+                    // Column(
+                    //   children: <Widget>[
+                    //     _buildOfferTile(context, '30% off up to Rs75 | Use code SWIGGYIT'),
+                    //     _buildOfferTile(
+                    //         context, '20% off up to Rs100 with SBI credit cards, once per week | Use code 100SBI')
+                    //   ],
+                    // ),
+                    // SizedBox(height: 16),
+                  ],
+                ),
+              ),
+              Container(
+                color: Colors.white,
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(15, 0, 15, 25.0),
+                      child: Text(
+                        "Description: " +
+                            (widget.productData!['description'] ?? 'N/A'),
+                        style: GoogleFonts.montserrat(
+                          fontSize: 18,
+                        ),
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(15.0, 0, 15, 0),
                           child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: CountStepper(
-                                  defaultValue: 1,
-                                  max: widget.productData!['balance_qty'] ?? 1,
-                                  min: 1,
-                                  onPressed: (value) {
-                                    setState(() {
-                                      _stepperValue = value;
-                                      int price =
-                                          widget.productData!['cost_per_kg'] ??
-                                              200;
-                                      _oneTimeBuyCost = _stepperValue! * price;
-                                      _contractBuyCost =
-                                          _oneTimeBuyCost! * _days!;
-                                    });
-                                  },
+                              Text(
+                                "Rs. ",
+                                style: GoogleFonts.montserrat(
+                                  fontSize: 20,
                                 ),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  'Kgs',
-                                  style: GoogleFonts.montserrat(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold),
+                              Text(
+                                "${widget.productData!['cost_per_kg'] ?? '200'}  ",
+                                style: GoogleFonts.montserrat(
+                                    fontSize: 23,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.green.shade700),
+                              ),
+                              Text(
+                                "/-  per kg",
+                                style: GoogleFonts.montserrat(
+                                  fontSize: 20,
                                 ),
-                              )
+                              ),
                             ],
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: size.height * 0.025),
-                  qAndAns(color, "One Time Buy Price ",
-                      "Rs. $_oneTimeBuyCost /-", context),
-                  qAndAns(color, "Contract Buy Price ",
-                      "Rs. $_contractBuyCost /-", context),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // qAndAns(color, "Category ", widget.category!, context),
-                      // qAndAns(color, "Order Type ", widget.orderType!, context),
-                      // qAndAns(color, "Status of Order ", widget.orderStatus.toString(), context),
-                      // qAndAns(color, "Location ", widget.location!, context),
-                      SizedBox(height: size.height * 0.05),
-                      Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: Center(
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                primary: const Color(0xFFB4E197),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12))),
-                            child: Text(
-                              "One-time Buy",
-                              style:
-                                  GoogleFonts.montserrat(color: Colors.black),
+                        Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: const Color(0xFFB4E197),
+                              width: 1,
                             ),
-                            onPressed: () {
-                              launchRazorPay();
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const PaymentSuccessPage()));
-                            },
+                            borderRadius: BorderRadius.circular(10),
                           ),
-                        ),
-                      ),
-
-                      Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: Center(
-                          child: Text(
-                            'Or',
-                            style: GoogleFonts.montserrat(
-                              fontSize: 18,
-                            ),
-                          ),
-                        ),
-                      ),
-                      FormBuilder(
-                        key: _formKey,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.all(9),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.grey.shade200,
-                                  borderRadius: BorderRadius.circular(20),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey[300]!,
-                                      blurRadius: 2.0,
-                                      spreadRadius: 0.0,
-                                      offset: const Offset(2.0, 2.0),
-                                    )
-                                  ],
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 11.0),
-                                  child: Center(
-                                    child: FormBuilderTextField(
-                                      name: 'duration',
-                                      initialValue: '1',
-                                      maxLength: 10,
-                                      onChanged: (value) {
+                          child: Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: SizedBox(
+                                    width: size.width * 0.22,
+                                    child: CountStepper(
+                                      splashRadius: 26,
+                                      iconColor: Color(0xFFB4E197),
+                                      iconIncrementColor: Color(0xFFB4E197),
+                                      defaultValue: 1,
+                                      max: widget.productData!['balance_qty'] ??
+                                          1,
+                                      min: 1,
+                                      onPressed: (value) {
                                         setState(() {
-                                          _days = int.parse(value ?? '1');
+                                          _stepperValue = value;
+                                          int price = widget.productData![
+                                                  'cost_per_kg'] ??
+                                              200;
+                                          _oneTimeBuyCost =
+                                              _stepperValue! * price;
                                           _contractBuyCost =
                                               _oneTimeBuyCost! * _days!;
                                         });
                                       },
-                                      decoration: InputDecoration(
-                                        labelText: 'Enter Number of days:',
-                                        labelStyle: const TextStyle(
-                                          color: Colors.black,
-                                        ),
-                                        hintStyle: Theme.of(context)
-                                            .textTheme
-                                            .subtitle2!
-                                            .copyWith(
-                                              color: Colors.grey,
-                                              fontSize: 17.0,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                        counterText: '',
-                                        border: InputBorder.none,
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    'Kgs',
+                                    style: GoogleFonts.montserrat(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: size.height * 0.025),
+                    qAndAns(color, "One Time Buy Price ",
+                        "Rs. $_oneTimeBuyCost /-", context),
+                    qAndAns(color, "Contract Buy Price ",
+                        "Rs. $_contractBuyCost /-", context),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // qAndAns(color, "Category ", widget.category!, context),
+                        // qAndAns(color, "Order Type ", widget.orderType!, context),
+                        // qAndAns(color, "Status of Order ", widget.orderStatus.toString(), context),
+                        // qAndAns(color, "Location ", widget.location!, context),
+                        SizedBox(height: size.height * 0.05),
+
+                        Padding(
+                          padding: const EdgeInsets.only(top: 18.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: Center(
+                                  child: SizedBox(
+                                    width: size.width * .40,
+                                    height: size.height * .08,
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          primary: const Color(0xFFB4E197),
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(12))),
+                                      child: Text(
+                                        "One-time Buy",
+                                        style: GoogleFonts.montserrat(
+                                            color: Colors.black),
                                       ),
-                                      validator: FormBuilderValidators.compose([
-                                        FormBuilderValidators.required(context),
-                                      ]),
-                                      keyboardType: TextInputType.number,
+                                      onPressed: () {
+                                        //  launchRazorPay();
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    CheckoutScreen(
+                                                        imageUrl:
+                                                            widget.imageUrl,
+                                                        totalPrice:
+                                                            _oneTimeBuyCost
+                                                                .toString(),
+                                                        sellerId: widget
+                                                                .productData![
+                                                            'food_waste_title'],
+                                                        productName: widget
+                                                                .productData![
+                                                            'food_waste_title'],
+                                                        weight: _stepperValue
+                                                            .toString())));
+                                      },
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: Center(
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                primary: const Color(0xFFB4E197),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12))),
-                            child: Text(
-                              "Contract Buy",
-                              style:
-                                  GoogleFonts.montserrat(color: Colors.black),
-                            ),
-                            onPressed: () {
-                              _formKey.currentState!.save();
-                              if (_formKey.currentState!.validate()) {
-                                print(_formKey.currentState!.value);
-                                launchRazorPayForMonths(_days, _stepperValue);
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const PaymentSuccessPage()));
-                              } else {
-                                print("validation failed");
-                              }
-                            },
+                              Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: Center(
+                                  child: SizedBox(
+                                    width: size.width * .4,
+                                    height: size.height * .08,
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          primary: const Color(0xFFB4E197),
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(12))),
+                                      child: Text(
+                                        "Contract Buy",
+                                        style: GoogleFonts.montserrat(
+                                            color: Colors.black),
+                                      ),
+                                      onPressed: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ContractBuyCheckoutScreen(
+                                                        imageUrl:
+                                                            widget.imageUrl,
+                                                        totalPrice:
+                                                            _contractBuyCost
+                                                                .toString(),
+                                                        sellerId: widget
+                                                                .productData![
+                                                            'food_waste_title'],
+                                                        productName: widget
+                                                                .productData![
+                                                            'food_waste_title'],
+                                                        weight: _stepperValue
+                                                            .toString())));
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

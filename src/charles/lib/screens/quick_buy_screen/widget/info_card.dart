@@ -9,8 +9,9 @@ class InfoCard extends StatelessWidget {
   final String? name;
   final int? price;
   final int? availableQty;
-  final String? distance;
+  final String? distance, imageUrl;
   final int? duration;
+
   const InfoCard({
     Key? key,
     required this.id,
@@ -20,6 +21,7 @@ class InfoCard extends StatelessWidget {
     required this.name,
     required this.price,
     required this.duration,
+    required this.imageUrl,
   }) : super(key: key);
 
   @override
@@ -32,7 +34,7 @@ class InfoCard extends StatelessWidget {
             builder: (context) => ProductDetailsPage(
               category: 'some category',
               description: 'Some descritption',
-              imageUrl: 'assets/logo.png',
+              imageUrl: imageUrl!,
               location: 'Location',
               orderStatus: 'orderStatus',
               orderType: 'One time buy',
@@ -82,18 +84,27 @@ class InfoCard extends StatelessWidget {
                     // restaurant.name,
                     name ?? 'N/A',
                     maxLines: 1,
-                    style: Theme.of(context).textTheme.subtitle2!.copyWith(fontSize: 20.0),
+                    style: Theme.of(context)
+                        .textTheme
+                        .subtitle2!
+                        .copyWith(fontSize: 20.0),
                   ),
                   Text(
                     // restaurant.desc,
                     'Available Qty: $availableQty KG',
                     maxLines: 2,
-                    style: Theme.of(context).textTheme.bodyText1!.copyWith(color: Colors.grey[800], fontSize: 13.5),
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText1!
+                        .copyWith(color: Colors.grey[800], fontSize: 13.5),
                   ),
                   Text(
                     // restaurant.coupon,
                     (productData['business'] as String? ?? 'N/A').titleCase,
-                    style: Theme.of(context).textTheme.bodyText1!.copyWith(color: Utils.primaryColor, fontSize: 13.0),
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText1!
+                        .copyWith(color: Utils.primaryColor, fontSize: 13.0),
                   ),
                   const Divider(),
                   FittedBox(
