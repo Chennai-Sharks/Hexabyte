@@ -1,11 +1,13 @@
 from logging import log
 from django.http import HttpResponse, JsonResponse
-from lewis.api.utils import  bytes_to_json # ,get_db_handle,
+from lewis.api.utils import  bytes_to_json 
 from lewis.api.schemas import MetadataSerializer , ItemDataSerializer
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view
 from lewis.settings import db
 from bson import ObjectId, json_util
+import json
+
 @api_view(['POST'])
 @csrf_exempt
 def item_addition(request):   
@@ -15,6 +17,8 @@ def item_addition(request):
     :return: A success or a failure JSON Response
     '''
     try:
+        import pdb 
+        pdb.set_trace()
         data_ = request.body
         data = bytes_to_json(data_)
         serializer = ItemDataSerializer(data = data)
