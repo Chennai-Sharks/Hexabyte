@@ -46,6 +46,8 @@ class _SearchPageState extends State<SearchPage> {
           : BeforeSearch(
               searchDone: updateFirstSearchDone,
               searchController: searchController,
+              // updateRecentSearches: updateRecentSearches,
+              // recentSearches: recentSearches,
             ),
     );
   }

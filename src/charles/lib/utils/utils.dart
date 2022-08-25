@@ -5,7 +5,7 @@ import 'package:geolocator/geolocator.dart';
 
 class Utils {
   static const primaryFontColor = Color(0xFF313131);
-  static const primaryColor = Color(0xFFBB0C24);
+  static const primaryColor = Color(0xFF4E944F);
   // background of all screens
   static const primaryBackground = Color(0xFFF8F8F8);
 

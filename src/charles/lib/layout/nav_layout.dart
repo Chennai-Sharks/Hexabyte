@@ -4,11 +4,13 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hexabyte/screens/add_product_screen/add_product_screen.dart';
 import 'package:hexabyte/screens/curation_screen/curation_screen.dart';
 import 'package:hexabyte/screens/home_screen/home_screen.dart';
+import 'package:hexabyte/screens/listed_products_screen/listed_products_screen.dart';
 import 'package:hexabyte/screens/profile_screen/profile_screen.dart';
 import 'package:hexabyte/screens/quick_buy_screen/quick_buy_screen.dart';
 
 class NavigationLayout extends StatefulWidget {
-  const NavigationLayout({Key? key}) : super(key: key);
+  final bool isConsumer;
+  const NavigationLayout({Key? key, required this.isConsumer}) : super(key: key);
 
   @override
   NavigationLayoutState createState() => NavigationLayoutState();
@@ -16,29 +18,33 @@ class NavigationLayout extends StatefulWidget {
 
 class NavigationLayoutState extends State<NavigationLayout> {
   int _currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
-    Color? color = Colors.redAccent.shade700;
-
-    final tabNavigations = [
-      HomeScreen(),
-      QuickBuyScreen(),
-      CurationScreen(),
-      const AddProductsScreen(),
-      ProfileScreen(),
-    ];
+    final tabNavigations = widget.isConsumer
+        ? [
+            HomeScreen(),
+            QuickBuyScreen(),
+            CurationScreen(),
+            ProfileScreen(),
+          ]
+        : [
+            ListedProductsScreen(),
+            const AddProductsScreen(),
+            ProfileScreen(),
+          ];
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
         leading: const Text(''),
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xFFE9EFC0),
         toolbarHeight: 0,
       ),
       body: tabNavigations[_currentIndex],
       backgroundColor: Colors.white,
       bottomNavigationBar: NavigationBarTheme(
         data: NavigationBarThemeData(
-            indicatorColor: color.withAlpha(80),
+            indicatorColor: const Color(0xFF83BD75),
             labelTextStyle: MaterialStateProperty.all(
               GoogleFonts.montserrat(
                 fontSize: 12,
@@ -51,27 +57,36 @@ class NavigationLayoutState extends State<NavigationLayout> {
               _currentIndex = index;
             });
           },
-          backgroundColor: color.withOpacity(0.05),
-          destinations: const [
-            NavigationDestination(
-              icon: FaIcon(FontAwesomeIcons.home, size: 20),
-              label: "Home",
-            ),
-            NavigationDestination(
-                icon: FaIcon(FontAwesomeIcons.cartArrowDown, size: 20),
-                label: 'Quick Buy'),
-            NavigationDestination(
-                icon: Icon(Icons.create, size: 20), label: 'Curation'),
-            NavigationDestination(
-                icon: Icon(Icons.add, size: 20), label: 'Add Product'),
-            NavigationDestination(
-                icon: FaIcon(
-                  FontAwesomeIcons.userCircle,
-                  size: 20,
-                  color: Colors.black,
-                ),
-                label: 'Profile'),
-          ],
+          // backgroundColor: const Color.fromARGB(255, 215, 225, 209),
+          backgroundColor: const Color(0xFFE9EFC0),
+          destinations: widget.isConsumer
+              ? const [
+                  NavigationDestination(
+                    icon: FaIcon(FontAwesomeIcons.home, size: 20),
+                    label: "Home",
+                  ),
+                  NavigationDestination(icon: FaIcon(FontAwesomeIcons.cartArrowDown, size: 20), label: 'Quick Buy'),
+                  NavigationDestination(icon: Icon(Icons.create, size: 20), label: 'Curation'),
+                ]
+              : const [
+                  NavigationDestination(
+                    icon: FaIcon(
+                      FontAwesomeIcons.userCircle,
+                      size: 20,
+                      color: Colors.black,
+                    ),
+                    label: 'ListedProducts',
+                  ),
+                  NavigationDestination(icon: Icon(Icons.add, size: 20), label: 'Add Product'),
+                  NavigationDestination(
+                    icon: FaIcon(
+                      FontAwesomeIcons.userCircle,
+                      size: 20,
+                      color: Colors.black,
+                    ),
+                    label: 'Profile',
+                  ),
+                ],
         ),
       ),
     );

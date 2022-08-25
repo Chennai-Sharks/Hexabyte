@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hexabyte/common/custom_divider.dart';
 import 'package:hexabyte/screens/product_details_screen/widgets/payment_success_screen.dart';
 import 'package:hexabyte/screens/search_screen/search_screen.dart';
+import 'package:hexabyte/utils/utils.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:count_stepper/count_stepper.dart';
 import 'package:recase/recase.dart';
@@ -246,7 +247,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                         child: Center(
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                                primary: Colors.greenAccent,
+                                primary: Color(0xFFB4E197),
                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
                             child: Text(
                               "One-time Buy",
@@ -335,7 +336,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                         child: Center(
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                                primary: Colors.greenAccent,
+                                primary: Color(0xFFB4E197),
                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
                             child: Text(
                               "Contract Buy",

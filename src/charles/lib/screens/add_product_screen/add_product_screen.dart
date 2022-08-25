@@ -170,7 +170,7 @@ class AddProductsScreenState extends State<AddProductsScreen> {
 
                           navContext.pushReplacement(
                             MaterialPageRoute(
-                              builder: (context) => const NavigationLayout(),
+                              builder: (context) => const NavigationLayout(isConsumer: false),
                             ),
                           );
                         } else {

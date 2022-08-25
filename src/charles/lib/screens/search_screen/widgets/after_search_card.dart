@@ -62,10 +62,20 @@ class AfterSearchCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       AutoSizeText(
-                        name ?? 'N/A',
+                        'Seller Name',
                         style: GoogleFonts.montserrat(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 6,
+                      ),
+                      AutoSizeText(
+                        name ?? 'N/A',
+                        style: GoogleFonts.montserrat(
+                          // fontWeight: FontWeight.bold,
+                          fontSize: 16,
                         ),
                       ),
                       const SizedBox(

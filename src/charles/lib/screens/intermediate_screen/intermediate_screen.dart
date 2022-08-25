@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hexabyte/layout/nav_layout.dart';
 import 'package:hexabyte/screens/auth_screen/auth_screen.dart';
 import 'package:hexabyte/screens/loading_screen/loading_screen.dart';
+import 'package:hexabyte/screens/select_role_screen.dart/select_role_screen.dart';
 
 class IntermediateScreen extends StatelessWidget {
   final Future<FirebaseApp> _initFirebaseSdk = Firebase.initializeApp();
@@ -30,7 +31,7 @@ class IntermediateScreen extends StatelessWidget {
               } else {
                 navContext.pushReplacement(
                   MaterialPageRoute(
-                    builder: (context) => const NavigationLayout(),
+                    builder: (context) => const SelectRoleScreen(),
                   ),
                 );
               }

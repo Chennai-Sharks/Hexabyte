@@ -36,7 +36,10 @@ class _ListedProductsScreenState extends State<ListedProductsScreen> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
-            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const NavigationLayout()));
+            Navigator.of(context).pushReplacement(MaterialPageRoute(
+                builder: (context) => const NavigationLayout(
+                      isConsumer: false,
+                    )));
           },
         ),
       ),
