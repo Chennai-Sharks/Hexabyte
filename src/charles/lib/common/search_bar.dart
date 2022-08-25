@@ -22,7 +22,10 @@ class SearchBar extends StatelessWidget {
       ),
       child: Row(
         children: [
-          const Icon(Icons.search_outlined),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 0, 10.0, 0),
+            child: const Icon(Icons.search_outlined),
+          ),
           // UIHelper.horizontalSpaceMedium(),
           Expanded(
             child: Text(

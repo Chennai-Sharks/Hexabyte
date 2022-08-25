@@ -1,4 +1,3 @@
-import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -36,83 +35,44 @@ class NavigationLayoutState extends State<NavigationLayout> {
         toolbarHeight: 0,
       ),
       body: tabNavigations[_currentIndex],
-      backgroundColor: Colors.grey[50],
-      bottomNavigationBar: BottomNavyBar(
-        backgroundColor: Theme.of(context).primaryColor,
-        items: <BottomNavyBarItem>[
-          BottomNavyBarItem(
-            icon: const FaIcon(FontAwesomeIcons.home, size: 20),
-            title: Center(
-              child: Text(
-                'HexaByte',
-                style: GoogleFonts.montserrat(
-                  fontSize: 12,
-                ),
+      backgroundColor: Colors.white,
+      bottomNavigationBar: NavigationBarTheme(
+        data: NavigationBarThemeData(
+            indicatorColor: color.withAlpha(80),
+            labelTextStyle: MaterialStateProperty.all(
+              GoogleFonts.montserrat(
+                fontSize: 12,
               ),
+            )),
+        child: NavigationBar(
+          selectedIndex: _currentIndex,
+          onDestinationSelected: (index) {
+            setState(() {
+              _currentIndex = index;
+            });
+          },
+          backgroundColor: color.withOpacity(0.05),
+          destinations: const [
+            NavigationDestination(
+              icon: FaIcon(FontAwesomeIcons.home, size: 20),
+              label: "Home",
             ),
-            activeColor: color,
-            inactiveColor: color,
-          ),
-          BottomNavyBarItem(
-            icon: const FaIcon(FontAwesomeIcons.cartArrowDown, size: 20),
-            title: Center(
-              child: Text(
-                'Quick buy',
-                style: GoogleFonts.montserrat(
-                  fontSize: 12,
+            NavigationDestination(
+                icon: FaIcon(FontAwesomeIcons.cartArrowDown, size: 20),
+                label: 'Quick Buy'),
+            NavigationDestination(
+                icon: Icon(Icons.create, size: 20), label: 'Curation'),
+            NavigationDestination(
+                icon: Icon(Icons.add, size: 20), label: 'Add Product'),
+            NavigationDestination(
+                icon: FaIcon(
+                  FontAwesomeIcons.userCircle,
+                  size: 20,
+                  color: Colors.black,
                 ),
-              ),
-            ),
-            activeColor: color,
-            inactiveColor: color,
-          ),
-          BottomNavyBarItem(
-            icon: const Icon(Icons.create, size: 20),
-            title: Center(
-              child: Text(
-                'Curation',
-                style: GoogleFonts.montserrat(
-                  fontSize: 12,
-                ),
-              ),
-            ),
-            activeColor: color,
-            inactiveColor: color,
-          ),
-          BottomNavyBarItem(
-            icon: const Icon(Icons.add, size: 20),
-            title: Center(
-              child: Text(
-                'Add Product',
-                style: GoogleFonts.montserrat(
-                  fontSize: 12,
-                ),
-              ),
-            ),
-            activeColor: color,
-            inactiveColor: color,
-          ),
-          BottomNavyBarItem(
-            icon: const FaIcon(FontAwesomeIcons.userCircle, size: 20),
-            title: Center(
-              child: Text(
-                'Profile',
-                style: GoogleFonts.montserrat(
-                  fontSize: 12,
-                ),
-              ),
-            ),
-            activeColor: color,
-            inactiveColor: color,
-          ),
-        ],
-        animationDuration: const Duration(milliseconds: 400),
-        selectedIndex: _currentIndex,
-        onItemSelected: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
+                label: 'Profile'),
+          ],
+        ),
       ),
     );
   }

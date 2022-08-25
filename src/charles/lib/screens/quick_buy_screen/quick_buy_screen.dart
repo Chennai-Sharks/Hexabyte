@@ -7,6 +7,8 @@ import 'package:hexabyte/common/search_bar.dart';
 import 'package:hexabyte/screens/quick_buy_screen/widget/info_card.dart';
 import 'package:hexabyte/screens/search_screen/search_screen.dart';
 
+import '../profile_screen/profile_screen.dart';
+
 class QuickBuyScreen extends StatefulWidget {
   const QuickBuyScreen({Key? key}) : super(key: key);
 
@@ -32,13 +34,21 @@ class _QuickBuyScreenState extends State<QuickBuyScreen> {
                 color: Colors.black,
               ),
             ),
-            CircleAvatar(
-              backgroundColor: Colors.white,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(40),
-                child: const Icon(
-                  Icons.account_circle,
-                  color: Colors.black,
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ProfileScreen()));
+              },
+              child: CircleAvatar(
+                backgroundColor: Colors.white,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(40),
+                  child: const Icon(
+                    Icons.account_circle,
+                    color: Colors.black,
+                  ),
                 ),
               ),
             ),
