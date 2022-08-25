@@ -92,7 +92,7 @@ class InfoCard extends StatelessWidget {
                   ),
                   Text(
                     // restaurant.coupon,
-                    (productData['business'] as String).titleCase,
+                    (productData['business'] as String? ?? 'N/A').titleCase,
                     style: Theme.of(context).textTheme.bodyText1!.copyWith(color: Utils.primaryColor, fontSize: 13.0),
                   ),
                   const Divider(),
