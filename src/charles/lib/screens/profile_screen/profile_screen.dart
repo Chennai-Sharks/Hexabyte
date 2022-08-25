@@ -1,14 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hexabyte/common/custom_divider.dart';
 import 'package:hexabyte/layout/nav_layout.dart';
 import 'package:hexabyte/screens/auth_screen/auth_screen.dart';
-import 'package:hexabyte/screens/loading_screen/loading_screen.dart';
 import 'package:hexabyte/screens/profile_screen/widgets/order_history_card.dart';
-import 'package:hexabyte/utils/utils.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -71,22 +66,51 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
                 const SizedBox(height: 16),
+                 Padding(
+                   padding: const EdgeInsets.all(8.0),
+                   child: Container(
+                    color: Colors.white,
+                    padding: const EdgeInsets.only(bottom: 10.0, left: 15.0, top: 10),
+                    width: size.width,
+                    child: Text(
+                      'Kishore M',
+                      style: GoogleFonts.montserrat(fontWeight: FontWeight.bold, fontSize: 24.0),
+                    ),
+                ),
+
+
+                 ),
+                 Padding(
+                   padding: const EdgeInsets.all(8.0),
+                   child: Container(
+                    color: Colors.white,
+                    padding: const EdgeInsets.only(bottom: 10.0, left: 15.0, top: 10),
+                    width: size.width,
+                    child: Text(
+                      'Small Scale Business',
+                      style: GoogleFonts.montserrat( fontSize: 22.0),
+                    ),
+                ),
+                 ),
+
                 Container(
                   color: Colors.white,
                   padding: const EdgeInsets.only(bottom: 10.0, left: 15.0, top: 10),
                   width: size.width,
                   child: Text(
                     'Order History',
-                    style: GoogleFonts.montserrat(fontWeight: FontWeight.bold, fontSize: 16.0),
+                    style: GoogleFonts.montserrat(fontWeight: FontWeight.bold, fontSize: 22.0),
                   ),
                 ),
+
+
                 Container(
                   color: Colors.white,
                   child: ListView.builder(
                     shrinkWrap: true,
                     itemCount: 10,
                     physics: const NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) => OrderHistoryCard(),
+                    itemBuilder: (context, index) => const OrderHistoryCard(),
                   ),
                 ),
               ],

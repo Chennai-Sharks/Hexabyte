@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:hexabyte/layout/nav_layout.dart';
 import 'package:hexabyte/screens/auth_screen/auth_screen.dart';
 import 'package:hexabyte/screens/loading_screen/loading_screen.dart';
 import 'package:hexabyte/screens/select_role_screen.dart/select_role_screen.dart';

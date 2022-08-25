@@ -10,7 +10,8 @@ import 'package:hexabyte/screens/quick_buy_screen/quick_buy_screen.dart';
 
 class NavigationLayout extends StatefulWidget {
   final bool isConsumer;
-  const NavigationLayout({Key? key, required this.isConsumer}) : super(key: key);
+  const NavigationLayout({Key? key, required this.isConsumer})
+      : super(key: key);
 
   @override
   NavigationLayoutState createState() => NavigationLayoutState();
@@ -23,21 +24,21 @@ class NavigationLayoutState extends State<NavigationLayout> {
   Widget build(BuildContext context) {
     final tabNavigations = widget.isConsumer
         ? [
-            HomeScreen(),
-            QuickBuyScreen(),
-            CurationScreen(),
-            ProfileScreen(),
+            const HomeScreen(),
+            const QuickBuyScreen(),
+            const CurationScreen(),
+            const ProfileScreen(),
           ]
         : [
-            ListedProductsScreen(),
+            const ListedProductsScreen(),
             const AddProductsScreen(),
-            ProfileScreen(),
+            const ProfileScreen(),
           ];
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
         leading: const Text(''),
-        backgroundColor: Color(0xFFE9EFC0),
+        backgroundColor: const Color(0xFFE9EFC0),
         toolbarHeight: 0,
       ),
       body: tabNavigations[_currentIndex],
@@ -65,8 +66,11 @@ class NavigationLayoutState extends State<NavigationLayout> {
                     icon: FaIcon(FontAwesomeIcons.home, size: 20),
                     label: "Home",
                   ),
-                  NavigationDestination(icon: FaIcon(FontAwesomeIcons.cartArrowDown, size: 20), label: 'Quick Buy'),
-                  NavigationDestination(icon: Icon(Icons.create, size: 20), label: 'Curation'),
+                  NavigationDestination(
+                      icon: FaIcon(FontAwesomeIcons.cartArrowDown, size: 20),
+                      label: 'Quick Buy'),
+                  NavigationDestination(
+                      icon: Icon(Icons.create, size: 20), label: 'Combo Buy'),
                 ]
               : const [
                   NavigationDestination(
@@ -77,7 +81,8 @@ class NavigationLayoutState extends State<NavigationLayout> {
                     ),
                     label: 'ListedProducts',
                   ),
-                  NavigationDestination(icon: Icon(Icons.add, size: 20), label: 'Add Product'),
+                  NavigationDestination(
+                      icon: Icon(Icons.add, size: 20), label: 'Add Product'),
                   NavigationDestination(
                     icon: FaIcon(
                       FontAwesomeIcons.userCircle,

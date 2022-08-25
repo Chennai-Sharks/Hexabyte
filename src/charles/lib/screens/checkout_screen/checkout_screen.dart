@@ -74,6 +74,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               child: Container(
                   height: size.height * 0.2,
                   width: size.height * 0.2,
+                  color: Colors.white,
                   child: SvgPicture.asset(
                     'assets/credit_card.svg',
                     fit: BoxFit.cover,
