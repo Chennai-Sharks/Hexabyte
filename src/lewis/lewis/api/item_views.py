@@ -73,3 +73,44 @@ def item_edit(request,id):
             }, status = 200)
     except Exception as e:
         print(e)
+
+@api_view(['POST'])
+@csrf_exempt
+def combo_buy(request):
+    '''
+    Get the tags from the metadata and search for the related products to that tag and compute the distance 
+    and cost for all the permutations combinations. 
+    :param request: User ID and metadata
+    :return: A success or failure JSON Response
+    '''
+    data_ = request.body
+    data = bytes_to_json(data_)
+    metadata = db.metadata.find_one({"phone": data["phone"]})
+    location = metadata["location"]
+    tags = data["tags"]
+    final_dict = {}    
+    for tag in tags:
+        data_cursor = db.Items.find({"$and":[
+                                        {"location": {"$near": location}},                                        
+                                        {"applicable_tags":{'$in':[tag]}}                                      
+                                    ]})
+        data = json.loads(json_util.dumps(data_cursor))[0:4]
+        final_dict[tag] = data
+    return JsonResponse({
+        "status": "success", 
+        "message": "Combo buy done",
+        "data": final_dict
+     })       
+
+# @api_view(['POST'])
+# @csrf_exempt
+# def find_distance(request):
+#     data_ = request.body
+#     data = bytes_to_json(data_)
+#     metadata = db.metadata.find_one({"phone": data["phone"]})
+#     location = metadata["location"]
+#     data_cursor = db.Items.find({"$and":[
+#                                         {"location": {"$near": location}},
+#                                         {"distanceField": "distance"},
+#                                         {"applicable_tags":{'$in':["organic_waste"]}}                                                                              
+#                                     ]})
