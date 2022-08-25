@@ -13,6 +13,7 @@ from bson import json_util
 from lewis.settings import db
 from pymongo import GEO2D
 from itertools import combinations
+from geopy import distance
 
 
 @api_view(['POST'])
@@ -70,21 +71,21 @@ def product_search(request):
     
 @api_view(['GET'])
 @csrf_exempt
-def nearest(request,phone):
-    metadata = db.metadata.find_one({"phone": phone})
+def nearest(request, id):
+    import pdb
+    pdb.set_trace()
+    metadata = db.metadata.find_one({"phone": id})    
     location = metadata["location"]
     data_cursor = db.Items.find(
-                                            {"location": {"$near": location}}
-                                            # {"applicable_tags":{'$in':data["tags"]}},
-                                            # {
-                                            #     "$or":[
-                                            #         {"food_waste_title":{'$regex':data["query"],"$options":"i"}},
-                                            #         {"description":{'$regex':data["query"],"$options":"i"}}
-                                            #     ]
-                                            # }
-                                        )
-    if data_cursor is not None:                           
+                                {"location": {"$near": location}}                                            
+                            )    
+    if data_cursor is not None:                                   
         data_cursor = json.loads(json_util.dumps(data_cursor[:10]))
+        for data in data_cursor:
+            coords_1 = location
+            coords_2 = data["location"]
+
+            data["distance"] = distance.geodesic(coords_1, coords_2).km 
         return JsonResponse({
             "status": "Success",
             "message": "Fetched search results",
