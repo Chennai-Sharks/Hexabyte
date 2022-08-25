@@ -54,18 +54,30 @@ def product_search(request):
                                             ]
                                         }
                                     ]})
-    if data_cursor is not None:                           
-        data_cursor = json.loads(json_util.dumps(data_cursor))
-        return JsonResponse({
-            "status": "Success",
-            "message": "Fetched search results",
-            "data": data_cursor
-        }, status = 200)
-    else:
-        return JsonResponse({
-            "status": "Failure",
-            "message": "Couldn't fetch search results",            
-        }, status = 400)
+    final_results=[]
+    for i in data_cursor:
+        rat = db.Ratings.aggregate([{
+            "$group":{
+                "_id":i['_id'],
+                "avg_rating":{  "$avg": "$rating"  }
+            }
+        }])
+        for j in rat:
+            i['avg_rating']=j['avg_rating']
+        final_results.append(i)
+    
+# if data_cursor is not None:                           
+    data_cursor = json.loads(json_util.dumps(final_results))
+    return JsonResponse({
+        "status": "Success",
+        "message": "Fetched search results",
+        "data": data_cursor
+    }, status = 200)
+# else:
+    return JsonResponse({
+        "status": "Failure",
+        "message": "Couldn't fetch search results",            
+    }, status = 400)
 
     
 @api_view(['GET'])
