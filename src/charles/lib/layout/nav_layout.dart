@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hexabyte/screens/active_order_screen/active_order_screen.dart';
+import 'package:hexabyte/screens/active_order_screen/widgets/active_order_card.dart';
 import 'package:hexabyte/screens/add_product_screen/add_product_screen.dart';
-import 'package:hexabyte/screens/curation_screen/curation_screen.dart';
 import 'package:hexabyte/screens/home_screen/home_screen.dart';
 import 'package:hexabyte/screens/listed_products_screen/listed_products_screen.dart';
 import 'package:hexabyte/screens/order_history_screen/order_history_screen.dart';
@@ -32,7 +33,7 @@ class NavigationLayoutState extends State<NavigationLayout> {
         : [
             const ListedProductsScreen(),
             const AddProductsScreen(),
-            const ProfileScreen(),
+            const ActiveOrderScreen(),
           ];
     return Scaffold(
       appBar: AppBar(
