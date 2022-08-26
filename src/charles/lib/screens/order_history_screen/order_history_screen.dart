@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hexabyte/layout/nav_layout.dart';
 import 'package:hexabyte/screens/order_history_screen/api/order_history_api.dart';
 import 'package:hexabyte/screens/order_history_screen/widgets/order_history_card.dart';
-import 'package:hexabyte/screens/quick_buy_screen/api/quick_buy_api.dart';
 
 class OrderHistoryScreen extends StatelessWidget {
   const OrderHistoryScreen({Key? key}) : super(key: key);

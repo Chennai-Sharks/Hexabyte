@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hexabyte/common/custom_divider.dart';
 import 'package:hexabyte/common/dotted_seperator.dart';
 
@@ -133,6 +134,7 @@ class OrderHistoryCard extends StatelessWidget {
                   },
                   onRatingUpdate: (rating) {
                     print(rating);
+                    Fluttertoast.showToast(msg: 'Rating recorded');
                   },
                 ),
               ),
