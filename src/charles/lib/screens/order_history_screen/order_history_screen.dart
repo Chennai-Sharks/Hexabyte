@@ -57,7 +57,7 @@ class OrderHistoryScreen extends StatelessWidget {
                             itemCount: response.length,
                             physics: const NeverScrollableScrollPhysics(),
                             itemBuilder: (context, index) => OrderHistoryCard(
-                              id: response[index]['_id']['\$oid'],
+                              id: response[index]['item_id']['\$oid'],
                               name: response[index]['food_waste_title'] ?? 'Vegetable peels',
                               price: response[index]['cost_per_kg'] * response[index]['subscribed_qty'] ?? 200,
                               subscriptedQty: response[index]['subscribed_qty'] ?? 50,

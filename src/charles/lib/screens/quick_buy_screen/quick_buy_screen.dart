@@ -37,10 +37,7 @@ class _QuickBuyScreenState extends State<QuickBuyScreen> {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const ProfileScreen()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileScreen()));
               },
               child: CircleAvatar(
                 backgroundColor: Colors.white,
@@ -110,29 +107,15 @@ class _QuickBuyScreenState extends State<QuickBuyScreen> {
                         itemCount: 4,
                         itemBuilder: (context, index) => SizedBox(
                           width: MediaQuery.of(context).size.width,
-                          child:response != null ? InfoCard(
-                            id: response[5 + index]['_id']['\$oid'] != null
-                                ? response[5 + index]['_id']['\$oid']
-                                : "nil",
-                            name:
-                                response[5 + index]['food_waste_title'] != null
-                                    ? response[5 + index]['food_waste_title']
-                                    : "nil",
-                            price: response[5 + index]['cost'] != null
-                                ? response[5 + index]['cost']
-                                : "nil",
-                            availableQty:
-                                response[5 + index]['balance_qty'] != null
-                                    ? response[5 + index]['balance_qty']
-                                    : "nil",
+                          child: InfoCard(
+                            id: response[5 + index]['_id']['\$oid'],
+                            name: response[5 + index]['food_waste_title'],
+                            price: response[5 + index]['cost'],
+                            availableQty: response[5 + index]['balance_qty'],
                             distance: '4.9 km',
-                            duration: response[5 + index]['duration'] != null
-                                ? response[5 + index]['duration']
-                                : "nil",
-                            productData: response[5 + index] != null
-                                ? response[5 + index]
-                                : "nil",
-                          ) : Container(),
+                            duration: response[5 + index]['duration'],
+                            productData: response[5 + index],
+                          ),
                         ),
                       ),
                     );
