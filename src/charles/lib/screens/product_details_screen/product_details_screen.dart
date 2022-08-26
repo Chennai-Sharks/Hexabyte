@@ -198,7 +198,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                       child: ListView.builder(
                         shrinkWrap: true,
                         scrollDirection: Axis.horizontal,
-                        physics: const NeverScrollableScrollPhysics(),
+                        physics: const BouncingScrollPhysics(),
                         itemCount:
                             widget.productData!['applicable_tags'].length,
                         itemBuilder: (context, index) => Padding(
