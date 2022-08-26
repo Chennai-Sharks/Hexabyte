@@ -33,6 +33,9 @@ class OrderDataSerializer(serializers.Serializer):
     duration = serializers.IntegerField()
     subscribed_qty = serializers.IntegerField()
     cost_per_kg = serializers.IntegerField()
+    ship_charge = serializers.IntegerField()
+    tax = serializers.IntegerField()
+    status = serializers.CharField(required=False,default="Pending")
     one_time = serializers.BooleanField()
 
 class UserRatingSerializer(serializers.Serializer):
