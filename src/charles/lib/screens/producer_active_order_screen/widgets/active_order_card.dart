@@ -63,25 +63,25 @@ class ActiveOrderCard extends StatelessWidget {
                           'Food waste title: $foodWasteTitle',
                           style: Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 12.0),
                         ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Row(
-                          children: <Widget>[
-                            const Text('Cost per Kg: '),
-                            // Text(
-                            //   'Rs. $cost/-',
-                            //   style: GoogleFonts.montserrat(
-                            //       color: Colors.green.shade600,
-                            //       fontWeight: FontWeight.bold,
-                            //       fontSize: 16),
-                            // ),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            // Icon(Icons.keyboard_arrow_right, color: Colors.grey[600])
-                          ],
-                        )
+                        // const SizedBox(
+                        //   height: 10,
+                        // ),
+                        // Row(
+                        //   children: <Widget>[
+                        //     // const Text('Cost per Kg: '),
+                        //     // Text(
+                        //     //   'Rs. $cost/-',
+                        //     //   style: GoogleFonts.montserrat(
+                        //     //       color: Colors.green.shade600,
+                        //     //       fontWeight: FontWeight.bold,
+                        //     //       fontSize: 16),
+                        //     // ),
+                        //     const SizedBox(
+                        //       height: 8,
+                        //     ),
+                        //     // Icon(Icons.keyboard_arrow_right, color: Colors.grey[600])
+                        //   ],
+                        // )
                       ],
                     ),
                     const Spacer(),
