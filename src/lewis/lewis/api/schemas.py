@@ -20,7 +20,7 @@ class ItemDataSerializer(serializers.Serializer):
     description = serializers.CharField()
     location = serializers.ListField(child = serializers.FloatField(), allow_empty = False,  min_length=2, max_length=2,required=False)
     total_qty = serializers.IntegerField()
-    cost_per_kg = serializers.IntegerField()
+    cost = serializers.FloatField()
     subscribed_qty = serializers.IntegerField(required=False)
     available_qty =  serializers.IntegerField(required=False)
     expiry_date = serializers.CharField()
@@ -32,10 +32,10 @@ class OrderDataSerializer(serializers.Serializer):
     item_id = serializers.JSONField()
     duration = serializers.IntegerField()
     subscribed_qty = serializers.IntegerField()
-    cost_per_kg = serializers.IntegerField()
-    ship_charge = serializers.IntegerField()
-    tax = serializers.IntegerField()
-    status = serializers.CharField(required=False,default="Pending")
+    cost = serializers.FloatField()
+    ship_charge = serializers.FloatField()
+    tax = serializers.FloatField()
+    status = serializers.CharField(required=False)
     one_time = serializers.BooleanField()
 
 class UserRatingSerializer(serializers.Serializer):

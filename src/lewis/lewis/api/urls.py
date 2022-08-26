@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from . import views,item_views,next_views
+from . import views,item_views,next_views,final_views
 
 urlpatterns = [
     path('admin/', admin.site.urls), 
@@ -25,14 +25,17 @@ urlpatterns = [
     path('item_edit/<str:id>/',item_views.item_edit),
     path('product_search/', views.product_search),
     path('combo_buy/', item_views.combo_buy),
-    path('nearest/<str:id>/', views.nearest),
+    path('nearest/<str:phone>/', views.nearest),
     path('distance/', item_views.find_distance),
     path('purchase_item/', views.purchase_item),
     path('item_rating/', views.item_rating),
     path('recomm/<str:phone>/', views.recomm),  
     path('nearest/<str:phone>/', views.nearest),    
-    path('live_orders/<str:phone>/', next_views.live_orders),    
+    path('producer_live/<str:phone>/', next_views.producer_live),    
     path('profile_page/<str:phone>/', next_views.profile_page), 
     path('producer_items/<str:phone>/', next_views.producer_items),  
     path('customer_orders/<str:phone>/', next_views.customer_orders),  
+    path('producer_orders/<str:phone>/', final_views.producer_orders), 
+    path('customer_live/<str:phone>/', final_views.customer_live),
+    path('order_complete/<str:id>/', final_views.order_complete),    
 ]

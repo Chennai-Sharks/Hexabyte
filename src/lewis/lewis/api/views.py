@@ -57,7 +57,11 @@ def product_search(request):
                                     ]})
     final_results=[]
     for i in data_cursor:
-        rat = db.Ratings.aggregate([{
+        rat = db.Ratings.aggregate([
+            {
+                "$match":{"item_id":{"$oid":data['_id'] }}
+            },
+            {
             "$group":{
                 "_id":i['_id'],
                 "avg_rating":{  "$avg": "$rating"  }
@@ -65,6 +69,11 @@ def product_search(request):
         }])
         for j in rat:
             i['avg_rating']=j['avg_rating']
+
+        coords_1 = location
+        coords_2 = i["location"]
+
+        i["distance"] = distance.geodesic(coords_1, coords_2).km 
         final_results.append(i)
     
 # if data_cursor is not None:                           
@@ -83,25 +92,42 @@ def product_search(request):
     
 @api_view(['GET'])
 @csrf_exempt
-def nearest(request, id):
-    import pdb
-    pdb.set_trace()
-    metadata = db.metadata.find_one({"phone": id})    
+def nearest(request, phone):
+    metadata = db.metadata.find_one({"phone": phone})    
     location = metadata["location"]
     data_cursor = db.Items.find(
                                 {"location": {"$near": location}}                                            
                             )    
+    final_results=[]
     if data_cursor is not None:                                   
-        data_cursor = json.loads(json_util.dumps(data_cursor[:10]))
-        for data in data_cursor:
+        for data in data_cursor[:10]:
+            rat = db.Ratings.find({
+                "item_id.$oid":data.get('_id') 
+                })
+            #     ,
+            #     {
+            #     "$group":{
+            #         "_id":None,
+            #         "pop":{  "$avg": "$rating"  }
+            #     }
+            # }])   
+            knt=0
+            sum=0
+            for j in rat:
+                sum+=j['rating']
+                knt+=1
+            data['avg_rating']=sum/knt
             coords_1 = location
             coords_2 = data["location"]
 
             data["distance"] = distance.geodesic(coords_1, coords_2).km 
+            final_results.append(data)
+        data_cursor1 = json.loads(json_util.dumps(final_results))
+
         return JsonResponse({
             "status": "Success",
             "message": "Fetched search results",
-            "data": data_cursor
+            "data": data_cursor1
         }, status = 200)
     else:
         return JsonResponse({
@@ -165,7 +191,7 @@ def data_collection(request):
 @api_view(['POST'])
 @csrf_exempt
 def purchase_item(request):
-    try:
+    # try:
         data_ = request.body
         data = bytes_to_json(data_)
         serializer = OrderDataSerializer(data = data)
@@ -184,12 +210,13 @@ def purchase_item(request):
                         "message": "Insufficient duration"
                     }, status = 400)
             item_data['balance_qty']-=data['subscribed_qty']
+            data['status']='Pending'
             if data['one_time']==False:
                 item_data['subscribed_qty']+=data['subscribed_qty']
                 # data['end_date']=date.today() +timedelta(days=data['duration'])
             # else:
                 # data['end_date']=date.today() +timedelta(days=1)
-            item_result = db.Items.save(item_data)
+            item_result = db.Items.update_one({'_id':item_data['_id']},{"$set":item_data})
             
             order_result = db.Orders.insert_one(data)
             
@@ -202,8 +229,8 @@ def purchase_item(request):
                 "status": "Failure",
                 "message": "Invalid data or format"
             }, status = 400)
-    except Exception as e:
-        print(e)    
+    # except Exception as e:
+    #     print(e)    
 
 @api_view(['GET'])
 @csrf_exempt

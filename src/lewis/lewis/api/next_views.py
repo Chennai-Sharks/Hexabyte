@@ -1,6 +1,5 @@
 from bson import ObjectId, json_util
 import json
-import pandas as pd
 # from logging import log
 from pprint import pprint
 # from textwrap import indent
@@ -14,10 +13,10 @@ from lewis.settings import db
     
 @api_view(['GET'])
 @csrf_exempt
-def live_orders(request,phone):
+def producer_live(request,phone):
     # metadata = db.Orders.find({"phone": phone})
     results = db.Orders.aggregate([
-        { '$match': { 'producer_id':phone }  },
+        { '$match': { 'producer_id':phone,"status":"Pending" }  },
         # { 
         #     '$lookup':{
         #         "from":"Items",
@@ -40,6 +39,7 @@ def live_orders(request,phone):
                     # "itemdata.description":1,
                     # "itemdata.applicable_tags":1,
                     "item_id":1,
+                    "customer_id":1,
                     "subscribed_qty":1,
                     "customerdata.name":1,
                     "customerdata.phone":1,
@@ -61,11 +61,15 @@ def live_orders(request,phone):
         newdata["business"]=i["customerdata"][0]["business"]
         newdata["email"]=i["customerdata"][0]["email"]
 
+        userdata=db.metadata.find_one({'phone':i['customer_id']})
         itemdata=db.Items.find_one({'_id':ObjectId(i['item_id']['$oid'])})
         print(itemdata)        
         newdata["food_waste_title"]=itemdata['food_waste_title']
         # newdata["description"]=itemdata['description']
         newdata["applicable_tags"]=itemdata['applicable_tags']
+        newdata['customer_name']=userdata['name']
+        newdata['customer_phone']=userdata['phone']
+            
         final_result.append(newdata)
     if results is not None:                           
         # data_cursor = json.loads(json_util.dumps(results))
@@ -118,8 +122,26 @@ def producer_items(request,phone):
 @csrf_exempt
 def customer_orders(request,phone):
     results = db.Orders.find({"customer_id":phone})
+    final_result=[]
     if results is not None:                           
-        data_cursor = json.loads(json_util.dumps(results))
+        for i in results:
+            # print(i)
+            newdata={}
+            newdata["item_id"]=i["item_id"]
+            newdata["subscribed_qty"]=i["subscribed_qty"]
+            newdata["cost"]=i["cost"]
+            newdata["status"]=i["status"]
+            # newdata["phone"]=i["phone"]
+            # newdata["email"]=i["email"]
+
+            itemdata=db.Items.find_one({'_id':ObjectId(i['item_id']['$oid'])})
+            print(itemdata)        
+            newdata["food_waste_title"]=itemdata['food_waste_title']
+            newdata["business"]=itemdata["business"]
+            # newdata["description"]=itemdata['description']
+            newdata["applicable_tags"]=itemdata['applicable_tags']
+            final_result.append(newdata)
+        data_cursor = json.loads(json_util.dumps(final_result))
         return JsonResponse({
             "status": "Success",
             "message": "Fetched search results",
