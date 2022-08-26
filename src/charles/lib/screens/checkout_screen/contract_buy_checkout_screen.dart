@@ -185,6 +185,9 @@ class _ContractBuyCheckoutScreenState extends State<ContractBuyCheckoutScreen> {
                             onChanged: (value) {
                               setState(() {
                                 days = int.parse(value!);
+                                 taxes = days! * 30 * double.parse(widget.totalPrice!) * 15 / 100;
+                               shippingCharges = days! * 30 * double.parse(widget.totalPrice!) / 10;
+                                totalAmount = taxes! + (int.parse(widget.totalPrice!) * 30 * days!) + shippingCharges!;
                               });
                             },
                             decoration: InputDecoration(
