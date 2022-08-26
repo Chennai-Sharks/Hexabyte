@@ -17,7 +17,7 @@ class _MapWidgetState extends State<MapWidget> {
     return FlutterMap(
       options: MapOptions(
         center: LatLng(widget.myLocation[0], widget.myLocation[1]),
-        zoom: 5,
+        zoom: 8,
         // interactiveFlags: InteractiveFlag.all - InteractiveFlag.rotate,
       ),
       layers: [
