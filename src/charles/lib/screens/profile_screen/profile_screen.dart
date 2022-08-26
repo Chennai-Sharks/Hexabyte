@@ -16,10 +16,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-
+    Color? color =const Color(0xFFE9EFC0);
     return Scaffold(
-      backgroundColor: const Color(0xffEEEEEE),
+      backgroundColor: Colors.white,
       appBar: AppBar(
+       backgroundColor: const Color(0xFFE9EFC0),
         iconTheme: const IconThemeData(color: Colors.black),
         elevation: 0.0,
         centerTitle: true,
@@ -27,7 +28,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           "Your Profile",
           style: GoogleFonts.montserrat(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
         ),
-        backgroundColor: Colors.white,
+
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -51,71 +52,83 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
       body: RefreshIndicator(
         onRefresh: () async {},
-        child: ListView(
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
+        child: Container(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+Center(
+                child: Container(
                   color: Colors.white,
-                  padding: const EdgeInsets.only(bottom: 15.0, left: 15.0, top: 10),
+                  padding: const EdgeInsets.only(bottom: 15.0, left: 15.0, top: 20),
                   width: size.width,
                   child: Text(
                     FirebaseAuth.instance.currentUser!.phoneNumber!,
                     style: GoogleFonts.montserrat(fontWeight: FontWeight.bold, fontSize: 16.0),
                   ),
                 ),
-                const SizedBox(height: 16),
-                 Padding(
-                   padding: const EdgeInsets.all(8.0),
-                   child: Container(
-                    color: Colors.white,
-                    padding: const EdgeInsets.only(bottom: 10.0, left: 15.0, top: 10),
-                    width: size.width,
-                    child: Text(
-                      'Kishore M',
-                      style: GoogleFonts.montserrat(fontWeight: FontWeight.bold, fontSize: 24.0),
-                    ),
+              ),
+            
+              Center(
+                child: Container(
+                  color: Colors.white,
+                  padding: const EdgeInsets.only(bottom: 15.0, left: 15.0, top: 20),
+                  width: size.width,
+                  child: Text(
+                    FirebaseAuth.instance.currentUser!.phoneNumber!,
+                    style: GoogleFonts.montserrat(fontWeight: FontWeight.bold, fontSize: 16.0),
+                  ),
                 ),
+              ),
+             const   Center(
+                child:CircleAvatar(
+                  backgroundColor:Colors.white ,
+                  backgroundImage: AssetImage('assets/user-profile.png'),
+                  radius: 60,
+                  ),
+              ),
+               Padding(
+                 padding: const EdgeInsets.all(8.0),
+                 child: Container(
+                  color: Colors.white,
+                  padding: const EdgeInsets.only(bottom: 0, left: 15.0, top: 10),
+                  width: size.width,
+                  child: Text(
+                    'Kishore M',
+                    style: GoogleFonts.montserrat(fontWeight: FontWeight.bold, fontSize: 24.0),
+                  ),
+              ),
 
 
-                 ),
+               ),
                  Padding(
-                   padding: const EdgeInsets.all(8.0),
-                   child: Container(
-                    color: Colors.white,
-                    padding: const EdgeInsets.only(bottom: 10.0, left: 15.0, top: 10),
-                    width: size.width,
-                    child: Text(
-                      'Small Scale Business',
-                      style: GoogleFonts.montserrat( fontSize: 22.0),
-                    ),
-                ),
-                 ),
+                                  padding: const EdgeInsets.symmetric(horizontal:8.0),
+                                  child: Container(
+                                   color: Colors.white,
+                                   padding: const EdgeInsets.only(bottom: 10.0, left: 15.0, top: 10),
+                                   width: size.width,
+                                   child: Text(
+                                     'kishoremuthuselvan@gmail.com',
+                                     style: GoogleFonts.montserrat( fontSize: 20.0),
+                                   ),
+                               ),
+                                ),
 
-                Container(
+               Padding(
+                 padding: const EdgeInsets.symmetric(horizontal:8.0),
+                 child: Container(
                   color: Colors.white,
                   padding: const EdgeInsets.only(bottom: 10.0, left: 15.0, top: 10),
                   width: size.width,
                   child: Text(
-                    'Order History',
-                    style: GoogleFonts.montserrat(fontWeight: FontWeight.bold, fontSize: 22.0),
+                    'Small Scale Business',
+                    style: GoogleFonts.montserrat( fontSize: 22.0),
                   ),
-                ),
+              ),
+               ),
 
 
-                Container(
-                  color: Colors.white,
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: 10,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) => const OrderHistoryCard(),
-                  ),
-                ),
-              ],
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
