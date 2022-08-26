@@ -47,4 +47,10 @@ final List<Map<String, dynamic>> addProductFormStructure = [
       'edible_oilwaste',
     ],
   },
+  {
+    'type': 'date',
+    'name': 'expiry_date',
+    'label': 'Select Expiry date',
+    'required': true,
+  },
 ];
