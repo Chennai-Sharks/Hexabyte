@@ -1,21 +1,18 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hexabyte/screens/product_details_screen/api/purchase_product_api.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 import '../../common/custom_divider.dart';
 import '../profile_screen/profile_screen.dart';
 
 class CheckoutScreen extends StatefulWidget {
-  final String? totalPrice, sellerId, productName, weight, imageUrl;
+  final String? totalPrice, sellerId, productName, weight, imageUrl, productId;
 
   const CheckoutScreen(
-      {super.key,
-      this.totalPrice,
-      this.sellerId,
-      this.productName,
-      this.weight,
-      this.imageUrl});
+      {super.key, this.productId, this.totalPrice, this.sellerId, this.productName, this.weight, this.imageUrl});
 
   @override
   State<CheckoutScreen> createState() => _CheckoutScreenState();
@@ -60,8 +57,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   Widget build(BuildContext context) {
     double? taxes = double.parse(widget.totalPrice!) / 10;
     double? shippingCharges = double.parse(widget.totalPrice!) / 10;
-    double? totalAmount =
-        taxes + int.parse(widget.totalPrice!) + shippingCharges;
+    double? totalAmount = taxes + int.parse(widget.totalPrice!) + shippingCharges;
 
     Size? size = MediaQuery.of(context).size;
     return Scaffold(
@@ -81,10 +77,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const ProfileScreen()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileScreen()));
               },
               child: CircleAvatar(
                 backgroundColor: Colors.white,
@@ -134,17 +127,14 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     width: size.width * 0.12,
                     height: size.width * 0.12,
                     color: Colors.white,
-                    child: Image.asset(widget.imageUrl! == null
-                        ? 'assets/logo.png'
-                        : widget.imageUrl!),
+                    child: Image.asset(widget.imageUrl! == null ? 'assets/logo.png' : widget.imageUrl!),
                   ),
                 ),
                 SizedBox(
                   width: size.width * 0.6,
                   child: Text(
                     widget.productName!,
-                    style: GoogleFonts.montserrat(
-                        fontSize: 18, color: Colors.black),
+                    style: GoogleFonts.montserrat(fontSize: 18, color: Colors.black),
                   ),
                 ),
                 Padding(
@@ -153,8 +143,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     width: size.width * 0.16,
                     child: Text(
                       "Rs. " + widget.totalPrice! + " /-",
-                      style: GoogleFonts.montserrat(
-                          fontSize: 19, color: Colors.green.shade600),
+                      style: GoogleFonts.montserrat(fontSize: 19, color: Colors.green.shade600),
                     ),
                   ),
                 ),
@@ -190,8 +179,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         primary: const Color(0xFFB4E197),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12))),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
                     child: Center(
                       child: Text(
                         "Proceed To Payment",
@@ -199,7 +187,18 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                         style: GoogleFonts.montserrat(color: Colors.black),
                       ),
                     ),
-                    onPressed: () {
+                    onPressed: () async {
+                      await PurchaseProductApi.purchaseApi(data: {
+                        "customer_id": FirebaseAuth.instance.currentUser!.phoneNumber!.substring(3),
+                        "producer_id": widget.sellerId,
+                        "item_id": {"\$oid": widget.productId},
+                        "duration": 1,
+                        "subscribed_qty": widget.weight,
+                        "cost": double.parse(widget.totalPrice!),
+                        "ship_charge": shippingCharges,
+                        "tax": taxes,
+                        "one_time": false
+                      });
                       launchRazorPay(1);
                     },
                   ),

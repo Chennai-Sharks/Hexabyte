@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 
 class PurchaseProductApi {
   static Future<int> purchaseApi({required Map data}) async {
+    print(data);
     print('${Utils.backendUrl!}/customer_orders/${FirebaseAuth.instance.currentUser!.phoneNumber!.substring(3)}');
     final serverResponse = await http.post(
       Uri.parse('${Utils.backendUrl!}/purchase_item/'),

@@ -1,8 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hexabyte/screens/product_details_screen/api/purchase_product_api.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:recase/recase.dart';
 
@@ -10,19 +12,20 @@ import '../../common/custom_divider.dart';
 import '../profile_screen/profile_screen.dart';
 
 class ContractBuyCheckoutScreen extends StatefulWidget {
-  final String? totalPrice, sellerId, productName, weight, imageUrl;
+  final String? totalPrice, sellerId, productName, weight, imageUrl, productId;
 
-  const ContractBuyCheckoutScreen(
-      {super.key,
-      this.totalPrice,
-      this.sellerId,
-      this.productName,
-      this.weight,
-      this.imageUrl});
+  const ContractBuyCheckoutScreen({
+    super.key,
+    this.totalPrice,
+    this.sellerId,
+    this.productName,
+    this.weight,
+    this.imageUrl,
+    this.productId,
+  });
 
   @override
-  State<ContractBuyCheckoutScreen> createState() =>
-      _ContractBuyCheckoutScreenState();
+  State<ContractBuyCheckoutScreen> createState() => _ContractBuyCheckoutScreenState();
 }
 
 class _ContractBuyCheckoutScreenState extends State<ContractBuyCheckoutScreen> {
@@ -66,10 +69,8 @@ class _ContractBuyCheckoutScreenState extends State<ContractBuyCheckoutScreen> {
   @override
   Widget build(BuildContext context) {
     double? taxes = days! * 30 * double.parse(widget.totalPrice!) * 15 / 100;
-    double? shippingCharges =
-        days! * 30 * double.parse(widget.totalPrice!) / 10;
-    double? totalAmount =
-        taxes + (int.parse(widget.totalPrice!) * 30 * days!) + shippingCharges;
+    double? shippingCharges = days! * 30 * double.parse(widget.totalPrice!) / 10;
+    double? totalAmount = taxes + (int.parse(widget.totalPrice!) * 30 * days!) + shippingCharges;
 
     Size? size = MediaQuery.of(context).size;
     return Scaffold(
@@ -89,10 +90,7 @@ class _ContractBuyCheckoutScreenState extends State<ContractBuyCheckoutScreen> {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const ProfileScreen()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileScreen()));
               },
               child: CircleAvatar(
                 backgroundColor: Colors.white,
@@ -170,10 +168,7 @@ class _ContractBuyCheckoutScreenState extends State<ContractBuyCheckoutScreen> {
                               labelStyle: const TextStyle(
                                 color: Colors.black,
                               ),
-                              hintStyle: Theme.of(context)
-                                  .textTheme
-                                  .subtitle2!
-                                  .copyWith(
+                              hintStyle: Theme.of(context).textTheme.subtitle2!.copyWith(
                                     color: Colors.grey,
                                     fontSize: 17.0,
                                     fontWeight: FontWeight.w600,
@@ -203,9 +198,7 @@ class _ContractBuyCheckoutScreenState extends State<ContractBuyCheckoutScreen> {
                     width: size.width * 0.12,
                     height: size.width * 0.12,
                     color: Colors.white,
-                    child: Image.asset(widget.imageUrl! == null
-                        ? 'assets/logo.png'
-                        : widget.imageUrl!),
+                    child: Image.asset(widget.imageUrl! == null ? 'assets/logo.png' : widget.imageUrl!),
                   ),
                 ),
                 SizedBox(
@@ -213,8 +206,7 @@ class _ContractBuyCheckoutScreenState extends State<ContractBuyCheckoutScreen> {
                   child: Text(
                     widget.productName!.sentenceCase,
                     overflow: TextOverflow.ellipsis,
-                    style: GoogleFonts.montserrat(
-                        fontSize: 18, color: Colors.black),
+                    style: GoogleFonts.montserrat(fontSize: 18, color: Colors.black),
                   ),
                 ),
               ],
@@ -226,11 +218,9 @@ class _ContractBuyCheckoutScreenState extends State<ContractBuyCheckoutScreen> {
                 color: Color(0xFFE9EFC0),
               ),
             ),
-            InputOutputRow("Value of Product",
-                "Rs. ${int.parse(widget.totalPrice!) * 30 * days!} /-", ""),
+            InputOutputRow("Value of Product", "Rs. ${int.parse(widget.totalPrice!) * 30 * days!} /-", ""),
             InputOutputRow("Taxes", "Rs. $taxes /-", " (15%)"),
-            InputOutputRow(
-                "Shipping Charges", "Rs. $shippingCharges /-", " (10%)"),
+            InputOutputRow("Shipping Charges", "Rs. $shippingCharges /-", " (10%)"),
             const SizedBox(
               height: 40,
             ),
@@ -251,8 +241,7 @@ class _ContractBuyCheckoutScreenState extends State<ContractBuyCheckoutScreen> {
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         primary: const Color(0xFFB4E197),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12))),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
                     child: Center(
                       child: Text(
                         "Proceed To Payment",
@@ -260,7 +249,19 @@ class _ContractBuyCheckoutScreenState extends State<ContractBuyCheckoutScreen> {
                         style: GoogleFonts.montserrat(color: Colors.black),
                       ),
                     ),
-                    onPressed: () {
+                    onPressed: () async {
+                      final a = await PurchaseProductApi.purchaseApi(data: {
+                        "customer_id": FirebaseAuth.instance.currentUser!.phoneNumber!.substring(3),
+                        "producer_id": widget.sellerId,
+                        "item_id": {"\$oid": widget.productId},
+                        "duration": days! * 30,
+                        "subscribed_qty": widget.weight,
+                        "cost": double.parse(widget.totalPrice!),
+                        "ship_charge": shippingCharges,
+                        "tax": taxes,
+                        "one_time": false
+                      });
+                      print(a);
                       launchRazorPay(1);
                     },
                   ),
@@ -273,8 +274,7 @@ class _ContractBuyCheckoutScreenState extends State<ContractBuyCheckoutScreen> {
     );
   }
 
-  Widget InputOutputRow(
-      String? inputText, String? outputText, String? percentage) {
+  Widget InputOutputRow(String? inputText, String? outputText, String? percentage) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(

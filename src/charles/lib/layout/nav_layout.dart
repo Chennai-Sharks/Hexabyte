@@ -26,7 +26,7 @@ class NavigationLayoutState extends State<NavigationLayout> {
         ? [
             const HomeScreen(),
             const QuickBuyScreen(),
-            const CurationScreen(),
+            // const CurationScreen(),
             const OrderHistoryScreen(),
           ]
         : [
@@ -67,7 +67,7 @@ class NavigationLayoutState extends State<NavigationLayout> {
                     label: "Home",
                   ),
                   NavigationDestination(icon: FaIcon(FontAwesomeIcons.cartArrowDown, size: 20), label: 'Quick Buy'),
-                  NavigationDestination(icon: Icon(Icons.create, size: 20), label: 'Combo Buy'),
+                  // NavigationDestination(icon: Icon(Icons.create, size: 20), label: 'Combo Buy'),
                   NavigationDestination(icon: Icon(Icons.open_in_browser_rounded, size: 20), label: 'My orders'),
                 ]
               : const [
