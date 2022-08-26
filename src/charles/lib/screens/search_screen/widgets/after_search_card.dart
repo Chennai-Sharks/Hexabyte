@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexabyte/screens/product_details_screen/product_details_screen.dart';
+import 'package:recase/recase.dart';
 
 class AfterSearchCard extends StatelessWidget {
   final String? id;
@@ -61,18 +62,18 @@ class AfterSearchCard extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      // AutoSizeText(
+                      //   'Seller id: ${productData!['producer_id']}',
+                      //   style: GoogleFonts.montserrat(
+                      //     fontWeight: FontWeight.bold,
+                      //     fontSize: 18,
+                      //   ),
+                      // ),
+                      // const SizedBox(
+                      //   height: 6,
+                      // ),
                       AutoSizeText(
-                        'Seller id: ${productData!['producer_id']}',
-                        style: GoogleFonts.montserrat(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 6,
-                      ),
-                      AutoSizeText(
-                        name ?? 'N/A',
+                        (name ?? 'N/A').titleCase,
                         style: GoogleFonts.montserrat(
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
@@ -111,7 +112,7 @@ class AfterSearchCard extends StatelessWidget {
                         height: 6,
                       ),
                       AutoSizeText(
-                        '${price ?? 'N/A'}/- Rs per kg',
+                        '${price ?? '200'}/- Rs per kg',
                         overflow: TextOverflow.ellipsis,
                         style: GoogleFonts.montserrat(
                           fontWeight: FontWeight.bold,

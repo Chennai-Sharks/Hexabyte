@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hexabyte/screens/search_screen/api/Search_api.dart';
+import 'package:hexabyte/screens/search_screen/api/search_api.dart';
 import 'package:recase/recase.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

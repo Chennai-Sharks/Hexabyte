@@ -18,15 +18,15 @@ class CurationScreen extends StatefulWidget {
 
 class _CurationScreenState extends State<CurationScreen> {
   List<String?> preferenceList = [
-    'Food Waste',
-    'Organic Waste',
-    'Fruit Pulp',
-    'Fruit Peels',
-    'Fruit Seeds',
-    'Vegetable Peels',
-    'Sugary Starchy Waste',
-    'Fatty Food Waste',
-    'Edible Oil Waste',
+    'food_waste',
+    'organic_waste',
+    'fruit_pulp',
+    'fruit_peels',
+    'fruit_seeds',
+    'vegetable_peels',
+    'sugary_starchy_waste',
+    'fatty_foodwaste',
+    'edible_oilwaste',
   ];
   final _formKey = GlobalKey<FormBuilderState>();
   @override
@@ -42,7 +42,7 @@ class _CurationScreenState extends State<CurationScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Combo Buys',
+                  'Combo Buy',
                   style: GoogleFonts.montserrat(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
@@ -51,10 +51,7 @@ class _CurationScreenState extends State<CurationScreen> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const ProfileScreen()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileScreen()));
                   },
                   child: CircleAvatar(
                     backgroundColor: Colors.white,
@@ -84,10 +81,8 @@ class _CurationScreenState extends State<CurationScreen> {
       ),
       body: Container(
         height: size.height,
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage('assets/curation_bg.gif'))),
+        decoration:
+            const BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/curation_bg.gif'))),
         child: SingleChildScrollView(
           child: FormBuilder(
             key: _formKey,
@@ -95,48 +90,48 @@ class _CurationScreenState extends State<CurationScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 SizedBox(height: size.height * 0.05),
+                Text(
+                  'Select Tags',
+                  style: GoogleFonts.montserrat(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
                 Padding(
                   padding: const EdgeInsets.all(18),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: const Color(0xFFE9EFC0),
-                        borderRadius: BorderRadius.circular(20)),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Center(
-                        child: FormBuilderFilterChip(
-                          name: "preferences",
-                          spacing: 10,
-                          initialValue: const [],
-                          validator: (value) => value!.isEmpty
-                              ? 'This field cannot be empty.'
-                              : null,
-                          checkmarkColor: Colors.black,
-                          disabledColor: Colors.grey.shade100,
-                          crossAxisAlignment: WrapCrossAlignment.start,
-                          decoration: InputDecoration(
-                            labelText: "Pick any 3 out",
-                            border: InputBorder.none,
-                            labelStyle: GoogleFonts.montserrat(
-                              fontSize: 23,
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                            ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Center(
+                      child: FormBuilderFilterChip(
+                        name: "preferences",
+                        spacing: 10,
+                        initialValue: const [],
+                        validator: (value) => value!.isEmpty ? 'This field cannot be empty.' : null,
+                        checkmarkColor: Colors.black,
+                        disabledColor: Colors.grey.shade100,
+                        crossAxisAlignment: WrapCrossAlignment.start,
+                        decoration: InputDecoration(
+                          // labelText: "Pick",
+                          border: InputBorder.none,
+                          labelStyle: GoogleFonts.montserrat(
+                            fontSize: 25,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
                           ),
-                          options: (preferenceList)
-                              .map(
-                                (eachItem) => FormBuilderFieldOption(
-                                  key: Key(eachItem!),
-                                  value: eachItem,
-                                  child: Text(
-                                    eachItem.sentenceCase,
-                                    style: GoogleFonts.montserrat(
-                                        color: Colors.black),
-                                  ),
-                                ),
-                              )
-                              .toList(),
                         ),
+                        options: (preferenceList)
+                            .map(
+                              (eachItem) => FormBuilderFieldOption(
+                                key: Key(eachItem!),
+                                value: eachItem,
+                                child: Text(
+                                  eachItem.sentenceCase,
+                                  style: GoogleFonts.montserrat(color: Colors.black),
+                                ),
+                              ),
+                            )
+                            .toList(),
                       ),
                     ),
                   ),
@@ -157,32 +152,17 @@ class _CurationScreenState extends State<CurationScreen> {
                       onPressed: () async {
                         _formKey.currentState!.save();
                         if (_formKey.currentState!.validate()) {
-                          // EasyLoading.show(status: 'Loading...');
-                          // final formValue = {..._formKey.currentState!.value};
-                          final List<dynamic> finalList =
-                              _formKey.currentState!.value['preferences'];
+                          final List<dynamic> finalList = _formKey.currentState!.value['preferences'];
 
                           if (finalList.isEmpty) {
                             EasyLoading.dismiss();
-                            Fluttertoast.showToast(
-                                msg: 'No products has been added!');
-                          } else if (finalList.length > 3) {
-                            EasyLoading.dismiss();
-                            Fluttertoast.showToast(
-                                msg:
-                                    'Number of products must be less than or equal to 3 ... ');
+                            Fluttertoast.showToast(msg: 'No products has been added!');
                           } else {
-                            for (int i = 0; i < finalList.length; i++) {
-                              print(finalList[i]);
-                            }
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => CurationProviderPage(
-                                        preferencesList:
-                                            finalList as dynamic)));
-                            Fluttertoast.showToast(
-                                msg: 'Fetching your preferences ...');
+                                    builder: (context) => CurationProviderPage(preferencesList: finalList as dynamic)));
+                            Fluttertoast.showToast(msg: 'Fetching your preferences ...');
                           }
                         } else {
                           Fluttertoast.showToast(msg: 'Validation Failed ...');

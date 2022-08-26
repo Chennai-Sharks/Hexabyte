@@ -34,18 +34,9 @@ class _ListedProductsScreenState extends State<ListedProductsScreen> {
             ),
           ],
         ),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () {
-            Navigator.of(context).pushReplacement(MaterialPageRoute(
-                builder: (context) => const NavigationLayout(
-                      isConsumer: false,
-                    )));
-          },
-        ),
       ),
       body: FutureBuilder(
-          future: ListedProductApi.getMyProducts(data: data),
+          future: ListedProductApi.getMyProducts(),
           builder: (BuildContext context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:
@@ -58,14 +49,28 @@ class _ListedProductsScreenState extends State<ListedProductsScreen> {
                 }
               case ConnectionState.done:
                 {
+                  print('here');
+                  print(snapshot.data);
+                  final response = snapshot.data as List;
+                  if (response.isEmpty) {
+                    return const Center(child: Text('No data.'));
+                  }
                   return RefreshIndicator(
                     onRefresh: () async {
-                      ListedProductApi.getMyProducts(data: data);
+                      // ListedProductApi.getMyProducts(data: data);
                     },
                     child: ListView.builder(
-                      itemCount: 10,
-                      itemBuilder: (BuildContext context, index) =>
-                          const ListedProductCard(),
+                      itemCount: (snapshot.data as List).length,
+                      itemBuilder: (BuildContext context, index) => ListedProductCard(
+                        title: response[index]['food_waste_title'],
+                        description: response[index]['description'],
+                        business: response[index]['business'],
+                        subscribedQty: response[index]['subscribed_qty'],
+                        totalQty: response[index]['total_qty'],
+                        tags: response[index]['applicable_tags'],
+                        balanceQty: response[index]['balance_qty'],
+                        cost: response[index]['cost'],
+                      ),
                     ),
                   );
                 }

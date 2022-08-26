@@ -12,6 +12,9 @@ import 'package:hexabyte/screens/add_product_screen/config/form_structure.dart';
 import 'package:hexabyte/utils/utils.dart';
 import 'package:recase/recase.dart';
 
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl.dart';
+
 class AddProductsScreen extends StatefulWidget {
   const AddProductsScreen({Key? key}) : super(key: key);
 
@@ -20,6 +23,12 @@ class AddProductsScreen extends StatefulWidget {
 }
 
 class AddProductsScreenState extends State<AddProductsScreen> {
+  @override
+  void initState() {
+    super.initState();
+    initializeDateFormatting();
+  }
+
   final _formKey = GlobalKey<FormBuilderState>();
 
   @override
@@ -30,9 +39,7 @@ class AddProductsScreenState extends State<AddProductsScreen> {
         title: Text(
           "Add Your Product",
           style: GoogleFonts.montserrat(
-              fontSize: 24,
-              color: Theme.of(context).secondaryHeaderColor,
-              fontWeight: FontWeight.bold),
+              fontSize: 24, color: Theme.of(context).secondaryHeaderColor, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
         backgroundColor: const Color(0xFFE9EFC0),
@@ -68,20 +75,17 @@ class AddProductsScreenState extends State<AddProductsScreen> {
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 11.0),
+                                padding: const EdgeInsets.symmetric(horizontal: 11.0),
                                 child: Center(
                                   child: FormBuilderTextField(
                                     name: item['name'],
                                     decoration: InputDecoration(
                                       labelText: item['label'],
-                                      labelStyle: const TextStyle(
-                                          fontSize: 16, color: Colors.black),
+                                      labelStyle: const TextStyle(fontSize: 16, color: Colors.black),
                                       border: InputBorder.none,
                                     ),
 
-                                    maxLines:
-                                        item['multiline'] ?? false ? 5 : 1,
+                                    maxLines: item['multiline'] ?? false ? 5 : 1,
 
                                     // valueTransformer: (text) => num.tryParse(text),
                                     validator: FormBuilderValidators.compose([
@@ -97,9 +101,8 @@ class AddProductsScreenState extends State<AddProductsScreen> {
                           return Padding(
                             padding: const EdgeInsets.all(9),
                             child: Container(
-                              decoration: BoxDecoration(
-                                  color: Colors.grey.shade200,
-                                  borderRadius: BorderRadius.circular(20)),
+                              decoration:
+                                  BoxDecoration(color: Colors.grey.shade200, borderRadius: BorderRadius.circular(20)),
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Center(
@@ -107,13 +110,10 @@ class AddProductsScreenState extends State<AddProductsScreen> {
                                     name: item['name'],
                                     spacing: 10,
                                     initialValue: const [],
-                                    validator: (value) => value!.isEmpty
-                                        ? 'This field cannot be empty.'
-                                        : null,
+                                    validator: (value) => value!.isEmpty ? 'This field cannot be empty.' : null,
                                     checkmarkColor: Colors.black,
                                     disabledColor: Colors.grey.shade100,
-                                    crossAxisAlignment:
-                                        WrapCrossAlignment.start,
+                                    crossAxisAlignment: WrapCrossAlignment.start,
                                     decoration: InputDecoration(
                                       labelText: item['label'],
                                       border: InputBorder.none,
@@ -129,8 +129,7 @@ class AddProductsScreenState extends State<AddProductsScreen> {
                                             value: eachItem,
                                             child: Text(
                                               eachItem.sentenceCase,
-                                              style: GoogleFonts.montserrat(
-                                                  color: Colors.black),
+                                              style: GoogleFonts.montserrat(color: Colors.black),
                                             ),
                                           ),
                                         )
@@ -140,13 +139,40 @@ class AddProductsScreenState extends State<AddProductsScreen> {
                               ),
                             ),
                           );
+                        } else if (item['type'] == 'date') {
+                          return Padding(
+                            padding: const EdgeInsets.all(9.0),
+                            child: Container(
+                              decoration:
+                                  BoxDecoration(color: Colors.grey.shade200, borderRadius: BorderRadius.circular(20)),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Center(
+                                  child: FormBuilderDateTimePicker(
+                                    name: item['name'],
+                                    decoration: InputDecoration(
+                                      labelText: 'Select expiry date',
+                                      border: InputBorder.none,
+                                      labelStyle: GoogleFonts.montserrat(
+                                        fontSize: 18,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    initialDatePickerMode: DatePickerMode.day,
+                                    initialDate: DateTime.now(),
+                                    firstDate: DateTime.now(),
+                                    lastDate: DateTime(2023),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
                         } else {
                           return Padding(
                             padding: const EdgeInsets.all(9.0),
                             child: Container(
-                              decoration: BoxDecoration(
-                                  color: Colors.grey.shade200,
-                                  borderRadius: BorderRadius.circular(20)),
+                              decoration:
+                                  BoxDecoration(color: Colors.grey.shade200, borderRadius: BorderRadius.circular(20)),
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Center(
@@ -159,13 +185,10 @@ class AddProductsScreenState extends State<AddProductsScreen> {
                                       suffix: FaIcon(FontAwesomeIcons.calendar),
                                       hintText: '',
                                     ),
-                                    validator: FormBuilderValidators.compose([
-                                      FormBuilderValidators.required(context)
-                                    ]),
+                                    validator: FormBuilderValidators.compose([FormBuilderValidators.required(context)]),
                                     items: (item['values'] as List<String?>)
                                         .map((value) => DropdownMenuItem(
-                                              alignment:
-                                                  AlignmentDirectional.center,
+                                              alignment: AlignmentDirectional.center,
                                               value: value,
                                               child: Text(value!),
                                             ))
@@ -202,26 +225,23 @@ class AddProductsScreenState extends State<AddProductsScreen> {
                         if (_formKey.currentState!.validate()) {
                           EasyLoading.show(status: 'Loading...');
                           final formValue = {..._formKey.currentState!.value};
+                          print(formValue);
                           // formValue['age'] = int.parse(formValue['age']);
-                          formValue.update(
-                              'duration', (value) => int.parse(value));
-                          formValue.update(
-                              'total_qty', (value) => int.parse(value));
-                          formValue['producer_id'] = FirebaseAuth
-                              .instance.currentUser!.phoneNumber!
-                              .substring(3);
-                          final response =
-                              await AddProductApi.itemAddition(data: formValue);
+                          formValue.update('duration', (value) => int.parse(value));
+                          formValue.update('total_qty', (value) => int.parse(value));
+                          formValue.update('cost', (value) => int.parse(value));
+                          formValue.update('expiry_date', (value) => (value as DateTime).toString());
+
+                          formValue['producer_id'] = FirebaseAuth.instance.currentUser!.phoneNumber!.substring(3);
+                          final response = await AddProductApi.itemAddition(data: formValue);
 
                           if (response == 1) {
                             EasyLoading.dismiss();
-                            Fluttertoast.showToast(
-                                msg: 'Product added successfully!');
+                            Fluttertoast.showToast(msg: 'Product added successfully!');
 
                             navContext.pushReplacement(
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    const NavigationLayout(isConsumer: false),
+                                builder: (context) => const NavigationLayout(isConsumer: false),
                               ),
                             );
                           } else {
