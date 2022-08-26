@@ -37,7 +37,10 @@ class _QuickBuyScreenState extends State<QuickBuyScreen> {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileScreen()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ProfileScreen()));
               },
               child: CircleAvatar(
                 backgroundColor: Colors.white,
@@ -108,13 +111,14 @@ class _QuickBuyScreenState extends State<QuickBuyScreen> {
                         itemBuilder: (context, index) => SizedBox(
                           width: MediaQuery.of(context).size.width,
                           child: InfoCard(
-                            id: response[5 + index]['_id']['\$oid'],
-                            name: response[5 + index]['food_waste_title'],
-                            price: response[5 + index]['cost'],
-                            availableQty: response[5 + index]['balance_qty'],
+                            id: response[index]['_id']['\$oid'],
+                            name: response[index]['food_waste_title'],
+                            price: response[index]['cost'],
+                            availableQty: response[index]['balance_qty'],
                             distance: '4.9 km',
-                            duration: response[5 + index]['duration'],
-                            productData: response[5 + index],
+                            duration: response[index]['duration'],
+                            productData: response[index],
+                            imageUrl: 'assets/logo.png',
                           ),
                         ),
                       ),

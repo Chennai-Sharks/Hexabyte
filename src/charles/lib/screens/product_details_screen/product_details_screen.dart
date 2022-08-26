@@ -186,8 +186,9 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                         Container(
                           height: size.width * 0.4,
                           width: size.width * 0.4,
-                          child:
-                              Image.asset(widget.imageUrl!, fit: BoxFit.cover),
+                          child: Image.asset(
+                              widget.imageUrl ?? 'assets/logo.png',
+                              fit: BoxFit.cover),
                         )
                       ],
                     ),

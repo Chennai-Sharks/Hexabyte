@@ -37,7 +37,8 @@ class AfterSearchCard extends StatelessWidget {
           ));
         },
         child: Card(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
           elevation: 8,
           child: Row(
             children: [
@@ -134,16 +135,6 @@ class AfterSearchCard extends StatelessWidget {
                       ),
                       const SizedBox(
                         height: 6,
-                      ),
-                      AutoSizeText(
-                        ' 4.9 km',
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: GoogleFonts.montserrat(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.grey,
-                          fontSize: 15,
-                        ),
                       ),
                     ],
                   ),

@@ -64,7 +64,7 @@ class _ContractBuyCheckoutScreenState extends State<ContractBuyCheckoutScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double? taxes = days! * 30 * double.parse(widget.totalPrice!) / 10;
+    double? taxes = days! * 30 * double.parse(widget.totalPrice!) * 15 / 100;
     double? shippingCharges =
         days! * 30 * double.parse(widget.totalPrice!) / 10;
     double? totalAmount =
@@ -234,9 +234,10 @@ class _ContractBuyCheckoutScreenState extends State<ContractBuyCheckoutScreen> {
               ),
             ),
             InputOutputRow("Value of Product",
-                "Rs. ${int.parse(widget.totalPrice!) * 30 * days!} /-"),
-            InputOutputRow("Shipping Charges", "Rs. $shippingCharges /-"),
-            InputOutputRow("Taxes", "Rs. $taxes /-"),
+                "Rs. ${int.parse(widget.totalPrice!) * 30 * days!} /-", ""),
+            InputOutputRow("Taxes", "Rs. $taxes /-", " - 15 %"),
+            InputOutputRow(
+                "Shipping Charges", "Rs. $shippingCharges /-", " - 10%"),
             const SizedBox(
               height: 40,
             ),
@@ -279,11 +280,12 @@ class _ContractBuyCheckoutScreenState extends State<ContractBuyCheckoutScreen> {
     );
   }
 
-  Widget InputOutputRow(String? inputText, String? outputText) {
+  Widget InputOutputRow(
+      String? inputText, String? outputText, String? percentage) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Padding(
             padding: const EdgeInsets.only(left: 18.0),
@@ -292,6 +294,17 @@ class _ContractBuyCheckoutScreenState extends State<ContractBuyCheckoutScreen> {
               style: GoogleFonts.montserrat(
                 color: Colors.black,
                 fontSize: 20,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 18.0),
+            child: Text(
+              percentage!,
+              style: GoogleFonts.montserrat(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
               ),
             ),
           ),
