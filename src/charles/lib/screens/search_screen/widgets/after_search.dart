@@ -10,11 +10,7 @@ import 'package:hexabyte/screens/search_screen/widgets/map.dart';
 class AfterSearch extends StatefulWidget {
   final Function goBackToFirstSearch;
   final TextEditingController searchController;
-  const AfterSearch(
-      {Key? key,
-      required this.searchController,
-      required this.goBackToFirstSearch})
-      : super(key: key);
+  const AfterSearch({Key? key, required this.searchController, required this.goBackToFirstSearch}) : super(key: key);
 
   @override
   State<AfterSearch> createState() => _AfterSearchState();
@@ -36,8 +32,7 @@ class _AfterSearchState extends State<AfterSearch> {
             children: [
               SizedBox(height: MediaQuery.of(context).size.height * 0.06),
               Container(
-                padding:
-                    const EdgeInsets.only(left: 15.0, top: 2.0, bottom: 2.0),
+                padding: const EdgeInsets.only(left: 15.0, top: 2.0, bottom: 2.0),
                 margin: const EdgeInsets.only(left: 20, right: 20),
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -69,12 +64,11 @@ class _AfterSearchState extends State<AfterSearch> {
                             widget.goBackToFirstSearch();
                           },
                           decoration: InputDecoration(
-                            hintStyle:
-                                Theme.of(context).textTheme.subtitle2!.copyWith(
-                                      color: Colors.grey,
-                                      fontSize: 17.0,
-                                      fontWeight: FontWeight.w600,
-                                    ),
+                            hintStyle: Theme.of(context).textTheme.subtitle2!.copyWith(
+                                  color: Colors.grey,
+                                  fontSize: 17.0,
+                                  fontWeight: FontWeight.w600,
+                                ),
                             border: InputBorder.none,
                           ),
                         ),
@@ -114,8 +108,7 @@ class _AfterSearchState extends State<AfterSearch> {
                 height: height * 0.02,
               ),
               FutureBuilder(
-                future: SearchApi.productSearch(
-                    searchText: widget.searchController.text, isMap: true),
+                future: SearchApi.productSearch(searchText: widget.searchController.text, isMap: true),
                 builder: ((context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
                     print(snapshot.data);
@@ -138,8 +131,7 @@ class _AfterSearchState extends State<AfterSearch> {
                 height: height * 0.02,
               ),
               FutureBuilder(
-                future: SearchApi.productSearch(
-                    searchText: widget.searchController.text),
+                future: SearchApi.productSearch(searchText: widget.searchController.text),
                 builder: ((context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
                     print(snapshot.data);
@@ -153,7 +145,7 @@ class _AfterSearchState extends State<AfterSearch> {
                         child: AfterSearchCard(
                           id: response[index]['_id']['\$oid'],
                           name: response[index]['food_waste_title'],
-                          price: response[index]['amount_processed'],
+                          price: response[index]['cost'],
                           availableQty: response[index]['balance_qty'],
                           distance: '',
                           duration: response[index]['duration'],

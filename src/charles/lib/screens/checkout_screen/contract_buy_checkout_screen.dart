@@ -185,8 +185,8 @@ class _ContractBuyCheckoutScreenState extends State<ContractBuyCheckoutScreen> {
                             onChanged: (value) {
                               setState(() {
                                 days = int.parse(value!);
-                                 taxes = days! * 30 * double.parse(widget.totalPrice!) * 15 / 100;
-                               shippingCharges = days! * 30 * double.parse(widget.totalPrice!) / 10;
+                                taxes = days! * 30 * double.parse(widget.totalPrice!) * 15 / 100;
+                                shippingCharges = days! * 30 * double.parse(widget.totalPrice!) / 10;
                                 totalAmount = taxes! + (int.parse(widget.totalPrice!) * 30 * days!) + shippingCharges!;
                               });
                             },
@@ -225,7 +225,7 @@ class _ContractBuyCheckoutScreenState extends State<ContractBuyCheckoutScreen> {
                     width: size.width * 0.12,
                     height: size.width * 0.12,
                     color: Colors.white,
-                    child: Image.asset(widget.imageUrl! == null ? 'assets/logo.png' : widget.imageUrl!),
+                    child: Image.asset('assets/logo.png'),
                   ),
                 ),
                 SizedBox(

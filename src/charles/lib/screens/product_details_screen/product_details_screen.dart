@@ -162,7 +162,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                             SizedBox(
                               width: size.width * 0.45,
                               child: Text(
-                                'Seller id: ${widget.productData!['producer_id'] ?? 'N/A'}',
+                                'Seller phone no: ${widget.productData!['producer_id'] ?? 'N/A'}',
                                 style: GoogleFonts.montserrat(
                                   fontSize: 15.0,
                                   fontWeight: FontWeight.w400,
@@ -316,8 +316,8 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                       ],
                     ),
                     SizedBox(height: size.height * 0.025),
-                    qAndAns(color, "One Time Buy Price ", "Rs. $_oneTimeBuyCost /-", context),
-                    qAndAns(color, "Contract Buy Price ", "Rs. $_contractBuyCost /-", context),
+                    // qAndAns(color, "One Time Buy Price ", "Rs. $_oneTimeBuyCost /-", context),
+                    // qAndAns(color, "Contract Buy Price ", "Rs. $_contractBuyCost /-", context),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,

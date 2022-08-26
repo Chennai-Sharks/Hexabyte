@@ -153,7 +153,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     width: size.width * 0.12,
                     height: size.width * 0.12,
                     color: Colors.white,
-                    child: Image.asset(widget.imageUrl! == null ? 'assets/logo.png' : widget.imageUrl!),
+                    child: Image.asset('assets/logo.png'),
                   ),
                 ),
                 SizedBox(

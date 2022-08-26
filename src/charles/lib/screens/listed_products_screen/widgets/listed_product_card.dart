@@ -99,7 +99,7 @@ class ListedProductCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    'Wastes of vegetable from farms',
+                    description,
                     style: GoogleFonts.montserrat(
                       color: Colors.black,
                       fontSize: 14,
