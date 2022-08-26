@@ -44,10 +44,14 @@ class OrderHistoryScreen extends StatelessWidget {
                   builder: ((context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.done) {
                       print(snapshot.data);
-                      final response = snapshot.data as List<dynamic>;
+                      final response = snapshot.data as List<dynamic>?;
+                      if (response == null) {
+                        return const Center(child: Text('No orders found'));
+                      }
                       if (response.isEmpty) {
                         return const Center(child: Text('No orders found'));
                       }
+
                       return SizedBox(
                         width: MediaQuery.of(context).size.width,
                         child: Container(
