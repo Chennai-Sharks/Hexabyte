@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hexabyte/layout/nav_layout.dart';
-import 'package:hexabyte/screens/active_order_screen/api/listed_products_api.dart';
-import 'package:hexabyte/screens/active_order_screen/widgets/active_order_card.dart';
-import 'package:hexabyte/screens/listed_products_screen/api/listed_products_api.dart';
-import 'package:hexabyte/screens/listed_products_screen/widgets/listed_product_card.dart';
 import 'package:hexabyte/screens/producer_order_history_screen/api/producer_order_history_api.dart';
 import 'package:hexabyte/screens/producer_order_history_screen/widgets/producer_order_history_card.dart';
 
@@ -65,15 +60,17 @@ class _ActiveOrderScreenState extends State<ProducerOrderHistoryScreen> {
                     },
                     child: ListView.builder(
                       itemCount: (snapshot.data as List).length,
-                      itemBuilder: (BuildContext context, index) => ProducerOrderHistoryCard(
-                        title: response[index]['food_waste_title'],
-                        description: response[index]['description'],
-                        business: response[index]['business'],
-                        subscribedQty: response[index]['subscribed_qty'],
-                        totalQty: response[index]['total_qty'],
-                        tags: response[index]['applicable_tags'],
-                        balanceQty: response[index]['balance_qty'],
-                        cost: response[index]['cost'],
+                      itemBuilder: (BuildContext context, index) =>
+                          ProducerOrderHistoryCard(
+                        customerName: response[index]['customer_name'], // 6
+                        customerPhoneNumber: response[index]
+                            ['customer_phone'], //7
+                        foodWasteTitle: response[index]['food_waste_title'],
+                        subscribedQty: response[index]['subscribed_qty'], //
+                        status: response[index]['status'], //5
+                        tax: response[index]['tax'], //4
+                        shipCharge: response[index]['ship_charge'], // 3
+                        cost: response[index]['cost'], //
                       ),
                     ),
                   );

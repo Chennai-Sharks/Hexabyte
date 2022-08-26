@@ -1,27 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexabyte/common/dotted_seperator.dart';
-import 'package:hexabyte/utils/app_colors.dart';
-import 'package:recase/recase.dart';
 
 class ProducerOrderHistoryCard extends StatelessWidget {
-  final dynamic title;
-  final dynamic description;
-  final dynamic business;
+  final dynamic customerName;
+  final dynamic customerPhoneNumber;
+  final dynamic status;
   final dynamic subscribedQty;
-  final dynamic totalQty;
-  final dynamic tags;
-  final dynamic balanceQty;
+  final dynamic shipCharge;
+  final dynamic tax;
+  final dynamic foodWasteTitle;
   final dynamic cost;
   const ProducerOrderHistoryCard({
     Key? key,
-    required this.balanceQty,
-    required this.business,
-    required this.description,
+    required this.shipCharge,
+    required this.status,
+    required this.customerName,
     required this.subscribedQty,
-    required this.tags,
-    required this.title,
-    required this.totalQty,
+    required this.tax,
+    required this.customerPhoneNumber,
+    required this.foodWasteTitle,
     required this.cost,
   }) : super(key: key);
 
@@ -33,13 +31,16 @@ class ProducerOrderHistoryCard extends StatelessWidget {
         padding: const EdgeInsets.all(10.0),
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
-          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(15), boxShadow: [
-            BoxShadow(
-              color: Colors.black54,
-              spreadRadius: 1,
-              blurRadius: 0.5,
-            )
-          ]),
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(15),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black54,
+                  spreadRadius: 1,
+                  blurRadius: 0.5,
+                )
+              ]),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,15 +55,21 @@ class ProducerOrderHistoryCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          title,
-                          style: GoogleFonts.montserrat(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
+                          customerName,
+                          style: GoogleFonts.montserrat(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black),
                         ),
                         const SizedBox(
                           height: 8,
                         ),
                         Text(
-                          'Tags: ${(tags as List<dynamic>).join(', ').sentenceCase}',
-                          style: Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 12.0),
+                          'Food Waste Title: $foodWasteTitle',
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText1!
+                              .copyWith(fontSize: 12.0),
                         ),
                         const SizedBox(
                           height: 10,
@@ -73,7 +80,9 @@ class ProducerOrderHistoryCard extends StatelessWidget {
                             Text(
                               'Rs. $cost/-',
                               style: GoogleFonts.montserrat(
-                                  color: Colors.green.shade600, fontWeight: FontWeight.bold, fontSize: 16),
+                                  color: Colors.green.shade600,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16),
                             ),
                             const SizedBox(
                               height: 8,
