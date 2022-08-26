@@ -134,10 +134,8 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
       body: Container(
         height: size.height,
         width: size.width,
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage('assets/curation_bg.gif'))),
+        decoration:
+            const BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/curation_bg.gif'))),
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -356,7 +354,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) => CheckoutScreen(
-                                                    productId: widget.productData!['item_id']['\$oid'],
+                                                    productId: widget.productData!['_id']['\$oid'],
                                                     imageUrl: widget.imageUrl,
                                                     totalPrice: _oneTimeBuyCost.toString(),
                                                     sellerId: widget.productData!['food_waste_title'],

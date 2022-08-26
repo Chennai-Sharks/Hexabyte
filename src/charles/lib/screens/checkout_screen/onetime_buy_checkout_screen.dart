@@ -213,8 +213,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     );
   }
 
-  Widget InputOutputRow(
-      String? inputText, String? outputText, String? percentage) {
+  Widget InputOutputRow(String? inputText, String? outputText) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(
@@ -233,18 +232,18 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 6.0, top: 3),
-                child: Center(
-                  child: Text(
-                    percentage!,
-                    style: GoogleFonts.montserrat(
-                      color: Colors.black,
-                      fontSize: 13,
-                    ),
-                  ),
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.only(left: 6.0, top: 3),
+              //   child: Center(
+              //     child: Text(
+              //       percentage!,
+              //       style: GoogleFonts.montserrat(
+              //         color: Colors.black,
+              //         fontSize: 13,
+              //       ),
+              //     ),
+              //   ),
+              // ),
             ],
           ),
           Padding(
