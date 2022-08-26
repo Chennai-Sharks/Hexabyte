@@ -51,10 +51,14 @@ class _ListedProductsScreenState extends State<ListedProductsScreen> {
                 {
                   print('here');
                   print(snapshot.data);
-                  final response = snapshot.data as List;
+                  final response = snapshot.data as List?;
+                  if (response == null) {
+                    return const Center(child: Text('No data.'));
+                  }
                   if (response.isEmpty) {
                     return const Center(child: Text('No data.'));
                   }
+                  final reversedData = response.reversed.toList();
                   return RefreshIndicator(
                     onRefresh: () async {
                       // ListedProductApi.getMyProducts(data: data);
@@ -62,14 +66,14 @@ class _ListedProductsScreenState extends State<ListedProductsScreen> {
                     child: ListView.builder(
                       itemCount: (snapshot.data as List).length,
                       itemBuilder: (BuildContext context, index) => ListedProductCard(
-                        title: response[index]['food_waste_title'],
-                        description: response[index]['description'],
-                        business: response[index]['business'],
-                        subscribedQty: response[index]['subscribed_qty'],
-                        totalQty: response[index]['total_qty'],
-                        tags: response[index]['applicable_tags'],
-                        balanceQty: response[index]['balance_qty'],
-                        cost: response[index]['cost'],
+                        title: reversedData[index]['food_waste_title'],
+                        description: reversedData[index]['description'],
+                        business: reversedData[index]['business'],
+                        subscribedQty: reversedData[index]['subscribed_qty'],
+                        totalQty: reversedData[index]['total_qty'],
+                        tags: reversedData[index]['applicable_tags'],
+                        balanceQty: reversedData[index]['balance_qty'],
+                        cost: reversedData[index]['cost'],
                       ),
                     ),
                   );

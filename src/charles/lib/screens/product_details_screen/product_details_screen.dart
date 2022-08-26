@@ -55,8 +55,8 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
   void initState() {
     super.initState();
     initaliseRazorPay();
-    _oneTimeBuyCost = widget.productData!['cost_per_kg'] ?? 200;
-    _contractBuyCost = (widget.productData!['cost_per_kg'] ?? 200) * _days!;
+    _oneTimeBuyCost = widget.productData!['cost'] ?? 200;
+    _contractBuyCost = (widget.productData!['cost'] ?? 200) * _days!;
   }
 
   Razorpay? _razorpay;
@@ -75,7 +75,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
   void launchRazorPay() {
     var options = {
       "key": "rzp_test_ZdIhaAYTQ8urAz",
-      "amount": (int.parse(widget.productData!['cost_per_kg']!) * 100 * _stepperValue!).toString(),
+      "amount": (int.parse(widget.productData!['cost']!) * 100 * _stepperValue!).toString(),
       "name": "Kishore M",
       "description": "Purchase of ${widget.productName}"
     };
@@ -90,7 +90,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
   void launchRazorPayForMonths(int? val, int? stepperValue) {
     var options = {
       "key": "rzp_test_ZdIhaAYTQ8urAz",
-      "amount": (int.parse(widget.productData!['cost_per_kg']!) * 100 * val! * stepperValue!).toString(),
+      "amount": (int.parse(widget.productData!['cost']!) * 100 * val! * stepperValue!).toString(),
       "name": "Kishore M",
       "description": "Purchase of ${widget.productName}"
     };
@@ -204,9 +204,9 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
-                        _buildVerticalStack(context, '5.0', 'Points'),
-                        _buildVerticalStack(context, '29 Kms', 'Distance'),
-                        _buildVerticalStack(context, 'Rs ${widget.productData!['cost_per_kg'] ?? '200'}/-', 'Per Kg'),
+                        // _buildVerticalStack(context, '5.0', 'Points'),
+                        // _buildVerticalStack(context, '29 Kms', 'Distance'),
+                        _buildVerticalStack(context, '${widget.productData!['cost']}/-', 'per Kg'),
                       ],
                     ),
                     const CustomDividerView(
@@ -255,7 +255,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                                 ),
                               ),
                               Text(
-                                "${widget.productData!['cost_per_kg'] ?? '200'}  ",
+                                "${widget.productData!['cost'] ?? '200'}  ",
                                 style: GoogleFonts.montserrat(
                                     fontSize: 23, fontWeight: FontWeight.bold, color: Colors.green.shade700),
                               ),
@@ -294,7 +294,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                                       onPressed: (value) {
                                         setState(() {
                                           _stepperValue = value;
-                                          int price = widget.productData!['cost_per_kg'] ?? 200;
+                                          int price = widget.productData!['cost'] ?? 200;
                                           _oneTimeBuyCost = _stepperValue! * price;
                                           _contractBuyCost = _oneTimeBuyCost! * _days!;
                                         });

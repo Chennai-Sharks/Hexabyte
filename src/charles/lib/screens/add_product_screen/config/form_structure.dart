@@ -26,7 +26,7 @@ final List<Map<String, dynamic>> addProductFormStructure = [
   {
     'type': 'text',
     'name': 'total_qty',
-    'label': 'Enter total quantity',
+    'label': 'Enter total quantity (in KG)',
     'required': true,
     'keyboardType': TextInputType.number
   },
