@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hexabyte/screens/product_details_screen/api/purchase_product_api.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:recase/recase.dart';
 
@@ -8,15 +10,10 @@ import '../../common/custom_divider.dart';
 import '../profile_screen/profile_screen.dart';
 
 class CheckoutScreen extends StatefulWidget {
-  final String? totalPrice, sellerId, productName, weight, imageUrl;
+  final String? totalPrice, sellerId, productName, weight, imageUrl, productId;
 
   const CheckoutScreen(
-      {super.key,
-      this.totalPrice,
-      this.sellerId,
-      this.productName,
-      this.weight,
-      this.imageUrl});
+      {super.key, this.productId, this.totalPrice, this.sellerId, this.productName, this.weight, this.imageUrl});
 
   @override
   State<CheckoutScreen> createState() => _CheckoutScreenState();
@@ -61,8 +58,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   Widget build(BuildContext context) {
     double? taxes = double.parse(widget.totalPrice!) / 10;
     double? shippingCharges = double.parse(widget.totalPrice!) / 10;
-    double? totalAmount =
-        taxes + int.parse(widget.totalPrice!) + shippingCharges;
+    double? totalAmount = taxes + int.parse(widget.totalPrice!) + shippingCharges;
 
     Size? size = MediaQuery.of(context).size;
     return Scaffold(
@@ -83,10 +79,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const ProfileScreen()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileScreen()));
               },
               child: CircleAvatar(
                 backgroundColor: Colors.white,
@@ -109,105 +102,112 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           ),
         ),
       ),
-      body: Container(
-        height: size.height,
-        width: size.width,
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage('assets/curation_bg.gif'))),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(18.0),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.all(18.0),
+                child: Container(
+                    height: size.height * 0.25,
+                    width: size.width * 0.8,
+                    color: Colors.white,
+                    child: SvgPicture.asset(
+                      'assets/credit_card.svg',
+                    )),
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
                   child: Container(
-                      height: size.height * 0.25,
-                      width: size.width * 0.8,
-                      color: Colors.white,
-                      child: SvgPicture.asset(
-                        'assets/credit_card.svg',
-                      )),
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Container(
-                      width: size.width * 0.12,
-                      height: size.width * 0.12,
-                      color: Colors.white,
-                      child: Image.asset(widget.imageUrl! == null
-                          ? 'assets/logo.png'
-                          : widget.imageUrl!),
-                    ),
+                    width: size.width * 0.12,
+                    height: size.width * 0.12,
+                    color: Colors.white,
+                    child: Image.asset(widget.imageUrl! == null ? 'assets/logo.png' : widget.imageUrl!),
                   ),
-                  SizedBox(
-                    width: size.width * 0.6,
-                    child: Text(
-                      widget.productName!.sentenceCase,
-                      style: GoogleFonts.montserrat(
-                          fontSize: 18, color: Colors.black),
-                    ),
+                ),
+                SizedBox(
+                  width: size.width * 0.6,
+                  child: Text(
+                    widget.productName!,
+                    style: GoogleFonts.montserrat(fontSize: 18, color: Colors.black),
                   ),
-                ],
-              ),
-              const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: CustomDividerView(
-                  dividerHeight: 1.0,
-                  color: Color(0xFFE9EFC0),
                 ),
-              ),
-              InputOutputRow(
-                  "Value of Product", "Rs. ${widget.totalPrice!} /-", ""),
-              InputOutputRow(
-                  "Shipping Charges", "Rs. $shippingCharges /-", "(10%)"),
-              InputOutputRow("Taxes", "Rs. $taxes/-", "(15%)"),
-              const SizedBox(
-                height: 40,
-              ),
-              TotalInputOutputRow("Total Amount", "Rs. $totalAmount /-"),
-              const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: CustomDividerView(
-                  dividerHeight: 1.0,
-                  color: Color(0xFFE9EFC0),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Center(
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   child: SizedBox(
-                    width: size.width * .40,
-                    height: size.height * .08,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          primary: const Color(0xFFB4E197),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12))),
-                      child: Center(
-                        child: Text(
-                          "Proceed To Payment",
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.montserrat(color: Colors.black),
-                        ),
-                      ),
-                      onPressed: () {
-                        launchRazorPay(1);
-                      },
+                    width: size.width * 0.16,
+                    child: Text(
+                      "Rs. " + widget.totalPrice! + " /-",
+                      style: GoogleFonts.montserrat(fontSize: 19, color: Colors.green.shade600),
                     ),
                   ),
                 ),
+              ],
+            ),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: CustomDividerView(
+                dividerHeight: 1.0,
+                color: Color(0xFFE9EFC0),
               ),
-            ],
-          ),
+            ),
+            InputOutputRow("Value of Product", "Rs. ${widget.totalPrice!} /-"),
+            InputOutputRow("Shipping Charges", "Rs. $shippingCharges /-"),
+            InputOutputRow("Taxes", "Rs. $taxes/-"),
+            const SizedBox(
+              height: 40,
+            ),
+            TotalInputOutputRow("Total Amount", "Rs. $totalAmount /-"),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: CustomDividerView(
+                dividerHeight: 1.0,
+                color: Color(0xFFE9EFC0),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Center(
+                child: SizedBox(
+                  width: size.width * .40,
+                  height: size.height * .08,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        primary: const Color(0xFFB4E197),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
+                    child: Center(
+                      child: Text(
+                        "Proceed To Payment",
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.montserrat(color: Colors.black),
+                      ),
+                    ),
+                    onPressed: () async {
+                      await PurchaseProductApi.purchaseApi(data: {
+                        "customer_id": FirebaseAuth.instance.currentUser!.phoneNumber!.substring(3),
+                        "producer_id": widget.sellerId,
+                        "item_id": {"\$oid": widget.productId},
+                        "duration": 1,
+                        "subscribed_qty": widget.weight,
+                        "cost": double.parse(widget.totalPrice!),
+                        "ship_charge": shippingCharges,
+                        "tax": taxes,
+                        "one_time": false
+                      });
+                      launchRazorPay(1);
+                    },
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

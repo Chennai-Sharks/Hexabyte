@@ -44,10 +44,14 @@ class OrderHistoryScreen extends StatelessWidget {
                   builder: ((context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.done) {
                       print(snapshot.data);
-                      final response = snapshot.data as List<dynamic>;
+                      final response = snapshot.data as List<dynamic>?;
+                      if (response == null) {
+                        return const Center(child: Text('No orders found'));
+                      }
                       if (response.isEmpty) {
                         return const Center(child: Text('No orders found'));
                       }
+
                       return SizedBox(
                         width: MediaQuery.of(context).size.width,
                         child: Container(
@@ -59,7 +63,7 @@ class OrderHistoryScreen extends StatelessWidget {
                             itemBuilder: (context, index) => OrderHistoryCard(
                               id: response[index]['item_id']['\$oid'],
                               name: response[index]['food_waste_title'] ?? 'Vegetable peels',
-                              price: response[index]['cost_per_kg'] * response[index]['subscribed_qty'] ?? 200,
+                              price: response[index]['cost'] * response[index]['subscribed_qty'] ?? 200,
                               subscriptedQty: response[index]['subscribed_qty'] ?? 50,
                               duration: response[index]['duration'] ?? 1,
                               isOneTime: response[index]['one_time'] ?? true,

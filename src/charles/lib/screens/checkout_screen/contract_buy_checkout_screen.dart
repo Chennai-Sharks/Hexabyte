@@ -1,8 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hexabyte/screens/product_details_screen/api/purchase_product_api.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:recase/recase.dart';
 
@@ -10,19 +12,20 @@ import '../../common/custom_divider.dart';
 import '../profile_screen/profile_screen.dart';
 
 class ContractBuyCheckoutScreen extends StatefulWidget {
-  final String? totalPrice, sellerId, productName, weight, imageUrl;
+  final String? totalPrice, sellerId, productName, weight, imageUrl, productId;
 
-  const ContractBuyCheckoutScreen(
-      {super.key,
-      this.totalPrice,
-      this.sellerId,
-      this.productName,
-      this.weight,
-      this.imageUrl});
+  const ContractBuyCheckoutScreen({
+    super.key,
+    this.totalPrice,
+    this.sellerId,
+    this.productName,
+    this.weight,
+    this.imageUrl,
+    this.productId,
+  });
 
   @override
-  State<ContractBuyCheckoutScreen> createState() =>
-      _ContractBuyCheckoutScreenState();
+  State<ContractBuyCheckoutScreen> createState() => _ContractBuyCheckoutScreenState();
 }
 
 class _ContractBuyCheckoutScreenState extends State<ContractBuyCheckoutScreen> {
@@ -66,10 +69,8 @@ class _ContractBuyCheckoutScreenState extends State<ContractBuyCheckoutScreen> {
   @override
   Widget build(BuildContext context) {
     double? taxes = days! * 30 * double.parse(widget.totalPrice!) * 15 / 100;
-    double? shippingCharges =
-        days! * 30 * double.parse(widget.totalPrice!) / 10;
-    double? totalAmount =
-        taxes + (int.parse(widget.totalPrice!) * 30 * days!) + shippingCharges;
+    double? shippingCharges = days! * 30 * double.parse(widget.totalPrice!) / 10;
+    double? totalAmount = taxes + (int.parse(widget.totalPrice!) * 30 * days!) + shippingCharges;
 
     Size? size = MediaQuery.of(context).size;
     return Scaffold(
@@ -90,10 +91,7 @@ class _ContractBuyCheckoutScreenState extends State<ContractBuyCheckoutScreen> {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const ProfileScreen()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileScreen()));
               },
               child: CircleAvatar(
                 backgroundColor: Colors.white,
@@ -116,174 +114,168 @@ class _ContractBuyCheckoutScreenState extends State<ContractBuyCheckoutScreen> {
           ),
         ),
       ),
-      body: Container(
-        height: size.height,
-        width: size.width,
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage('assets/curation_bg.gif'))),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(18.0),
-                  child: Container(
-                      height: size.height * 0.25,
-                      width: size.width * 0.8,
-                      color: Colors.white,
-                      child: SvgPicture.asset(
-                        'assets/credit_card.svg',
-                      )),
-                ),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.all(18.0),
+                child: Container(
+                    height: size.height * 0.25,
+                    width: size.width * 0.8,
+                    color: Colors.white,
+                    child: SvgPicture.asset(
+                      'assets/credit_card.svg',
+                    )),
               ),
-              FormBuilder(
-                key: _formKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.all(9),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.grey.shade200,
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey[300]!,
-                              blurRadius: 2.0,
-                              spreadRadius: 0.0,
-                              offset: const Offset(2.0, 2.0),
-                            )
-                          ],
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 11.0),
-                          child: Center(
-                            child: FormBuilderTextField(
-                              name: 'duration',
-                              initialValue: '1',
-                              maxLength: 10,
-                              onChanged: (value) {
-                                setState(() {
-                                  days = int.parse(value!);
-                                });
-                              },
-                              decoration: InputDecoration(
-                                labelText: 'Enter number of months:',
-                                labelStyle: const TextStyle(
-                                  color: Colors.black,
-                                ),
-                                hintStyle: Theme.of(context)
-                                    .textTheme
-                                    .subtitle2!
-                                    .copyWith(
-                                      color: Colors.grey,
-                                      fontSize: 17.0,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                counterText: '',
-                                border: InputBorder.none,
+            ),
+            FormBuilder(
+              key: _formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(9),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade200,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey[300]!,
+                            blurRadius: 2.0,
+                            spreadRadius: 0.0,
+                            offset: const Offset(2.0, 2.0),
+                          )
+                        ],
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 11.0),
+                        child: Center(
+                          child: FormBuilderTextField(
+                            name: 'duration',
+                            initialValue: '1',
+                            maxLength: 10,
+                            onChanged: (value) {
+                              setState(() {
+                                days = int.parse(value!);
+                              });
+                            },
+                            decoration: InputDecoration(
+                              labelText: 'Enter number of months:',
+                              labelStyle: const TextStyle(
+                                color: Colors.black,
                               ),
-                              validator: FormBuilderValidators.compose([
-                                FormBuilderValidators.required(context),
-                              ]),
-                              keyboardType: TextInputType.number,
+                              hintStyle: Theme.of(context).textTheme.subtitle2!.copyWith(
+                                    color: Colors.grey,
+                                    fontSize: 17.0,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                              counterText: '',
+                              border: InputBorder.none,
                             ),
+                            validator: FormBuilderValidators.compose([
+                              FormBuilderValidators.required(context),
+                            ]),
+                            keyboardType: TextInputType.number,
                           ),
                         ),
                       ),
                     ),
-                  ],
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Container(
-                      width: size.width * 0.12,
-                      height: size.width * 0.12,
-                      color: Colors.white,
-                      child: Image.asset(widget.imageUrl! == null
-                          ? 'assets/logo.png'
-                          : widget.imageUrl!),
-                    ),
-                  ),
-                  SizedBox(
-                    width: size.width * 0.8,
-                    child: Text(
-                      widget.productName!.sentenceCase,
-                      overflow: TextOverflow.ellipsis,
-                      style: GoogleFonts.montserrat(
-                          fontSize: 18, color: Colors.black),
-                    ),
                   ),
                 ],
               ),
-              const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: CustomDividerView(
-                  dividerHeight: 1.0,
-                  color: Color(0xFFE9EFC0),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Container(
+                    width: size.width * 0.12,
+                    height: size.width * 0.12,
+                    color: Colors.white,
+                    child: Image.asset(widget.imageUrl! == null ? 'assets/logo.png' : widget.imageUrl!),
+                  ),
                 ),
-              ),
-              InputOutputRow("Value of Product",
-                  "Rs. ${int.parse(widget.totalPrice!) * 30 * days!} /-", ""),
-              InputOutputRow("Taxes", "Rs. $taxes /-", " (15%)"),
-              InputOutputRow(
-                  "Shipping Charges", "Rs. $shippingCharges /-", " (10%)"),
-              const SizedBox(
-                height: 40,
-              ),
-              TotalInputOutputRow("Total Amount", "Rs. $totalAmount /-"),
-              const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: CustomDividerView(
-                  dividerHeight: 1.0,
-                  color: Color(0xFFE9EFC0),
+                SizedBox(
+                  width: size.width * 0.8,
+                  child: Text(
+                    widget.productName!.sentenceCase,
+                    overflow: TextOverflow.ellipsis,
+                    style: GoogleFonts.montserrat(fontSize: 18, color: Colors.black),
+                  ),
                 ),
+              ],
+            ),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: CustomDividerView(
+                dividerHeight: 1.0,
+                color: Color(0xFFE9EFC0),
               ),
-              Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Center(
-                  child: SizedBox(
-                    width: size.width * .40,
-                    height: size.height * .08,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          primary: const Color(0xFFB4E197),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12))),
-                      child: Center(
-                        child: Text(
-                          "Proceed To Payment",
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.montserrat(color: Colors.black),
-                        ),
+            ),
+            InputOutputRow("Value of Product", "Rs. ${int.parse(widget.totalPrice!) * 30 * days!} /-", ""),
+            InputOutputRow("Taxes", "Rs. $taxes /-", " (15%)"),
+            InputOutputRow("Shipping Charges", "Rs. $shippingCharges /-", " (10%)"),
+            const SizedBox(
+              height: 40,
+            ),
+            TotalInputOutputRow("Total Amount", "Rs. $totalAmount /-"),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: CustomDividerView(
+                dividerHeight: 1.0,
+                color: Color(0xFFE9EFC0),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Center(
+                child: SizedBox(
+                  width: size.width * .40,
+                  height: size.height * .08,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        primary: const Color(0xFFB4E197),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
+                    child: Center(
+                      child: Text(
+                        "Proceed To Payment",
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.montserrat(color: Colors.black),
                       ),
-                      onPressed: () {
-                        launchRazorPay(1);
-                      },
                     ),
+                    onPressed: () async {
+                      final a = await PurchaseProductApi.purchaseApi(data: {
+                        "customer_id": FirebaseAuth.instance.currentUser!.phoneNumber!.substring(3),
+                        "producer_id": widget.sellerId,
+                        "item_id": {"\$oid": widget.productId},
+                        "duration": days! * 30,
+                        "subscribed_qty": widget.weight,
+                        "cost": double.parse(widget.totalPrice!),
+                        "ship_charge": shippingCharges,
+                        "tax": taxes,
+                        "one_time": false
+                      });
+                      print(a);
+                      launchRazorPay(1);
+                    },
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
   }
 
-  Widget InputOutputRow(
-      String? inputText, String? outputText, String? percentage) {
+  Widget InputOutputRow(String? inputText, String? outputText, String? percentage) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(

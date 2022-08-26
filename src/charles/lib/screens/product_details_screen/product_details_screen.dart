@@ -75,10 +75,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
   void launchRazorPay() {
     var options = {
       "key": "rzp_test_ZdIhaAYTQ8urAz",
-      "amount": (int.parse(widget.productData!['cost_per_kg']!) *
-              100 *
-              _stepperValue!)
-          .toString(),
+      "amount": (int.parse(widget.productData!['cost_per_kg']!) * 100 * _stepperValue!).toString(),
       "name": "Kishore M",
       "description": "Purchase of ${widget.productName}"
     };
@@ -93,11 +90,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
   void launchRazorPayForMonths(int? val, int? stepperValue) {
     var options = {
       "key": "rzp_test_ZdIhaAYTQ8urAz",
-      "amount": (int.parse(widget.productData!['cost_per_kg']!) *
-              100 *
-              val! *
-              stepperValue!)
-          .toString(),
+      "amount": (int.parse(widget.productData!['cost_per_kg']!) * 100 * val! * stepperValue!).toString(),
       "name": "Kishore M",
       "description": "Purchase of ${widget.productName}"
     };
@@ -133,8 +126,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
           IconButton(
             icon: const Icon(Icons.search),
             onPressed: () {
-              Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => const SearchPage()));
+              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const SearchPage()));
             },
           ),
         ],
@@ -164,11 +156,8 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                             SizedBox(
                               width: size.width * 0.45,
                               child: Text(
-                                widget.productData!['food_waste_title'] ??
-                                    'N/A',
-                                style: GoogleFonts.montserrat(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 24.0),
+                                widget.productData!['food_waste_title'] ?? 'N/A',
+                                style: GoogleFonts.montserrat(fontWeight: FontWeight.bold, fontSize: 24.0),
                               ),
                             ),
                             const SizedBox(height: 8),
@@ -189,9 +178,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                         Container(
                           height: size.width * 0.4,
                           width: size.width * 0.4,
-                          child: Image.asset(
-                              widget.imageUrl ?? 'assets/logo.png',
-                              fit: BoxFit.cover),
+                          child: Image.asset(widget.imageUrl ?? 'assets/logo.png', fit: BoxFit.cover),
                         )
                       ],
                     ),
@@ -201,15 +188,12 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                         shrinkWrap: true,
                         scrollDirection: Axis.horizontal,
                         physics: const BouncingScrollPhysics(),
-                        itemCount:
-                            widget.productData!['applicable_tags'].length,
+                        itemCount: widget.productData!['applicable_tags'].length,
                         itemBuilder: (context, index) => Padding(
                           padding: const EdgeInsets.all(5.0),
                           child: Chip(
                             label: Text(
-                              widget.productData!['applicable_tags'][index]
-                                  .toString()
-                                  .sentenceCase,
+                              widget.productData!['applicable_tags'][index].toString().sentenceCase,
                               textAlign: TextAlign.left,
                             ),
                           ),
@@ -224,10 +208,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                       children: <Widget>[
                         _buildVerticalStack(context, '5.0', 'Points'),
                         _buildVerticalStack(context, '29 Kms', 'Distance'),
-                        _buildVerticalStack(
-                            context,
-                            'Rs ${widget.productData!['cost_per_kg'] ?? '200'}/-',
-                            'Per Kg'),
+                        _buildVerticalStack(context, 'Rs ${widget.productData!['cost_per_kg'] ?? '200'}/-', 'Per Kg'),
                       ],
                     ),
                     const CustomDividerView(
@@ -255,8 +236,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(15, 0, 15, 25.0),
                       child: Text(
-                        "Description: " +
-                            (widget.productData!['description'] ?? 'N/A'),
+                        "Description: " + (widget.productData!['description'] ?? 'N/A'),
                         style: GoogleFonts.montserrat(
                           fontSize: 18,
                         ),
@@ -279,9 +259,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                               Text(
                                 "${widget.productData!['cost_per_kg'] ?? '200'}  ",
                                 style: GoogleFonts.montserrat(
-                                    fontSize: 23,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.green.shade700),
+                                    fontSize: 23, fontWeight: FontWeight.bold, color: Colors.green.shade700),
                               ),
                               Text(
                                 "/-  per kg",
@@ -313,19 +291,14 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                                       iconColor: Color(0xFFB4E197),
                                       iconIncrementColor: Color(0xFFB4E197),
                                       defaultValue: 1,
-                                      max: widget.productData!['balance_qty'] ??
-                                          1,
+                                      max: widget.productData!['balance_qty'] ?? 1,
                                       min: 1,
                                       onPressed: (value) {
                                         setState(() {
                                           _stepperValue = value;
-                                          int price = widget.productData![
-                                                  'cost_per_kg'] ??
-                                              200;
-                                          _oneTimeBuyCost =
-                                              _stepperValue! * price;
-                                          _contractBuyCost =
-                                              _oneTimeBuyCost! * _days!;
+                                          int price = widget.productData!['cost_per_kg'] ?? 200;
+                                          _oneTimeBuyCost = _stepperValue! * price;
+                                          _contractBuyCost = _oneTimeBuyCost! * _days!;
                                         });
                                       },
                                     ),
@@ -335,9 +308,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
                                     'Kgs',
-                                    style: GoogleFonts.montserrat(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold),
+                                    style: GoogleFonts.montserrat(fontSize: 18, fontWeight: FontWeight.bold),
                                   ),
                                 )
                               ],
@@ -347,10 +318,8 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                       ],
                     ),
                     SizedBox(height: size.height * 0.025),
-                    qAndAns(color, "One Time Buy Price ",
-                        "Rs. $_oneTimeBuyCost /-", context),
-                    qAndAns(color, "Contract Buy Price ",
-                        "Rs. $_contractBuyCost /-", context),
+                    qAndAns(color, "One Time Buy Price ", "Rs. $_oneTimeBuyCost /-", context),
+                    qAndAns(color, "Contract Buy Price ", "Rs. $_contractBuyCost /-", context),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -376,34 +345,23 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                                     child: ElevatedButton(
                                       style: ElevatedButton.styleFrom(
                                           primary: const Color(0xFFB4E197),
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(12))),
+                                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
                                       child: Text(
                                         "One-time Buy",
-                                        style: GoogleFonts.montserrat(
-                                            color: Colors.black),
+                                        style: GoogleFonts.montserrat(color: Colors.black),
                                       ),
                                       onPressed: () {
                                         //  launchRazorPay();
                                         Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                                builder: (context) =>
-                                                    CheckoutScreen(
-                                                        imageUrl:
-                                                            widget.imageUrl,
-                                                        totalPrice:
-                                                            _oneTimeBuyCost
-                                                                .toString(),
-                                                        sellerId: widget
-                                                                .productData![
-                                                            'food_waste_title'],
-                                                        productName: widget
-                                                                .productData![
-                                                            'food_waste_title'],
-                                                        weight: _stepperValue
-                                                            .toString())));
+                                                builder: (context) => CheckoutScreen(
+                                                    productId: widget.productData!['item_id']['\$oid'],
+                                                    imageUrl: widget.imageUrl,
+                                                    totalPrice: _oneTimeBuyCost.toString(),
+                                                    sellerId: widget.productData!['food_waste_title'],
+                                                    productName: widget.productData!['food_waste_title'],
+                                                    weight: _stepperValue.toString())));
                                       },
                                     ),
                                   ),
@@ -418,33 +376,24 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                                     child: ElevatedButton(
                                       style: ElevatedButton.styleFrom(
                                           primary: const Color(0xFFB4E197),
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(12))),
+                                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
                                       child: Text(
                                         "Contract Buy",
-                                        style: GoogleFonts.montserrat(
-                                            color: Colors.black),
+                                        style: GoogleFonts.montserrat(color: Colors.black),
                                       ),
                                       onPressed: () {
+                                        print('here');
+                                        print(widget.productData);
                                         Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                                builder: (context) =>
-                                                    ContractBuyCheckoutScreen(
-                                                        imageUrl:
-                                                            widget.imageUrl,
-                                                        totalPrice:
-                                                            _contractBuyCost
-                                                                .toString(),
-                                                        sellerId: widget
-                                                                .productData![
-                                                            'food_waste_title'],
-                                                        productName: widget
-                                                                .productData![
-                                                            'food_waste_title'],
-                                                        weight: _stepperValue
-                                                            .toString())));
+                                                builder: (context) => ContractBuyCheckoutScreen(
+                                                    productId: widget.productData!['_id']['\$oid'],
+                                                    imageUrl: widget.imageUrl,
+                                                    totalPrice: _contractBuyCost.toString(),
+                                                    sellerId: widget.productData!['food_waste_title'],
+                                                    productName: widget.productData!['food_waste_title'],
+                                                    weight: _stepperValue.toString())));
                                       },
                                     ),
                                   ),
@@ -465,16 +414,9 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
     );
   }
 
-  var monthOptions = [
-    '30 month',
-    '3 months',
-    '6 months',
-    '12 months',
-    '24 months'
-  ];
+  var monthOptions = ['30 month', '3 months', '6 months', '12 months', '24 months'];
 
-  Widget qAndAns(
-      Color? color, String? question, String? ans, BuildContext context) {
+  Widget qAndAns(Color? color, String? question, String? ans, BuildContext context) {
     Size? size = MediaQuery.of(context).size;
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -485,8 +427,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
             width: size.width * 0.43,
             child: Text(
               question!,
-              style: GoogleFonts.montserrat(
-                  fontSize: 16, fontWeight: FontWeight.bold),
+              style: GoogleFonts.montserrat(fontSize: 16, fontWeight: FontWeight.bold),
             ),
           ),
         ),
@@ -507,9 +448,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
   }
 }
 
-Expanded _buildVerticalStack(
-        BuildContext context, String title, String subtitle) =>
-    Expanded(
+Expanded _buildVerticalStack(BuildContext context, String title, String subtitle) => Expanded(
       child: SizedBox(
         height: 60.0,
         child: Column(
@@ -518,10 +457,7 @@ Expanded _buildVerticalStack(
           children: <Widget>[
             Text(
               title,
-              style: Theme.of(context)
-                  .textTheme
-                  .subtitle2!
-                  .copyWith(fontSize: 17.0, fontWeight: FontWeight.bold),
+              style: Theme.of(context).textTheme.subtitle2!.copyWith(fontSize: 17.0, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 4),
             Text(subtitle,
