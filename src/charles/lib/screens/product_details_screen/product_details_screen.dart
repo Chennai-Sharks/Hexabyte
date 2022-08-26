@@ -139,16 +139,19 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          height: size.height,
-          color: Colors.white,
+      body: Container(
+        height: size.height,
+        width: size.width,
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                fit: BoxFit.cover,
+                image: AssetImage('assets/curation_bg.gif'))),
+        child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                color: Colors.white,
+              Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -194,7 +197,6 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                     ),
                     Container(
                       height: 50,
-                      color: Colors.white,
                       child: ListView.builder(
                         shrinkWrap: true,
                         scrollDirection: Axis.horizontal,
@@ -245,7 +247,6 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                 ),
               ),
               Container(
-                color: Colors.white,
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
+import 'package:recase/recase.dart';
 
 import '../../common/custom_divider.dart';
 import '../profile_screen/profile_screen.dart';
@@ -67,6 +68,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFFE9EFC0),
+        centerTitle: true,
         elevation: 0,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -107,126 +109,143 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Center(
-              child: Padding(
-                padding: const EdgeInsets.all(18.0),
-                child: Container(
-                    height: size.height * 0.25,
-                    width: size.width * 0.8,
-                    color: Colors.white,
-                    child: SvgPicture.asset(
-                      'assets/credit_card.svg',
-                    )),
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(12.0),
+      body: Container(
+        height: size.height,
+        width: size.width,
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                fit: BoxFit.cover,
+                image: AssetImage('assets/curation_bg.gif'))),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(18.0),
                   child: Container(
-                    width: size.width * 0.12,
-                    height: size.width * 0.12,
-                    color: Colors.white,
-                    child: Image.asset(widget.imageUrl! == null
-                        ? 'assets/logo.png'
-                        : widget.imageUrl!),
-                  ),
+                      height: size.height * 0.25,
+                      width: size.width * 0.8,
+                      color: Colors.white,
+                      child: SvgPicture.asset(
+                        'assets/credit_card.svg',
+                      )),
                 ),
-                SizedBox(
-                  width: size.width * 0.6,
-                  child: Text(
-                    widget.productName!,
-                    style: GoogleFonts.montserrat(
-                        fontSize: 18, color: Colors.black),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Container(
+                      width: size.width * 0.12,
+                      height: size.width * 0.12,
+                      color: Colors.white,
+                      child: Image.asset(widget.imageUrl! == null
+                          ? 'assets/logo.png'
+                          : widget.imageUrl!),
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  child: SizedBox(
-                    width: size.width * 0.16,
+                  SizedBox(
+                    width: size.width * 0.6,
                     child: Text(
-                      "Rs. " + widget.totalPrice! + " /-",
+                      widget.productName!.sentenceCase,
                       style: GoogleFonts.montserrat(
-                          fontSize: 19, color: Colors.green.shade600),
+                          fontSize: 18, color: Colors.black),
                     ),
                   ),
+                ],
+              ),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: CustomDividerView(
+                  dividerHeight: 1.0,
+                  color: Color(0xFFE9EFC0),
                 ),
-              ],
-            ),
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: CustomDividerView(
-                dividerHeight: 1.0,
-                color: Color(0xFFE9EFC0),
               ),
-            ),
-            InputOutputRow("Value of Product", "Rs. ${widget.totalPrice!} /-"),
-            InputOutputRow("Shipping Charges", "Rs. $shippingCharges /-"),
-            InputOutputRow("Taxes", "Rs. $taxes/-"),
-            const SizedBox(
-              height: 40,
-            ),
-            TotalInputOutputRow("Total Amount", "Rs. $totalAmount /-"),
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: CustomDividerView(
-                dividerHeight: 1.0,
-                color: Color(0xFFE9EFC0),
+              InputOutputRow(
+                  "Value of Product", "Rs. ${widget.totalPrice!} /-", ""),
+              InputOutputRow(
+                  "Shipping Charges", "Rs. $shippingCharges /-", "(10%)"),
+              InputOutputRow("Taxes", "Rs. $taxes/-", "(15%)"),
+              const SizedBox(
+                height: 40,
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Center(
-                child: SizedBox(
-                  width: size.width * .40,
-                  height: size.height * .08,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        primary: const Color(0xFFB4E197),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12))),
-                    child: Center(
-                      child: Text(
-                        "Proceed To Payment",
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.montserrat(color: Colors.black),
+              TotalInputOutputRow("Total Amount", "Rs. $totalAmount /-"),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: CustomDividerView(
+                  dividerHeight: 1.0,
+                  color: Color(0xFFE9EFC0),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Center(
+                  child: SizedBox(
+                    width: size.width * .40,
+                    height: size.height * .08,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          primary: const Color(0xFFB4E197),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12))),
+                      child: Center(
+                        child: Text(
+                          "Proceed To Payment",
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.montserrat(color: Colors.black),
+                        ),
                       ),
+                      onPressed: () {
+                        launchRazorPay(1);
+                      },
                     ),
-                    onPressed: () {
-                      launchRazorPay(1);
-                    },
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget InputOutputRow(String? inputText, String? outputText) {
+  Widget InputOutputRow(
+      String? inputText, String? outputText, String? percentage) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 18.0),
-            child: Text(
-              inputText!,
-              style: GoogleFonts.montserrat(
-                color: Colors.black,
-                fontSize: 20,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 6.0),
+                child: Text(
+                  inputText!,
+                  style: GoogleFonts.montserrat(
+                    color: Colors.black,
+                    fontSize: 20,
+                  ),
+                ),
               ),
-            ),
+              Padding(
+                padding: const EdgeInsets.only(left: 6.0, top: 3),
+                child: Center(
+                  child: Text(
+                    percentage!,
+                    style: GoogleFonts.montserrat(
+                      color: Colors.black,
+                      fontSize: 13,
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
           Padding(
             padding: const EdgeInsets.only(right: 18.0),

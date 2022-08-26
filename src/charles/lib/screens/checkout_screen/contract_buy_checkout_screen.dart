@@ -74,6 +74,7 @@ class _ContractBuyCheckoutScreenState extends State<ContractBuyCheckoutScreen> {
     Size? size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: const Color(0xFFE9EFC0),
         elevation: 0,
         title: Row(
@@ -115,159 +116,167 @@ class _ContractBuyCheckoutScreenState extends State<ContractBuyCheckoutScreen> {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Center(
-              child: Padding(
-                padding: const EdgeInsets.all(18.0),
-                child: Container(
-                    height: size.height * 0.25,
-                    width: size.width * 0.8,
-                    color: Colors.white,
-                    child: SvgPicture.asset(
-                      'assets/credit_card.svg',
-                    )),
+      body: Container(
+        height: size.height,
+        width: size.width,
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                fit: BoxFit.cover,
+                image: AssetImage('assets/curation_bg.gif'))),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(18.0),
+                  child: Container(
+                      height: size.height * 0.25,
+                      width: size.width * 0.8,
+                      color: Colors.white,
+                      child: SvgPicture.asset(
+                        'assets/credit_card.svg',
+                      )),
+                ),
               ),
-            ),
-            FormBuilder(
-              key: _formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(9),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.grey.shade200,
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey[300]!,
-                            blurRadius: 2.0,
-                            spreadRadius: 0.0,
-                            offset: const Offset(2.0, 2.0),
-                          )
-                        ],
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 11.0),
-                        child: Center(
-                          child: FormBuilderTextField(
-                            name: 'duration',
-                            initialValue: '1',
-                            maxLength: 10,
-                            onChanged: (value) {
-                              setState(() {
-                                days = int.parse(value!);
-                              });
-                            },
-                            decoration: InputDecoration(
-                              labelText: 'Enter number of months:',
-                              labelStyle: const TextStyle(
-                                color: Colors.black,
+              FormBuilder(
+                key: _formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(9),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.grey.shade200,
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey[300]!,
+                              blurRadius: 2.0,
+                              spreadRadius: 0.0,
+                              offset: const Offset(2.0, 2.0),
+                            )
+                          ],
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 11.0),
+                          child: Center(
+                            child: FormBuilderTextField(
+                              name: 'duration',
+                              initialValue: '1',
+                              maxLength: 10,
+                              onChanged: (value) {
+                                setState(() {
+                                  days = int.parse(value!);
+                                });
+                              },
+                              decoration: InputDecoration(
+                                labelText: 'Enter number of months:',
+                                labelStyle: const TextStyle(
+                                  color: Colors.black,
+                                ),
+                                hintStyle: Theme.of(context)
+                                    .textTheme
+                                    .subtitle2!
+                                    .copyWith(
+                                      color: Colors.grey,
+                                      fontSize: 17.0,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                counterText: '',
+                                border: InputBorder.none,
                               ),
-                              hintStyle: Theme.of(context)
-                                  .textTheme
-                                  .subtitle2!
-                                  .copyWith(
-                                    color: Colors.grey,
-                                    fontSize: 17.0,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                              counterText: '',
-                              border: InputBorder.none,
+                              validator: FormBuilderValidators.compose([
+                                FormBuilderValidators.required(context),
+                              ]),
+                              keyboardType: TextInputType.number,
                             ),
-                            validator: FormBuilderValidators.compose([
-                              FormBuilderValidators.required(context),
-                            ]),
-                            keyboardType: TextInputType.number,
                           ),
                         ),
                       ),
                     ),
+                  ],
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Container(
+                      width: size.width * 0.12,
+                      height: size.width * 0.12,
+                      color: Colors.white,
+                      child: Image.asset(widget.imageUrl! == null
+                          ? 'assets/logo.png'
+                          : widget.imageUrl!),
+                    ),
+                  ),
+                  SizedBox(
+                    width: size.width * 0.8,
+                    child: Text(
+                      widget.productName!.sentenceCase,
+                      overflow: TextOverflow.ellipsis,
+                      style: GoogleFonts.montserrat(
+                          fontSize: 18, color: Colors.black),
+                    ),
                   ),
                 ],
               ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Container(
-                    width: size.width * 0.12,
-                    height: size.width * 0.12,
-                    color: Colors.white,
-                    child: Image.asset(widget.imageUrl! == null
-                        ? 'assets/logo.png'
-                        : widget.imageUrl!),
-                  ),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: CustomDividerView(
+                  dividerHeight: 1.0,
+                  color: Color(0xFFE9EFC0),
                 ),
-                SizedBox(
-                  width: size.width * 0.8,
-                  child: Text(
-                    widget.productName!.sentenceCase,
-                    overflow: TextOverflow.ellipsis,
-                    style: GoogleFonts.montserrat(
-                        fontSize: 18, color: Colors.black),
-                  ),
+              ),
+              InputOutputRow("Value of Product",
+                  "Rs. ${int.parse(widget.totalPrice!) * 30 * days!} /-", ""),
+              InputOutputRow("Taxes", "Rs. $taxes /-", " (15%)"),
+              InputOutputRow(
+                  "Shipping Charges", "Rs. $shippingCharges /-", " (10%)"),
+              const SizedBox(
+                height: 40,
+              ),
+              TotalInputOutputRow("Total Amount", "Rs. $totalAmount /-"),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: CustomDividerView(
+                  dividerHeight: 1.0,
+                  color: Color(0xFFE9EFC0),
                 ),
-              ],
-            ),
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: CustomDividerView(
-                dividerHeight: 1.0,
-                color: Color(0xFFE9EFC0),
               ),
-            ),
-            InputOutputRow("Value of Product",
-                "Rs. ${int.parse(widget.totalPrice!) * 30 * days!} /-", ""),
-            InputOutputRow("Taxes", "Rs. $taxes /-", " (15%)"),
-            InputOutputRow(
-                "Shipping Charges", "Rs. $shippingCharges /-", " (10%)"),
-            const SizedBox(
-              height: 40,
-            ),
-            TotalInputOutputRow("Total Amount", "Rs. $totalAmount /-"),
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: CustomDividerView(
-                dividerHeight: 1.0,
-                color: Color(0xFFE9EFC0),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Center(
-                child: SizedBox(
-                  width: size.width * .40,
-                  height: size.height * .08,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        primary: const Color(0xFFB4E197),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12))),
-                    child: Center(
-                      child: Text(
-                        "Proceed To Payment",
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.montserrat(color: Colors.black),
+              Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Center(
+                  child: SizedBox(
+                    width: size.width * .40,
+                    height: size.height * .08,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          primary: const Color(0xFFB4E197),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12))),
+                      child: Center(
+                        child: Text(
+                          "Proceed To Payment",
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.montserrat(color: Colors.black),
+                        ),
                       ),
+                      onPressed: () {
+                        launchRazorPay(1);
+                      },
                     ),
-                    onPressed: () {
-                      launchRazorPay(1);
-                    },
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
