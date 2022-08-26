@@ -2,25 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexabyte/common/dotted_seperator.dart';
 
-class ActiveOrderCard extends StatelessWidget {
-  final dynamic customerName;
-  final dynamic customerPhoneNumber;
-  final dynamic shipCharge;
+class ConsumerActiveOrderCard extends StatelessWidget {
+  final dynamic status;
   final dynamic subscribedQty;
   final dynamic foodWasteTitle;
-  final dynamic tax;
-  final dynamic status;
   final dynamic cost;
-  const ActiveOrderCard({
+  final dynamic business;
+  const ConsumerActiveOrderCard({
     Key? key,
     required this.status,
-    required this.shipCharge,
-    required this.customerName,
     required this.subscribedQty,
-    required this.tax,
-    required this.customerPhoneNumber,
     required this.foodWasteTitle,
     required this.cost,
+    required this.business,
   }) : super(key: key);
 
   @override
@@ -31,16 +25,13 @@ class ActiveOrderCard extends StatelessWidget {
         padding: const EdgeInsets.all(10.0),
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
-          decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(15),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black54,
-                  spreadRadius: 1,
-                  blurRadius: 0.5,
-                )
-              ]),
+          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(15), boxShadow: [
+            BoxShadow(
+              color: Colors.black54,
+              spreadRadius: 1,
+              blurRadius: 0.5,
+            )
+          ]),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,21 +46,8 @@ class ActiveOrderCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          customerName,
-                          style: GoogleFonts.montserrat(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black),
-                        ),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        Text(
-                          'Food waste title: ${foodWasteTitle}',
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyText1!
-                              .copyWith(fontSize: 12.0),
+                          ' $foodWasteTitle',
+                          style: Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 12.0),
                         ),
                         const SizedBox(
                           height: 10,
@@ -80,20 +58,22 @@ class ActiveOrderCard extends StatelessWidget {
                             Text(
                               'Rs. $cost/-',
                               style: GoogleFonts.montserrat(
-                                  color: Colors.green.shade600,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16),
+                                  color: Colors.green.shade600, fontWeight: FontWeight.bold, fontSize: 16),
                             ),
-                            const SizedBox(
-                              height: 8,
-                            ),
+
                             // Icon(Icons.keyboard_arrow_right, color: Colors.grey[600])
                           ],
-                        )
+                        ),
+                        const SizedBox(
+                          height: 8,
+                        ),
+                        const SizedBox(
+                          height: 8,
+                        ),
                       ],
                     ),
                     const Spacer(),
-                    // const Chip(label: Text('One-time'))
+                    Chip(label: Text('$status'))
                   ],
                 ),
               ),
@@ -108,7 +88,18 @@ class ActiveOrderCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    'Wastes of vegetable from farms',
+                    'Business name: $business',
+                    style: GoogleFonts.montserrat(
+                      color: Colors.black,
+                      fontSize: 14,
+                    ),
+                  ),
+
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  Text(
+                    'Subscribed Qty: $subscribedQty',
                     style: GoogleFonts.montserrat(
                       color: Colors.black,
                       fontSize: 14,

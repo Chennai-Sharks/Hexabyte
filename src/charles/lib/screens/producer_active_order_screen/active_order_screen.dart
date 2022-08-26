@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hexabyte/screens/active_order_screen/api/listed_products_api.dart';
-import 'package:hexabyte/screens/active_order_screen/widgets/active_order_card.dart';
+import 'package:hexabyte/screens/producer_active_order_screen/api/listed_products_api.dart';
+import 'package:hexabyte/screens/producer_active_order_screen/widgets/active_order_card.dart';
 
 class ActiveOrderScreen extends StatefulWidget {
   const ActiveOrderScreen({Key? key}) : super(key: key);
@@ -24,7 +24,7 @@ class _ActiveOrderScreenState extends State<ActiveOrderScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'My Listed Products',
+              'Active orders',
               style: GoogleFonts.montserrat(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -60,17 +60,13 @@ class _ActiveOrderScreenState extends State<ActiveOrderScreen> {
                     },
                     child: ListView.builder(
                       itemCount: (snapshot.data as List).length,
-                      itemBuilder: (BuildContext context, index) =>
-                          ActiveOrderCard(
-                        customerName: response[index]['customer_name'], // 6
-                        customerPhoneNumber: response[index]
-                            ['customer_phone'], //7
+                      itemBuilder: (BuildContext context, index) => ActiveOrderCard(
+                        name: response[index]['name'], // 6
+                        phone: response[index]['phone'], //7
                         foodWasteTitle: response[index]['food_waste_title'],
                         subscribedQty: response[index]['subscribed_qty'], //
-                        status: response[index]['status'], //5
-                        tax: response[index]['tax'], //4
-                        shipCharge: response[index]['ship_charge'], // 3
-                        cost: response[index]['cost'], //
+                        // status: response[index]['status'], //5
+                        business: response[index]['business'],
                       ),
                     ),
                   );

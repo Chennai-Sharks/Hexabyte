@@ -66,6 +66,7 @@ class OrderHistoryScreen extends StatelessWidget {
                               price: response[index]['cost'] * response[index]['subscribed_qty'] ?? 200,
                               subscriptedQty: response[index]['subscribed_qty'] ?? 50,
                               duration: response[index]['duration'] ?? 1,
+                              status: response[index]['status'],
                               isOneTime: response[index]['one_time'] ?? true,
                             ),
                           ),

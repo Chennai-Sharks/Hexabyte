@@ -2,25 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexabyte/common/dotted_seperator.dart';
 
-class ProducerOrderHistoryCard extends StatelessWidget {
-  final dynamic customerName;
-  final dynamic customerPhoneNumber;
-  final dynamic status;
+class ActiveOrderCard extends StatelessWidget {
+  final dynamic name;
+  final dynamic phone;
   final dynamic subscribedQty;
-  final dynamic shipCharge;
-  final dynamic tax;
   final dynamic foodWasteTitle;
-  final dynamic cost;
-  const ProducerOrderHistoryCard({
+  final dynamic business;
+  const ActiveOrderCard({
     Key? key,
-    required this.shipCharge,
-    required this.status,
-    required this.customerName,
     required this.subscribedQty,
-    required this.tax,
-    required this.customerPhoneNumber,
     required this.foodWasteTitle,
-    required this.cost,
+    required this.business,
+    required this.name,
+    required this.phone,
   }) : super(key: key);
 
   @override
@@ -52,14 +46,21 @@ class ProducerOrderHistoryCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          customerName,
+                          'Consumer name: $name',
                           style: GoogleFonts.montserrat(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
                         ),
                         const SizedBox(
                           height: 8,
                         ),
                         Text(
-                          ' $foodWasteTitle',
+                          'Consumer phno: $phone',
+                          style: GoogleFonts.montserrat(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
+                        ),
+                        const SizedBox(
+                          height: 8,
+                        ),
+                        Text(
+                          'Food waste title: $foodWasteTitle',
                           style: Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 12.0),
                         ),
                         const SizedBox(
@@ -68,36 +69,23 @@ class ProducerOrderHistoryCard extends StatelessWidget {
                         Row(
                           children: <Widget>[
                             const Text('Cost per Kg: '),
-                            Text(
-                              'Rs. $cost/-',
-                              style: GoogleFonts.montserrat(
-                                  color: Colors.green.shade600, fontWeight: FontWeight.bold, fontSize: 16),
+                            // Text(
+                            //   'Rs. $cost/-',
+                            //   style: GoogleFonts.montserrat(
+                            //       color: Colors.green.shade600,
+                            //       fontWeight: FontWeight.bold,
+                            //       fontSize: 16),
+                            // ),
+                            const SizedBox(
+                              height: 8,
                             ),
-
                             // Icon(Icons.keyboard_arrow_right, color: Colors.grey[600])
                           ],
-                        ),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        Text(
-                          'Tax: Rs. $tax/-',
-                          style: GoogleFonts.montserrat(fontWeight: FontWeight.bold, fontSize: 16),
-                        ),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        Text(
-                          'Shipment charge: Rs. $shipCharge/-',
-                          style: GoogleFonts.montserrat(fontWeight: FontWeight.bold, fontSize: 16),
-                        ),
-                        const SizedBox(
-                          height: 8,
-                        ),
+                        )
                       ],
                     ),
                     const Spacer(),
-                    Chip(label: Text('$status'))
+                    // const Chip(label: Text('One-time'))
                   ],
                 ),
               ),
@@ -112,7 +100,7 @@ class ProducerOrderHistoryCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    'Customer name: $customerName',
+                    'Subscribed qty: $subscribedQty',
                     style: GoogleFonts.montserrat(
                       color: Colors.black,
                       fontSize: 14,
@@ -122,17 +110,7 @@ class ProducerOrderHistoryCard extends StatelessWidget {
                     height: 8,
                   ),
                   Text(
-                    'Customer phone number: $customerPhoneNumber',
-                    style: GoogleFonts.montserrat(
-                      color: Colors.black,
-                      fontSize: 14,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  Text(
-                    'Subscribed Qty: $subscribedQty',
+                    'Business: $business',
                     style: GoogleFonts.montserrat(
                       color: Colors.black,
                       fontSize: 14,

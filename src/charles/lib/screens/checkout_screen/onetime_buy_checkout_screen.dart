@@ -1,8 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexabyte/screens/product_details_screen/api/purchase_product_api.dart';
+import 'package:hexabyte/screens/product_details_screen/widgets/payment_success_screen.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:recase/recase.dart';
 
@@ -20,15 +23,39 @@ class CheckoutScreen extends StatefulWidget {
 }
 
 class _CheckoutScreenState extends State<CheckoutScreen> {
+  double? taxes;
+  double? shippingCharges;
+  double? totalAmount;
   @override
   void initState() {
     super.initState();
+    taxes = double.parse(widget.totalPrice!) / 10;
+    shippingCharges = double.parse(widget.totalPrice!) / 10;
+    totalAmount = taxes! + int.parse(widget.totalPrice!) + shippingCharges!;
     initaliseRazorPay();
   }
 
   Razorpay? _razorpay;
 
-  void _handlePayment(PaymentSuccessResponse res) {}
+  void _handlePayment(PaymentSuccessResponse res) async {
+    final navContext = Navigator.of(context);
+    EasyLoading.show(status: 'Waiting for confirmation');
+
+    await PurchaseProductApi.purchaseApi(data: {
+      "customer_id": FirebaseAuth.instance.currentUser!.phoneNumber!.substring(3),
+      "producer_id": widget.sellerId,
+      "item_id": {"\$oid": widget.productId},
+      "duration": 1,
+      "subscribed_qty": int.parse(widget.weight!),
+      "cost": double.parse(widget.totalPrice!),
+      "ship_charge": shippingCharges,
+      "tax": taxes,
+      "one_time": true
+    });
+    EasyLoading.dismiss();
+
+    navContext.pushReplacement(MaterialPageRoute(builder: (context) => PaymentSuccessPage()));
+  }
 
   void initaliseRazorPay() {
     _razorpay = Razorpay();
@@ -50,16 +77,13 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       _razorpay!.open(options);
     } catch (e) {
       // ignore: avoid_print
+      Fluttertoast.showToast(msg: 'Error in payment.');
       print(e);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    double? taxes = double.parse(widget.totalPrice!) / 10;
-    double? shippingCharges = double.parse(widget.totalPrice!) / 10;
-    double? totalAmount = taxes + int.parse(widget.totalPrice!) + shippingCharges;
-
     Size? size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
@@ -190,17 +214,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       ),
                     ),
                     onPressed: () async {
-                      await PurchaseProductApi.purchaseApi(data: {
-                        "customer_id": FirebaseAuth.instance.currentUser!.phoneNumber!.substring(3),
-                        "producer_id": widget.sellerId,
-                        "item_id": {"\$oid": widget.productId},
-                        "duration": 1,
-                        "subscribed_qty": int.parse(widget.weight!),
-                        "cost": double.parse(widget.totalPrice!),
-                        "ship_charge": shippingCharges,
-                        "tax": taxes,
-                        "one_time": false
-                      });
                       launchRazorPay(1);
                     },
                   ),

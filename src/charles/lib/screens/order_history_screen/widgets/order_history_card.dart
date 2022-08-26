@@ -11,6 +11,7 @@ class OrderHistoryCard extends StatelessWidget {
   final dynamic subscriptedQty;
   final dynamic duration;
   final bool isOneTime;
+  final dynamic status;
   const OrderHistoryCard({
     Key? key,
     required this.duration,
@@ -19,6 +20,7 @@ class OrderHistoryCard extends StatelessWidget {
     required this.isOneTime,
     required this.price,
     required this.subscriptedQty,
+    required this.status,
   }) : super(key: key);
 
   @override
@@ -60,7 +62,11 @@ class OrderHistoryCard extends StatelessWidget {
                         ),
                         // Icon(Icons.keyboard_arrow_right, color: Colors.grey[600])
                       ],
-                    )
+                    ),
+                    Text('Status: $status'),
+                    const SizedBox(
+                      height: 8,
+                    ),
                   ],
                 ),
                 const Spacer(),

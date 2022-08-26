@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hexabyte/screens/active_order_screen/active_order_screen.dart';
-import 'package:hexabyte/screens/active_order_screen/widgets/active_order_card.dart';
 import 'package:hexabyte/screens/add_product_screen/add_product_screen.dart';
+import 'package:hexabyte/screens/consumer_active_orders_screen/consumer_active_orders_screen.dart';
 import 'package:hexabyte/screens/home_screen/home_screen.dart';
 import 'package:hexabyte/screens/listed_products_screen/listed_products_screen.dart';
 import 'package:hexabyte/screens/order_history_screen/order_history_screen.dart';
+import 'package:hexabyte/screens/producer_active_order_screen/active_order_screen.dart';
+import 'package:hexabyte/screens/producer_order_history_screen/producer_order_history_screen.dart';
 import 'package:hexabyte/screens/profile_screen/profile_screen.dart';
 import 'package:hexabyte/screens/quick_buy_screen/quick_buy_screen.dart';
 
@@ -29,11 +30,13 @@ class NavigationLayoutState extends State<NavigationLayout> {
             const QuickBuyScreen(),
             // const CurationScreen(),
             const OrderHistoryScreen(),
+            const ConsumerActiveOrdersScreen(),
           ]
         : [
             const ListedProductsScreen(),
             const AddProductsScreen(),
             const ActiveOrderScreen(),
+            const ProducerOrderHistoryScreen(),
           ];
     return Scaffold(
       appBar: AppBar(
@@ -70,6 +73,7 @@ class NavigationLayoutState extends State<NavigationLayout> {
                   NavigationDestination(icon: FaIcon(FontAwesomeIcons.cartArrowDown, size: 20), label: 'Quick Buy'),
                   // NavigationDestination(icon: Icon(Icons.create, size: 20), label: 'Combo Buy'),
                   NavigationDestination(icon: Icon(Icons.open_in_browser_rounded, size: 20), label: 'My orders'),
+                  NavigationDestination(icon: Icon(Icons.open_in_browser_rounded, size: 20), label: 'My Active orders'),
                 ]
               : const [
                   NavigationDestination(
@@ -88,6 +92,14 @@ class NavigationLayoutState extends State<NavigationLayout> {
                       color: Colors.black,
                     ),
                     label: 'Active orders',
+                  ),
+                  NavigationDestination(
+                    icon: FaIcon(
+                      FontAwesomeIcons.userCircle,
+                      size: 20,
+                      color: Colors.black,
+                    ),
+                    label: 'Order History',
                   ),
                 ],
         ),

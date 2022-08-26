@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hexabyte/screens/consumer_active_orders_screen/api/consumer_active_order_api.dart';
+import 'package:hexabyte/screens/consumer_active_orders_screen/widgets/consumer_active_order_card.dart';
 import 'package:hexabyte/screens/producer_order_history_screen/api/producer_order_history_api.dart';
 import 'package:hexabyte/screens/producer_order_history_screen/widgets/producer_order_history_card.dart';
 
-class ProducerOrderHistoryScreen extends StatefulWidget {
-  const ProducerOrderHistoryScreen({Key? key}) : super(key: key);
+class ConsumerActiveOrdersScreen extends StatefulWidget {
+  const ConsumerActiveOrdersScreen({Key? key}) : super(key: key);
 
   @override
-  State<ProducerOrderHistoryScreen> createState() => _ActiveOrderScreenState();
+  State<ConsumerActiveOrdersScreen> createState() => _ActiveOrderScreenState();
 }
 
-class _ActiveOrderScreenState extends State<ProducerOrderHistoryScreen> {
+class _ActiveOrderScreenState extends State<ConsumerActiveOrdersScreen> {
   List data = [];
 
   @override
@@ -24,7 +26,7 @@ class _ActiveOrderScreenState extends State<ProducerOrderHistoryScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Producer order history',
+              'My Active Orders',
               style: GoogleFonts.montserrat(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -35,7 +37,7 @@ class _ActiveOrderScreenState extends State<ProducerOrderHistoryScreen> {
         ),
       ),
       body: FutureBuilder(
-          future: ProducerOrderHistoryApi.getOrders(),
+          future: ConsumerActiveOrdersApi.getOrders(),
           builder: (BuildContext context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:
@@ -60,14 +62,11 @@ class _ActiveOrderScreenState extends State<ProducerOrderHistoryScreen> {
                     },
                     child: ListView.builder(
                       itemCount: (snapshot.data as List).length,
-                      itemBuilder: (BuildContext context, index) => ProducerOrderHistoryCard(
-                        customerName: response[index]['customer_name'], // 6
-                        customerPhoneNumber: response[index]['customer_phone'], //7
+                      itemBuilder: (BuildContext context, index) => ConsumerActiveOrderCard(
                         foodWasteTitle: response[index]['food_waste_title'],
                         subscribedQty: response[index]['subscribed_qty'], //
-                        status: response[index]['status'], //5
-                        tax: response[index]['tax'], //4
-                        shipCharge: response[index]['ship_charge'], // 3
+                        status: 'active', //5
+                        business: response[index]['business'], // 3
                         cost: response[index]['cost'], //
                       ),
                     ),
