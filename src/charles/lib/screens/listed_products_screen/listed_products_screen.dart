@@ -34,15 +34,6 @@ class _ListedProductsScreenState extends State<ListedProductsScreen> {
             ),
           ],
         ),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () {
-            Navigator.of(context).pushReplacement(MaterialPageRoute(
-                builder: (context) => const NavigationLayout(
-                      isConsumer: false,
-                    )));
-          },
-        ),
       ),
       body: FutureBuilder(
           future: ListedProductApi.getMyProducts(data: data),
@@ -64,8 +55,7 @@ class _ListedProductsScreenState extends State<ListedProductsScreen> {
                     },
                     child: ListView.builder(
                       itemCount: 10,
-                      itemBuilder: (BuildContext context, index) =>
-                          const ListedProductCard(),
+                      itemBuilder: (BuildContext context, index) => const ListedProductCard(),
                     ),
                   );
                 }
