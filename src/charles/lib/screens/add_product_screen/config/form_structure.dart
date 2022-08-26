@@ -31,6 +31,13 @@ final List<Map<String, dynamic>> addProductFormStructure = [
     'keyboardType': TextInputType.number
   },
   {
+    'type': 'text',
+    'name': 'cost',
+    'label': 'Enter cost per KG',
+    'required': true,
+    'keyboardType': TextInputType.number,
+  },
+  {
     'type': 'multichip',
     'name': 'applicable_tags',
     'label': 'Select Product tags',
