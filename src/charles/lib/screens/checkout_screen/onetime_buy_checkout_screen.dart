@@ -195,7 +195,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                         "producer_id": widget.sellerId,
                         "item_id": {"\$oid": widget.productId},
                         "duration": 1,
-                        "subscribed_qty": widget.weight,
+                        "subscribed_qty": int.parse(widget.weight!),
                         "cost": double.parse(widget.totalPrice!),
                         "ship_charge": shippingCharges,
                         "tax": taxes,
