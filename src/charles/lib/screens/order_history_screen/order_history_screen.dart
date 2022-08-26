@@ -44,7 +44,7 @@ class OrderHistoryScreen extends StatelessWidget {
                   builder: ((context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.done) {
                       print(snapshot.data);
-                      final response = snapshot.data as List<dynamic>?;
+                      final response = (snapshot.data as List<dynamic>?);
                       if (response == null) {
                         return const Center(child: Text('No orders found'));
                       }
@@ -52,22 +52,24 @@ class OrderHistoryScreen extends StatelessWidget {
                         return const Center(child: Text('No orders found'));
                       }
 
+                      final reversed = response.reversed.toList();
+
                       return SizedBox(
                         width: MediaQuery.of(context).size.width,
                         child: Container(
                           color: Colors.white,
                           child: ListView.builder(
                             shrinkWrap: true,
-                            itemCount: response.length,
+                            itemCount: reversed.length,
                             physics: const NeverScrollableScrollPhysics(),
                             itemBuilder: (context, index) => OrderHistoryCard(
-                              id: response[index]['item_id']['\$oid'],
-                              name: response[index]['food_waste_title'] ?? 'Vegetable peels',
-                              price: response[index]['cost'] * response[index]['subscribed_qty'] ?? 200,
-                              subscriptedQty: response[index]['subscribed_qty'] ?? 50,
-                              duration: response[index]['duration'] ?? 1,
-                              status: response[index]['status'],
-                              isOneTime: response[index]['one_time'] ?? true,
+                              id: reversed[index]['item_id']['\$oid'],
+                              name: reversed[index]['food_waste_title'] ?? 'Vegetable peels',
+                              price: reversed[index]['cost'] * response[index]['subscribed_qty'] ?? 200,
+                              subscriptedQty: reversed[index]['subscribed_qty'] ?? 50,
+                              duration: reversed[index]['duration'] ?? 1,
+                              status: reversed[index]['status'],
+                              isOneTime: reversed[index]['one_time'] ?? true,
                             ),
                           ),
                         ),

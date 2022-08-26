@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexabyte/common/dotted_seperator.dart';
+import 'package:hexabyte/screens/consumer_active_orders_screen/api/consumer_active_order_api.dart';
+import 'package:hexabyte/utils/app_colors.dart';
 
 class ConsumerActiveOrderCard extends StatelessWidget {
-  final dynamic status;
+  // final dynamic status;
+  final dynamic id;
   final dynamic subscribedQty;
   final dynamic foodWasteTitle;
   final dynamic cost;
   final dynamic business;
   const ConsumerActiveOrderCard({
     Key? key,
-    required this.status,
+    // required this.status,
+    required this.id,
     required this.subscribedQty,
     required this.foodWasteTitle,
     required this.cost,
@@ -73,7 +78,7 @@ class ConsumerActiveOrderCard extends StatelessWidget {
                       ],
                     ),
                     const Spacer(),
-                    Chip(label: Text('$status'))
+                    // Chip(label: Text('$status'))
                   ],
                 ),
               ),
@@ -114,6 +119,24 @@ class ConsumerActiveOrderCard extends StatelessWidget {
                   // ),
                   const SizedBox(
                     height: 12,
+                  ),
+                  OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      side: BorderSide(width: 1.5, color: darkOrange!),
+                    ),
+                    child: Text(
+                      'Received',
+                      style: Theme.of(context).textTheme.subtitle2!.copyWith(color: darkOrange),
+                    ),
+                    onPressed: () async {
+                      Fluttertoast.showToast(msg: 'Sending Request');
+                      final response = await ConsumerActiveOrdersApi.setProductReceived(id);
+                      if (response == 1) {
+                        Fluttertoast.showToast(msg: 'Success');
+                      } else {
+                        Fluttertoast.showToast(msg: 'something went wrong');
+                      }
+                    },
                   ),
                   // Text(
                   //   'Rating: 5.0 ⭐',

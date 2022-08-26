@@ -21,4 +21,20 @@ class ConsumerActiveOrdersApi {
       return [];
     }
   }
+
+  static Future<int> setProductReceived(String id) async {
+    print('${Utils.backendUrl!}/order_complete/$id/');
+    final serverResponse = await http.put(
+      Uri.parse('${Utils.backendUrl!}/order_complete/$id/'),
+    );
+    final response = json.decode(serverResponse.body);
+
+    print(response);
+
+    if (serverResponse.statusCode == 200) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
 }

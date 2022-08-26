@@ -65,7 +65,8 @@ class _ActiveOrderScreenState extends State<ConsumerActiveOrdersScreen> {
                       itemBuilder: (BuildContext context, index) => ConsumerActiveOrderCard(
                         foodWasteTitle: response[index]['food_waste_title'],
                         subscribedQty: response[index]['subscribed_qty'], //
-                        status: 'active', //5
+                        // status: 'active', //5
+                        id: response[index]['item_id']['\$oid'],
                         business: response[index]['business'], // 3
                         cost: response[index]['cost'], //
                       ),
