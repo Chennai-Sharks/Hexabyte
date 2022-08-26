@@ -4,7 +4,7 @@ import 'package:hexabyte/common/dotted_seperator.dart';
 import 'package:hexabyte/utils/app_colors.dart';
 import 'package:recase/recase.dart';
 
-class ListedProductCard extends StatelessWidget {
+class ProducerOrderHistoryCard extends StatelessWidget {
   final dynamic title;
   final dynamic description;
   final dynamic business;
@@ -13,7 +13,7 @@ class ListedProductCard extends StatelessWidget {
   final dynamic tags;
   final dynamic balanceQty;
   final dynamic cost;
-  const ListedProductCard({
+  const ProducerOrderHistoryCard({
     Key? key,
     required this.balanceQty,
     required this.business,

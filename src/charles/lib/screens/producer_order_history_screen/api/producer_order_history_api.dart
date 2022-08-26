@@ -4,10 +4,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hexabyte/utils/utils.dart';
 import 'package:http/http.dart' as http;
 
-class ActiveOrders {
+class ProducerOrderHistoryApi {
   static Future<List> getOrders() async {
     final serverResponse = await http.get(
-      Uri.parse('${Utils.backendUrl!}/live_orders/${FirebaseAuth.instance.currentUser!.phoneNumber!.substring(3)}'),
+      Uri.parse('${Utils.backendUrl!}/producer_orders/${FirebaseAuth.instance.currentUser!.phoneNumber!.substring(3)}'),
     );
     final response = json.decode(serverResponse.body);
 
