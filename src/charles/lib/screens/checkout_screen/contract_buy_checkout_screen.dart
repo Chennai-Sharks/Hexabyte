@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
+import 'package:recase/recase.dart';
 
 import '../../common/custom_divider.dart';
 import '../profile_screen/profile_screen.dart';
@@ -208,20 +209,12 @@ class _ContractBuyCheckoutScreenState extends State<ContractBuyCheckoutScreen> {
                   ),
                 ),
                 SizedBox(
-                  width: size.width * 0.45,
+                  width: size.width * 0.8,
                   child: Text(
-                    widget.productName!,
+                    widget.productName!.sentenceCase,
                     overflow: TextOverflow.ellipsis,
                     style: GoogleFonts.montserrat(
                         fontSize: 18, color: Colors.black),
-                  ),
-                ),
-                SizedBox(
-                  width: size.width * 0.33,
-                  child: Text(
-                    "Rs. ${int.parse(widget.totalPrice!) * 30 * days!} /-",
-                    style: GoogleFonts.montserrat(
-                        fontSize: 19, color: Colors.green.shade600),
                   ),
                 ),
               ],
@@ -235,9 +228,9 @@ class _ContractBuyCheckoutScreenState extends State<ContractBuyCheckoutScreen> {
             ),
             InputOutputRow("Value of Product",
                 "Rs. ${int.parse(widget.totalPrice!) * 30 * days!} /-", ""),
-            InputOutputRow("Taxes", "Rs. $taxes /-", " - 15 %"),
+            InputOutputRow("Taxes", "Rs. $taxes /-", " (15%)"),
             InputOutputRow(
-                "Shipping Charges", "Rs. $shippingCharges /-", " - 10%"),
+                "Shipping Charges", "Rs. $shippingCharges /-", " (10%)"),
             const SizedBox(
               height: 40,
             ),
@@ -285,28 +278,34 @@ class _ContractBuyCheckoutScreenState extends State<ContractBuyCheckoutScreen> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 18.0),
-            child: Text(
-              inputText!,
-              style: GoogleFonts.montserrat(
-                color: Colors.black,
-                fontSize: 20,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 6.0),
+                child: Text(
+                  inputText!,
+                  style: GoogleFonts.montserrat(
+                    color: Colors.black,
+                    fontSize: 20,
+                  ),
+                ),
               ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 18.0),
-            child: Text(
-              percentage!,
-              style: GoogleFonts.montserrat(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
+              Padding(
+                padding: const EdgeInsets.only(left: 6.0, top: 3),
+                child: Center(
+                  child: Text(
+                    percentage!,
+                    style: GoogleFonts.montserrat(
+                      color: Colors.black,
+                      fontSize: 13,
+                    ),
+                  ),
+                ),
               ),
-            ),
+            ],
           ),
           Padding(
             padding: const EdgeInsets.only(right: 18.0),
