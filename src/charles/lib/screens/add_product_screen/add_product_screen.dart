@@ -229,6 +229,8 @@ class AddProductsScreenState extends State<AddProductsScreen> {
                           // formValue['age'] = int.parse(formValue['age']);
                           formValue.update('duration', (value) => int.parse(value));
                           formValue.update('total_qty', (value) => int.parse(value));
+                          formValue.update('expiry_date', (value) => (value as DateTime).toString());
+
                           formValue['producer_id'] = FirebaseAuth.instance.currentUser!.phoneNumber!.substring(3);
                           final response = await AddProductApi.itemAddition(data: formValue);
 
