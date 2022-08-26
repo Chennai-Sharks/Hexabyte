@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hexabyte/screens/add_product_screen/add_product_screen.dart';
 import 'package:hexabyte/screens/home_screen/widgets/home_screen_card.dart';
 import 'package:hexabyte/screens/home_screen/widgets/search_bar.dart';
+import 'package:hexabyte/screens/order_history_screen/order_history_screen.dart';
 import 'package:hexabyte/screens/quick_buy_screen/quick_buy_screen.dart';
 import 'package:hexabyte/screens/search_screen/search_screen.dart';
 
@@ -47,10 +47,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const ProfileScreen()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileScreen()));
                     },
                     child: CircleAvatar(
                       backgroundColor: Colors.white,
@@ -80,9 +77,8 @@ class HomeScreen extends StatelessWidget {
       ),
       body: Container(
         height: size.height,
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-                fit: BoxFit.cover, image: AssetImage('assets/home_bg.png'))),
+        decoration:
+            const BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/home_bg.png'))),
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: Column(
@@ -98,12 +94,11 @@ class HomeScreen extends StatelessWidget {
               ScrollableCategories(
                 categories: secondCategories,
                 categoriesImgList: secondCategoriesImg,
-                widget: [const ProfileScreen(), const ProfileScreen()],
+                widget: [const OrderHistoryScreen(), const ProfileScreen()],
               ),
               const HomeScreenCard(
                 color: Colors.orange,
-                imageUrl:
-                    "https://c.tenor.com/6kZnvYgHAMMAAAAC/wasted-house-parched.gif",
+                imageUrl: "https://c.tenor.com/6kZnvYgHAMMAAAAC/wasted-house-parched.gif",
                 descriptionText: "Products across the country",
                 sloganText: "Come let's purchase !!!",
                 buttonText: "EXPLORE QUICK BUY",
@@ -122,13 +117,12 @@ class HomeScreen extends StatelessWidget {
               ),
               const HomeScreenCard(
                 color: Colors.green,
-                imageUrl:
-                    "https://i.pinimg.com/originals/39/a0/51/39a0515d87ac9194c801e6104e9552f7.gif",
-                descriptionText: "Add your products across the country",
-                sloganText: "Sell it !!!",
-                buttonText: "ADD YOUR PRODUCTS",
+                imageUrl: "https://i.pinimg.com/originals/39/a0/51/39a0515d87ac9194c801e6104e9552f7.gif",
+                descriptionText: "Buy food waste by initiate a contract with the seller",
+                sloganText: "Subscription !!!",
+                buttonText: "EXPLORE SUBSCRIPTION",
                 icon: FontAwesomeIcons.luggageCart,
-                navigatorWidget: AddProductsScreen(),
+                navigatorWidget: QuickBuyScreen(),
               ),
             ],
           ),
