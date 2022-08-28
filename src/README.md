@@ -2,7 +2,7 @@
 
 ## Folder structure
 
-- alonso - admin dashboard
+- george - admin dashboard
 - charles - mobile app
 - lewis - backend
 - max - ML stuff

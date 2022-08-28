@@ -1,13 +1,13 @@
 // import 'package:app/providers/auth_provider.dart';
-import 'package:flutter/material.dart';
-
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 // import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexabyte/screens/otp_screen/otp_screen.dart';
 import 'package:hexabyte/utils/utils.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // import 'package:provider/provider.dart';
 
@@ -18,7 +18,7 @@ class AuthScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Utils.primaryBackground,
+      backgroundColor: Theme.of(context).primaryColor,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -32,9 +32,9 @@ class AuthScreen extends StatelessWidget {
           Center(
             child: AutoSizeText(
               'Hexabyte',
-              style: GoogleFonts.exo(
+              style: GoogleFonts.montserrat(
                 fontSize: 50,
-                color: Utils.primaryFontColor,
+                color: Theme.of(context).secondaryHeaderColor.withAlpha(900),
                 fontWeight: FontWeight.bold,
                 wordSpacing: 3,
               ),
@@ -50,9 +50,9 @@ class AuthScreen extends StatelessWidget {
             child: Center(
               child: AutoSizeText(
                 'Application for using food waste as consumable organic resource',
-                style: GoogleFonts.rubik(
+                style: GoogleFonts.montserrat(
                   fontSize: 20,
-                  color: Utils.primaryFontColor,
+                  color: Theme.of(context).secondaryHeaderColor.withAlpha(900),
                 ),
                 textAlign: TextAlign.center,
                 maxLines: 2,
@@ -74,9 +74,14 @@ class AuthScreen extends StatelessWidget {
                   fillColor: const Color(0xFFF2F2F2),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30.0),
+                    borderSide: BorderSide(
+                      color: Theme.of(context).secondaryHeaderColor,
+                    ),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: Utils.primaryFontColor),
+                    borderSide: BorderSide(
+                      color: Theme.of(context).secondaryHeaderColor,
+                    ),
                     borderRadius: BorderRadius.circular(30),
                   ),
                 ),
@@ -107,13 +112,15 @@ class AuthScreen extends StatelessWidget {
                 elevation: 3,
               ),
               onPressed: () async {
+                final navContext = Navigator.of(context);
                 _formKey.currentState?.save();
                 final mobileno = _formKey.currentState?.value['phoneno'];
                 if (mobileno == null) {
                   Fluttertoast.showToast(msg: 'Phone number is empty');
                 } else if (mobileno.length == 10) {
-                  print(_formKey.currentState?.value);
-                  Navigator.of(context).push(
+                  SharedPreferences pref = await SharedPreferences.getInstance();
+                  await pref.setString('phone', mobileno);
+                  navContext.push(
                     MaterialPageRoute(
                       builder: (context) => OtpScreen(phone: mobileno),
                     ),

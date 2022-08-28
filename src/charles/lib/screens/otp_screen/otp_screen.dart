@@ -1,14 +1,13 @@
-import 'package:flutter/material.dart';
-
-import 'package:pinput/pinput.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import 'package:hexabyte/layout/nav_layout.dart';
-import 'package:hexabyte/providers/auth/auth_provider.dart';
 import 'package:hexabyte/screens/onboarding_screen/onboarding_screen.dart';
-import 'package:hexabyte/utils/utils.dart';
+import 'package:hexabyte/screens/select_role_screen.dart/select_role_screen.dart';
+import 'package:pinput/pinput.dart';
+
+import '../../utils/utils.dart';
 
 class OtpScreen extends StatefulWidget {
   final String phone;
@@ -22,7 +21,6 @@ class OtpScreen extends StatefulWidget {
 }
 
 class _OtpScreenState extends State<OtpScreen> {
-  AuthProvider authProvider = AuthProvider();
   String? verificationCode;
 
   Future<void> verifyPhoneSendOtp({
@@ -31,13 +29,15 @@ class _OtpScreenState extends State<OtpScreen> {
     await FirebaseAuth.instance.verifyPhoneNumber(
         phoneNumber: '+91$phone',
         verificationCompleted: (PhoneAuthCredential credentials) async {
-          Fluttertoast.showToast(msg: 'OTP sent to your phone number', toastLength: Toast.LENGTH_LONG);
+          Fluttertoast.showToast(msg: 'Verification done!', toastLength: Toast.LENGTH_LONG);
         },
         verificationFailed: (e) {
           Fluttertoast.showToast(
               msg: 'App verification failed. Maybe due to internet issues.', toastLength: Toast.LENGTH_LONG);
         },
         codeSent: (verificationId, resendToken) {
+          Fluttertoast.showToast(msg: 'OTP sent to your phone number', toastLength: Toast.LENGTH_LONG);
+
           setState(() {
             verificationCode = verificationId;
           });
@@ -64,16 +64,29 @@ class _OtpScreenState extends State<OtpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final defaultPinTheme = PinTheme(
+      width: 76,
+      height: 56,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(19),
+        border: Border.all(color: Theme.of(context).secondaryHeaderColor),
+      ),
+    );
+    final focusedPinTheme = defaultPinTheme.copyDecorationWith(
+      border: Border.all(color: Utils.primaryColor),
+      borderRadius: BorderRadius.circular(8),
+    );
     return Scaffold(
-      backgroundColor: Utils.primaryBackground,
+      backgroundColor: Theme.of(context).primaryColor,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Center(
             child: Text(
               'Verification',
-              style: GoogleFonts.rubik(
+              style: GoogleFonts.montserrat(
                 fontWeight: FontWeight.bold,
+                color: Theme.of(context).secondaryHeaderColor,
                 fontSize: 30,
               ),
             ),
@@ -84,9 +97,9 @@ class _OtpScreenState extends State<OtpScreen> {
           Center(
             child: Text(
               'Enter the code sent to the number',
-              style: GoogleFonts.rubik(
+              style: GoogleFonts.montserrat(
                 fontSize: 22,
-                color: Colors.black54,
+                color: Theme.of(context).secondaryHeaderColor.withAlpha(700),
               ),
             ),
           ),
@@ -96,9 +109,10 @@ class _OtpScreenState extends State<OtpScreen> {
           Center(
             child: Text(
               '+91 ${widget.phone}',
-              style: GoogleFonts.rubik(
+              style: GoogleFonts.montserrat(
                 // fontWeight: FontWeight.bold,
                 fontSize: 25,
+                color: Theme.of(context).secondaryHeaderColor,
               ),
             ),
           ),
@@ -106,8 +120,12 @@ class _OtpScreenState extends State<OtpScreen> {
             padding: const EdgeInsets.all(30.0),
             child: Pinput(
               length: 6,
+              focusedPinTheme: focusedPinTheme,
+              submittedPinTheme: defaultPinTheme,
               hapticFeedbackType: HapticFeedbackType.heavyImpact,
               onCompleted: ((value) async {
+                final navContext = Navigator.of(context);
+                EasyLoading.show(status: 'Loading...');
                 try {
                   final userData = await FirebaseAuth.instance.signInWithCredential(
                     PhoneAuthProvider.credential(
@@ -115,27 +133,24 @@ class _OtpScreenState extends State<OtpScreen> {
                       smsCode: value,
                     ),
                   );
-                  if (!mounted) return;
                   final bool isNewUser = userData.additionalUserInfo?.isNewUser as bool;
-                  // add the login route code (connection with backend)
                   if (isNewUser) {
-                    // await authProvider.register(userId: FirebaseAuth.instance.currentUser!.uid);
-                    Navigator.of(context).pushAndRemoveUntil(
+                    await EasyLoading.dismiss();
+                    navContext.pushAndRemoveUntil(
                         MaterialPageRoute(
                           builder: (context) => const OnboardingScreen(),
                         ),
                         (route) => false);
                   } else {
-                    //uncomment this afterwards.
-                    // await authProvider.login(userId: FirebaseAuth.instance.currentUser!.uid);
-                    if (!mounted) return;
-                    Navigator.of(context).pushAndRemoveUntil(
+                    await EasyLoading.dismiss();
+                    navContext.pushAndRemoveUntil(
                         MaterialPageRoute(
-                          builder: (context) => const NavigationLayout(),
+                          builder: (context) => const SelectRoleScreen(),
                         ),
                         (route) => false);
                   }
                 } catch (error) {
+                  await EasyLoading.dismiss();
                   Fluttertoast.showToast(
                     msg: 'Problem: ${error.toString()}',
                     toastLength: Toast.LENGTH_LONG,
@@ -147,10 +162,19 @@ class _OtpScreenState extends State<OtpScreen> {
                 height: 56,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(19),
-                  border: Border.all(color: Colors.black26),
+                  border: Border.all(color: Theme.of(context).secondaryHeaderColor),
                 ),
               ),
             ),
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              primary: Colors.green,
+            ),
+            onPressed: () async {
+              await verifyPhoneSendOtp(phone: widget.phone);
+            },
+            child: Text('Resend'),
           ),
         ],
       ),
