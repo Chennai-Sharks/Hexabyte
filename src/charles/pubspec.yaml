@@ -37,6 +37,10 @@ dependencies:
   flutter_onboarding_screen: ^2.0.2
   flutter_rating_bar: ^4.0.1
   flutter_easyloading: ^3.0.5
+  lazy_load_scrollview: ^1.3.0
+  flutter_map: ^2.2.0
+  latlong2: ^0.8.1
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:
@@ -58,7 +62,7 @@ flutter:
 
   assets:
     - assets/
-   # - .env
+    - .env
 
   # fonts:
   #   - family: Schyler

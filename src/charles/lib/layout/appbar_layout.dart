@@ -13,7 +13,7 @@ class _CommonAppBarState extends State<CommonAppBar> {
   Widget build(BuildContext context) {
     Color? color = Colors.redAccent.shade400;
     return Container(
-      padding: EdgeInsets.only(
+      padding: const EdgeInsets.only(
         bottom: 15,
       ),
       color: color,
@@ -26,7 +26,7 @@ class _CommonAppBarState extends State<CommonAppBar> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
+                children: const [
                   // Padding(
                   //   padding: const EdgeInsets.symmetric(
                   //     vertical: 5,
@@ -49,6 +49,7 @@ class _CommonAppBarState extends State<CommonAppBar> {
                 onTap: () {},
                 child: Container(
                   height: 20,
+                  color: Colors.white,
                   child: GestureDetector(
                     onTap: () {},
                     child: Row(
@@ -145,7 +146,7 @@ class _HomePageAppBarState extends State<HomePageAppBar> {
       child: SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          children: [
+          children: const [
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceAround,
             //   crossAxisAlignment: CrossAxisAlignment.center,
@@ -278,13 +279,13 @@ class TextFieldControllers extends StatelessWidget {
           height: 35,
           decoration: BoxDecoration(
             color: Theme.of(context).primaryColor,
-            boxShadow: [
+            boxShadow: const [
               BoxShadow(color: Colors.grey, blurRadius: 1),
             ],
             border: Border.all(
               color: Colors.black.withAlpha(55),
             ),
-            borderRadius: BorderRadius.all(
+            borderRadius: const BorderRadius.all(
               Radius.circular(5),
             ),
           ),

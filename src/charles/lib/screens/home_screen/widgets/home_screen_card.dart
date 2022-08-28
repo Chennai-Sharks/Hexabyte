@@ -33,12 +33,7 @@ class _HomeScreenCardState extends State<HomeScreenCard> {
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(30),
               color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                    color: Colors.black.withAlpha(100),
-                    blurRadius: 2,
-                    spreadRadius: 0.5)
-              ]),
+              boxShadow: [BoxShadow(color: Colors.black.withAlpha(100), blurRadius: 2, spreadRadius: 0.5)]),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,10 +73,7 @@ class _HomeScreenCardState extends State<HomeScreenCard> {
                   padding: const EdgeInsets.fromLTRB(14.0, 14, 14, 26),
                   child: GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => widget.navigatorWidget!));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => widget.navigatorWidget!));
                     },
                     child: Container(
                       height: size.height * 0.075,

@@ -17,8 +17,9 @@ class _ListedProductsScreenState extends State<ListedProductsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFE9EFC0),
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: const Color(0xFFE9EFC0),
         elevation: 0,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -33,15 +34,9 @@ class _ListedProductsScreenState extends State<ListedProductsScreen> {
             ),
           ],
         ),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () {
-            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const NavigationLayout()));
-          },
-        ),
       ),
       body: FutureBuilder(
-          future: ListedProductApi.getMyProducts(data: data),
+          future: ListedProductApi.getMyProducts(),
           builder: (BuildContext context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:
@@ -54,13 +49,32 @@ class _ListedProductsScreenState extends State<ListedProductsScreen> {
                 }
               case ConnectionState.done:
                 {
+                  print('here');
+                  print(snapshot.data);
+                  final response = snapshot.data as List?;
+                  if (response == null) {
+                    return const Center(child: Text('No data.'));
+                  }
+                  if (response.isEmpty) {
+                    return const Center(child: Text('No data.'));
+                  }
+                  final reversedData = response.reversed.toList();
                   return RefreshIndicator(
                     onRefresh: () async {
-                      ListedProductApi.getMyProducts(data: data);
+                      // ListedProductApi.getMyProducts(data: data);
                     },
                     child: ListView.builder(
-                      itemCount: 10,
-                      itemBuilder: (BuildContext context, index) => ListedProductCard(),
+                      itemCount: (snapshot.data as List).length,
+                      itemBuilder: (BuildContext context, index) => ListedProductCard(
+                        title: reversedData[index]['food_waste_title'],
+                        description: reversedData[index]['description'],
+                        business: reversedData[index]['business'],
+                        subscribedQty: reversedData[index]['subscribed_qty'],
+                        totalQty: reversedData[index]['total_qty'],
+                        tags: reversedData[index]['applicable_tags'],
+                        balanceQty: reversedData[index]['balance_qty'],
+                        cost: reversedData[index]['cost'],
+                      ),
                     ),
                   );
                 }

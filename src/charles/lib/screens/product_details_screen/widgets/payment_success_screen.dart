@@ -26,7 +26,12 @@ class _PaymentSuccessPageState extends State<PaymentSuccessPage> {
           Center(
             child: GestureDetector(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const NavigationLayout()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const NavigationLayout(
+                              isConsumer: true,
+                            )));
               },
               child: Container(
                 width: MediaQuery.of(context).size.width * 0.4,

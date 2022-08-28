@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hexabyte/layout/nav_layout.dart';
 import 'package:hexabyte/screens/onboarding_screen/onboarding_screen.dart';
+import 'package:hexabyte/screens/select_role_screen.dart/select_role_screen.dart';
 import 'package:pinput/pinput.dart';
 
 import '../../utils/utils.dart';
@@ -145,7 +145,7 @@ class _OtpScreenState extends State<OtpScreen> {
                     await EasyLoading.dismiss();
                     navContext.pushAndRemoveUntil(
                         MaterialPageRoute(
-                          builder: (context) => const NavigationLayout(),
+                          builder: (context) => const SelectRoleScreen(),
                         ),
                         (route) => false);
                   }
@@ -166,6 +166,15 @@ class _OtpScreenState extends State<OtpScreen> {
                 ),
               ),
             ),
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              primary: Colors.green,
+            ),
+            onPressed: () async {
+              await verifyPhoneSendOtp(phone: widget.phone);
+            },
+            child: Text('Resend'),
           ),
         ],
       ),

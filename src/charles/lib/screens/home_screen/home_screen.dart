@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hexabyte/screens/add_product_screen/add_product_screen.dart';
 import 'package:hexabyte/screens/home_screen/widgets/home_screen_card.dart';
 import 'package:hexabyte/screens/home_screen/widgets/search_bar.dart';
+import 'package:hexabyte/screens/order_history_screen/order_history_screen.dart';
+import 'package:hexabyte/screens/quick_buy_screen/quick_buy_screen.dart';
 import 'package:hexabyte/screens/search_screen/search_screen.dart';
 
+import '../curation_screen/curation_screen.dart';
+import '../profile_screen/profile_screen.dart';
 import 'widgets/scroll_categories.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -15,15 +18,18 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Size? size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Theme.of(context).primaryColor,
+      backgroundColor: const Color(0xFFE9EFC0),
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(120),
+        preferredSize: const Size.fromHeight(130),
         child: Container(
           decoration: const BoxDecoration(
-              image: DecorationImage(
-                  fit: BoxFit.cover, image: AssetImage('assets/home_bg.png'))),
+            color: Color(0xFFE9EFC0),
+          ),
           child: Column(
             children: [
+              const SizedBox(
+                height: 10,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -34,18 +40,24 @@ class HomeScreen extends StatelessWidget {
                   Text(
                     'HexaByte',
                     style: GoogleFonts.roboto(
-                      fontSize: 22,
+                      fontSize: 24,
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
                     ),
                   ),
-                  CircleAvatar(
-                    backgroundColor: Colors.white,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(40),
-                      child: const Icon(
-                        Icons.account_circle,
-                        color: Colors.black,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileScreen()));
+                    },
+                    child: CircleAvatar(
+                      backgroundColor: Colors.white,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(50),
+                        child: const Icon(
+                          Icons.account_circle,
+                          color: Colors.black,
+                          size: 32,
+                        ),
                       ),
                     ),
                   ),
@@ -55,7 +67,7 @@ class HomeScreen extends StatelessWidget {
                 child: const SearchBar(),
                 onTap: () => Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => SearchPage(),
+                    builder: (context) => const SearchPage(),
                   ),
                 ),
               ),
@@ -65,61 +77,52 @@ class HomeScreen extends StatelessWidget {
       ),
       body: Container(
         height: size.height,
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-                fit: BoxFit.cover, image: AssetImage('assets/home_bg.png'))),
+        decoration:
+            const BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/home_bg.png'))),
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
             children: [
               ScrollableCategories(
                 categories: categories,
                 categoriesImgList: categoriesImg,
+                widget: [const QuickBuyScreen(), const CurationScreen()],
               ),
               ScrollableCategories(
                 categories: secondCategories,
                 categoriesImgList: secondCategoriesImg,
+                widget: [const OrderHistoryScreen(), const ProfileScreen()],
               ),
               const HomeScreenCard(
                 color: Colors.orange,
-                imageUrl:
-                    "https://c.tenor.com/6kZnvYgHAMMAAAAC/wasted-house-parched.gif",
+                imageUrl: "https://c.tenor.com/6kZnvYgHAMMAAAAC/wasted-house-parched.gif",
                 descriptionText: "Products across the country",
                 sloganText: "Come let's purchase !!!",
-                buttonText: "EXPLORE PRODUCTS",
-                icon: FontAwesomeIcons.productHunt,
-                navigatorWidget: AddProductsScreen(),
+                buttonText: "EXPLORE QUICK BUY",
+                icon: FontAwesomeIcons.luggageCart,
+                navigatorWidget: QuickBuyScreen(),
               ),
               HomeScreenCard(
                 color: Colors.purple.shade900,
                 imageUrl:
                     "https://64.media.tumblr.com/0120d5711147ae7d7a876b2213a61373/tumblr_nt748trUEB1uz3idyo1_500.gif",
-                descriptionText: "Products across the country",
-                sloganText: "Come let's purchase !!!",
-                buttonText: "EXPLORE INSTAMART",
+                descriptionText: "Combos across the country",
+                sloganText: "Come and purchase more than one !!!",
+                buttonText: "EXPLORE COMBO BUY",
                 icon: FontAwesomeIcons.luggageCart,
-                navigatorWidget: AddProductsScreen(),
+                navigatorWidget: const CurationScreen(),
               ),
               const HomeScreenCard(
                 color: Colors.green,
-                imageUrl:
-                    "https://i.pinimg.com/originals/39/a0/51/39a0515d87ac9194c801e6104e9552f7.gif",
-                descriptionText: "Products across the country",
-                sloganText: "Come let's purchase !!!",
-                buttonText: "EXPLORE INSTAMART",
+                imageUrl: "https://i.pinimg.com/originals/39/a0/51/39a0515d87ac9194c801e6104e9552f7.gif",
+                descriptionText: "Buy food waste by initiate a contract with the seller",
+                sloganText: "Subscription !!!",
+                buttonText: "EXPLORE SUBSCRIPTION",
                 icon: FontAwesomeIcons.luggageCart,
-                navigatorWidget: AddProductsScreen(),
-              ),
-              const HomeScreenCard(
-                color: Colors.redAccent,
-                imageUrl:
-                    "https://thumbs.gfycat.com/MistyMilkyAlbacoretuna-max-1mb.gif",
-                descriptionText: "Products across the country",
-                sloganText: "Come let's purchase !!!",
-                buttonText: "EXPLORE INSTAMART",
-                icon: FontAwesomeIcons.luggageCart,
-                navigatorWidget: AddProductsScreen(),
+                navigatorWidget: QuickBuyScreen(),
               ),
             ],
           ),
@@ -128,3 +131,23 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+
+List<String?> categories = [
+  "Quick buy",
+  "Combo buy",
+];
+
+List<String?> categoriesImg = [
+  "assets/fast-time.png",
+  "assets/combo-box.png",
+];
+
+List<String?> secondCategories = [
+  "Order History",
+  'Profile',
+];
+
+List<String?> secondCategoriesImg = [
+  "assets/document.png",
+  "assets/user-profile.png",
+];

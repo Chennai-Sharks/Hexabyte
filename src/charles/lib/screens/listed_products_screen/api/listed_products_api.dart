@@ -1,14 +1,13 @@
 import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:hexabyte/utils/utils.dart';
 import 'package:http/http.dart' as http;
 
-import 'package:hexabyte/utils/utils.dart';
-
 class ListedProductApi {
-  static Future<void> getMyProducts({required List data}) async {
+  static Future<List> getMyProducts() async {
     final serverResponse = await http.get(
-      Uri.parse('${Utils.backendUrl!}/some_route/'),
+      Uri.parse('${Utils.backendUrl!}/producer_items/${FirebaseAuth.instance.currentUser!.phoneNumber!.substring(3)}'),
     );
     final response = json.decode(serverResponse.body);
 
@@ -17,7 +16,9 @@ class ListedProductApi {
     if (serverResponse.statusCode == 200) {
       final response = json.decode(serverResponse.body);
 
-      data = response['data'];
+      return response['data'];
+    } else {
+      return [];
     }
   }
 }

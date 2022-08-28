@@ -2,10 +2,10 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
-import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hexabyte/screens/search_screen/api/Search_api.dart';
+import 'package:hexabyte/screens/search_screen/api/search_api.dart';
 import 'package:hexabyte/screens/search_screen/widgets/after_search_card.dart';
+import 'package:hexabyte/screens/search_screen/widgets/map.dart';
 
 class AfterSearch extends StatefulWidget {
   final Function goBackToFirstSearch;
@@ -108,6 +108,29 @@ class _AfterSearchState extends State<AfterSearch> {
                 height: height * 0.02,
               ),
               FutureBuilder(
+                future: SearchApi.productSearch(searchText: widget.searchController.text, isMap: true),
+                builder: ((context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    print(snapshot.data);
+                    final response = snapshot.data as List<dynamic>;
+                    print('here');
+                    print(response[1]);
+                    return SizedBox(
+                      height: 300,
+                      width: MediaQuery.of(context).size.width,
+                      child: MapWidget(
+                        myLocation: response[0]['my-location'],
+                        prodData: response[1],
+                      ),
+                    );
+                  }
+                  return const Center(child: Text('Loading...'));
+                }),
+              ),
+              SizedBox(
+                height: height * 0.02,
+              ),
+              FutureBuilder(
                 future: SearchApi.productSearch(searchText: widget.searchController.text),
                 builder: ((context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
@@ -121,10 +144,10 @@ class _AfterSearchState extends State<AfterSearch> {
                         width: MediaQuery.of(context).size.width,
                         child: AfterSearchCard(
                           id: response[index]['_id']['\$oid'],
-                          name: response[index]['title'],
-                          price: response[index]['cost_per_kg'],
+                          name: response[index]['food_waste_title'],
+                          price: response[index]['cost'],
                           availableQty: response[index]['balance_qty'],
-                          distance: '4.9 km',
+                          distance: '',
                           duration: response[index]['duration'],
                           productData: response[index],
                         ),
@@ -134,11 +157,6 @@ class _AfterSearchState extends State<AfterSearch> {
                   return const Center(child: Text('Loading...'));
                 }),
               ),
-              // const AfterSearchCard(),
-              // const AfterSearchCard(),
-              // const AfterSearchCard(),
-              // const AfterSearchCard(),
-              // const AfterSearchCard(),
               SizedBox(
                 height: height * 0.06,
               ),
