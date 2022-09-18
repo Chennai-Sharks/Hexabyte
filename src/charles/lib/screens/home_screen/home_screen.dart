@@ -89,12 +89,12 @@ class HomeScreen extends StatelessWidget {
               ScrollableCategories(
                 categories: categories,
                 categoriesImgList: categoriesImg,
-                widget: [const QuickBuyScreen(), const CurationScreen()],
+                widget: const [QuickBuyScreen(), CurationScreen()],
               ),
               ScrollableCategories(
                 categories: secondCategories,
                 categoriesImgList: secondCategoriesImg,
-                widget: [const OrderHistoryScreen(), const ProfileScreen()],
+                widget: const [OrderHistoryScreen(), ProfileScreen()],
               ),
               const HomeScreenCard(
                 color: Colors.orange,
