@@ -56,3 +56,4 @@ web/
 
 # firebase
 google-services.json
+GoogleService-info.plist

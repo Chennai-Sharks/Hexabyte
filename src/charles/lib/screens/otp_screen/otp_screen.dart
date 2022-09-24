@@ -32,6 +32,7 @@ class _OtpScreenState extends State<OtpScreen> {
           Fluttertoast.showToast(msg: 'Verification done!', toastLength: Toast.LENGTH_LONG);
         },
         verificationFailed: (e) {
+          print(e);
           Fluttertoast.showToast(
               msg: 'App verification failed. Maybe due to internet issues.', toastLength: Toast.LENGTH_LONG);
         },

@@ -106,6 +106,8 @@ dmypy.json
 .dart_tool/
 .packages
 
+.DS_Store
+
 
 .flutter-plugins
 .flutter-plugins-dependencies
